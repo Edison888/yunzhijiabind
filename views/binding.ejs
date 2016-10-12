@@ -69,31 +69,42 @@
             <button class="btn btn-default" type="button">搜索</button>
             </span>
     </div>
-    <div class="table-responsive" ng-controller = "list_controller">
+    <div class="table-responsive" ng-controller="list_controller">
         <table class="table table-bordered table-striped">
             <thead>
             <tr class="bg-info">
                 <th>云之家openid</th>
                 <th>云之家用户名</th>
                 <th>云之家手机号</th>
-                <th>NCid</th>
+                <th>NCID</th>
                 <th>NC用户名</th>
                 <th>NC手机号</th>
+                <th>OAID</th>
+                <th>OA用户名</th>
+                <th>OA手机号</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>5667700a60b204d58900735f</td>
-                <td>{{username}}</td>
-                <td>13120428485</td>
+            <tr ng-repeat="user in users">
+                <td>{{user.yzj_openid}}</td>
+                <td>{{user.yzj_username}}</td>
+                <td>{{user.yzj_mobile}}</td>
                 <td>
-                    <span>00735faa60b204d58900735f</span>
+                    <span>{{user.nc_mobile}}</span>
                     <button class="btn btn-xs pull-right">
                         编辑
                     </button>
                 </td>
-                <td>YeasonHe</td>
-                <td>13120428485</td>
+                <td>{{user.nc_username}}</td>
+                <td>{{user.nc_mobile}}</td>
+                <td>
+                    <span>{{user.oa_mobile}}</span>
+                    <button class="btn btn-xs pull-right">
+                        编辑
+                    </button>
+                </td>
+                <td>{{user.oa_username}}</td>
+                <td>{{user.oa_mobile}}</td>
             </tr>
             </tbody>
         </table>
@@ -108,10 +119,12 @@
 </body>
 <script>
     var app = angular.module('binding', []);
-    app.controller('list_controller',function($scope){
-        var username ='he';
-        $scope.username = username;
+    app.controller('list_controller', function ($scope, $http) {
+        $http.get('json/binddata').success(function (response) {
+            console.log('中间表数据：' + response);
+            $scope.users = response.data;
+        });
 
-    })
+    });
 </script>
 </html>
