@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="binding">
 <head lang="en">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,6 +30,7 @@
     <script src="http://do.yunzhijia.com/pub/js/qingjs.js"></script>
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
     <script src="//cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     <!-- ↑↑↑↑↑↑something about bootstrap && jquery↑↑↑↑↑↑-->
     <!--<script src="//cdn.bootcss.com/blueimp-md5/2.3.0/js/md5.min.js"></script>-->
@@ -62,22 +63,40 @@
             <div class="circle4"></div>
         </div>
     </div>
-    <div class="input-group" style="width: 80%;margin: 0 auto">
-        <div class="input-group-btn">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">手机号<span
-                        class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="#">手机号</a></li>
-                <li><a href="#">用户名</a></li>
-            </ul>
-        </div>
-        <div class="input-group">
-            <input type="text" class="form-control">
+    <div class="input-group" style="width: 80%;margin: 0 auto;margin-top: 20px">
+        <input type="text" class="form-control">
             <span class="input-group-btn">
             <button class="btn btn-default" type="button">搜索</button>
             </span>
-        </div>
-        <!-- /input-group -->
+    </div>
+    <div class="table-responsive" ng-controller = "list_controller">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr class="bg-info">
+                <th>云之家openid</th>
+                <th>云之家用户名</th>
+                <th>云之家手机号</th>
+                <th>NCid</th>
+                <th>NC用户名</th>
+                <th>NC手机号</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>5667700a60b204d58900735f</td>
+                <td>{{username}}</td>
+                <td>13120428485</td>
+                <td>
+                    <span>00735faa60b204d58900735f</span>
+                    <button class="btn btn-xs pull-right">
+                        编辑
+                    </button>
+                </td>
+                <td>YeasonHe</td>
+                <td>13120428485</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
     <!-- /input-group -->
 
@@ -87,4 +106,12 @@
 <!--自定义js文件-->
 <!--<script src="javascripts/roomprice/room_detail.js"></script>-->
 </body>
+<script>
+    var app = angular.module('binding', []);
+    app.controller('list_controller',function($scope){
+        var username ='he';
+        $scope.username = username;
+
+    })
+</script>
 </html>
