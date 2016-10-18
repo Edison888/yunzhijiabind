@@ -63,14 +63,58 @@
             <div class="circle4"></div>
         </div>
     </div>
+    <div class="modal fade" id="modal">
+        <div class="modal-dialog model-sm">
+            <div class="modal-content">
+                <div class="modal-header bg-info">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">添加行</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">OpenId</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="yzj_openid" placeholder="云之家OpenId">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">手机号</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="yzj_phone" placeholder="手机号">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">用户名</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="yzj_username" placeholder="用户名">
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer bg-info">
+                    <button id="confirm" type="button" class="btn" data-dismiss="modal"
+                            style=" background-color: #3cbaff;color: white;">确定
+                    </button>
+                    <button id="cancel" type="button" class="btn" data-dismiss="modal"
+                            style="background-color: #F4F4F4;">取消
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
     <div class="input-group" style="width: 80%;margin: 0 auto;margin-top: 20px">
         <input type="text" class="form-control">
             <span class="input-group-btn">
             <button class="btn btn-default" type="button">搜索</button>
             </span>
     </div>
-    <button class="btn btn-info">
-        添加云之家用户
+    <button class="btn btn-info" ng-controller="add_yzj" data-toggle="modal" data-target="#modal">
+        添加行
     </button>
     <div class="table-responsive" ng-controller="list_controller">
 
@@ -128,6 +172,9 @@
             console.log(response);
             $scope.users = response.data;
         });
+
+    });
+    app.controller('add_yzj', function ($scope, $http) {
 
     });
 </script>
