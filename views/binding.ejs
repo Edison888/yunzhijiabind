@@ -129,7 +129,8 @@
                 <td>{{user.yzj_position}}</td>
                 <td>
                     <span>{{user.nc_mobile}}</span>
-                    <button class="btn btn-xs pull-right" ng-click="bindNC(user.yzj_openid,user.yzj_mobile,user.yzj_username,user.yzj_department,user.yzj_position)">
+                    <button class="btn btn-xs pull-right" data-toggle="modal" data-target="#ncDialog"
+                            ng-click="getYzjData(user.yzj_openid,user.yzj_mobile,user.yzj_username,user.yzj_department,user.yzj_position)">
                         编辑
                     </button>
                 </td>
@@ -186,28 +187,55 @@
                         mobile: phoneValue
                     }
                 }).success(function (response) {
-                    if (response.success) {
-                        var yzjUserObj = response.data[0];
-                        var user = {
-                            yzj_openid: yzjUserObj.openId,
-                            yzj_mobile: yzjUserObj.phone,
-                            yzj_username: yzjUserObj.name,
-                            nc_openid: '',
-                            nc_mobile: '',
-                            nc_username: ''
-                        };
-                        $scope.users.push(user);
-                    } else {
-                        toastr.error(response.error)
-                    }
-                });
+                            if (response.success) {
+                                var yzjUserObj = response.data[0];
+                                var user = {
+                                    yzj_openid: yzjUserObj.openId,
+                                    yzj_mobile: yzjUserObj.phone,
+                                    yzj_username: yzjUserObj.name,
+                                    nc_openid: '',
+                                    nc_mobile: '',
+                                    nc_username: ''
+                                };
+                                $http({
+                                    method: 'get',
+                                    url: 'http://192.168.1.158:8089/servlet/MobileApproveServlet',
+                                    params: {
+                                        yzjid: yzjUserObj.openId,	//云之家账号ID
+                                        yzjmobile: yzjUserObj.phone,	//云之家人员手机号
+                                        yzjname: yzjUserObj.name,   // 云之家人员名称
+                                        yzjdept: yzjUserObj.department,// 云之家人员部门
+                                        yzjjob: yzjUserObj.jobTitle, //云之家人员职位
+                                        method: 'createUserMapping'//方法名
+
+                                    }
+
+                                }).success(function (response) {
+                                    if (response.flag == 0) {
+                                        if (response.data.success == 0) {
+                                            $scope.users.push(user);
+                                        } else {
+                                            toastr.error(response.data.desc);
+                                        }
+                                    } else {
+                                        toastr.error(response.desc);
+                                    }
+                                });
+                            }
+                            else {
+                                toastr.error(response.error)
+                            }
+                        }
+                )
+                ;
             }
         }
 
-        $scope.bindNC = function (yzjid, yzjmobile, yzjname, yzjdept, yzjjob) {
+        $scope.getYzjData = function (yzjid, yzjmobile, yzjname, yzjdept, yzjjob) {
 
         }
 
-    });
+    })
+    ;
 </script>
 </html>
