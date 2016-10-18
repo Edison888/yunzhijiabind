@@ -42,7 +42,7 @@
     <title>账号绑定</title>
 </head>
 <body>
-<div class="container">
+<div class="container" ng-controller="list_controller">
     <div id="spinner">
         <div class="spinner-container container1">
             <div class="circle1"></div>
@@ -63,7 +63,7 @@
             <div class="circle4"></div>
         </div>
     </div>
-    <div class="modal fade" id="modal" ng-controller="add_yzj">
+    <div class="modal fade" id="modal">
         <div class="modal-dialog model-sm">
             <div class="modal-content">
                 <div class="modal-header bg-info">
@@ -105,7 +105,7 @@
     <button class="btn btn-info" data-toggle="modal" data-target="#modal">
         添加行
     </button>
-    <div class="table-responsive" ng-controller="list_controller">
+    <div class="table-responsive">
 
         <table class="table table-bordered table-striped">
             <thead>
@@ -168,8 +168,6 @@
             $scope.users = response.data;
         });
 
-    });
-    app.controller('add_yzj', function ($scope, $http) {
         $scope.addYzj = function () {
             var phoneValue = document.getElementById('yzj_phone').value;
             if (phoneValue == null || phoneValue == '' || phoneValue == undefined) {
@@ -185,13 +183,23 @@
                     }
                 }).success(function (response) {
                     if (response.success) {
-
+                        var yzjUserObj = response.data[0];
+                        var user = {
+                            yzj_openid: yzjUserObj.openId,
+                            yzj_mobile: yzjUserObj.phone,
+                            yzj_username: yzjUserObj.name,
+                            nc_openid: '',
+                            nc_mobile: '',
+                            nc_username: ''
+                        };
+                        $scope.users.push(user);
                     } else {
                         toastr.error(response.error)
                     }
                 });
             }
         }
+
     });
 </script>
 </html>
