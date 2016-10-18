@@ -195,6 +195,11 @@
                         mobile: phoneValue
                     }
                 }).success(function (response) {
+                    if (response.success) {
+
+                    } else {
+                        toastr.error(response.error)
+                    }
                 });
             }
         }
