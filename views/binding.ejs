@@ -113,6 +113,8 @@
                 <th>云之家openid</th>
                 <th>云之家用户名</th>
                 <th>云之家手机号</th>
+                <th>云之家部门</th>
+                <th>云之家职位</th>
                 <th>NCID</th>
                 <th>NC用户名</th>
                 <th>NC手机号</th>
@@ -123,9 +125,11 @@
                 <td>{{user.yzj_openid}}</td>
                 <td>{{user.yzj_username}}</td>
                 <td>{{user.yzj_mobile}}</td>
+                <td>{{user.yzj_department}}</td>
+                <td>{{user.yzj_position}}</td>
                 <td>
                     <span>{{user.nc_mobile}}</span>
-                    <button class="btn btn-xs pull-right">
+                    <button class="btn btn-xs pull-right" ng-click="bindNC(user.yzj_openid,user.yzj_mobile,user.yzj_username,user.yzj_department,user.yzj_position)">
                         编辑
                     </button>
                 </td>
@@ -198,6 +202,10 @@
                     }
                 });
             }
+        }
+
+        $scope.bindNC = function (yzjid, yzjmobile, yzjname, yzjdept, yzjjob) {
+
         }
 
     });
