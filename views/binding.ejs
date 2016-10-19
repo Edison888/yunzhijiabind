@@ -136,6 +136,34 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+
+    <div class="modal fade" id="delRow">
+        <div class="modal-dialog model-sm">
+            <div class="modal-content">
+                <div class="modal-header bg-info">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">确定删除以下人员的绑定信息？</h4>
+                </div>
+                <div class="modal-body">
+                    <p ng-repeat="selectIndex in selectedRows">
+                        {{users[selectIndex].yzjname}}
+                    </p>
+                </div>
+                <div class="modal-footer bg-info">
+                    <button id="confirm" type="button" class="btn" data-dismiss="modal"
+                            style=" background-color: palevioletred;color: white;" ng-click="del()">确定
+                    </button>
+                    <button id="cancel" type="button" class="btn" data-dismiss="modal"
+                            style="background-color: #F4F4F4;">取消
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
     <div class="modal fade" id="modal">
         <div class="modal-dialog model-sm">
             <div class="modal-content">
@@ -178,7 +206,7 @@
     <button class="btn btn-info" data-toggle="modal" data-target="#modal" style="margin-top: 10px">
         添加行
     </button>
-    <button class="btn btn-default" style="margin-top: 10px">
+    <button class="btn btn-default" style="margin-top: 10px" data-toggle="modal" data-target="#delRow" ng-click="getSelectedRows()" >
         删除行
     </button>
     <div class="table-responsive" style="margin-top: 10px">
@@ -186,6 +214,7 @@
         <table class="table table-bordered table-striped">
             <thead>
             <tr class="bg-info">
+                <th></th>
                 <th>云之家openid</th>
                 <th>云之家用户名</th>
                 <th>云之家手机号</th>
@@ -197,7 +226,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="user in users">
+            <tr ng-repeat="user in users" ng-class="{'success' : tableSelection[$index]}">
+                <td><input type="checkbox" ng-model="tableSelection[$index]"></td>
                 <td>{{user.yzjid}}</td>
                 <td>{{user.yzjname}}</td>
                 <td>{{user.yzjmobile}}</td>
