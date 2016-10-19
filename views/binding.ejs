@@ -107,28 +107,31 @@
                     <div class="radio" style="margin-left: 30px">
                         <div ng-repeat="ncuser in ncusers">
                             <h4>
-                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1"
+                                       ng-click="selectNcUser(ncuser)">
                                 {{ncuser.ncuser_name}}
                             </h4>
 
                             <p>{{ncuser.ncuser_code}}</p>
 
                             <p>{{ncuser.ncdept}}</p>
+
                             <p>{{ncuser.ncjob}}</p>
                         </div>
 
                     </div>
                 </div>
                 <div class="modal-footer bg-info">
-                    <button id="confirm" type="button" class="btn" data-dismiss="modal"
-                            style=" background-color: #3cbaff;color: white;" ng-click="bindNC()">确定
+                    <button id="binding" type="button" class="btn" data-dismiss="modal"
+                            style=" background-color: grey;color: white;" ng-click="bindNC(currentSelectedNcUser)"
+                            disabled="disabled">绑定
                     </button>
                     <button id="cancel" type="button" class="btn" data-dismiss="modal"
-                            style="background-color: #F4F4F4;">取消
+                            style="background-color: #F4F4F4;" ng-click="disableBind()">取消
                     </button>
                 </div>
             </div>
-            <!-- /.modal-content -->
+            <!-- /.modal-content style=" background-color: #3cbaff;color: white;" ng-click="bindNC()">绑定-->
         </div>
         <!-- /.modal-dialog -->
     </div>
@@ -225,7 +228,7 @@
         "onclick": null,
         "showDuration": "1",
         "hideDuration": "1000",
-        "timeOut": "5000",
+        "timeOut": "3000",
         "extendedTimeOut": "1000",
         "showEasing": "swing",
         "hideEasing": "linear",
@@ -236,10 +239,9 @@
     app.controller('list_controller', function ($scope, $http) {
         $http({
             method: 'get',
-//            url: 'json/binddata'
             url: 'http://192.168.1.158:8089/servlet/MobileApproveServlet?method=getAllUserMappingInfo',
-            params:{
-                method:'getAllUserMappingInfo'
+            params: {
+                method: 'getAllUserMappingInfo'
             }
         }).success(function (response) {
             console.log(response);
@@ -263,12 +265,11 @@
                             if (response.success) {
                                 var yzjUserObj = response.data[0];
                                 var user = {
-                                    yzj_openid: yzjUserObj.openId,
-                                    yzj_mobile: yzjUserObj.phone,
-                                    yzj_username: yzjUserObj.name,
-                                    nc_openid: '',
-                                    nc_mobile: '',
-                                    nc_username: ''
+                                    yzjid: yzjUserObj.openId,	//云之家账号ID
+                                    yzjmobile: yzjUserObj.phone,	//云之家人员手机号
+                                    yzjname: yzjUserObj.name,   // 云之家人员名称
+                                    yzjdept: yzjUserObj.department,// 云之家人员部门
+                                    yzjjob: yzjUserObj.jobTitle//云之家人员职位
                                 };
                                 $http({
                                     method: 'get',
@@ -284,6 +285,7 @@
                                     }
 
                                 }).success(function (response) {
+                                    console.log(response);
                                     if (response.flag == 0) {
                                         if (response.data.success == 0) {
                                             $scope.users.push(user);
@@ -303,7 +305,41 @@
                 ;
             }
         }
+        $scope.bindNC = function (currentSelectedNcUser) {
+            //todo
+            $http(
+                    {
+                        method: 'get',
+                        url: 'http://192.168.1.158:8089/servlet/MobileApproveServlet',
+                        params: {
+                            ncjob: currentSelectedNcUser.ncjob,
+                            ncmobile: currentSelectedNcUser.ncmobile,
+                            ncunit: currentSelectedNcUser.ncmobile,
+                            ncuser_code: currentSelectedNcUser.ncuser_code,
+                            ncuser_name: currentSelectedNcUser.ncuser_name,
+                            ncuserid: currentSelectedNcUser.ncuserid
+                        }
+                    }
+            ).success(function (response) {
+                        $scope.disableBind();
+                        if (response.flag == 0) {
+                            toastr.success("绑定成功");
+                        } else {
+                            toastr.error(response.desc);
+                        }
 
+                    });
+
+        }
+        $scope.disableBind = function () {
+            $('#binding').attr("disabled", true);
+            document.getElementById("binding").style.backgroundColor = "grey";
+        }
+        $scope.selectNcUser = function (ncUser) {
+            $("#binding").removeAttr("disabled", false);
+            document.getElementById("binding").style.backgroundColor = "#3cbaff";
+            $scope.currentSelectedNcUser = ncUser;
+        }
         $scope.getYzjData = function (yzjid, yzjmobile, yzjname, yzjdept, yzjjob) {
             $scope.currentUser = {
                 yzjid: yzjid,
@@ -315,15 +351,13 @@
             $http({
                 method: 'get',
                 url: 'http://192.168.1.158:8089/servlet/MobileApproveServlet',
-//                url: 'json/nc_users',
                 params: {
-//                    ncname:'冯冬',
-                    ncname:yzjname,
-                    ncmobile:yzjmobile,
-//                    ncmobile: '13900000000',
+                    ncname: yzjname,
+                    ncmobile: yzjmobile,
                     method: 'getNCUserInfo'
                 }
             }).success(function (response) {
+                console.log(response);
                 $scope.ncusers = [];
                 if (response.flag == 0) {
                     if (response.data.length > 0) {
