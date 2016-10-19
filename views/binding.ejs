@@ -32,6 +32,7 @@
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
     <script src="//cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="javascripts/bootstrap-paginator.js"></script>
     <!-- ↑↑↑↑↑↑something about bootstrap && jquery↑↑↑↑↑↑-->
     <!--<script src="//cdn.bootcss.com/blueimp-md5/2.3.0/js/md5.min.js"></script>-->
     <!--自定义css文件-->
@@ -212,6 +213,7 @@
             </tbody>
         </table>
     </div>
+    <ul id="paginator" style="margin: 0 auto;"></ul>
     <!-- /input-group -->
 
 </div>
@@ -237,17 +239,39 @@
     };
     var app = angular.module('binding', []);
     app.controller('list_controller', function ($scope, $http) {
-        $http({
-            method: 'get',
-            url: 'http://192.168.1.158:8089/servlet/MobileApproveServlet?method=getAllUserMappingInfo',
-            params: {
-                method: 'getAllUserMappingInfo'
+        $scope.getMappings = function () {
+            $http({
+                method: 'get',
+                url: 'http://192.168.1.158:8089/servlet/MobileApproveServlet?method=getAllUserMappingInfo',
+                params: {
+                    method: 'getAllUserMappingInfo'
+                }
+            }).success(function (response) {
+                console.log(response);
+                $scope.users = response.data;
+            });
+        }
+        //分页相关↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+        var pageSize = 2;
+//        var totalPages = Math.ceil(getUrlParamObj()['pagecount'] / pageSize);
+        var totalPages = Math.ceil(5);
+        //    document.getElementById('spinner').style.visibility = 'visible';
+        /*
+         * 分页控件（https://github.com/lyonlai/bootstrap-paginator）
+         * */
+        var element = $('#paginator');
+        var options = {
+            bootstrapMajorVersion: 3,//必须指定bootstrap的版本
+            currentPage: 1,//默认显示第一页
+            numberOfPages: 3,//这里固定为4
+            totalPages: totalPages,
+            onPageChanged: function (e, oldPage, newPage) {
+                $scope.getMappings(newPage, pageSize);
             }
-        }).success(function (response) {
-            console.log(response);
-            $scope.users = response.data;
-        });
-
+        };
+        element.bootstrapPaginator(options);
+        $scope.getMappings(1, pageSize);
+        //分页相关↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
         $scope.addYzj = function () {
             var phoneValue = document.getElementById('yzj_phone').value;
             if (phoneValue == null || phoneValue == '' || phoneValue == undefined) {
@@ -372,4 +396,5 @@
     })
     ;
 </script>
+
 </html>
