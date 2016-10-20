@@ -629,15 +629,15 @@
 
             switch (type) {
             case "first":
-                return "Go to first page";
+                return "首页";
             case "prev":
-                return "Go to previous page";
+                return "上一页";
             case "next":
-                return "Go to next page";
+                return "下一页";
             case "last":
-                return "Go to last page";
+                return "末页";
             case "page":
-                return (page === current) ? "Current page is " + page : "Go to page " + page;
+                return (page === current) ? "当前第 " + page+"页" : "第 " + page+"页";
             }
         },
         bootstrapTooltipOptions: {
