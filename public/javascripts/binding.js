@@ -19,7 +19,7 @@ app.controller('list_controller', function ($scope, $http) {
     $scope.del = function () {
         //start from last index because starting from first index cause shifting
         //in the array because of array.splice()
-        //$http().success(function(){//todo ÇëÇóÉ¾³ıĞĞÊı¾İ
+        //$http().success(function(){//todo è¯·æ±‚åˆ é™¤è¡Œæ•°æ®
          $scope.selectedRows.reverse();
         console.log($scope.selectedRows);
         for (var i =0;i < $scope.selectedRows.length;i++) {
@@ -59,19 +59,19 @@ app.controller('list_controller', function ($scope, $http) {
             $scope.users = response.data;
         });
     };
-    //·ÖÒ³Ïà¹Ø¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı
+    //åˆ†é¡µç›¸å…³â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“
     var pageSize = 2;
 //        var totalPages = Math.ceil(getUrlParamObj()['pagecount'] / pageSize);
     var totalPages = Math.ceil(5);
     //    document.getElementById('spinner').style.visibility = 'visible';
     /*
-     * ·ÖÒ³¿Ø¼ş£¨https://github.com/lyonlai/bootstrap-paginator£©
+     * åˆ†é¡µæ§ä»¶ï¼ˆhttps://github.com/lyonlai/bootstrap-paginatorï¼‰
      * */
     var element = $('#paginator');
     var options = {
-        bootstrapMajorVersion: 3,//±ØĞëÖ¸¶¨bootstrapµÄ°æ±¾
-        currentPage: 1,//Ä¬ÈÏÏÔÊ¾µÚÒ»Ò³
-        numberOfPages: 3,//ÕâÀï¹Ì¶¨Îª4
+        bootstrapMajorVersion: 3,//å¿…é¡»æŒ‡å®šbootstrapçš„ç‰ˆæœ¬
+        currentPage: 1,//é»˜è®¤æ˜¾ç¤ºç¬¬ä¸€é¡µ
+        numberOfPages: 3,//è¿™é‡Œå›ºå®šä¸º4
         totalPages: totalPages,
         onPageChanged: function (e, oldPage, newPage) {
             $scope.getMappings(newPage, pageSize);
@@ -79,13 +79,13 @@ app.controller('list_controller', function ($scope, $http) {
     };
     element.bootstrapPaginator(options);
     $scope.getMappings(1, pageSize);
-    //·ÖÒ³Ïà¹Ø¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü
+    //åˆ†é¡µç›¸å…³â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘
     $scope.addYzj = function () {
         var phoneValue = document.getElementById('yzj_phone').value;
         if (phoneValue == null || phoneValue == '' || phoneValue == undefined) {
-            toastr.error('ÊÖ»úºÅ²»ÄÜÎª¿Õ');
+            toastr.error('æ‰‹æœºå·ä¸èƒ½ä¸ºç©º');
         } else if (!(/^1[34578]\d{9}$/.test(phoneValue))) {
-            toastr.error("ÊÖ»úºÅÂëÓĞÎó£¬ÇëÖØÌî");
+            toastr.error("æ‰‹æœºå·ç æœ‰è¯¯ï¼Œè¯·é‡å¡«");
         } else {
             document.getElementById('spinner').style.visibility = 'visible'
             $http({
@@ -99,22 +99,22 @@ app.controller('list_controller', function ($scope, $http) {
                     if (response.success) {
                         var yzjUserObj = response.data[0];
                         var user = {
-                            yzjid: yzjUserObj.openId,	//ÔÆÖ®¼ÒÕËºÅID
-                            yzjmobile: yzjUserObj.phone,	//ÔÆÖ®¼ÒÈËÔ±ÊÖ»úºÅ
-                            yzjname: yzjUserObj.name,   // ÔÆÖ®¼ÒÈËÔ±Ãû³Æ
-                            yzjdept: yzjUserObj.department,// ÔÆÖ®¼ÒÈËÔ±²¿ÃÅ
-                            yzjjob: yzjUserObj.jobTitle//ÔÆÖ®¼ÒÈËÔ±Ö°Î»
+                            yzjid: yzjUserObj.openId,	//äº‘ä¹‹å®¶è´¦å·ID
+                            yzjmobile: yzjUserObj.phone,	//äº‘ä¹‹å®¶äººå‘˜æ‰‹æœºå·
+                            yzjname: yzjUserObj.name,   // äº‘ä¹‹å®¶äººå‘˜åç§°
+                            yzjdept: yzjUserObj.department,// äº‘ä¹‹å®¶äººå‘˜éƒ¨é—¨
+                            yzjjob: yzjUserObj.jobTitle//äº‘ä¹‹å®¶äººå‘˜èŒä½
                         };
                         $http({
                             method: 'get',
                             url: 'http://192.168.1.158:8089/servlet/MobileApproveServlet',
                             params: {
-                                yzjid: yzjUserObj.openId,	//ÔÆÖ®¼ÒÕËºÅID
-                                yzjmobile: yzjUserObj.phone,	//ÔÆÖ®¼ÒÈËÔ±ÊÖ»úºÅ
-                                yzjname: yzjUserObj.name,   // ÔÆÖ®¼ÒÈËÔ±Ãû³Æ
-                                yzjdept: yzjUserObj.department,// ÔÆÖ®¼ÒÈËÔ±²¿ÃÅ
-                                yzjjob: yzjUserObj.jobTitle, //ÔÆÖ®¼ÒÈËÔ±Ö°Î»
-                                method: 'createUserMapping'//·½·¨Ãû
+                                yzjid: yzjUserObj.openId,	//äº‘ä¹‹å®¶è´¦å·ID
+                                yzjmobile: yzjUserObj.phone,	//äº‘ä¹‹å®¶äººå‘˜æ‰‹æœºå·
+                                yzjname: yzjUserObj.name,   // äº‘ä¹‹å®¶äººå‘˜åç§°
+                                yzjdept: yzjUserObj.department,// äº‘ä¹‹å®¶äººå‘˜éƒ¨é—¨
+                                yzjjob: yzjUserObj.jobTitle, //äº‘ä¹‹å®¶äººå‘˜èŒä½
+                                method: 'createUserMapping'//æ–¹æ³•å
 
                             }
 
@@ -159,7 +159,7 @@ app.controller('list_controller', function ($scope, $http) {
                 document.getElementById('spinner').style.visibility = 'hidden'
                 $scope.disableBind();
                 if (response.flag == 0) {
-                    toastr.success("°ó¶¨³É¹¦");
+                    toastr.success("ç»‘å®šæˆåŠŸ");
                 } else {
                     toastr.error(response.desc);
                 }
