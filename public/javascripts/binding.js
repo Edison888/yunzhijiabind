@@ -46,6 +46,7 @@ app.controller('list_controller', function ($scope, $http) {
         console.log($scope.selectedRows);
     };
     $scope.getMappings = function () {
+        document.getElementById('spinner').style.visibility = 'visible';
         $http({
             method: 'get',
             url: 'http://192.168.1.158:8089/servlet/MobileApproveServlet?method=getAllUserMappingInfo',
@@ -53,6 +54,7 @@ app.controller('list_controller', function ($scope, $http) {
                 method: 'getAllUserMappingInfo'
             }
         }).success(function (response) {
+            document.getElementById('spinner').style.visibility = 'hidden';
             console.log(response);
             $scope.users = response.data;
         });
@@ -85,6 +87,7 @@ app.controller('list_controller', function ($scope, $http) {
         } else if (!(/^1[34578]\d{9}$/.test(phoneValue))) {
             toastr.error("手机号码有误，请重填");
         } else {
+            document.getElementById('spinner').style.visibility = 'visible'
             $http({
                 method: 'get',
                 url: 'json/yzj_user',
@@ -92,6 +95,7 @@ app.controller('list_controller', function ($scope, $http) {
                     mobile: phoneValue
                 }
             }).success(function (response) {
+                    document.getElementById('spinner').style.visibility = 'hidden'
                     if (response.success) {
                         var yzjUserObj = response.data[0];
                         var user = {
@@ -137,6 +141,7 @@ app.controller('list_controller', function ($scope, $http) {
     };
     $scope.bindNC = function (currentSelectedNcUser) {
         //todo
+        document.getElementById('spinner').style.visibility = 'visible'
         $http(
             {
                 method: 'get',
@@ -151,6 +156,7 @@ app.controller('list_controller', function ($scope, $http) {
                 }
             }
         ).success(function (response) {
+                document.getElementById('spinner').style.visibility = 'hidden'
                 $scope.disableBind();
                 if (response.flag == 0) {
                     toastr.success("绑定成功");
@@ -179,6 +185,7 @@ app.controller('list_controller', function ($scope, $http) {
             yzjdept: user.yzjdept,
             yzjjob: user.yzjjob
         };
+        document.getElementById('spinner').style.visibility = 'visible'
         $http({
             method: 'get',
             url: 'http://192.168.1.158:8089/servlet/MobileApproveServlet',
@@ -188,6 +195,7 @@ app.controller('list_controller', function ($scope, $http) {
                 method: 'getNCUserInfo'
             }
         }).success(function (response) {
+            document.getElementById('spinner').style.visibility = 'hidden'
             console.log(response);
             $scope.ncusers = [];
             if (response.flag == 0) {
