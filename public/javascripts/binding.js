@@ -183,8 +183,8 @@ app.controller('list_controller', function ($scope, $http) {
             method: 'get',
             url: 'http://192.168.1.158:8089/servlet/MobileApproveServlet',
             params: {
-                ncname: yzjname,
-                ncmobile: yzjmobile,
+                ncname: user.yzjname,
+                ncmobile: user.yzjmobile,
                 method: 'getNCUserInfo'
             }
         }).success(function (response) {
