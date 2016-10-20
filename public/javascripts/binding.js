@@ -49,7 +49,7 @@ app.controller('list_controller', function ($scope, $http) {
         document.getElementById('spinner').style.visibility = 'visible';
         $http({
             method: 'get',
-            url: 'http://192.168.1.158:8089/servlet/MobileApproveServlet?method=getAllUserMappingInfo',
+            url: requrl,
             params: {
                 method: 'getAllUserMappingInfo'
             }
@@ -107,7 +107,7 @@ app.controller('list_controller', function ($scope, $http) {
                         };
                         $http({
                             method: 'get',
-                            url: 'http://192.168.1.158:8089/servlet/MobileApproveServlet',
+                            url: requrl,
                             params: {
                                 yzjid: yzjUserObj.openId,	//云之家账号ID
                                 yzjmobile: yzjUserObj.phone,	//云之家人员手机号
@@ -145,7 +145,7 @@ app.controller('list_controller', function ($scope, $http) {
         $http(
             {
                 method: 'get',
-                url: 'http://192.168.1.158:8089/servlet/MobileApproveServlet',
+                url: requrl,
                 params: {
                     ncjob: currentSelectedNcUser.ncjob,
                     ncmobile: currentSelectedNcUser.ncmobile,
@@ -188,7 +188,7 @@ app.controller('list_controller', function ($scope, $http) {
         document.getElementById('spinner').style.visibility = 'visible'
         $http({
             method: 'get',
-            url: 'http://192.168.1.158:8089/servlet/MobileApproveServlet',
+            url: requrl,
             params: {
                 ncname: user.yzjname,
                 ncmobile: user.yzjmobile,
