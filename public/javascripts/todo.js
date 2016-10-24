@@ -14,124 +14,139 @@ toastr.options = {
 };
 var app = angular.module('todo', []);
 
-app.controller('matters', function ($scope) {
-
+app.controller('matters', function ($scope,$http) {
+    document.getElementById('spinner').style.visibility = 'visible';
+    $http({
+            method: 'get',
+            url: 'json/todolist',
+            params: {//todo 根据云之家openid获取用户名
+                userid: '',
+                statuskey: 'submit ',
+                statuscode: 'unhandle1d',
+                startline: '10',
+                count: '10',
+                count: '10',
+                method: 'getTaskList'
+            }
+        }
+    ).success(function (response) {
+            document.getElementById('spinner').style.visibility = 'hidden';
+            console.log(response);
+        });
 });
 
-$(function () {
-        XuntongJSBridge.call('setWebViewTitle', {'title': '业务审批'});//设置页面标题并显示
-        $('#myTabs a').click(function (e) {
-            e.preventDefault();
-            $(this).tab('show');
-        });
-        var userId = '';
-        var security = $('body').attr('data-encrypt-security') + '';
-        var time = $('body').attr('data-encrypt-date') + '';
-        document.getElementById('spinner').style.visibility = 'visible';
-//TODO 测试用，先注释掉判断云之家环境并获取用户ID的代码↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓2016-8-19 09:46:45
-//        if (isYzjApp()) {//如果运行在云之家（Android或IOS的云之家APP客户端）里面，才能执行下面的逻辑
-//            XuntongJSBridge.call('getPersonInfo', {}, function (result) {//这里返回的result是个对象，转换json传使用JSON.stringfy(result)
-//                getServerHost('OA', function (serverHost) {
-//                    $.post(serverHost + fetchUsernameUrl,
-//                        {
-//                            openid: result.data.openId,
-//                            params: JSON.stringify({
-//                                securityCode: security,
-//                                time: time
-//                            })
-//                        }//只需要传一个openid即可
-//                        , function (res) {
-//                            if (res.resultcode == 0) {//如果为0，那么获取成功
-//TODO 测试用，先注释掉判断云之家环境并获取用户ID的代↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑2016-8-19 09:46:47
-        userId = 'sunyangyang';
-        //userId = res.userid;
-        getServerHost('OA', function (serverHost) {
-            var url = serverHost + todoUrl;
-            $.post(url//获取待办列表
-                , {
-                    userId: userId
-                    , params: JSON.stringify({
-                        securityCode: security,
-                        time: time
-                    })
-                }
-                , function (result, code) {
-                    console.log(result);
-                    var o = result;
-                    if (o.resultcode == 0) {
-                        if (o.data.length == 0) {
-                            toastr.info('暂无待办');
-                            document.getElementById('spinner').style.visibility = 'hidden';
-                        }
-                        var html = '';
-                        for (var i = 0; i < o.data.length; i++) {
-                            var info = o.data[i];
-                            getFormName(i, info, function (back, formname) {
-                                    var info = o.data[back];
-                                    //↓↓↓↓↓↓↓↓↓时间戳转换成时间↓↓↓↓↓↓↓↓↓
-                                    var time = transTimeStampToTime(info.getdate);
-                                    //↑↑↑↑↑↑↑↑↑时间戳转换成时间↑↑↑↑↑↑↑↑↑
-                                    html += '<li onclick="" class="list-group-item"' +
-                                    ' data-form-source="' + info.source +//系统来源
-                                    '" data-form-biztype="' + info.biztype +//业务类型
-                                    '" data-form-bizurl="' + info.bizurl +
-                                    '" data-form-entityid="' + info.entityid +//表单详情id
-                                    '" data-form-pid="' + info.pid +//审批流程id
-                                    '" data-form-taskid="' + info.taskid +//对应审批操作
-                                    '" data-form-formname="' + formname +//表单名字
-                                    '" ><h5>' +
-                                    info.title +
-                                    '</h5><div>' +
-                                    '<p>' +
-                                    info.source +
-                                    '</p><p>' +
-                                    formname +
-                                    '</p><p>' +
-                                    info.username + '</p><h6>' +
-                                    time +
-                                    '</h6></div></li>';
-                                    if (back == o.data.length - 1) {//如果进行到最后一次回调
-                                        document.getElementById('spinner').style.visibility = 'hidden';
-                                        $('#todo-ul').html(html);
-                                        $('#todo-ul li').click(function () {
-                                            var source = $(this).attr('data-form-source');
-                                            var biztype = $(this).attr('data-form-biztype');
-                                            var bizurl = $(this).attr('data-form-bizurl');
-                                            var entityid = $(this).attr('data-form-entityid');
-                                            var pid = $(this).attr('data-form-pid');
-                                            var taskid = $(this).attr('data-form-taskid');
-                                            var formname = $(this).attr('data-form-formname');
-                                            //跳转到表单详情页，dispatch里面会默认跟一个isFromApp=false
-                                            if (bizurl == '') {
-                                                dispatch('json/router.json', formname, source, biztype, bizurl, entityid, pid, taskid, userId, function (url) {
-                                                    window.location = url;
-                                                });
-                                            } else {
-                                                window.location = bizurl;
-                                            }
-
-                                        });
-                                    }
-                                }
-                            );//getFormName
-                        }
-                    }//todo formal
-                });//获取待办列表
-        });
-//TODO 测试用，先注释掉判断云之家环境并获取用户ID的代码↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓2016-8-19 09:48:09
-//                            }//if (res.resultcode == 0)
+//$(function () {
+//        XuntongJSBridge.call('setWebViewTitle', {'title': '业务审批'});//设置页面标题并显示
+//        $('#myTabs a').click(function (e) {
+//            e.preventDefault();
+//            $(this).tab('show');
+//        });
+//        var userId = '';
+//        document.getElementById('spinner').style.visibility = 'visible';
+////TODO 测试用，先注释掉判断云之家环境并获取用户ID的代码↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓2016-8-19 09:46:45
+////        if (isYzjApp()) {//如果运行在云之家（Android或IOS的云之家APP客户端）里面，才能执行下面的逻辑
+////            XuntongJSBridge.call('getPersonInfo', {}, function (result) {//这里返回的result是个对象，转换json传使用JSON.stringfy(result)
+////                getServerHost('OA', function (serverHost) {
+////                    $.post(serverHost + fetchUsernameUrl,
+////                        {
+////                            openid: result.data.openId,
+////                            params: JSON.stringify({
+////                                securityCode: security,
+////                                time: time
+////                            })
+////                        }//只需要传一个openid即可
+////                        , function (res) {
+////                            if (res.resultcode == 0) {//如果为0，那么获取成功
+////TODO 测试用，先注释掉判断云之家环境并获取用户ID的代↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑2016-8-19 09:46:47
+//        userId = 'sunyangyang';
+//        //userId = res.userid;
+//        getServerHost('OA', function (serverHost) {
+//            var url = serverHost + todoUrl;
+//            $.post(url//获取待办列表
+//                , {
+//                    userId: userId
+//                    , params: JSON.stringify({
+//                        securityCode: security,
+//                        time: time
+//                    })
+//                }
+//                , function (result, code) {
+//                    console.log(result);
+//                    var o = result;
+//                    if (o.resultcode == 0) {
+//                        if (o.data.length == 0) {
+//                            toastr.info('暂无待办');
+//                            document.getElementById('spinner').style.visibility = 'hidden';
+//                        }
+//                        var html = '';
+//                        for (var i = 0; i < o.data.length; i++) {
+//                            var info = o.data[i];
+//                            getFormName(i, info, function (back, formname) {
+//                                    var info = o.data[back];
+//                                    //↓↓↓↓↓↓↓↓↓时间戳转换成时间↓↓↓↓↓↓↓↓↓
+//                                    var time = transTimeStampToTime(info.getdate);
+//                                    //↑↑↑↑↑↑↑↑↑时间戳转换成时间↑↑↑↑↑↑↑↑↑
+//                                    html += '<li onclick="" class="list-group-item"' +
+//                                    ' data-form-source="' + info.source +//系统来源
+//                                    '" data-form-biztype="' + info.biztype +//业务类型
+//                                    '" data-form-bizurl="' + info.bizurl +
+//                                    '" data-form-entityid="' + info.entityid +//表单详情id
+//                                    '" data-form-pid="' + info.pid +//审批流程id
+//                                    '" data-form-taskid="' + info.taskid +//对应审批操作
+//                                    '" data-form-formname="' + formname +//表单名字
+//                                    '" ><h5>' +
+//                                    info.title +
+//                                    '</h5><div>' +
+//                                    '<p>' +
+//                                    info.source +
+//                                    '</p><p>' +
+//                                    formname +
+//                                    '</p><p>' +
+//                                    info.username + '</p><h6>' +
+//                                    time +
+//                                    '</h6></div></li>';
+//                                    if (back == o.data.length - 1) {//如果进行到最后一次回调
+//                                        document.getElementById('spinner').style.visibility = 'hidden';
+//                                        $('#todo-ul').html(html);
+//                                        $('#todo-ul li').click(function () {
+//                                            var source = $(this).attr('data-form-source');
+//                                            var biztype = $(this).attr('data-form-biztype');
+//                                            var bizurl = $(this).attr('data-form-bizurl');
+//                                            var entityid = $(this).attr('data-form-entityid');
+//                                            var pid = $(this).attr('data-form-pid');
+//                                            var taskid = $(this).attr('data-form-taskid');
+//                                            var formname = $(this).attr('data-form-formname');
+//                                            //跳转到表单详情页，dispatch里面会默认跟一个isFromApp=false
+//                                            if (bizurl == '') {
+//                                                dispatch('json/router.json', formname, source, biztype, bizurl, entityid, pid, taskid, userId, function (url) {
+//                                                    window.location = url;
+//                                                });
+//                                            } else {
+//                                                window.location = bizurl;
+//                                            }
 //
-//                        });// $.post(fetchUsernameUrl
-//                });
-//            });//XuntongJSBridge.call
-//
-//        }
-//        else {
-//            alert('请在云之家App内打开应用');
-//        }//if (isYzjApp())
-//TODO 测试用，先注释掉判断云之家环境并获取用户ID的代码↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑2016-8-19 09:48:05
-    }
-);
+//                                        });
+//                                    }
+//                                }
+//                            );//getFormName
+//                        }
+//                    }//todo formal
+//                });//获取待办列表
+//        });
+////TODO 测试用，先注释掉判断云之家环境并获取用户ID的代码↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓2016-8-19 09:48:09
+////                            }//if (res.resultcode == 0)
+////
+////                        });// $.post(fetchUsernameUrl
+////                });
+////            });//XuntongJSBridge.call
+////
+////        }
+////        else {
+////            alert('请在云之家App内打开应用');
+////        }//if (isYzjApp())
+////TODO 测试用，先注释掉判断云之家环境并获取用户ID的代码↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑2016-8-19 09:48:05
+//    }
+//);
 //判断是否运行于云之家App中
 function isYzjApp() {
     return navigator.userAgent.match(/Qing\/.*;(iPhone|Android).*/) ? true : false;
