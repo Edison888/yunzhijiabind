@@ -31,15 +31,13 @@
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     <link href="//cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
-    <!-- ↑↑↑↑↑↑something about bootstrap && jquery↑↑↑↑↑↑-->
-    <script src="//cdn.bootcss.com/blueimp-md5/2.3.0/js/md5.min.js"></script>
     <!--自定义css文件-->
     <link rel="stylesheet" href="stylesheets/todo.css">
     <!--加载动画-->
     <link rel="stylesheet" href="stylesheets/loading.css">
     <title>待办列表</title>
 </head>
-<body data-encrypt-date="<%=date%>"  data-encrypt-security="<%=security%>">
+<body>
 <div class="container">
     <div id="spinner" style=" margin: auto;position: absolute; top: 0; left: 0; bottom: 0; right: 0;visibility: hidden">
         <div class="spinner-container container1">
@@ -62,12 +60,6 @@
         </div>
 
     </div>
-    <div ng-controller="UserController">
-        Your name: <input ng-model="user.name" type="text" placeholder="World">
-        <button ng-click="getName()">'获取用户名称</button>
-        <hr>
-        Hello{{user.name||'World'}}!
-    </div>
     <ul class="nav nav-pills" role="tablist">
         <li role="presentation" style="width: 50%;text-align: center" class="active">
                 <a role="tab" aria-controls="todo" data-toggle="tab" href="#todo">待办
@@ -76,7 +68,7 @@
         <li role="presentation" style="width:50%;text-align: center">
             <a role="tab" aria-controls="havedo" data-toggle="tab" href="#havedo">已办</a></li>
     </ul>
-    <div class="tab-content">
+    <div class="tab-content" ng-controller="matters">
         <div role="tabpanel" class="tab-pane active" id="todo">
             <ul id="todo-ul" class="list-group">
             </ul>
@@ -89,27 +81,8 @@
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <!-- AngularJS http://www.bootcdn.cn/angular.js/1.5.8/-->
 <script src="//cdn.bootcss.com/angular.js/1.5.8/angular.js"></script>
-<!--通用js-->
-<script src="javascripts/common.js"></script>
 <!--自定义js文件-->
+<script src="javascripts/url.js"></script>
 <script src="javascripts/todo.js"></script>
-<script>
-    var app = angular.module('todo', []);
-    app.controller('UserController', function ($scope) {
-        $scope.user = {};//如果表单用到对象这种形式去引用值的时候，尽量在controller里面先初始化对象，避免不必要错误
-        $scope.getName = function () {
-            //input没有输入前，input里面的ng-model没有值，如果没有上边的$scope.user初始化，直接user.name会报错。
-            //另外，这里的$scope.user.name如果为undefined，
-            console.log($scope.user.name || '默认为空');
-        }
-    });
-
-   var a = parseFloat(1.5) - parseFloat(250) / 100;
-    console.log(a);
-    if(a>0){
-        console.log("大于0")
-    }
-
-</script>
 </body>
 </html>

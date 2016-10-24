@@ -1,18 +1,24 @@
+toastr.options = {
+    "closeButton": false,
+    "debug": true,
+    "positionClass": "toast-bottom-full-width",
+    "onclick": null,
+    "showDuration": "1",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+};
+var app = angular.module('todo', []);
+
+app.controller('matters', function ($scope) {
+
+});
+
 $(function () {
-        toastr.options = {
-            "closeButton": false,
-            "debug": true,
-            "positionClass": "toast-bottom-full-width",
-            "onclick": null,
-            "showDuration": "1",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
         XuntongJSBridge.call('setWebViewTitle', {'title': '业务审批'});//设置页面标题并显示
         $('#myTabs a').click(function (e) {
             e.preventDefault();
