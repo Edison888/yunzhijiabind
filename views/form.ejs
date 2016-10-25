@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="form">
 <head lang="en">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -98,8 +98,14 @@
             </div>
             <div style="width: 100%;height: 1px;background-color: lightgray"></div>
         </div>
-        <div id="line_top"></div>
-        <div id="form_info">
+        <!--<div id="line_top"></div>-->
+        <div id="form_info" ng-controller="form_detail">
+            <ul class="nav nav-pills" role="tablist">
+                <li role="presentation" class="active"><a href="#">Home</a></li>
+                <li role="presentation"><a href="#">Profile</a></li>
+                <li role="presentation"><a href="#">Messages</a></li>
+                <li role="presentation"><a href="#">Profile</a></li>
+            </ul>
 
         </div>
     </div>
@@ -115,6 +121,8 @@
 </div>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- AngularJS http://www.bootcdn.cn/angular.js/1.5.8/-->
+<script src="//cdn.bootcss.com/angular.js/1.5.8/angular.js"></script>
 <!--通用js-->
 <script src="javascripts/url.js"></script>
 <script src="javascripts/form.js"></script>
