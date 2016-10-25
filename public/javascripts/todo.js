@@ -36,11 +36,10 @@ switch (urlObj.type) {
         break;
 }
 params = {//todo 根据云之家openid获取用户名
-    userid: '',
+    userid: '574e2e2ce4b00f589e2e999f',
     statuskey: statuskeyparam,
     statuscode: statuscodeparam,
-    startline: '10',
-    count: '10',
+    startline: '0',
     count: '10',
     method: 'getTaskList'
 }
@@ -49,22 +48,28 @@ app.controller('matters', function ($scope, $http) {
     document.getElementById('spinner').style.visibility = 'visible';
     $http({
             method: 'get',
-            url: 'json/todolist',
+            url: requrl,
             params: params
         }
     ).success(function (response) {
+            $scope.matters = [];
             document.getElementById('spinner').style.visibility = 'hidden';
-            $scope.matters = response.data;
-            if (response.data.length == 0) {
-                toastr.info('暂无待办');
-            }
-            $scope.goDetail = function (matter) {
-                console.log(matter);
-                var uri = new URI('/form');
-                uri.addQuery('taskid', matter.taskid);
-                uri.addQuery('taskid', matter.billtype);
-                uri.addQuery('taskid', matter.billid);
-                window.location = uri.toString();
+            if(response.flag==0){
+                if (response.data.length == 0) {
+                    toastr.info('暂无待办');
+                }else{
+                    $scope.matters = response.data;
+                    $scope.goDetail = function (matter) {
+                        console.log(matter);
+                        var uri = new URI('/form');
+                        uri.addQuery('taskid', matter.taskid);
+                        uri.addQuery('taskid', matter.billtype);
+                        uri.addQuery('taskid', matter.billid);
+                        window.location = uri.toString();
+                    }
+                }
+            }else{
+                toastr.error(response.desc);
             }
             console.log(response);
         });
