@@ -63,8 +63,9 @@ app.controller('matters', function ($scope, $http) {
                         console.log(matter);
                         var uri = new URI('/form');
                         uri.addQuery('taskid', matter.taskid);
-                        uri.addQuery('taskid', matter.billtype);
-                        uri.addQuery('taskid', matter.billid);
+                        uri.addQuery('billtype', matter.billtype);
+                        uri.addQuery('billid', matter.billid);
+                        uri.addQuery('type', urlObj.type);
                         window.location = uri.toString();
                     }
                 }
