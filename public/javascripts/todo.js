@@ -13,21 +13,44 @@ toastr.options = {
     "hideMethod": "fadeOut"
 };
 var app = angular.module('todo', []);
-
+var urlObj = getUrlParamObj();
+console.log(urlObj);
+var statuskeyparam = '';
+var statuscodeparam = '';
+switch (urlObj.type) {
+    case 'todohd'://需要我处理并且已经处理
+        statuskeyparam = 'ishandled';
+        statuscodeparam = 'handled';
+        break;
+    case 'todounhd'://需要我处理并且未处理
+        statuskeyparam = 'ishandled';
+        statuscodeparam = 'unhandled';
+        break;
+    case 'subhd'://我提交的并且已经处理
+        statuskeyparam = 'submit';
+        statuscodeparam = 'finished';
+        break;
+    case 'subunhd'://我提交的并且未处理
+        statuskeyparam = 'submit';
+        statuscodeparam = 'unhandled';
+        break;
+}
+params = {//todo 根据云之家openid获取用户名
+    userid: '',
+    statuskey: statuskeyparam,
+    statuscode: statuscodeparam,
+    startline: '10',
+    count: '10',
+    count: '10',
+    method: 'getTaskList'
+}
+console.log(params);
 app.controller('matters', function ($scope, $http) {
     document.getElementById('spinner').style.visibility = 'visible';
     $http({
             method: 'get',
             url: 'json/todolist',
-            params: {//todo 根据云之家openid获取用户名
-                userid: '',
-                statuskey: 'ishandled ',
-                statuscode: 'unhandled',
-                startline: '10',
-                count: '10',
-                count: '10',
-                method: 'getTaskList'
-            }
+            params: params
         }
     ).success(function (response) {
             document.getElementById('spinner').style.visibility = 'hidden';
@@ -38,14 +61,23 @@ app.controller('matters', function ($scope, $http) {
             $scope.goDetail = function (matter) {
                 console.log(matter);
                 var uri = new URI('/form');
-                uri.addQuery('taskid',matter.taskid);
-                uri.addQuery('taskid',matter.billtype);
-                uri.addQuery('taskid',matter.billid);
+                uri.addQuery('taskid', matter.taskid);
+                uri.addQuery('taskid', matter.billtype);
+                uri.addQuery('taskid', matter.billid);
                 window.location = uri.toString();
             }
             console.log(response);
         });
 });
+/*
+ * 获取当前页面（通用审批页面参数）
+ * */
+function getUrlParamObj() {
+    var curUrl = window.location.href;//获取当前页面url地址（带参数的）
+    var uri = new URI(curUrl);//实例化一个URI对象
+    var paramObj = uri.search(true);//返回?之后链接对应参数所组成的js对象：例如uri == "http://example.org/bar/world.html?foo=bar&hello=world&hello=mars"  返回{ foo: "bar", hello : ["world", "mars"] }
+    return paramObj;
+}
 
 //$(function () {
 //        XuntongJSBridge.call('setWebViewTitle', {'title': '业务审批'});//设置页面标题并显示
