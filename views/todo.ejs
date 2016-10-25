@@ -61,7 +61,7 @@
 
     </div>
     <ul id="todo-ul" class="list-group" ng-controller="matters">
-        <li class="list-group-item" ng-repeat="matter in matters">
+        <li class="list-group-item" ng-repeat="matter in matters" ng-click="goDetail(matter)">
             <h5>
                 {{matter.title}}
             </h5>

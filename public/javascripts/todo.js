@@ -14,15 +14,15 @@ toastr.options = {
 };
 var app = angular.module('todo', []);
 
-app.controller('matters', function ($scope,$http) {
+app.controller('matters', function ($scope, $http) {
     document.getElementById('spinner').style.visibility = 'visible';
     $http({
             method: 'get',
             url: 'json/todolist',
             params: {//todo 根据云之家openid获取用户名
                 userid: '',
-                statuskey: 'submit ',
-                statuscode: 'unhandle1d',
+                statuskey: 'ishandled ',
+                statuscode: 'unhandled',
                 startline: '10',
                 count: '10',
                 count: '10',
@@ -32,8 +32,16 @@ app.controller('matters', function ($scope,$http) {
     ).success(function (response) {
             document.getElementById('spinner').style.visibility = 'hidden';
             $scope.matters = response.data;
-            if(response.data.length==0){
+            if (response.data.length == 0) {
                 toastr.info('暂无待办');
+            }
+            $scope.goDetail = function (matter) {
+                console.log(matter);
+                var uri = new URI('/form');
+                uri.addQuery('taskid',matter.taskid);
+                uri.addQuery('taskid',matter.billtype);
+                uri.addQuery('taskid',matter.billid);
+                window.location = uri.toString();
             }
             console.log(response);
         });
