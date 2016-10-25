@@ -31,6 +31,10 @@ app.controller('matters', function ($scope,$http) {
         }
     ).success(function (response) {
             document.getElementById('spinner').style.visibility = 'hidden';
+            $scope.matters = response.data;
+            if(response.data.length==0){
+                toastr.info('暂无待办');
+            }
             console.log(response);
         });
 });

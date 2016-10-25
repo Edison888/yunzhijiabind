@@ -62,8 +62,9 @@
     </div>
     <ul class="nav nav-pills" role="tablist">
         <li role="presentation" style="width: 50%;text-align: center" class="active">
-                <a role="tab" aria-controls="todo" data-toggle="tab" href="#todo">待办
-                <div id="vertical_line"></div></a>
+            <a role="tab" aria-controls="todo" data-toggle="tab" href="#todo">待办
+                <div id="vertical_line"></div>
+            </a>
         </li>
         <li role="presentation" style="width:50%;text-align: center">
             <a role="tab" aria-controls="havedo" data-toggle="tab" href="#havedo">已办</a></li>
@@ -71,9 +72,27 @@
     <div class="tab-content" ng-controller="matters">
         <div role="tabpanel" class="tab-pane active" id="todo">
             <ul id="todo-ul" class="list-group">
+                <li class="list-group-item" ng-repeat="matter in matters">
+                    <h5>
+                        {{matter.title}}
+                    </h5>
+
+                    <div>
+                        <p>
+                            {{matter.billtypename}}
+                        </p>
+
+                        <p>
+                            {{matter.sendman}}
+                        </p>
+
+                        <p></p>
+                        <h6>{{matter.senddate}}</h6>
+                    </div>
+                </li>
             </ul>
         </div>
-        <div role="tabpanel" class="tab-pane" id="havedo">...</div>
+        <div role="tabpanel" class="tab-panel" id="havedo">...</div>
     </div>
 
 </div>
