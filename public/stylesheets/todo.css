@@ -1,9 +1,11 @@
 body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p {
     font-family: 黑体, Microsoft YaHei, '宋体', Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
 }
+
 body {
     background-color: #e9ecf1; /*云之家规范：背景颜色*/
 }
+
 .container {
     padding: 0px;
 }
@@ -18,12 +20,14 @@ body {
     font-size: 12px;
 }
 
-.list-group-item > div > p:nth-child(2),.list-group-item > div > p:nth-child(3) {
+.list-group-item > div > p:nth-child(2), .list-group-item > div > p:nth-child(3) {
     padding-left: 10px;
 }
-.list-group-item > div > p:nth-child(3){
+
+.list-group-item > div > p:nth-child(3) {
     color: grey;
 }
+
 .list-group-item > div > h6 {
     float: right;
     margin-top: 3px;
@@ -41,40 +45,7 @@ body {
     border-top-right-radius: 0px;
 }
 
-.nav-pills > li > a {
-    border-radius: 0px;
-    border-bottom: solid white 2px;
-}
-
-/*
-覆盖bootstrap里面的li标签前面的边距
-*/
-.nav-pills > li + li {
-    margin-left: 0px;
-}
-
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
     line-height: 1.5;
 }
 
-a {
-    color: #9a9a9a;
-    font-size: 16px;
-    background-color: white;
-}
-
-.nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
-    color: #3cbaff;
-    background-color: #ffffff;
-    border-bottom: solid #3cbaff 2px;
-    font-size: 16px;
-}
-
-#vertical_line {
-    width: 1px;
-    height: 20px;
-    background-color: #e9ecf1;
-    display: inline;
-    float: right;
-    margin-right: -15px
-}
