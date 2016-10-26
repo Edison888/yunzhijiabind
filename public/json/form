@@ -78,6 +78,67 @@
             "tabdata": [
               {
                 "colname": "单据编号",
+                "colvalue": "XCVXCVXVXCVXXCVC",
+                "colkey": "djbh"
+              },
+              {
+                "colname": "单据日期",
+                "colvalue": "2016-10-18",
+                "colkey": "djrq"
+              },
+              {
+                "colname": "出差地点",
+                "colvalue": "1",
+                "colkey": "zyx2"
+              },
+              {
+                "colname": "出差事由",
+                "colvalue": "1",
+                "colkey": "zyx1"
+              },
+              {
+                "colname": "合计金额",
+                "colvalue": "889",
+                "colkey": "total"
+              },
+              {
+                "colname": "财务核报金额",
+                "colvalue": "889",
+                "colkey": "ybje"
+              },
+              {
+                "colname": "费用承担公司",
+                "colvalue": "葛洲坝集团房地产开发有限公司本部",
+                "colkey": "fydwbm"
+              },
+              {
+                "colname": "费用承担部门",
+                "colvalue": "总工程师办公室",
+                "colkey": "fydeptid"
+              },
+              {
+                "colname": "报销人公司",
+                "colvalue": "葛洲坝集团房地产开发有限公司本部",
+                "colkey": "dwbm"
+              },
+              {
+                "colname": "报销部门",
+                "colvalue": "总工程师办公室",
+                "colkey": "deptid"
+              },
+              {
+                "colname": "报销人",
+                "colvalue": "冯冬",
+                "colkey": "jkbxr"
+              }
+            ]
+          },
+          {
+            "tabTitle": "差旅费报销单",
+            "tabcode": "1",
+            "tabdata": [
+              {
+                "colname": "单据编号",
                 "colvalue": "SSSSSSS",
                 "colkey": "djbh"
               },

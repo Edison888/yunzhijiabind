@@ -113,26 +113,19 @@
             <!--</div>-->
             <!-- Nav tabs -->
             <ul id="myTab" class="nav nav-tabs" role="tablist">
-                <li role="presentation" ng-repeat="head in tabcontent"><a href="#pane{{$index}}" role="tab"
+                <li role="presentation" ng-repeat="head in tabcontent" ng-class="{'active':$index==0}"><a href="#pane{{$index}}" role="tab"
                                                                           data-toggle="tab">{{head.tabTitle}}</a></li>
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
-                <div role="tabpanel" ng-repeat="head in tabcontent" class="tab-pane " id="pane{{$index}}">
+                <div role="tabpanel" ng-repeat="head in tabcontent" class="tab-pane" ng-class="{'active':$index==0}" id="pane{{$index}}">
                     <div style="position: relative;overflow: hidden; padding-bottom: 5px;padding-top: 5px;"
                          ng-repeat="item in head.tabdata">
-                        <h5 style=" color: grey;
-    width: 40%;
-    float: left;
-    color: grey;">{{item.colname}}
+                        <h5 style=" color: grey;width: 40%;float: left;color: grey;">
+                            {{item.colname}}
                         </h5>
-
-                        <h5 style=" color: black;
-    width: 60%;
-    float: right;
-    text-align: right;
-    padding-right: 20px;">
+                        <h5 style=" color: black;width: 60%;float: right;text-align: right;padding-right: 20px;">
                             {{item.colvalue}}
                         </h5>
                     </div>
