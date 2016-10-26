@@ -1,6 +1,12 @@
 var app = angular.module('form', []);
 var type = urlObj.type;
 app.controller('form_detail', function ($scope, $http) {
+    $scope.goApprove = function () {
+        var uri = new URI('/history');
+        uri.addQuery('billid', urlObj.billid);
+        uri.addQuery('billtype', urlObj.billtype);
+        window.location = uri.toString();
+    }
     $http(
         {
             method: 'get',
