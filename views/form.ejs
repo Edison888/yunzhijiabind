@@ -100,18 +100,6 @@
         </div>
         <!--<div id="line_top"></div>-->
         <div id="form_info">
-            <!--<ul id="myTab" class="nav nav-tabs" role="tablist">-->
-            <!--<li role="presentation" ng-repeat="head in tabcontent" class="active"><a href="#pane{{$index}}" role="tab" data-toggle="tab">{{head.tabTitle}}</a></li>-->
-            <!--</ul>-->
-
-            <!--<div class="tab-content">-->
-            <!--<div role="tabpanel" ng-repeat="head in tabcontent" class="tab-pane" id="pane{{$index}}">-->
-            <!--<h1>-->
-            <!--{{$index}}-->
-            <!--</h1>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!-- Nav tabs -->
             <ul id="myTab" class="nav nav-tabs" role="tablist">
                 <li role="presentation" ng-repeat="head in tabcontent" ng-class="{'active':$index==0}"><a href="#pane{{$index}}" role="tab"
                                                                           data-toggle="tab">{{head.tabTitle}}</a></li>
