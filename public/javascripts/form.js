@@ -15,7 +15,8 @@ app.controller('form_detail', function ($scope, $http) {
         }
     ).success(function (response) {
             console.log(response)
-            $scope.tabcontent = response.data.taskbill.head.tabContent;
+            $scope.heads = response.data.taskbill.head.tabContent;
+            $scope.bodys = response.data.taskbill.body.tabContent;
             $('#myTab a').click(function (e) {
                 e.preventDefault()
                 $(this).tab('show')
