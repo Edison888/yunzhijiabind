@@ -15,26 +15,6 @@ toastr.options = {
 var app = angular.module('todo', []);
 var urlObj = getUrlParamObj();
 console.log(urlObj);
-var statuskeyparam = '';
-var statuscodeparam = '';
-switch (urlObj.type) {
-    case 'todohd'://需要我处理并且已经处理
-        statuskeyparam = 'ishandled';
-        statuscodeparam = 'handled';
-        break;
-    case 'todounhd'://需要我处理并且未处理
-        statuskeyparam = 'ishandled';
-        statuscodeparam = 'unhandled';
-        break;
-    case 'subhd'://我提交的并且已经处理
-        statuskeyparam = 'submit';
-        statuscodeparam = 'finished';
-        break;
-    case 'subunhd'://我提交的并且未处理
-        statuskeyparam = 'submit';
-        statuscodeparam = 'unhandled';
-        break;
-}
 params = {//todo 根据云之家openid获取用户名
     userid: '574e2e2ce4b00f589e2e999f',
     statuskey: statuskeyparam,
@@ -75,16 +55,6 @@ app.controller('matters', function ($scope, $http) {
             console.log(response);
         });
 });
-/*
- * 获取当前页面（通用审批页面参数）
- * */
-function getUrlParamObj() {
-    var curUrl = window.location.href;//获取当前页面url地址（带参数的）
-    var uri = new URI(curUrl);//实例化一个URI对象
-    var paramObj = uri.search(true);//返回?之后链接对应参数所组成的js对象：例如uri == "http://example.org/bar/world.html?foo=bar&hello=world&hello=mars"  返回{ foo: "bar", hello : ["world", "mars"] }
-    return paramObj;
-}
-
 //$(function () {
 //        XuntongJSBridge.call('setWebViewTitle', {'title': '业务审批'});//设置页面标题并显示
 //        $('#myTabs a').click(function (e) {
