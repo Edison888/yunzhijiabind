@@ -90,8 +90,9 @@ app.controller('list_controller', function ($scope, $http) {
             document.getElementById('spinner').style.visibility = 'visible'
             $http({
                 method: 'get',
-                url: 'json/yzj_user',
+                url: requrl,
                 params: {
+                    method:'getYzjUserInfo',
                     mobile: phoneValue
                 }
             }).success(function (response) {
