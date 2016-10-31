@@ -96,30 +96,33 @@ app.controller('list_controller', function ($scope, $http) {
                     mobile: phoneValue
                 }
             }).success(function (response) {
+                    console.log("sdfsdf")
+                    console.log(response);
                     document.getElementById('spinner').style.visibility = 'hidden'
-                    if (response.success) {
-                        var yzjUserObj = response.data[0];
+                    if (response.flag==0) {
+                        var yzjUserObj = response.data;
                         var user = {
-                            yzjid: yzjUserObj.openId,	//云之家账号ID
-                            yzjmobile: yzjUserObj.phone,	//云之家人员手机号
-                            yzjname: yzjUserObj.name,   // 云之家人员名称
-                            yzjdept: yzjUserObj.department,// 云之家人员部门
-                            yzjjob: yzjUserObj.jobTitle//云之家人员职位
+                            yzjid: yzjUserObj.yzjid,	//云之家账号ID
+                            yzjmobile: yzjUserObj.yzjmobile,	//云之家人员手机号
+                            yzjname: yzjUserObj.yzjname,   // 云之家人员名称
+                            yzjdept: yzjUserObj.yzjdept,// 云之家人员部门
+                            yzjjob: yzjUserObj.yzjjob//云之家人员职位
                         };
                         $http({
                             method: 'get',
                             url: requrl,
                             params: {
-                                yzjid: yzjUserObj.openId,	//云之家账号ID
-                                yzjmobile: yzjUserObj.phone,	//云之家人员手机号
-                                yzjname: yzjUserObj.name,   // 云之家人员名称
-                                yzjdept: yzjUserObj.department,// 云之家人员部门
-                                yzjjob: yzjUserObj.jobTitle, //云之家人员职位
+                                yzjid: yzjUserObj.yzjid,	//云之家账号ID
+                                yzjmobile: yzjUserObj.yzjmobile,	//云之家人员手机号
+                                yzjname: yzjUserObj.yzjname,   // 云之家人员名称
+                                yzjdept: yzjUserObj.yzjdept,// 云之家人员部门
+                                yzjjob: yzjUserObj.yzjjob,//云之家人员职位
                                 method: 'createUserMapping'//方法名
 
                             }
 
                         }).success(function (response) {
+                            console.log("成功");
                             console.log(response);
                             if (response.flag == 0) {
                                 if (response.data.success == 0) {
