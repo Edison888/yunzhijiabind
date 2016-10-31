@@ -3,42 +3,44 @@
  */
 var debug = true;
 var host_produce = "";
-var host_test = "http://192.168.1.158:8089";
+//var host_test = "http://192.168.1.158:8089";
+//var host_test = "http://61.136.222.246:8089";
+var host_test = "http://61.136.222.246:8089";
 var common_biz_url = "/servlet/MobileApproveServlet";
 var requrl = (debug ? host_test : host_produce) + common_biz_url;
 
 
 
-//-----Çø·Ö²»Í¬±íµ¥ÀàĞÍ-------------------------------
+//-----åŒºåˆ†ä¸åŒè¡¨å•ç±»å‹-------------------------------
 var statuskeyparam = '';
 var statuscodeparam = '';
 var urlObj = getUrlParamObj();
 switch (urlObj.type) {
-    case 'todohd'://ĞèÒªÎÒ´¦Àí²¢ÇÒÒÑ¾­´¦Àí
+    case 'todohd'://éœ€è¦æˆ‘å¤„ç†å¹¶ä¸”å·²ç»å¤„ç†
         statuskeyparam = 'ishandled';
         statuscodeparam = 'handled';
         break;
-    case 'todounhd'://ĞèÒªÎÒ´¦Àí²¢ÇÒÎ´´¦Àí
+    case 'todounhd'://éœ€è¦æˆ‘å¤„ç†å¹¶ä¸”æœªå¤„ç†
         statuskeyparam = 'ishandled';
         statuscodeparam = 'unhandled';
         break;
-    case 'subhd'://ÎÒÌá½»µÄ²¢ÇÒÒÑ¾­´¦Àí
+    case 'subhd'://æˆ‘æäº¤çš„å¹¶ä¸”å·²ç»å¤„ç†
         statuskeyparam = 'submit';
         statuscodeparam = 'finished';
         break;
-    case 'subunhd'://ÎÒÌá½»µÄ²¢ÇÒÎ´´¦Àí
+    case 'subunhd'://æˆ‘æäº¤çš„å¹¶ä¸”æœªå¤„ç†
         statuskeyparam = 'submit';
         statuscodeparam = 'unhandled';
         break;
 }
-//-----Çø·Ö²»Í¬±íµ¥ÀàĞÍ-------------------------------
+//-----åŒºåˆ†ä¸åŒè¡¨å•ç±»å‹-------------------------------
 
 /*
- * »ñÈ¡µ±Ç°Ò³Ãæ£¨Í¨ÓÃÉóÅúÒ³Ãæ²ÎÊı£©
+ * è·å–å½“å‰é¡µé¢ï¼ˆé€šç”¨å®¡æ‰¹é¡µé¢å‚æ•°ï¼‰
  * */
 function getUrlParamObj() {
-    var curUrl = window.location.href;//»ñÈ¡µ±Ç°Ò³ÃæurlµØÖ·£¨´ø²ÎÊıµÄ£©
-    var uri = new URI(curUrl);//ÊµÀı»¯Ò»¸öURI¶ÔÏó
-    var paramObj = uri.search(true);//·µ»Ø?Ö®ºóÁ´½Ó¶ÔÓ¦²ÎÊıËù×é³ÉµÄjs¶ÔÏó£ºÀıÈçuri == "http://example.org/bar/world.html?foo=bar&hello=world&hello=mars"  ·µ»Ø{ foo: "bar", hello : ["world", "mars"] }
+    var curUrl = window.location.href;//è·å–å½“å‰é¡µé¢urlåœ°å€ï¼ˆå¸¦å‚æ•°çš„ï¼‰
+    var uri = new URI(curUrl);//å®ä¾‹åŒ–ä¸€ä¸ªURIå¯¹è±¡
+    var paramObj = uri.search(true);//è¿”å›?ä¹‹åé“¾æ¥å¯¹åº”å‚æ•°æ‰€ç»„æˆçš„jså¯¹è±¡ï¼šä¾‹å¦‚uri == "http://example.org/bar/world.html?foo=bar&hello=world&hello=mars"  è¿”å›{ foo: "bar", hello : ["world", "mars"] }
     return paramObj;
 }
