@@ -54,21 +54,6 @@
                 "colname": "费用承担部门",
                 "colvalue": "总工程师办公室",
                 "colkey": "fydeptid"
-              },
-              {
-                "colname": "报销人公司",
-                "colvalue": "葛洲坝集团房地产开发有限公司本部",
-                "colkey": "dwbm"
-              },
-              {
-                "colname": "报销部门",
-                "colvalue": "总工程师办公室",
-                "colkey": "deptid"
-              },
-              {
-                "colname": "报销人",
-                "colvalue": "冯冬",
-                "colkey": "jkbxr"
               }
             ]
           },
@@ -204,6 +189,362 @@
             "tabcode": "1",
             "tabdata": [
               [
+                {
+                  "width": "20%",
+                  "colname": "出发日期",
+                  "colvalue": "2016-10-26",
+                  "colkey": "defitem1"
+                },
+                {
+                  "width": "20%",
+                  "colname": "出发地点",
+                  "colvalue": "1",
+                  "colkey": "defitem4"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达日期",
+                  "colvalue": "2016-10-26",
+                  "colkey": "defitem5"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达地点",
+                  "colvalue": "2",
+                  "colkey": "defitem8"
+                },
+                {
+                  "width": "20%",
+                  "colname": "报销金额",
+                  "colvalue": "889",
+                  "colkey": "amount"
+                }
+              ]
+            ]
+          },
+          {
+            "tabTitle": "交通费用",
+            "datacount": 1,
+            "tabcode": "1",
+            "tabdata": [
+              [
+                {
+                  "width": "20%",
+                  "colname": "出发日期",
+                  "colvalue": "2016-01-22",
+                  "colkey": "defitem1"
+                },
+                {
+                  "width": "20%",
+                  "colname": "出发地点",
+                  "colvalue": "1",
+                  "colkey": "defitem4"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达日期",
+                  "colvalue": "2016-01-22",
+                  "colkey": "defitem5"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达地点",
+                  "colvalue": "2",
+                  "colkey": "defitem8"
+                },
+                {
+                  "width": "20%",
+                  "colname": "报销金额",
+                  "colvalue": "889",
+                  "colkey": "amount"
+                }
+              ],[
+                {
+                  "width": "20%",
+                  "colname": "出发日期",
+                  "colvalue": "2016-01-22",
+                  "colkey": "defitem1"
+                },
+                {
+                  "width": "20%",
+                  "colname": "出发地点",
+                  "colvalue": "1",
+                  "colkey": "defitem4"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达日期",
+                  "colvalue": "2016-01-22",
+                  "colkey": "defitem5"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达地点",
+                  "colvalue": "2",
+                  "colkey": "defitem8"
+                },
+                {
+                  "width": "20%",
+                  "colname": "报销金额",
+                  "colvalue": "889",
+                  "colkey": "amount"
+                }
+              ],[
+                {
+                  "width": "20%",
+                  "colname": "出发日期",
+                  "colvalue": "2016-01-22",
+                  "colkey": "defitem1"
+                },
+                {
+                  "width": "20%",
+                  "colname": "出发地点",
+                  "colvalue": "1",
+                  "colkey": "defitem4"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达日期",
+                  "colvalue": "2016-01-22",
+                  "colkey": "defitem5"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达地点",
+                  "colvalue": "2",
+                  "colkey": "defitem8"
+                },
+                {
+                  "width": "20%",
+                  "colname": "报销金额",
+                  "colvalue": "889",
+                  "colkey": "amount"
+                }
+              ],[
+                {
+                  "width": "20%",
+                  "colname": "出发日期",
+                  "colvalue": "2016-01-22",
+                  "colkey": "defitem1"
+                },
+                {
+                  "width": "20%",
+                  "colname": "出发地点",
+                  "colvalue": "1",
+                  "colkey": "defitem4"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达日期",
+                  "colvalue": "2016-01-22",
+                  "colkey": "defitem5"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达地点",
+                  "colvalue": "2",
+                  "colkey": "defitem8"
+                },
+                {
+                  "width": "20%",
+                  "colname": "报销金额",
+                  "colvalue": "889",
+                  "colkey": "amount"
+                }
+              ],[
+                {
+                  "width": "20%",
+                  "colname": "出发日期",
+                  "colvalue": "2016-01-22",
+                  "colkey": "defitem1"
+                },
+                {
+                  "width": "20%",
+                  "colname": "出发地点",
+                  "colvalue": "1",
+                  "colkey": "defitem4"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达日期",
+                  "colvalue": "2016-01-22",
+                  "colkey": "defitem5"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达地点",
+                  "colvalue": "2",
+                  "colkey": "defitem8"
+                },
+                {
+                  "width": "20%",
+                  "colname": "报销金额",
+                  "colvalue": "889",
+                  "colkey": "amount"
+                }
+              ]
+            ]
+          },{
+            "tabTitle": "交通费用",
+            "datacount": 1,
+            "tabcode": "1",
+            "tabdata": [
+              [
+                {
+                  "width": "20%",
+                  "colname": "出发日期",
+                  "colvalue": "2016-10-18",
+                  "colkey": "defitem1"
+                },
+                {
+                  "width": "20%",
+                  "colname": "出发地点",
+                  "colvalue": "1",
+                  "colkey": "defitem4"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达日期",
+                  "colvalue": "2016-10-18",
+                  "colkey": "defitem5"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达地点",
+                  "colvalue": "2",
+                  "colkey": "defitem8"
+                },
+                {
+                  "width": "20%",
+                  "colname": "报销金额",
+                  "colvalue": "889",
+                  "colkey": "amount"
+                }
+              ],[
+                {
+                  "width": "20%",
+                  "colname": "出发日期",
+                  "colvalue": "2016-10-18",
+                  "colkey": "defitem1"
+                },
+                {
+                  "width": "20%",
+                  "colname": "出发地点",
+                  "colvalue": "1",
+                  "colkey": "defitem4"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达日期",
+                  "colvalue": "2016-10-18",
+                  "colkey": "defitem5"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达地点",
+                  "colvalue": "2",
+                  "colkey": "defitem8"
+                },
+                {
+                  "width": "20%",
+                  "colname": "报销金额",
+                  "colvalue": "889",
+                  "colkey": "amount"
+                }
+              ],[
+                {
+                  "width": "20%",
+                  "colname": "出发日期",
+                  "colvalue": "2016-10-18",
+                  "colkey": "defitem1"
+                },
+                {
+                  "width": "20%",
+                  "colname": "出发地点",
+                  "colvalue": "1",
+                  "colkey": "defitem4"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达日期",
+                  "colvalue": "2016-10-18",
+                  "colkey": "defitem5"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达地点",
+                  "colvalue": "2",
+                  "colkey": "defitem8"
+                },
+                {
+                  "width": "20%",
+                  "colname": "报销金额",
+                  "colvalue": "889",
+                  "colkey": "amount"
+                }
+              ],[
+                {
+                  "width": "20%",
+                  "colname": "出发日期",
+                  "colvalue": "2016-10-18",
+                  "colkey": "defitem1"
+                },
+                {
+                  "width": "20%",
+                  "colname": "出发地点",
+                  "colvalue": "1",
+                  "colkey": "defitem4"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达日期",
+                  "colvalue": "2016-10-18",
+                  "colkey": "defitem5"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达地点",
+                  "colvalue": "2",
+                  "colkey": "defitem8"
+                },
+                {
+                  "width": "20%",
+                  "colname": "报销金额",
+                  "colvalue": "889",
+                  "colkey": "amount"
+                }
+              ],[
+                {
+                  "width": "20%",
+                  "colname": "出发日期",
+                  "colvalue": "2016-10-18",
+                  "colkey": "defitem1"
+                },
+                {
+                  "width": "20%",
+                  "colname": "出发地点",
+                  "colvalue": "1",
+                  "colkey": "defitem4"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达日期",
+                  "colvalue": "2016-10-18",
+                  "colkey": "defitem5"
+                },
+                {
+                  "width": "20%",
+                  "colname": "到达地点",
+                  "colvalue": "2",
+                  "colkey": "defitem8"
+                },
+                {
+                  "width": "20%",
+                  "colname": "报销金额",
+                  "colvalue": "889",
+                  "colkey": "amount"
+                }
+              ],[
                 {
                   "width": "20%",
                   "colname": "出发日期",
