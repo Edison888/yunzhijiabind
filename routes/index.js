@@ -11,5 +11,8 @@ router.get('/todo', function(req, res, next) {
 router.get('/form', function(req, res, next) {
   res.render('form');
 });
+router.get('/history', function(req, res, next) {
+  res.render('history');
+});
 
 module.exports = router;
