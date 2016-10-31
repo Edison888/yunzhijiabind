@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "error": "正常",
+  "errorCode": 1,
+  "data": [
+    {
+      "openId": "sdfsdfs9df8s9dfs9dfs",
+      "name": "何明星",
+      "phone": "2222222222",
+      "department": "总经理办公室/信息部",
+      "jobTitle": "开发工程师"
+    }
+  ]
+}
