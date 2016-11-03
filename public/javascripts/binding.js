@@ -182,7 +182,7 @@ app.controller('list_controller', function ($scope, $http) {
             ;
         }
     };
-    $scope.bindNC = function (currentSelectedNcUser) {
+    $scope.bindNC = function (currentSelectedNcUser, currentIndex) {
         //todo
         console.log(currentSelectedNcUser);
         document.getElementById('spinner').style.visibility = 'visible';
@@ -206,6 +206,10 @@ app.controller('list_controller', function ($scope, $http) {
                 document.getElementById('spinner').style.visibility = 'hidden';
                 $scope.disableBind();
                 if (response.flag == 0) {
+                    console.log(currentIndex);
+                    $scope.users[currentIndex]['ncuser_code'] = currentSelectedNcUser.ncuser_code;
+                    $scope.users[currentIndex]['ncuser_name'] = currentSelectedNcUser.ncuser_name;
+                    $scope.users[currentIndex]['ncmobile'] = currentSelectedNcUser.ncmobile;
                     toastr.success("绑定成功");
                 } else {
                     toastr.error(response.desc);
@@ -218,12 +222,14 @@ app.controller('list_controller', function ($scope, $http) {
         $('#binding').attr("disabled", true);
         document.getElementById("binding").style.backgroundColor = "grey";
     };
-    $scope.selectNcUser = function (ncUser) {
+    $scope.selectNcUser = function (ncUser, index) {
         $("#binding").removeAttr("disabled", false);
         document.getElementById("binding").style.backgroundColor = "#3cbaff";
         $scope.currentSelectedNcUser = ncUser;
     };
     $scope.getYzjData = function (index) {
+        $scope.currentIndex = index;
+        console.log($scope.currentIndex);
         var user = $scope.users[index];
         $scope.currentUser = {
             yzjid: user.yzjid,

@@ -109,7 +109,7 @@
                         <div ng-repeat="ncuser in ncusers">
                             <h4>
                                 <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1"
-                                       ng-click="selectNcUser(ncuser)">
+                                       ng-click="selectNcUser(ncuser,$index)">
                                 {{ncuser.ncuser_name}}
                             </h4>
 
@@ -158,7 +158,8 @@
                 </div>
                 <div class="modal-footer bg-info">
                     <button id="binding" type="button" class="btn" data-dismiss="modal"
-                            style=" background-color: grey;color: white;" ng-click="bindNC(currentSelectedNcUser)"
+                            style=" background-color: grey;color: white;"
+                            ng-click="bindNC(currentSelectedNcUser,currentIndex)"
                             disabled="disabled">绑定
                     </button>
                     <button id="cancel" type="button" class="btn" data-dismiss="modal"
