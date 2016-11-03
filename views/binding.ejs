@@ -112,12 +112,45 @@
                                        ng-click="selectNcUser(ncuser)">
                                 {{ncuser.ncuser_name}}
                             </h4>
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group" style="margin-bottom: 0px">
+                                    <label class="col-sm-2 control-label">用户code</label>
 
-                            <p>{{ncuser.ncuser_code}}</p>
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static">{{ncuser.ncuser_code}}</p>
+                                    </div>
+                                </div>
 
-                            <p>{{ncuser.ncdept}}</p>
+                                <div class="form-group" style="margin-bottom: 0px">
+                                    <label class="col-sm-2 control-label">用户手机</label>
 
-                            <p>{{ncuser.ncjob}}</p>
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static">{{ncuser.ncmobile}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px">
+                                    <label class="col-sm-2 control-label">用户id</label>
+
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static">{{ncuser.ncuserid}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px">
+                                    <label class="col-sm-2 control-label">NC部门</label>
+
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static">{{ncuser.ncdept}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px">
+                                    <label class="col-sm-2 control-label">NC职位</label>
+
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static">{{ncuser.ncjob}}</p>
+                                    </div>
+                                </div>
+
+                            </form>
                         </div>
 
                     </div>
