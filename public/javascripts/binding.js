@@ -16,10 +16,48 @@ var app = angular.module('binding', []);
 app.controller('list_controller', function ($scope, $http) {
     $scope.tableSelection = {};
     $scope.selectedRows = [];
+    //$scope.selectedOpenIds = [];
+    $scope.selectedOpenIdsStr = '';
     $scope.del = function () {
         //start from last index because starting from first index cause shifting
         //in the array because of array.splice()
-        //$http().success(function(){//todo 请求删除行数据
+        if($scope.selectedRows.length>0){
+            for (var i =0;i < $scope.selectedRows.length;i++) {
+                var selectIndex = $scope.selectedRows[i];
+                $scope.selectedOpenIds.push($scope.users[selectIndex]['yzjid']);
+            }
+            if($scope.selectedRows.length==1){
+                $scope.selectedOpenIdsStr = $scope.selectedOpenIds[0];
+            }else{
+                $scope.selectedOpenIdsStr +=$scope.selectedOpenIds[0];
+                for (var i =1;i < $scope.selectedRows.length;i++) {
+                    var selectIndex = $scope.selectedRows[i];
+                    $scope.selectedOpenIdsStr +=','+$scope.users[selectIndex]['yzjid'];
+                }
+                console.log($scope.selectedOpenIdsStr);
+            }
+        }
+        console.log($scope.selectedOpenIds);
+        $http(
+            {
+                method: 'get',
+                url: requrl,
+                params: {
+                    yzjid:$scope.selectedOpenIdsStr,
+                    method: 'deleteUserMapping'
+                }
+
+            }
+
+        ).success(function(response){//todo 请求删除行数据
+                console.log(response);
+                if (response.flag==0) {
+                    toastr.success("已删除");
+                }else{
+                    toastr.error(response.data.desc);
+
+                }
+
          $scope.selectedRows.reverse();
         console.log($scope.selectedRows);
         for (var i =0;i < $scope.selectedRows.length;i++) {
@@ -32,12 +70,14 @@ app.controller('list_controller', function ($scope, $http) {
             console.log($scope.tableSelection)
         }
         console.log($scope.tableSelection);
-        //});
+        });
     };
     $scope.getSelectedRows = function () {
         //start from last index because starting from first index cause shifting
         //in the array because of array.splice()
         $scope.selectedRows = [];
+        $scope.selectedOpenIds = [];
+        $scope.selectedOpenIdsStr = '';
         for (var i = 0; i < $scope.users.length; i++) {
             if ($scope.tableSelection[i]) {
                 $scope.selectedRows.push(i);
