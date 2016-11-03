@@ -145,6 +145,7 @@ app.controller('list_controller', function ($scope, $http) {
     };
     $scope.bindNC = function (currentSelectedNcUser) {
         //todo
+        console.log(currentSelectedNcUser);
         document.getElementById('spinner').style.visibility = 'visible'
         $http(
             {
@@ -153,10 +154,13 @@ app.controller('list_controller', function ($scope, $http) {
                 params: {
                     ncjob: currentSelectedNcUser.ncjob,
                     ncmobile: currentSelectedNcUser.ncmobile,
-                    ncunit: currentSelectedNcUser.ncmobile,
-                    ncuser_code: currentSelectedNcUser.ncuser_code,
-                    ncuser_name: currentSelectedNcUser.ncuser_name,
-                    ncuserid: currentSelectedNcUser.ncuserid
+                    ncunit: currentSelectedNcUser.ncunit,
+                    ncdept: currentSelectedNcUser.ncdept,
+                    ncusercode: currentSelectedNcUser.ncuser_code,
+                    ncusername: currentSelectedNcUser.ncuser_name,
+                    ncuserid: currentSelectedNcUser.ncuserid,
+                    method:'bindNCUser',
+                    yzjid:$scope.currentUser.yzjid
                 }
             }
         ).success(function (response) {
@@ -189,7 +193,7 @@ app.controller('list_controller', function ($scope, $http) {
             yzjdept: user.yzjdept,
             yzjjob: user.yzjjob
         };
-        document.getElementById('spinner').style.visibility = 'visible'
+        document.getElementById('spinner').style.visibility = 'visible';
         $http({
             method: 'get',
             url: requrl,

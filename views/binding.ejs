@@ -221,7 +221,7 @@
                 <th>云之家手机号</th>
                 <th>云之家部门</th>
                 <th>云之家职位</th>
-                <th>NCID</th>
+                <th>NCUSERCODE</th>
                 <th>NC用户名</th>
                 <th>NC手机号</th>
             </tr>
@@ -235,14 +235,17 @@
                 <td>{{user.yzjdept}}</td>
                 <td>{{user.yzjjob}}</td>
                 <td>
-                    <span>{{user.nc_mobile}}</span>
-                    <button class="btn btn-xs pull-right" data-toggle="modal" data-target="#ncDialog"
-                            ng-click="getYzjData($index)">
-                        编辑
-                    </button>
+                    <div style="position: relative">
+                        <span style="float: left">{{user.ncuser_code}}</span>
+                        <button class="btn btn-xs pull-right" data-toggle="modal" data-target="#ncDialog"
+                                ng-click="getYzjData($index)">
+                            编辑
+                        </button>
+                    </div>
+
                 </td>
-                <td>{{user.nc_username}}</td>
-                <td>{{user.nc_mobile}}</td>
+                <td>{{user.ncuser_name}}</td>
+                <td>{{user.ncmobile}}</td>
             </tr>
             </tbody>
         </table>
