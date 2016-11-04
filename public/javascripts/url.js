@@ -10,29 +10,10 @@ var common_biz_url = "/servlet/MobileApproveServlet";
 var requrl = (debug ? host_test : host_produce) + common_biz_url;
 
 
-
 //-----区分不同表单类型-------------------------------
 var statuskeyparam = '';
 var statuscodeparam = '';
 var urlObj = getUrlParamObj();
-switch (urlObj.type) {
-    case 'todohd'://需要我处理并且已经处理
-        statuskeyparam = 'ishandled';
-        statuscodeparam = 'handled';
-        break;
-    case 'todounhd'://需要我处理并且未处理
-        statuskeyparam = 'ishandled';
-        statuscodeparam = 'unhandled';
-        break;
-    case 'subhd'://我提交的并且已经处理
-        statuskeyparam = 'submit';
-        statuscodeparam = 'finished';
-        break;
-    case 'subunhd'://我提交的并且未处理
-        statuskeyparam = 'submit';
-        statuscodeparam = 'unhandled';
-        break;
-}
 //-----区分不同表单类型-------------------------------
 
 /*
@@ -43,4 +24,27 @@ function getUrlParamObj() {
     var uri = new URI(curUrl);//实例化一个URI对象
     var paramObj = uri.search(true);//返回?之后链接对应参数所组成的js对象：例如uri == "http://example.org/bar/world.html?foo=bar&hello=world&hello=mars"  返回{ foo: "bar", hello : ["world", "mars"] }
     return paramObj;
+}
+/*
+ * 区分不同表单类型
+ * */
+function distinguish() {
+    switch (urlObj.type) {
+        case 'todohd'://需要我处理并且已经处理
+            statuskeyparam = 'ishandled';
+            statuscodeparam = 'handled';
+            break;
+        case 'todounhd'://需要我处理并且未处理
+            statuskeyparam = 'ishandled';
+            statuscodeparam = 'unhandled';
+            break;
+        case 'subhd'://我提交的并且已经处理
+            statuskeyparam = 'submit';
+            statuscodeparam = 'finished';
+            break;
+        case 'subunhd'://我提交的并且未处理
+            statuskeyparam = 'submit';
+            statuscodeparam = 'unhandled';
+            break;
+    }
 }

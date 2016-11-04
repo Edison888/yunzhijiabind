@@ -13,16 +13,16 @@ toastr.options = {
     "hideMethod": "fadeOut"
 };
 var app = angular.module('todo', []);
-var urlObj = getUrlParamObj();
-console.log(urlObj);
-params = {//todo 根据云之家openid获取用户名
-    userid: '574e2e2ce4b00f589e2e999f',
+distinguish();//跟据链接后参数做区分，从而查询不同的待办列表
+params = {//todo 根据云之家openid获取用户名,这里的userid就是云之家的openid。2016-11-4 13:57:09
+    userid: '6b2da1c2-95d8-11e6-a383-005056b8712a',
     statuskey: statuskeyparam,
     statuscode: statuscodeparam,
     startline: '0',
     count: '10',
+    condition: '',
     method: 'getTaskList'
-}
+};
 console.log(params);
 app.controller('matters', function ($scope, $http) {
     document.getElementById('spinner').style.visibility = 'visible';
@@ -34,10 +34,10 @@ app.controller('matters', function ($scope, $http) {
     ).success(function (response) {
             $scope.matters = [];
             document.getElementById('spinner').style.visibility = 'hidden';
-            if(response.flag==0){
+            if (response.flag == 0) {
                 if (response.data.length == 0) {
                     toastr.info('暂无待办');
-                }else{
+                } else {
                     $scope.matters = response.data;
                     $scope.goDetail = function (matter) {
                         console.log(matter);
@@ -45,11 +45,11 @@ app.controller('matters', function ($scope, $http) {
                         uri.addQuery('taskid', matter.taskid);
                         uri.addQuery('billtype', matter.billtype);
                         uri.addQuery('billid', matter.billid);
-                        uri.addQuery('type', urlObj.type);
+                        uri.addQuery('type', urlObj.type);//跳转到表单详情页面时，携带了type参数，用来告知表单详情页面过来的这个待办是哪种类型的待办。
                         window.location = uri.toString();
                     }
                 }
-            }else{
+            } else {
                 toastr.error(response.desc);
             }
             console.log(response);
