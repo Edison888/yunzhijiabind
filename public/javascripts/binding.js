@@ -21,18 +21,18 @@ app.controller('list_controller', function ($scope, $http) {
     $scope.del = function () {
         //start from last index because starting from first index cause shifting
         //in the array because of array.splice()
-        if($scope.selectedRows.length>0){
-            for (var i =0;i < $scope.selectedRows.length;i++) {
+        if ($scope.selectedRows.length > 0) {
+            for (var i = 0; i < $scope.selectedRows.length; i++) {
                 var selectIndex = $scope.selectedRows[i];
                 $scope.selectedOpenIds.push($scope.users[selectIndex]['yzjid']);
             }
-            if($scope.selectedRows.length==1){
+            if ($scope.selectedRows.length == 1) {
                 $scope.selectedOpenIdsStr = $scope.selectedOpenIds[0];
-            }else{
-                $scope.selectedOpenIdsStr +=$scope.selectedOpenIds[0];
-                for (var i =1;i < $scope.selectedRows.length;i++) {
+            } else {
+                $scope.selectedOpenIdsStr += $scope.selectedOpenIds[0];
+                for (var i = 1; i < $scope.selectedRows.length; i++) {
                     var selectIndex = $scope.selectedRows[i];
-                    $scope.selectedOpenIdsStr +=','+$scope.users[selectIndex]['yzjid'];
+                    $scope.selectedOpenIdsStr += ',' + $scope.users[selectIndex]['yzjid'];
                 }
                 console.log($scope.selectedOpenIdsStr);
             }
@@ -43,17 +43,16 @@ app.controller('list_controller', function ($scope, $http) {
                 method: 'get',
                 url: requrl,
                 params: {
-                    yzjid:$scope.selectedOpenIdsStr,
+                    yzjid: $scope.selectedOpenIdsStr,
                     method: 'deleteUserMapping'
                 }
 
             }
-
-        ).success(function(response){//todo 请求删除行数据
+        ).success(function (response) {//todo 请求删除行数据
                 console.log(response);
-                if (response.flag==0) {
+                if (response.flag == 0) {
                     toastr.success("已删除");
-                }else{
+                } else {
                     toastr.error(response.data.desc);
 
                 }
@@ -70,7 +69,7 @@ app.controller('list_controller', function ($scope, $http) {
             console.log($scope.tableSelection)
         }
         console.log($scope.tableSelection);
-        });
+            });
     };
     $scope.getSelectedRows = function () {
         //start from last index because starting from first index cause shifting
@@ -127,7 +126,7 @@ app.controller('list_controller', function ($scope, $http) {
         } else if (!(/^1[34578]\d{9}$/.test(phoneValue))) {
             toastr.error("手机号码有误，请重填");
         } else {
-            document.getElementById('spinner').style.visibility = 'visible'
+            document.getElementById('spinner').style.visibility = 'visible';
             $http({
                 method: 'get',
                 url: requrl,
@@ -136,9 +135,9 @@ app.controller('list_controller', function ($scope, $http) {
                     mobile: phoneValue
                 }
             }).success(function (response) {
-                    console.log("sdfsdf")
+                    console.log("sdfsdf");
                     console.log(response);
-                    document.getElementById('spinner').style.visibility = 'hidden'
+                    document.getElementById('spinner').style.visibility = 'hidden';
                     if (response.flag==0) {
                         var yzjUserObj = response.data;
                         var user = {
@@ -183,10 +182,10 @@ app.controller('list_controller', function ($scope, $http) {
             ;
         }
     };
-    $scope.bindNC = function (currentSelectedNcUser) {
+    $scope.bindNC = function (currentSelectedNcUser, currentIndex) {
         //todo
         console.log(currentSelectedNcUser);
-        document.getElementById('spinner').style.visibility = 'visible'
+        document.getElementById('spinner').style.visibility = 'visible';
         $http(
             {
                 method: 'get',
@@ -199,14 +198,18 @@ app.controller('list_controller', function ($scope, $http) {
                     ncusercode: currentSelectedNcUser.ncuser_code,
                     ncusername: currentSelectedNcUser.ncuser_name,
                     ncuserid: currentSelectedNcUser.ncuserid,
-                    method:'bindNCUser',
-                    yzjid:$scope.currentUser.yzjid
+                    method: 'bindNCUser',
+                    yzjid: $scope.currentUser.yzjid
                 }
             }
         ).success(function (response) {
-                document.getElementById('spinner').style.visibility = 'hidden'
+                document.getElementById('spinner').style.visibility = 'hidden';
                 $scope.disableBind();
                 if (response.flag == 0) {
+                    console.log(currentIndex);
+                    $scope.users[currentIndex]['ncuser_code'] = currentSelectedNcUser.ncuser_code;
+                    $scope.users[currentIndex]['ncuser_name'] = currentSelectedNcUser.ncuser_name;
+                    $scope.users[currentIndex]['ncmobile'] = currentSelectedNcUser.ncmobile;
                     toastr.success("绑定成功");
                 } else {
                     toastr.error(response.desc);
@@ -219,12 +222,14 @@ app.controller('list_controller', function ($scope, $http) {
         $('#binding').attr("disabled", true);
         document.getElementById("binding").style.backgroundColor = "grey";
     };
-    $scope.selectNcUser = function (ncUser) {
+    $scope.selectNcUser = function (ncUser, index) {
         $("#binding").removeAttr("disabled", false);
         document.getElementById("binding").style.backgroundColor = "#3cbaff";
         $scope.currentSelectedNcUser = ncUser;
     };
     $scope.getYzjData = function (index) {
+        $scope.currentIndex = index;
+        console.log($scope.currentIndex);
         var user = $scope.users[index];
         $scope.currentUser = {
             yzjid: user.yzjid,
@@ -243,7 +248,7 @@ app.controller('list_controller', function ($scope, $http) {
                 method: 'getNCUserInfo'
             }
         }).success(function (response) {
-            document.getElementById('spinner').style.visibility = 'hidden'
+            document.getElementById('spinner').style.visibility = 'hidden';
             console.log(response);
             $scope.ncusers = [];
             if (response.flag == 0) {

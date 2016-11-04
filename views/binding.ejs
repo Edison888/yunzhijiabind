@@ -109,9 +109,10 @@
                         <div ng-repeat="ncuser in ncusers">
                             <h4>
                                 <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1"
-                                       ng-click="selectNcUser(ncuser)">
+                                       ng-click="selectNcUser(ncuser,$index)">
                                 {{ncuser.ncuser_name}}
                             </h4>
+
                             <form class="form-horizontal" role="form">
                                 <div class="form-group" style="margin-bottom: 0px">
                                     <label class="col-sm-2 control-label">用户code</label>
@@ -157,7 +158,8 @@
                 </div>
                 <div class="modal-footer bg-info">
                     <button id="binding" type="button" class="btn" data-dismiss="modal"
-                            style=" background-color: grey;color: white;" ng-click="bindNC(currentSelectedNcUser)"
+                            style=" background-color: grey;color: white;"
+                            ng-click="bindNC(currentSelectedNcUser,currentIndex)"
                             disabled="disabled">绑定
                     </button>
                     <button id="cancel" type="button" class="btn" data-dismiss="modal"
@@ -249,14 +251,14 @@
             <thead>
             <tr class="bg-info">
                 <th></th>
-                <th>云之家openid</th>
-                <th>云之家用户名</th>
-                <th>云之家手机号</th>
-                <th>云之家部门</th>
-                <th>云之家职位</th>
-                <th>NCUSERCODE</th>
-                <th>NC用户名</th>
-                <th>NC手机号</th>
+                <th style="white-space:nowrap;text-align: center">云之家openid</th>
+                <th style="white-space:nowrap;text-align: center">云之家用户名</th>
+                <th style="white-space:nowrap;text-align: center">云之家手机号</th>
+                <th style="white-space:nowrap;text-align: center">云之家部门</th>
+                <th style="white-space:nowrap;text-align: center">云之家职位</th>
+                <th style="white-space:nowrap;text-align: center">NCID</th>
+                <th style="white-space:nowrap;text-align: center">NC用户名</th>
+                <th style="white-space:nowrap;text-align: center">NC手机号</th>
             </tr>
             </thead>
             <tbody>
