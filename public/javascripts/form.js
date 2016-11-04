@@ -1,4 +1,18 @@
 var app = angular.module('form', []);
+toastr.options = {
+    "closeButton": false,
+    "debug": true,
+    "positionClass": "toast-top-full-width",
+    "onclick": null,
+    "showDuration": "1",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+};
 app.controller('form_detail', function ($scope, $http) {
     $scope.agree = 'agree';
     $scope.disagree = 'disagree';
@@ -39,14 +53,18 @@ app.controller('form_detail', function ($scope, $http) {
             }
         }
     ).success(function (response) {
-            console.log(response);
-            $scope.heads = response.data.taskbill.head.tabContent;
-            $scope.bodys = response.data.taskbill.body.tabContent;
-            $('#myTab a').click(function (e) {
-                e.preventDefault();
-                $(this).tab('show')
-            });
-            $('#myTab a:first').tab('show');
+            if (response.flag == 0) {
+                $scope.heads = response.data.taskbill.head.tabContent;
+                $scope.bodys = response.data.taskbill.body.tabContent;
+                $('#myTab a').click(function (e) {
+                    e.preventDefault();
+                    $(this).tab('show')
+                });
+                $('#myTab a:first').tab('show');
+            } else {
+                toastr.error(response.desc);
+            }
+
         });
 
 });
