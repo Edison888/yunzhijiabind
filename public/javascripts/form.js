@@ -14,6 +14,7 @@ toastr.options = {
     "hideMethod": "fadeOut"
 };
 app.controller('form_detail', function ($scope, $http) {
+    $scope.isApproved = false;
     $scope.note = '';
     $scope.onInputNote = function (note) {
         console.log(note);
@@ -52,11 +53,21 @@ app.controller('form_detail', function ($scope, $http) {
                 method: 'dealTask'
             }
         }).success(function (response) {
+            console.log(response);
             if (response.flag == 0) {
-                toastr.success('审批成功');
+                if (response.data.result == true) {
+                    toastr.success('审批成功');
+                    $scope.isApproved = true;
+                    $('#footer > div:first-child').removeAttr('data-toggle');
+                    $('#footer > div:nth-child(2)').removeAttr('data-toggle');
+                    $('#footer > div:nth-child(3)').removeAttr('data-toggle');
+                } else {
+                    toastr.error(response.data.desc);
+                }
             } else {
                 toastr.error(response.desc);
             }
+
 
         });
     };
