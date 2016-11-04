@@ -14,6 +14,7 @@ var requrl = (debug ? host_test : host_produce) + common_biz_url;
 var statuskeyparam = '';
 var statuscodeparam = '';
 var urlObj = getUrlParamObj();
+distinguish();//跟据链接后参数做区分，从而查询不同的待办列表
 //-----区分不同表单类型-------------------------------
 
 /*
