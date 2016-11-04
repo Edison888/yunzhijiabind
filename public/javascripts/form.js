@@ -14,6 +14,17 @@ toastr.options = {
     "hideMethod": "fadeOut"
 };
 app.controller('form_detail', function ($scope, $http) {
+    $scope.note = '';
+    $scope.onInputNote = function (note) {
+        console.log(note);
+        if (note == undefined || note == '') {
+            document.getElementById('confirm').style = 'background-color:grey';
+            return true;
+        } else {
+            document.getElementById('confirm').style = 'background-color:#3cbaff';
+            return false;
+        }
+    };
     $scope.agree = 'agree';
     $scope.disagree = 'disagree';
     $scope.mreject = 'reject';
@@ -26,6 +37,10 @@ app.controller('form_detail', function ($scope, $http) {
     };
     $scope.oper = function (operation) {
         $scope.currentOper = operation;
+        $scope.note = '';//每次点击前，需要清空note，这样，不管之前是以何种方式关闭了对话框，不管是否已经填写了建议，都先清空，重新填写。
+
+    };
+    $scope.submit = function (operation) {
         $http({
             method: 'get',
             url: requrl,
@@ -33,12 +48,20 @@ app.controller('form_detail', function ($scope, $http) {
                 userid: urlObj.userid,
                 taskid: urlObj.taskid,
                 action: operation,
-                note: '��׼��',
+                note: $scope.note,
                 method: 'dealTask'
             }
         }).success(function (response) {
-            console.log(response);
+            if (response.flag == 0) {
+                toastr.success('审批成功');
+            } else {
+                toastr.error(response.desc);
+            }
+
         });
+    };
+    $scope.mcancel = function () {
+        $scope.note = '';
     };
     $http(
         {
@@ -53,6 +76,7 @@ app.controller('form_detail', function ($scope, $http) {
             }
         }
     ).success(function (response) {
+            console.log(response);
             if (response.flag == 0) {
                 $scope.heads = response.data.taskbill.head.tabContent;
                 $scope.bodys = response.data.taskbill.body.tabContent;

@@ -70,10 +70,13 @@
                     <h4 class="modal-title">审批确认</h4>
                 </div>
                 <div class="modal-body">
-                    <textarea id="Note" name="Note" class="form-control" placeholder="请输入您的意见..."></textarea>
+                    <textarea id="Note" name="Note" class="form-control" ng-attr-placeholder="请输入您的意见..."
+                              ng-model="note" ng-change="onInputNote(note)"></textarea>
                 </div>
                 <div class="modal-footer bg-info">
-                    <button id="confirm" type="button" class="btn" data-dismiss="modal">确定</button>
+                    <button id="confirm" type="button" style="background-color: grey" class="btn" data-dismiss="modal"
+                            ng-disabled="!note" ng-click="submit(currentOper)">确定
+                    </button>
                     <button id="cancel" type="button" class="btn" data-dismiss="modal">取消</button>
                 </div>
             </div>
