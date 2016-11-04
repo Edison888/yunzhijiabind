@@ -40,7 +40,7 @@
     <title>表单详情</title>
 </head>
 <body style="font-family: 黑体">
-<div class="container">
+<div class="container" ng-controller="form_detail">
     <div id="spinner" style=" margin: auto;position: absolute; top: 0; left: 0; bottom: 0; right: 0;visibility: hidden">
         <div class="spinner-container container1">
             <div class="circle1"></div>
@@ -81,7 +81,7 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-    <div id="form" ng-controller="form_detail">
+    <div id="form">
         <div id="info">
             <div id="info_person">
                 <img id="info_person_icon" src="img/icon.png">
@@ -158,12 +158,18 @@
         </div>
 
     </div>
-    <div class="row" id="footer" style="margin: 0px;visibility: hidden">
-        <div id="reject" class="col-xs-6 btn" data-toggle="modal" data-target="#modal" data-operate="false"><h4
-                    id="butongyi">
+    <div class="row" id="footer" style="margin: 0px;visibility: visible">
+        <div class="col-xs-4 btn" data-toggle="modal" data-target="#modal" data-operate="false"
+             ng-click="oper(disagree)"><h4
+                    id="disagree">
                 不同意</h4></div>
-        <div id="agree" class="col-xs-6 btn" data-toggle="modal" data-target="#modal" data-operate="true"><h4
-                    id="tongyi">
+        <div class="col-xs-4 btn" data-toggle="modal" data-target="#modal" data-operate="true" ng-click="oper(mreject)">
+            <h4
+                    id="reject">
+                驳回</h4></div>
+        <div class="col-xs-4 btn" data-toggle="modal" data-target="#modal" data-operate="true" ng-click="oper(agree)">
+            <h4
+                    id="agree">
                 同意</h4></div>
     </div>
 

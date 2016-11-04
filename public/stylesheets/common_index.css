@@ -90,13 +90,19 @@
     background-color: lightgray;
 }
 
-#butongyi {
+#disagree {
     margin-bottom: 0px;
     margin-top: 15px;
     margin-left: 0px;
 }
 
-#tongyi {
+#agree {
+    margin-bottom: 0px;
+    margin-top: 15px;
+    margin-left: 0px;
+}
+
+#reject {
     margin-bottom: 0px;
     margin-top: 15px;
     margin-left: 0px;
@@ -119,6 +125,14 @@
 }
 
 #footer > div:nth-child(2) {
+    height: 60px;
+    padding: 0px;
+    text-align: center;
+    color: white;
+    background-color: hotpink;
+}
+
+#footer > div:nth-child(3) {
     height: 60px;
     padding: 0px;
     text-align: center;
