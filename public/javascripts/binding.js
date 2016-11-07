@@ -71,10 +71,10 @@ app.controller('list_controller', function ($scope, $http) {
             }
         ).success(function (response) {//todo 请求删除行数据
                 console.log(response);
-                if (response.flag == 0) {
+                if (response.flag) {
                     toastr.success("已删除");
                 } else {
-                    toastr.error(response.data.desc);
+                    toastr.error(response.desc);
 
                 }
 
