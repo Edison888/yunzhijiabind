@@ -14,6 +14,27 @@ toastr.options = {
 };
 var app = angular.module('binding', []);
 app.controller('list_controller', function ($scope, $http) {
+    $scope.searchMobile = '';
+    $scope.searchMapping = function (mobile) {
+        $http({
+            method: 'get',
+            //url:requrl,
+            url: 'json/searchMappingByMobile',
+            params: {
+                mobile: mobile,
+                method: 'getUserMappingInfo'
+            }
+        }).success(function (response) {
+            console.log(response);
+            if (response.flag == 0) {
+                $scope.users = [];
+                $scope.users.push(response.data);
+            } else {
+                toastr.error(response.desc);
+            }
+        });
+    };
+
     $scope.tableSelection = {};
     $scope.selectedRows = [];
     //$scope.selectedOpenIds = [];
@@ -57,18 +78,18 @@ app.controller('list_controller', function ($scope, $http) {
 
                 }
 
-         $scope.selectedRows.reverse();
-        console.log($scope.selectedRows);
-        for (var i =0;i < $scope.selectedRows.length;i++) {
-            var selectIndex = $scope.selectedRows[i];
-            //delete row from data
-            $scope.users.splice(selectIndex, 1);
-            console.log(selectIndex);
-            //delete rowSelection property
-            delete $scope.tableSelection[selectIndex];
-            console.log($scope.tableSelection)
-        }
-        console.log($scope.tableSelection);
+                $scope.selectedRows.reverse();
+                console.log($scope.selectedRows);
+                for (var i = 0; i < $scope.selectedRows.length; i++) {
+                    var selectIndex = $scope.selectedRows[i];
+                    //delete row from data
+                    $scope.users.splice(selectIndex, 1);
+                    console.log(selectIndex);
+                    //delete rowSelection property
+                    delete $scope.tableSelection[selectIndex];
+                    console.log($scope.tableSelection)
+                }
+                console.log($scope.tableSelection);
             });
     };
     $scope.getSelectedRows = function () {
@@ -131,14 +152,14 @@ app.controller('list_controller', function ($scope, $http) {
                 method: 'get',
                 url: requrl,
                 params: {
-                    method:'getYzjUserInfo',
+                    method: 'getYzjUserInfo',
                     mobile: phoneValue
                 }
             }).success(function (response) {
                     console.log("sdfsdf");
                     console.log(response);
                     document.getElementById('spinner').style.visibility = 'hidden';
-                    if (response.flag==0) {
+                    if (response.flag == 0) {
                         var yzjUserObj = response.data;
                         var user = {
                             yzjid: yzjUserObj.yzjid,	//云之家账号ID

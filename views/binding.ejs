@@ -233,9 +233,9 @@
         <!-- /.modal-dialog -->
     </div>
     <div class="input-group" style="width: 80%;margin: 0 auto;margin-top: 20px">
-        <input type="text" class="form-control" placeholder="手机号">
+        <input type="text" class="form-control" placeholder="手机号" ng-model="searchMobile">
             <span class="input-group-btn">
-            <button class="btn btn-default" type="button">搜索</button>
+            <button class="btn btn-default" type="button" ng-click="searchMapping(searchMobile)">搜索</button>
             </span>
     </div>
     <button class="btn btn-info" data-toggle="modal" data-target="#modal" style="margin-top: 10px">
