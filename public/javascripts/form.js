@@ -37,6 +37,7 @@ app.controller('form_detail', function ($scope, $http) {
         window.location = uri.toString();
     };
     $scope.oper = function (operation) {
+        document.getElementById('confirm').style = 'background-color:grey';
         $scope.currentOper = operation;
         $scope.note = '';//每次点击前，需要清空note，这样，不管之前是以何种方式关闭了对话框，不管是否已经填写了建议，都先清空，重新填写。
 
@@ -55,7 +56,7 @@ app.controller('form_detail', function ($scope, $http) {
         }).success(function (response) {
             console.log(response);
             if (response.flag == 0) {
-                if (response.data.result == true) {
+                if (response.data.result == 'success') {
                     toastr.success('审批成功');
                     $scope.isApproved = true;
                     $('#footer > div:first-child').removeAttr('data-toggle');
