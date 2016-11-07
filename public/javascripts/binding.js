@@ -267,7 +267,7 @@ app.controller('list_controller', function ($scope, $http) {
             document.getElementById('spinner').style.visibility = 'hidden';
             console.log(response);
             $scope.ncusers = [];
-            if (response.flag == 0) {
+            if (response.flag) {
                 if (response.data.length > 0) {
                     $scope.ncusers = response.data;
                 }
