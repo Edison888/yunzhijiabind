@@ -18,8 +18,8 @@ app.controller('list_controller', function ($scope, $http) {
     $scope.searchMapping = function (mobile) {
         $http({
             method: 'get',
-            //url:requrl,
-            url: 'json/searchMappingByMobile',
+            url: requrl,
+            //url: 'json/searchMappingByMobile',
             params: {
                 mobile: mobile,
                 method: 'getUserMappingInfo'
@@ -159,7 +159,7 @@ app.controller('list_controller', function ($scope, $http) {
                     console.log("sdfsdf");
                     console.log(response);
                     document.getElementById('spinner').style.visibility = 'hidden';
-                    if (response.flag == 0) {
+                    if (response.flag) {
                         var yzjUserObj = response.data;
                         var user = {
                             yzjid: yzjUserObj.yzjid,	//云之家账号ID
@@ -182,14 +182,9 @@ app.controller('list_controller', function ($scope, $http) {
                             }
 
                         }).success(function (response) {
-                            console.log("成功");
                             console.log(response);
-                            if (response.flag == 0) {
-                                if (response.data.success == 0) {
+                            if (response.flag) {
                                     $scope.users.push(user);
-                                } else {
-                                    toastr.error(response.data.desc);
-                                }
                             } else {
                                 toastr.error(response.desc);
                             }
