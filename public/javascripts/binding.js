@@ -221,7 +221,7 @@ app.controller('list_controller', function ($scope, $http) {
         ).success(function (response) {
                 document.getElementById('spinner').style.visibility = 'hidden';
                 $scope.disableBind();
-                if (response.flag == 0) {
+                if (response.flag) {
                     console.log(currentIndex);
                     $scope.users[currentIndex]['ncuser_code'] = currentSelectedNcUser.ncuser_code;
                     $scope.users[currentIndex]['ncuser_name'] = currentSelectedNcUser.ncuser_name;
