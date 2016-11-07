@@ -37,9 +37,18 @@ app.controller('form_detail', function ($scope, $http) {
         window.location = uri.toString();
     };
     $scope.oper = function (operation) {
-        document.getElementById('confirm').style = 'background-color:grey';
         $scope.currentOper = operation;
-        $scope.note = '';//每次点击前，需要清空note，这样，不管之前是以何种方式关闭了对话框，不管是否已经填写了建议，都先清空，重新填写。
+        document.getElementById('confirm').style = 'background-color:grey';
+        if (operation == 'agree') {
+            $scope.note = '批准';//每次点击前，需要清空note，这样，不管之前是以何种方式关闭了对话框，不管是否已经填写了建议，都先清空，重新填写。
+            $('#myModal').modal({
+                show: true
+            });
+        } else if (operation == 'disagree') {
+            $scope.note = '不批准';
+        } else if (operation == 'reject') {
+            $scope.note = '驳回';
+        }
 
     };
     $scope.submit = function (operation) {

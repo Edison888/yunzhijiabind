@@ -61,6 +61,28 @@
             <div class="circle4"></div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header  bg-info">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                                aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">指派</h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button id="confirm" type="button" style="background-color: grey" class="btn" data-dismiss="modal">
+                        确定
+                    </button>
+                    <button id="cancel" type="button" class="btn" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="modal">
         <div class="modal-dialog model-sm">
             <div class="modal-content">
@@ -73,7 +95,7 @@
                     <textarea id="Note" name="Note" class="form-control" ng-attr-placeholder="请输入您的意见..."
                               ng-model="note" ng-change="onInputNote(note)"></textarea>
                 </div>
-                <div class="modal-footer bg-info">
+                <div class="modal-footer">
                     <button id="confirm" type="button" style="background-color: grey" class="btn" data-dismiss="modal"
                             ng-disabled="!note" ng-click="submit(currentOper)">确定
                     </button>
@@ -162,12 +184,12 @@
 
     </div>
     <div class="row" id="footer" style="margin: 0px;visibility: visible">
-        <div class="col-xs-4 btn" data-toggle="modal" data-target="#modal" data-operate="false"
+        <div class="col-xs-4 btn" data-toggle="modal" data-target="#modal"
              ng-click="oper(disagree)" ng-disabled="isApproved"><h4 id="disagree">不同意</h4></div>
-        <div class="col-xs-4 btn" data-toggle="modal" data-target="#modal" data-operate="true" ng-click="oper(mreject)"
+        <div class="col-xs-4 btn" data-toggle="modal" data-target="#modal" ng-click="oper(mreject)"
              ng-disabled="isApproved">
             <h4 id="reject">驳回</h4></div>
-        <div class="col-xs-4 btn" data-toggle="modal" data-target="#modal" data-operate="true" ng-click="oper(agree)"
+        <div class="col-xs-4 btn" ng-click="oper(agree)"
              ng-disabled="isApproved">
             <h4 id="agree">同意</h4></div>
     </div>
