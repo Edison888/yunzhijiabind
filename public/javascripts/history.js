@@ -4,13 +4,19 @@
 var app = angular.module('history', []);
 app.controller('opinion', function ($scope, $http) {
     $http({
-        method:'get',
-        url:'json/history',
-        params:{
-
+        method: 'get',
+        url: requrl,
+        params: {
+            billid: urlObj.billid,
+            billtype: urlObj.billtype,
+            method: 'getApproveHistory'
         }
     }).success(function (response) {
-        $scope.historys = response.data.reverse();
-    console.log(response);
+        console.log(response);
+        if (response.flag) {
+            $scope.historys = response.data.reverse();
+        } else {
+            toastr.error(response.desc);
+        }
     });
 });
