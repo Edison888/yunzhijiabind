@@ -19,6 +19,7 @@ app.controller('form_detail', function ($scope, $http) {
     $scope.onInputNote = function (note) {
         console.log(note);
         if (note == undefined || note == '') {
+
             document.getElementById('confirm').style = 'background-color:grey';
             return true;
         } else {
@@ -38,8 +39,26 @@ app.controller('form_detail', function ($scope, $http) {
     };
     $scope.oper = function (operation) {
         $scope.currentOper = operation;
-        document.getElementById('confirm').style = 'background-color:grey';
+        document.getElementById('confirm').style = 'background-color:#3cbaff';
+        $scope.assigns = [];
+        $scope.selecteds = [];
+        $scope.pushSelecteds = function (index) {
+            $scope.selecteds.push($scope.assigns[index]);
+            $scope.assigns.splice(index, 1);
+        };
+        $scope.pushAssigns = function (index) {
+            $scope.assigns.push($scope.selecteds[index]);
+            $scope.selecteds.splice(index, 1);
+        };
         if (operation == 'agree') {
+            $http({
+                method: 'get',
+                url: 'json/history',
+                params: {}
+            }).success(function (response) {
+                console.log(response);
+                $scope.assigns = response.data;
+            });
             $scope.note = '批准';//每次点击前，需要清空note，这样，不管之前是以何种方式关闭了对话框，不管是否已经填写了建议，都先清空，重新填写。
             $('#myModal').modal({
                 show: true
@@ -64,16 +83,12 @@ app.controller('form_detail', function ($scope, $http) {
             }
         }).success(function (response) {
             console.log(response);
-            if (response.flag == 0) {
-                if (response.data.result == 'success') {
-                    toastr.success('审批成功');
-                    $scope.isApproved = true;
-                    $('#footer > div:first-child').removeAttr('data-toggle');
-                    $('#footer > div:nth-child(2)').removeAttr('data-toggle');
-                    $('#footer > div:nth-child(3)').removeAttr('data-toggle');
-                } else {
-                    toastr.error(response.data.desc);
-                }
+            if (response.flag) {
+                toastr.success('审批成功');
+                $scope.isApproved = true;
+                $('#footer > div:first-child').removeAttr('data-toggle');
+                $('#footer > div:nth-child(2)').removeAttr('data-toggle');
+                $('#footer > div:nth-child(3)').removeAttr('data-toggle');
             } else {
                 toastr.error(response.desc);
             }
@@ -98,7 +113,7 @@ app.controller('form_detail', function ($scope, $http) {
         }
     ).success(function (response) {
             console.log(response);
-            if (response.flag == 0) {
+            if (response.flag) {
                 $scope.heads = response.data.taskbill.head.tabContent;
                 $scope.bodys = response.data.taskbill.body.tabContent;
                 $('#myTab a').click(function (e) {
