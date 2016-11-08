@@ -35,6 +35,8 @@ app.controller('form_detail', function ($scope, $http) {
         var uri = new URI('/history');
         uri.addQuery('billid', urlObj.billid);
         uri.addQuery('billtype', urlObj.billtype);
+        uri.addQuery('taskid', urlObj.taskid);
+        uri.addQuery('ts', urlObj.ts);
         window.location = uri.toString();
     };
     $scope.oper = function (operation) {

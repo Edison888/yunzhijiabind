@@ -40,7 +40,7 @@
     <title>审批意见</title>
 </head>
 <body style="font-family: 黑体">
-<div class="container">
+<div class="container" ng-controller="opinion">
     <div id="spinner" style=" margin: auto;position: absolute; top: 0; left: 0; bottom: 0; right: 0;visibility: hidden">
         <div class="spinner-container container1">
             <div class="circle1"></div>
@@ -90,6 +90,9 @@
         </div>
         '
     </section>
+    <div class="btn btn-info" style="width: 80%;" ng-click="redirectFlow(flowUrl)">
+        流程图
+    </div>
 </div>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
