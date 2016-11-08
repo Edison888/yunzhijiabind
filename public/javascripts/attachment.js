@@ -8,12 +8,13 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
                 fileName: $scope.attachments[index]['name'],
                 fileExt: $scope.attachments[index]['ext'],
                 //fileTime: $scope.attachments[index]['name'],
-                fileTime: '2843443',
+                fileTime: '2015-06-02 15:40',
                 fileSize: $scope.attachments[index]['size'],
                 //fileDownloadUrl: fileDownloadUrl + '&fileSize=' + fileSize
                 fileDownloadUrl: $scope.attachments[index]['url']
             },
             function (result) {
+                alert(result);
                 if (!(result.success)) {
                     alert(result.error);
                 }
