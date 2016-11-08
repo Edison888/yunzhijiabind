@@ -17,5 +17,8 @@ router.get('/history', function(req, res, next) {
 router.get('/flow', function (req, res, next) {
   res.render('flow');
 });
+router.get('/attachment', function (req, res, next) {
+  res.render('attachment');
+});
 
 module.exports = router;

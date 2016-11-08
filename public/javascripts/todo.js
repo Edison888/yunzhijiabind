@@ -13,7 +13,7 @@ toastr.options = {
     "hideMethod": "fadeOut"
 };
 var app = angular.module('todo', []);
-var userid = "fcd13a8d-9f22-11e6-943d-005056b8712a";
+var userid = "22b387d3-9b1e-11e6-943d-005056b8712a";
 params = {//todo 根据云之家openid获取用户名,这里的userid就是云之家的openid。2016-11-4 13:57:09
     userid: userid,
     statuskey: statuskeyparam,
@@ -23,7 +23,6 @@ params = {//todo 根据云之家openid获取用户名,这里的userid就是云�
     condition: '',
     method: 'getTaskList'
 };
-console.log(params);
 app.controller('matters', function ($scope, $http) {
     document.getElementById('spinner').style.visibility = 'visible';
     $http({
@@ -46,6 +45,7 @@ app.controller('matters', function ($scope, $http) {
                         uri.addQuery('taskid', matter.taskid);
                         uri.addQuery('userid', userid);
                         uri.addQuery('billtype', matter.billtype);
+                        uri.addQuery('ts', matter.senddate);
                         uri.addQuery('billid', matter.billid);
                         uri.addQuery('type', urlObj.type);//跳转到表单详情页面时，携带了type参数，用来告知表单详情页面过来的这个待办是哪种类型的待办。
                         window.location = uri.toString();
@@ -54,7 +54,6 @@ app.controller('matters', function ($scope, $http) {
             } else {
                 toastr.error(response.desc);
             }
-            console.log(response);
         });
 });
 //$(function () {
