@@ -71,7 +71,8 @@
                     {{position}}
                 </h4>
             </div>
-            <span class="glyphicon glyphicon-ok-sign item-icon" ng-class="{'glyphicon glyphicon-ok-sign item-icon':$index==(historys.length-1)}"></span>
+            <span class="glyphicon glyphicon-ok-sign item-icon"
+                  ng-class="{'glyphicon glyphicon-ok-sign item-icon':$index==(historys.length-1)}"></span>
 
             <div class="item-person">
                 <div class="item-person-detail">
@@ -90,9 +91,12 @@
         </div>
         '
     </section>
-    <div class="btn btn-info" style="width: 80%;" ng-click="redirectFlow(flowUrl)">
-        流程图
+    <div style="width: 80%;margin: 0 auto" ng-click="redirectFlow(flowUrl)">
+        <button class="btn  btn-info" style="width: 100%;color: white">
+            流程图
+        </button>
     </div>
+
 </div>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
