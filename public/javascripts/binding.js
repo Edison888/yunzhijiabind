@@ -21,14 +21,13 @@ app.controller('list_controller', function ($scope, $http) {
             url: requrl,
             //url: 'json/searchMappingByMobile',
             params: {
-                mobile: mobile,
-                method: 'getUserMappingInfo'
+                phone: mobile,
+                method: 'getAllUserMappingInfo'
             }
         }).success(function (response) {
             console.log(response);
-            if (response.flag == 0) {
-                $scope.users = [];
-                $scope.users.push(response.data);
+            if (response.flag) {
+                $scope.users = response.data;
             } else {
                 toastr.error(response.desc);
             }
