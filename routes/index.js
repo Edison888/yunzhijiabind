@@ -14,5 +14,8 @@ router.get('/form', function(req, res, next) {
 router.get('/history', function(req, res, next) {
   res.render('history');
 });
+router.get('/flow', function (req, res, next) {
+  res.render('flow');
+});
 
 module.exports = router;
