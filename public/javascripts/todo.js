@@ -13,7 +13,7 @@ toastr.options = {
     "hideMethod": "fadeOut"
 };
 var app = angular.module('todo', []);
-var userid = "22b387d3-9b1e-11e6-943d-005056b8712a";
+var userid = "fcd13a8d-9f22-11e6-943d-005056b8712a";
 params = {//todo 根据云之家openid获取用户名,这里的userid就是云之家的openid。2016-11-4 13:57:09
     userid: userid,
     statuskey: statuskeyparam,
@@ -32,6 +32,7 @@ app.controller('matters', function ($scope, $http) {
             params: params
         }
     ).success(function (response) {
+            console.log(response);
             $scope.matters = [];
             document.getElementById('spinner').style.visibility = 'hidden';
             if (response.flag) {
