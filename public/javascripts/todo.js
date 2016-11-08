@@ -34,7 +34,7 @@ app.controller('matters', function ($scope, $http) {
     ).success(function (response) {
             $scope.matters = [];
             document.getElementById('spinner').style.visibility = 'hidden';
-            if (response.flag == 0) {
+            if (response.flag) {
                 if (response.data.length == 0) {
                     toastr.info('暂无待办');
                 } else {
