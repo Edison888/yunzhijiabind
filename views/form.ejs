@@ -70,8 +70,38 @@
                                 aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title" id="myModalLabel">指派</h4>
                 </div>
-                <div class="modal-body">
-                    ...
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            待选人员
+                        </div>
+                        <div class="col-xs-6">
+                            已选人员
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="assign in assigns"
+                                    ng-click="pushSelecteds($index)">
+                                    <h3>
+                                        {{assign.checkman}}
+                                    </h3>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-6">
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="selected in selecteds"
+                                    ng-click="pushAssigns($index)">
+                                    <h3>
+                                        {{selected.checkman}}
+                                    </h3>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button id="confirm" type="button" style="background-color: grey" class="btn" data-dismiss="modal">
@@ -96,7 +126,8 @@
                               ng-model="note" ng-change="onInputNote(note)"></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button id="confirm" type="button" style="background-color: grey" class="btn" data-dismiss="modal"
+                    <button id="confirm" type="button" style="background-color: #3cbaff" class="btn"
+                            data-dismiss="modal"
                             ng-disabled="!note" ng-click="submit(currentOper)">确定
                     </button>
                     <button id="cancel" type="button" class="btn" data-dismiss="modal">取消</button>
