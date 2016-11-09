@@ -6,6 +6,9 @@
     padding: 0 0 0 0;
 }
 
+body {
+    font-family: 黑体
+}
 #form {
     margin: 0px 0px 50px 0px;
     padding: 0px;

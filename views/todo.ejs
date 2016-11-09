@@ -60,26 +60,8 @@
         </div>
 
     </div>
-    <ul class="nav nav-pills" role="tablist" id="myTab">
-        <li role="presentation" style="text-align: center">
-            <a role="tab" aria-controls="todounhd" data-toggle="tab" href="#todounhd">待办
-                <div id="vertical_line"></div>
-            </a>
-        </li>
-        <li role="presentation" style="text-align: center">
-            <a role="tab" aria-controls="todohd" data-toggle="tab" href="#todohd">已办
-                <div id="vertical_line"></div>
-            </a></li>
-        <li role="presentation" style="text-align: center">
-            <a role="tab" aria-controls="subunhd" data-toggle="tab" href="#subunhd">我的待办
-                <div id="vertical_line"></div>
-            </a></li>
-        <li role="presentation" style="text-align: center">
-            <a role="tab" aria-controls="subhd" data-toggle="tab" href="#subhd">我的已办</a></li>
-    </ul>
     <div class="tab-content" ng-controller="matters">
-        <div role="tabpanel" class="tab-pane active" id="todounhd">
-            待办
+        <div role="tabpanel" class="tab-pane active" id="todounhd" style="margin-bottom: 50px">
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="unhd in unhds" ng-click="goDetail(unhd,'todounhd')">
                     <h5>
@@ -101,8 +83,7 @@
                 </li>
             </ul>
         </div>
-        <div role="tabpanel" class="tab-pane" id="todohd">
-            已办
+        <div role="tabpanel" class="tab-pane" id="todohd" style="margin-bottom: 50px">
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="hd in hds" ng-click="goDetail(hd,'todohd')">
                     <h5>
@@ -124,8 +105,7 @@
                 </li>
             </ul>
         </div>
-        <div role="tabpanel" class="tab-pane" id="subunhd">
-            我的待办
+        <div role="tabpanel" class="tab-pane" id="subunhd" style="margin-bottom: 50px">
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="subunhd in subunhds" ng-click="goDetail(subunhd,'subunhd')">
                     <h5>
@@ -147,8 +127,7 @@
                 </li>
             </ul>
         </div>
-        <div role="tabpanel" class="tab-pane" id="subhd">
-            我的已办
+        <div role="tabpanel" class="tab-pane" id="subhd" style="margin-bottom: 50px">
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="subhd in subhds" ng-click="goDetail(subhd,'subhd')">
                     <h5>
@@ -171,6 +150,23 @@
             </ul>
         </div>
     </div>
+    <ul class="nav nav-pills" role="tablist" id="myTab">
+        <li role="presentation" class="active">
+            <a role="tab" aria-controls="todounhd" data-toggle="tab" href="#todounhd">待办
+                <div id="vertical_line"></div>
+            </a>
+        </li>
+        <li role="presentation">
+            <a role="tab" aria-controls="todohd" data-toggle="tab" href="#todohd">已办
+                <div id="vertical_line"></div>
+            </a></li>
+        <li role="presentation">
+            <a role="tab" aria-controls="subunhd" data-toggle="tab" href="#subunhd">我的待办
+                <div id="vertical_line"></div>
+            </a></li>
+        <li role="presentation">
+            <a role="tab" aria-controls="subhd" data-toggle="tab" href="#subhd">我的已办</a></li>
+    </ul>
 
 </div>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->

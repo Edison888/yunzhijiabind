@@ -49,3 +49,56 @@ body {
     line-height: 1.5;
 }
 
+#myTab {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+}
+
+.nav-pills > li > a {
+    border-radius: 0px;
+    border-bottom: solid white 2px;
+}
+
+/*
+覆盖bootstrap里面的li标签前面的边距
+*/
+.nav-pills > li + li {
+    margin-left: 0px;
+}
+
+.nav-pills > li {
+    margin-left: 0px;
+    text-align: center;
+    width: 25%
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    line-height: 1.5;
+}
+
+a {
+    color: #9a9a9a;
+    font-size: 12px;
+    background-color: white;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+    color: #3cbaff;
+    background-color: #ffffff;
+    /*border-bottom: solid #3cbaff 2px;*/
+    font-size: 12px;
+}
+
+#vertical_line {
+    width: 1px;
+    height: 20px;
+    background-color: #e9ecf1;
+    display: inline;
+    float: right;
+    margin-right: -15px
+}
+
