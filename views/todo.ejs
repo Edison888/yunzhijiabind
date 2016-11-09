@@ -160,12 +160,21 @@
             <a role="tab" aria-controls="todohd" data-toggle="tab" href="#todohd">已办
                 <div id="vertical_line"></div>
             </a></li>
-        <li role="presentation">
-            <a role="tab" aria-controls="subunhd" data-toggle="tab" href="#subunhd">我的待办
-                <div id="vertical_line"></div>
-            </a></li>
-        <li role="presentation">
-            <a role="tab" aria-controls="subhd" data-toggle="tab" href="#subhd">我的已办</a></li>
+
+        <li role="presentation" class="dropup">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                我的流程 <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <li role="presentation">
+                    <a role="tab" aria-controls="subunhd" data-toggle="tab" href="#subunhd">我的待办
+                        <div id="vertical_line"></div>
+                    </a></li>
+                <li role="presentation">
+                    <a role="tab" aria-controls="subhd" data-toggle="tab" href="#subhd">我的已办</a></li>
+            </ul>
+        </li>
+
     </ul>
 
 </div>

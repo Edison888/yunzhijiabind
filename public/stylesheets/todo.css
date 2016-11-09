@@ -55,12 +55,11 @@ body {
     margin: 0 auto;
     background-color: white;
     position: fixed;
-    bottom: 0;
+    bottom: 0px;
 }
 
 .nav-pills > li > a {
     border-radius: 0px;
-    border-bottom: solid white 2px;
 }
 
 /*
@@ -73,7 +72,7 @@ body {
 .nav-pills > li {
     margin-left: 0px;
     text-align: center;
-    width: 25%
+    width: 33%
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
