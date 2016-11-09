@@ -60,26 +60,117 @@
         </div>
 
     </div>
-    <ul id="todo-ul" class="list-group" ng-controller="matters">
-        <li class="list-group-item" ng-repeat="matter in matters" ng-click="goDetail(matter)">
-            <h5>
-                {{matter.title}}
-            </h5>
-
-            <div>
-                <p>
-                    {{matter.billtypename}}
-                </p>
-
-                <p>
-                    {{matter.sendman}}
-                </p>
-
-                <p></p>
-                <h6>{{matter.senddate}}</h6>
-            </div>
+    <ul class="nav nav-pills" role="tablist" id="myTab">
+        <li role="presentation" style="text-align: center">
+            <a role="tab" aria-controls="todounhd" data-toggle="tab" href="#todounhd">待办
+                <div id="vertical_line"></div>
+            </a>
         </li>
+        <li role="presentation" style="text-align: center">
+            <a role="tab" aria-controls="todohd" data-toggle="tab" href="#todohd">已办
+                <div id="vertical_line"></div>
+            </a></li>
+        <li role="presentation" style="text-align: center">
+            <a role="tab" aria-controls="subunhd" data-toggle="tab" href="#subunhd">我的待办
+                <div id="vertical_line"></div>
+            </a></li>
+        <li role="presentation" style="text-align: center">
+            <a role="tab" aria-controls="subhd" data-toggle="tab" href="#subhd">我的已办</a></li>
     </ul>
+    <div class="tab-content" ng-controller="matters">
+        <div role="tabpanel" class="tab-pane active" id="todounhd">
+            待办
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="unhd in unhds" ng-click="goDetail(unhd,'todounhd')">
+                    <h5>
+                        {{unhd.title}}
+                    </h5>
+
+                    <div>
+                        <p>
+                            {{unhd.billtypename}}
+                        </p>
+
+                        <p>
+                            {{unhd.sendman}}
+                        </p>
+
+                        <p></p>
+                        <h6>{{unhd.senddate}}</h6>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="todohd">
+            已办
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="hd in hds" ng-click="goDetail(hd,'todohd')">
+                    <h5>
+                        {{hd.title}}
+                    </h5>
+
+                    <div>
+                        <p>
+                            {{hd.billtypename}}
+                        </p>
+
+                        <p>
+                            {{hd.sendman}}
+                        </p>
+
+                        <p></p>
+                        <h6>{{hd.senddate}}</h6>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="subunhd">
+            我的待办
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="subunhd in subunhds" ng-click="goDetail(subunhd,'subunhd')">
+                    <h5>
+                        {{subunhd.title}}
+                    </h5>
+
+                    <div>
+                        <p>
+                            {{subunhd.billtypename}}
+                        </p>
+
+                        <p>
+                            {{subunhd.sendman}}
+                        </p>
+
+                        <p></p>
+                        <h6>{{subunhd.senddate}}</h6>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="subhd">
+            我的已办
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="subhd in subhds" ng-click="goDetail(subhd,'subhd')">
+                    <h5>
+                        {{subhd.title}}
+                    </h5>
+
+                    <div>
+                        <p>
+                            {{subhd.billtypename}}
+                        </p>
+
+                        <p>
+                            {{subhd.sendman}}
+                        </p>
+
+                        <p></p>
+                        <h6>{{subhd.senddate}}</h6>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 
 </div>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
