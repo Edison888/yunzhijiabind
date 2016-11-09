@@ -18,6 +18,7 @@ $('#myTab a').click(function (e) {
     e.preventDefault();
     $(this).tab('show')
 });
+XuntongJSBridge.call('setWebViewTitle', '待办流程');
 app.controller('matters', function ($scope, $http) {
     document.getElementById('spinner').style.visibility = 'visible';
     $scope.showTitle = function (title) {
