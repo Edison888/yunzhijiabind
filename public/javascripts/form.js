@@ -14,6 +14,19 @@ toastr.options = {
     "hideMethod": "fadeOut"
 };
 app.controller('form_detail', function ($scope, $http) {
+    $http({
+        method: 'get',
+        url: requrl,
+        params: {
+            billid: urlObj.billid,
+            billtype: urlObj.billtype,
+            method: 'getTaskSenderInfo'
+        }
+    }).success(function (response) {
+        console.log(response);
+        $scope.starter = response.data;
+
+    });
     $scope.isApproved = false;
     $scope.note = '';
     $scope.onInputNote = function (note) {

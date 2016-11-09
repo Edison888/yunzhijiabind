@@ -138,11 +138,11 @@
     <div id="form">
         <div id="info">
             <div id="info_person">
-                <img id="info_person_icon" src="img/icon.png">
+                <img id="info_person_icon" ng-src="{{starter.photoUrl}}" src="img/icon.png">
 
                 <div id="info_person_detail">
-                    <h4 id="info_person_name"></h4>
-                    <h5 id="info_person_position"></h5>
+                    <h4 id="info_person_name">{{starter.ncuser_name}}</h4>
+                    <h5 id="info_person_position">{{starter.ncjob}}</h5>
                 </div>
                 <div id="form_links">
                     <img id="form_links_appendix" src="img/appendix.png" ng-click="goAttach()"></span>
