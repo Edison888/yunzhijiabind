@@ -107,6 +107,7 @@ app.controller('form_detail', function ($scope, $http) {
     $scope.mcancel = function () {
         $scope.note = '';
     };
+    distinguish(urlObj.type);
     $http(
         {
             method: 'get',
