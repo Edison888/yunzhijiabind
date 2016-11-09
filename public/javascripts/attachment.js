@@ -14,7 +14,6 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
                 fileDownloadUrl: $scope.attachments[index]['url']
             },
             function (result) {
-                alert(result);
                 if (!(result.success)) {
                     alert(result.error);
                 }
