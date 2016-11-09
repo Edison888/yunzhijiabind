@@ -60,6 +60,7 @@ body {
 
 .nav-pills > li > a {
     border-radius: 0px;
+    font-weight: bold;
 }
 
 /*
@@ -81,7 +82,7 @@ body {
 
 a {
     color: #9a9a9a;
-    font-size: 14px;
+    font-size: 16px;
     background-color: white;
 }
 
@@ -89,9 +90,12 @@ a {
     color: #3cbaff;
     background-color: #ffffff;
     /*border-bottom: solid #3cbaff 2px;*/
-    font-size: 14px;
+    font-size: 16px;
 }
 
+.dropdown-menu > li > a {
+    padding: 5px;
+}
 #vertical_line {
     width: 1px;
     height: 20px;
