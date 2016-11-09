@@ -81,7 +81,7 @@ body {
 
 a {
     color: #9a9a9a;
-    font-size: 12px;
+    font-size: 14px;
     background-color: white;
 }
 
@@ -89,7 +89,7 @@ a {
     color: #3cbaff;
     background-color: #ffffff;
     /*border-bottom: solid #3cbaff 2px;*/
-    font-size: 12px;
+    font-size: 14px;
 }
 
 #vertical_line {
