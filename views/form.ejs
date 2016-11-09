@@ -84,9 +84,9 @@
                             <ul class="list-group">
                                 <li class="list-group-item" ng-repeat="assign in assigns"
                                     ng-click="pushSelecteds($index)">
-                                    <h3>
-                                        {{assign.checkman}}
-                                    </h3>
+
+                                    <span>{{assign.id}}  {{assign.checkman}}</span>
+
                                 </li>
                             </ul>
                         </div>
@@ -94,9 +94,7 @@
                             <ul class="list-group">
                                 <li class="list-group-item" ng-repeat="selected in selecteds"
                                     ng-click="pushAssigns($index)">
-                                    <h3>
-                                        {{selected.checkman}}
-                                    </h3>
+                                    <span>{{selected.id}}  {{selected.checkman}}</span>
                                 </li>
                             </ul>
                         </div>
@@ -104,10 +102,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button id="cancel" type="button" class="btn" data-dismiss="modal">取消</button>
                     <button id="confirm" type="button" style="background-color: grey" class="btn" data-dismiss="modal">
                         确定
                     </button>
-                    <button id="cancel" type="button" class="btn" data-dismiss="modal">取消</button>
                 </div>
             </div>
         </div>
@@ -126,11 +124,11 @@
                               ng-model="note" ng-change="onInputNote(note)"></textarea>
                 </div>
                 <div class="modal-footer">
+                    <button id="cancel" type="button" class="btn" data-dismiss="modal">取消</button>
                     <button id="confirm" type="button" style="background-color: #3cbaff" class="btn"
                             data-dismiss="modal"
                             ng-disabled="!note" ng-click="submit(currentOper)">确定
                     </button>
-                    <button id="cancel" type="button" class="btn" data-dismiss="modal">取消</button>
                 </div>
             </div>
             <!-- /.modal-content -->
