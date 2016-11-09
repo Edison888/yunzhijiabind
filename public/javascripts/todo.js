@@ -20,6 +20,9 @@ $('#myTab a').click(function (e) {
 });
 app.controller('matters', function ($scope, $http) {
     document.getElementById('spinner').style.visibility = 'visible';
+    $scope.showTitle = function (title) {
+        XuntongJSBridge.call('setWebViewTitle', {'title': title});
+    };
     $scope.getMatters = function (type) {
         distinguish(type);
         $http({

@@ -152,12 +152,12 @@
     </div>
     <ul class="nav nav-pills" role="tablist" id="myTab">
         <li role="presentation" class="active">
-            <a role="tab" aria-controls="todounhd" data-toggle="tab" href="#todounhd">待办流程
+            <a role="tab" aria-controls="todounhd" data-toggle="tab" href="#todounhd" ng-click="showTitle('待办流程')">待办流程
                 <div id="vertical_line"></div>
             </a>
         </li>
         <li role="presentation">
-            <a role="tab" aria-controls="todohd" data-toggle="tab" href="#todohd">已办流程
+            <a role="tab" aria-controls="todohd" data-toggle="tab" href="#todohd" ng-click="showTitle('已办流程')">已办流程
                 <div id="vertical_line"></div>
             </a></li>
 
@@ -167,7 +167,8 @@
             </a>
             <ul class="dropdown-menu" role="menu" style="min-width: 100px">
                 <li role="presentation">
-                    <a role="tab" aria-controls="subunhd" data-toggle="tab" href="#subunhd" style="padding-left: 20px">我的待办
+                    <a role="tab" aria-controls="subunhd" data-toggle="tab" href="#subunhd" style="padding-left: 20px"
+                       ng-click="showTitle('我的待办')">我的待办
                     </a>
 
                     <div style="background-color: lightgrey;height: 1px;width: 70%;margin: 0 auto">
@@ -175,7 +176,7 @@
                 </li>
                 <li role="presentation">
                     <a role="tab" aria-controls="subhd" data-toggle="tab" href="#subhd"
-                       style="padding-left: 20px">我的已办</a></li>
+                       style="padding-left: 20px" ng-click="showTitle('我的已办')">我的已办</a></li>
             </ul>
         </li>
 
