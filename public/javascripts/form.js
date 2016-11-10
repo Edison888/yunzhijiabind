@@ -13,7 +13,16 @@ toastr.options = {
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
 };
+var yzjPerson = {};
 app.controller('form_detail', function ($scope, $http) {
+    $scope.openPersonTab = function () {
+        XuntongJSBridge.call('personInfo', {
+            //'openId': res.data.createopenid
+            'openId': $scope.starter.openId
+        }, function (result) {
+        });
+    };
+
     $scope.isHide = true;
     $scope.isHide = urlObj.type == 'todounhd' ? false : true;
     $http({
