@@ -5,9 +5,9 @@ var debug = true;
 var host_produce = "";
 //var host_test = "http://192.168.1.158:8089";
 //var host_test = "http://61.136.222.246:8089";
-var host_test = "http://61.136.222.246:8089";//吉哲原服务
+//var host_test = "http://61.136.222.246:8089";//吉哲原服务
 //var host_test = 'http://61.136.222.246:6666';//新标准测试服务
-//var host_test = 'http://61.136.222.246:8088';//新标准测试服务
+var host_test = 'http://61.136.222.246:8088';//新标准测试服务
 var common_biz_url = "/servlet/MobileApproveServlet";
 var requrl = (debug ? host_test : host_produce) + common_biz_url;
 
