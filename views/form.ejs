@@ -137,10 +137,10 @@
     </div>
     <div id="form">
         <div id="info">
-            <div id="info_person" ng-click="openPersonTab()">
-                <img id="info_person_icon" ng-src="{{starter.photoUrl}}" src="img/icon.png">
+            <div id="info_person">
+                <img id="info_person_icon" ng-src="{{starter.photoUrl}}" src="img/icon.png" ng-click="openPersonTab()">
 
-                <div id="info_person_detail">
+                <div id="info_person_detail" ng-click="openPersonTab()">
                     <h4 id="info_person_name" ng-bind="starter.ncuser_name"></h4>
                     <h5 id="info_person_position" ng-bind="starter.ncjob"></h5>
                 </div>
