@@ -14,6 +14,7 @@ toastr.options = {
     "hideMethod": "fadeOut"
 };
 app.controller('form_detail', function ($scope, $http) {
+    $scope.isShow = urlObj.type == 'todounhd' ? 'margin: 0px;visibility: visibile' : 'margin: 0px;visibility: hidden';
     $http({
         method: 'get',
         url: requrl,
