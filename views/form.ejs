@@ -210,7 +210,7 @@
         </div>
 
     </div>
-    <div class="row" id="footer" style="{{isShow}}">
+    <div class="row" id="footer" style="margin: 0px" ng-hide="isHide">
         <div class="col-xs-4 btn" data-toggle="modal" data-target="#modal"
              ng-click="oper(disagree)" ng-disabled="isApproved"><h4 id="disagree">不同意</h4></div>
         <div class="col-xs-4 btn" data-toggle="modal" data-target="#modal" ng-click="oper(mreject)"
