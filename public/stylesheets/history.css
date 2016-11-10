@@ -44,12 +44,27 @@
     width: 8%;
     height: auto;
     text-align: center;
-    color: green;
     background-color: white;
     border-radius: 10%;
     margin-top: 10px;
     margin-left: -3px;
     font-size: 20px;
+}
+
+.item-icon-green {
+    color: green;
+}
+
+.item-icon-red {
+    color: red;
+}
+
+.item-icon-purple {
+    color: purple;
+}
+
+.item-icon-blue {
+    color: dodgerblue;
 }
 
 .item-person {
