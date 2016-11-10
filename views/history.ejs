@@ -61,31 +61,27 @@
             <div class="circle4"></div>
         </div>
     </div>
-    <section id="cd-timeline" class="cd-container" ng-controller="opinion">
+    <section id="cd-timeline" class="cd-container">
         <div class="cd-timeline-item" ng-repeat="history in historys">
             <div class="item-left">
-                <h5 class="item-left-time">
-                    {{history.dealdate}}
+                <h5 class="item-left-time" ng-bind="history.dealdate">
                 </h5>
-                <h4 class="item-left-position">
-                    {{position}}
+                <h4 class="item-left-position" ng-bind="history.position">
                 </h4>
             </div>
-            <span class="glyphicon glyphicon-ok-sign item-icon"
-                  ng-class="{'glyphicon glyphicon-ok-sign item-icon':$index==(historys.length-1)}"></span>
+            <!--<span class="glyphicon glyphicon-ok-sign item-icon"-->
+            <!--ng-class="{'glyphicon glyphicon-ok-sign item-icon':$index==(historys.length-1)}"></span>-->
+            <span class="{{history.approveresult|selectIcon}}"></span>
 
             <div class="item-person">
                 <div class="item-person-detail">
                     <img class="person-icon" src="img/icon.png">
-                    <h5 class="person-department">
-                        {{department}}
+                    <h5 class="person-department" ng-bind="history.department">
                     </h5>
-                    <h4 class="person-name">
-                        {{history.checkman}}
+                    <h4 class="person-name" ng-bind="history.checkman">
                     </h4>
                 </div>
-                <h5 class="person-opinion">
-                    {{history.checknote}}
+                <h5 class="person-opinion" ng-bind="history.checknote">
                 </h5>
             </div>
         </div>
