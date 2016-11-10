@@ -64,21 +64,17 @@
         <div role="tabpanel" class="tab-pane active" id="todounhd" style="margin-bottom: 50px">
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="unhd in unhds" ng-click="goDetail(unhd,'todounhd')">
-                    <h5>
-                        {{unhd.title}}
-                    </h5>
+                    <h5 ng-bind='unhd.title'></h5>
 
                     <div>
-                        <p>
-                            {{unhd.billtypename}}
+                        <p ng-bind="unhd.billtypename">
                         </p>
 
-                        <p>
-                            {{unhd.sendman}}
+                        <p ng-bind="unhd.sendman">
                         </p>
 
                         <p></p>
-                        <h6>{{unhd.senddate}}</h6>
+                        <h6 ng-bind="unhd.senddate"></h6>
                     </div>
                 </li>
             </ul>
@@ -86,21 +82,18 @@
         <div role="tabpanel" class="tab-pane" id="todohd" style="margin-bottom: 50px">
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="hd in hds" ng-click="goDetail(hd,'todohd')">
-                    <h5>
-                        {{hd.title}}
+                    <h5 ng-bind="hd.title">
                     </h5>
 
                     <div>
-                        <p>
-                            {{hd.billtypename}}
+                        <p ng-bind="hd.billtypename">
                         </p>
 
-                        <p>
-                            {{hd.sendman}}
+                        <p ng-bind="hd.sendman">
                         </p>
 
                         <p></p>
-                        <h6>{{hd.senddate}}</h6>
+                        <h6 ng-bind="hd.senddate"></h6>
                     </div>
                 </li>
             </ul>
@@ -108,21 +101,18 @@
         <div role="tabpanel" class="tab-pane" id="subunhd" style="margin-bottom: 50px">
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="subunhd in subunhds" ng-click="goDetail(subunhd,'subunhd')">
-                    <h5>
-                        {{subunhd.title}}
+                    <h5 ng-bind="subunhd.title">
                     </h5>
 
                     <div>
-                        <p>
-                            {{subunhd.billtypename}}
+                        <p ng-bind="subunhd.billtypename">
                         </p>
 
-                        <p>
-                            {{subunhd.sendman}}
+                        <p ng-bind="subunhd.sendman">
                         </p>
 
                         <p></p>
-                        <h6>{{subunhd.senddate}}</h6>
+                        <h6 ng-bind="subunhd.senddate"></h6>
                     </div>
                 </li>
             </ul>
@@ -130,21 +120,18 @@
         <div role="tabpanel" class="tab-pane" id="subhd" style="margin-bottom: 50px">
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="subhd in subhds" ng-click="goDetail(subhd,'subhd')">
-                    <h5>
-                        {{subhd.title}}
+                    <h5 ng-bind="subhd.title">
                     </h5>
 
                     <div>
-                        <p>
-                            {{subhd.billtypename}}
+                        <p ng-bind="subhd.billtypename">
                         </p>
 
-                        <p>
-                            {{subhd.sendman}}
+                        <p ng-bind="subhd.sendman">
                         </p>
 
                         <p></p>
-                        <h6>{{subhd.senddate}}</h6>
+                        <h6 ng-bind="subhd.senddate"></h6>
                     </div>
                 </li>
             </ul>
