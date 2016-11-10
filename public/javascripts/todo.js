@@ -13,8 +13,8 @@ toastr.options = {
     "hideMethod": "fadeOut"
 };
 var app = angular.module('todo', []);
-var userid = "22b387d3-9b1e-11e6-943d-005056b8712a";
-//var userid = "6b2da1c2-95d8-11e6-a383-005056b8712a";//杨总
+//var userid = "22b387d3-9b1e-11e6-943d-005056b8712a";
+var userid = "6b2da1c2-95d8-11e6-a383-005056b8712a";//杨总
 $('#myTab a').click(function (e) {
     e.preventDefault();
     $(this).tab('show')
