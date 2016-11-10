@@ -85,7 +85,7 @@
                                 <li class="list-group-item" ng-repeat="assign in assigns"
                                     ng-click="pushSelecteds($index)">
 
-                                    <span>{{assign.id}}  {{assign.checkman}}</span>
+                                    <span ng-bind="assign.id+'  '+assign.checkman"></span>
 
                                 </li>
                             </ul>
@@ -94,7 +94,7 @@
                             <ul class="list-group">
                                 <li class="list-group-item" ng-repeat="selected in selecteds"
                                     ng-click="pushAssigns($index)">
-                                    <span>{{selected.id}}  {{selected.checkman}}</span>
+                                    <span ng-bind="selected.id+'  '+selected.checkman"></span>
                                 </li>
                             </ul>
                         </div>
@@ -141,8 +141,8 @@
                 <img id="info_person_icon" ng-src="{{starter.photoUrl}}" src="img/icon.png">
 
                 <div id="info_person_detail">
-                    <h4 id="info_person_name">{{starter.ncuser_name}}</h4>
-                    <h5 id="info_person_position">{{starter.ncjob}}</h5>
+                    <h4 id="info_person_name" ng-bind="starter.ncuser_name"></h4>
+                    <h5 id="info_person_position" ng-bind="starter.ncjob"></h5>
                 </div>
                 <div id="form_links">
                     <img id="form_links_appendix" src="img/appendix.png" ng-click="goAttach()"></span>
@@ -157,7 +157,7 @@
             <ul id="myTab" class="nav nav-tabs" role="tablist">
                 <li role="presentation" ng-repeat="head in heads" ng-class="{'active':$index==0}"><a
                             href="#head{{$index}}" role="tab"
-                            data-toggle="tab">{{head.tabTitle}}</a></li>
+                            data-toggle="tab" ng-bind="head.tabTitle"></a></li>
             </ul>
 
             <!-- Tab panes -->
@@ -166,11 +166,10 @@
                      id="head{{$index}}">
                     <div ng-repeat="item in head.tabdata">
                         <div style="position: relative;overflow: hidden; padding-bottom: 5px;padding-top: 5px;">
-                            <h5 style=" color: grey;width: 30%;float: left;color: grey;">
-                                {{item.colname}}
+                            <h5 style=" color: grey;width: 30%;float: left;color: grey;" ng-bind="item.colname">
                             </h5>
-                            <h5 style=" color: black;width: 70%;float: right;text-align: right;padding-right: 20px;">
-                                {{item.colvalue}}
+                            <h5 style=" color: black;width: 70%;float: right;text-align: right;padding-right: 20px;"
+                                ng-bind="item.colvalue">
                             </h5>
                         </div>
                         <div class="line"></div>
@@ -181,7 +180,7 @@
             <ul id="myTab" class="nav nav-pills" role="tablist" style="margin-top: 5px">
                 <li role="presentation" ng-repeat="body in bodys" ng-class="{'active':$index==0}"><a
                             href="#body{{$index}}" role="tab"
-                            data-toggle="tab">{{body.tabTitle}}</a></li>
+                            data-toggle="tab" ng-bind="body.tabTitle"></a></li>
             </ul>
 
             <!-- Tab panes -->
@@ -193,13 +192,12 @@
 
                             <thead>
                             <tr class="bg-info" style="text-align: center">
-                                <th ng-repeat="body in bodys[0]['tabdata'][0]">{{body.colname}}</th>
+                                <th ng-repeat="body in bodys[0]['tabdata'][0]" ng-bind="body.colname"></th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr ng-repeat="line in body.tabdata">
-                                <td ng-repeat="item in line" style="text-align: center">
-                                    {{item.colvalue}}
+                                <td ng-repeat="item in line" style="text-align: center" ng-bind="item.colvalue">
                                 </td>
                             </tr>
                             </tbody>
