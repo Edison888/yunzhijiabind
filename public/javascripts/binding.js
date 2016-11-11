@@ -21,8 +21,10 @@ app.controller('list_controller', function ($scope, $http) {
             url: requrl,
             //url: 'json/searchMappingByMobile',
             params: {
-                phone: mobile,
-                method: 'getAllUserMappingInfo'
+                phone: mobile,//chenhao
+                //mobile: mobile,//jizhe
+                //method: 'getUserMappingInfo'//jizhe
+                method: 'getAllUserMappingInfo'//chenhao
             }
         }).success(function (response) {
             console.log(response);
