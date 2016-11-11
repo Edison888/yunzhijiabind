@@ -23,6 +23,13 @@ app.filter('selectIcon', function () {
         return out;
     }
 }).controller('opinion', function ($scope, $http) {
+    $scope.openPersonTab = function (openid) {
+        XuntongJSBridge.call('personInfo', {
+            //'openId': res.data.createopenid
+            'openId': openid
+        }, function (result) {
+        });
+    };
     $scope.showIcon = function (iconStr) {
         return iconStr ? iconStr : 'img/icon.png';
     };

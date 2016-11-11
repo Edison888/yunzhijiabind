@@ -74,7 +74,7 @@
             <span class="{{history.approveresult|selectIcon}}"></span>
 
             <div class="item-person">
-                <div class="item-person-detail">
+                <div class="item-person-detail" ng-click="openPersonTab(history.openId)">
                     <img class="person-icon" ng-src="{{showIcon(history.photoUrl)}}">
                     <h5 class="person-department" ng-bind="history.ncunit">
                     </h5>
