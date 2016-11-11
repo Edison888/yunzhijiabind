@@ -29,7 +29,6 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
             },
             function (result) {
                 if (!(result.success)) {
-                    alert(result.error);
                 }
             }
         );
