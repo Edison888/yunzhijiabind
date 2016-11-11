@@ -23,6 +23,9 @@ app.filter('selectIcon', function () {
         return out;
     }
 }).controller('opinion', function ($scope, $http) {
+    $scope.showIcon = function (iconStr) {
+        return iconStr ? iconStr : 'img/icon.png';
+    };
     $scope.redirectFlow = function (imgUrl) {
         var uri = new URI('/flow');
         uri.addQuery('imgUrl', imgUrl);
