@@ -45,9 +45,6 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
         $scope.getMatters('subhd');
         $scope.getMatters('subunhd');
     });
-    //$window.addEventListener('unload',function(){
-    //    $cookieStore.remove('currentTab');
-    //});
     var currentTab = $cookieStore.get('currentTab');
     if (currentTab) {//如果currentTab不为空
         switchTab(currentTab);
