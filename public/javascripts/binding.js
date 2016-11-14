@@ -28,7 +28,7 @@ app.controller('list_controller', function ($scope, $http) {
             }
         }).success(function (response) {
             console.log(response);
-            if (response.flag) {
+            if (response.flag == 0) {
                 //$scope.users = response.data;//chenhao
                 $scope.users = [];//jizhe
                 $scope.users.push(response.data[0]);//jizhe
@@ -74,7 +74,7 @@ app.controller('list_controller', function ($scope, $http) {
             }
         ).success(function (response) {//todo 请求删除行数据
                 console.log(response);
-                if (response.flag) {
+                if (response.flag == 0) {
                     toastr.success("已删除");
                 } else {
                     toastr.error(response.desc);
@@ -162,7 +162,7 @@ app.controller('list_controller', function ($scope, $http) {
                     console.log("sdfsdf");
                     console.log(response);
                     document.getElementById('spinner').style.visibility = 'hidden';
-                    if (response.flag) {
+                    if (response.flag == 0) {
                         var yzjUserObj = response.data;
                         var user = {
                             yzjid: yzjUserObj.yzjid,	//云之家账号ID
@@ -186,7 +186,7 @@ app.controller('list_controller', function ($scope, $http) {
 
                         }).success(function (response) {
                             console.log(response);
-                            if (response.flag) {
+                            if (response.flag == 0) {
                                     $scope.users.push(user);
                             } else {
                                 toastr.error(response.desc);
@@ -224,7 +224,7 @@ app.controller('list_controller', function ($scope, $http) {
         ).success(function (response) {
                 document.getElementById('spinner').style.visibility = 'hidden';
                 $scope.disableBind();
-                if (response.flag) {
+                if (response.flag == 0) {
                     console.log(currentIndex);
                     $scope.users[currentIndex]['ncuser_code'] = currentSelectedNcUser.ncuser_code;
                     $scope.users[currentIndex]['ncuser_name'] = currentSelectedNcUser.ncuser_name;
@@ -270,7 +270,7 @@ app.controller('list_controller', function ($scope, $http) {
             document.getElementById('spinner').style.visibility = 'hidden';
             console.log(response);
             $scope.ncusers = [];
-            if (response.flag) {
+            if (response.flag == 0) {
                 if (response.data.length > 0) {
                     $scope.ncusers = response.data;
                 }
