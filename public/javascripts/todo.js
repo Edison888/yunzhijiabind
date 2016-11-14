@@ -12,7 +12,7 @@ toastr.options = {
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
 };
-var app = angular.module('todo', []);
+var app = angular.module('todo', ['ngCookies']);
 //var userid = "22b387d3-9b1e-11e6-943d-005056b8712a";
 //var userid = "6b2da1c2-95d8-11e6-a383-005056b8712a";//杨总
 var userid = "fccda66d-9f22-11e6-943d-005056b8712a";//胡文全
@@ -22,8 +22,28 @@ $('#myTab a').click(function (e) {
     $(this).tab('show')
 });
 XuntongJSBridge.call('setWebViewTitle', {'title': '待办流程'});
-app.controller('matters', function ($scope, $http) {
+app.controller('matters', function ($scope, $http, $cookieStore) {
     document.getElementById('spinner').style.visibility = 'visible';
+    $scope.setCookie = function (cookieValue) {
+        $cookieStore.put('currentTab', cookieValue);
+    };
+    $scope.isActive = function (historyTab) {
+        var currentTab = $cookieStore.get('currentTab');
+        if (!currentTab) {//如果第一次打开
+            if (historyTab == 'todounhd') {//默认显示待办流程
+                $cookieStore.put('currentTab', 'todounhd');
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (historyTab == currentTab) {//如果页签对应上了cookie里面存储的历史页签，那么返回true
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
     $scope.showTitle = function (title) {
         XuntongJSBridge.call('setWebViewTitle', {'title': title});
     };
