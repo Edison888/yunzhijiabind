@@ -105,3 +105,21 @@ a {
     margin-right: -15px
 }
 
+#mytodohd::before {
+    top: -12px;
+    right: -14px;
+    height: 16px;
+    position: absolute;
+    content: '10';
+    width: 16px;
+    border-radius: 8px;
+    background: red;
+    text-align: center;
+    font-size: 12px;
+    color: white;
+}
+
+#mytodohd {
+    position: relative;
+}
+
