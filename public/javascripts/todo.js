@@ -40,7 +40,11 @@ function switchTab(currentTab) {
 }
 app.controller('matters', function ($scope, $http, $cookieStore) {
     var currentTab = $cookieStore.get('currentTab');
-    switchTab(currentTab);
+    if (currentTab) {//如果currentTab不为空
+        switchTab(currentTab);
+    } else {
+        switchTab('todounhd');
+    }
     document.getElementById('spinner').style.visibility = 'visible';
     $scope.setCookie = function (cookieValue) {
         $cookieStore.put('currentTab', cookieValue);
