@@ -46,7 +46,6 @@ app.controller('form_detail', function ($scope, $http) {
             method: 'getTaskSenderInfo'
         }
     }).success(function (response) {
-        console.log(response);
         $scope.starter = response.data;
 
     });
@@ -67,6 +66,7 @@ app.controller('form_detail', function ($scope, $http) {
     $scope.disagree = 'disagree';
     $scope.mreject = 'reject';
     $scope.currentOper = '';
+    $scope.task = {};
     $scope.goAttach = function () {
         var uri = new URI('/attachment');
         uri.addQuery('billid', urlObj.billid);
@@ -78,7 +78,7 @@ app.controller('form_detail', function ($scope, $http) {
         uri.addQuery('billid', urlObj.billid);
         uri.addQuery('billtype', urlObj.billtype);
         uri.addQuery('taskid', urlObj.taskid);
-        uri.addQuery('ts', urlObj.ts);
+        uri.addQuery('ts', $scope.task.data.ts);
         window.location = uri.toString();
     };
     $scope.oper = function (operation) {
@@ -127,7 +127,7 @@ app.controller('form_detail', function ($scope, $http) {
             }
         }).success(function (response) {
             console.log(response);
-            if (response.flag) {
+            if (response.flag == 0) {
                 toastr.success('审批成功');
                 deplayCloseCurrentPage();
                 $scope.isApproved = true;
@@ -158,8 +158,8 @@ app.controller('form_detail', function ($scope, $http) {
             }
         }
     ).success(function (response) {
-            console.log(response);
-            if (response.flag) {
+            $scope.task = response;
+            if (response.flag == 0) {
                 $scope.heads = response.data.taskbill.head.tabContent;
                 $scope.bodys = response.data.taskbill.body.tabContent;
                 $('#myTab a').click(function (e) {
