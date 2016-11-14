@@ -141,7 +141,7 @@
         </div>
     </div>
     <ul class="nav nav-pills" role="tablist" id="myTab" style="border-top: solid 1px lightsteelblue">
-        <li role="presentation" ng-class="{active:isActive('todounhd')}">
+        <li role="presentation" ng-class="{active:isActive('todounhd')}" ng-click="setCookie('todounhd')">
             <a role="tab" aria-controls="todounhd" data-toggle="tab" href="#todounhd" ng-click="showTitle('待办流程')"><span
                         id="mytodohd">待办流程</span>
                 <div id="vertical_line"></div>
@@ -150,7 +150,7 @@
             <p></p>
         </li>
         <!--<li role="presentation" ng-class="{active:true}">-->
-        <li role="presentation" ng-class="{active:isActive('todohd')}">
+        <li role="presentation" ng-class="{active:isActive('todohd')}" ng-click="setCookie('todohd')">
             <a role="tab" aria-controls="todohd" data-toggle="tab" href="#todohd" ng-click="showTitle('已办流程')">已办流程
                 <div id="vertical_line"></div>
             </a></li>
@@ -160,7 +160,7 @@
                 我的流程 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu" style="min-width: 120px">
-                <li role="presentation" ng-class="{active:isActive('subunhd')}">
+                <li role="presentation" ng-class="{active:isActive('subunhd')}" ng-click="setCookie('subunhd')">
                     <a role="tab" aria-controls="subunhd" data-toggle="tab" href="#subunhd" style="text-align: center;padding: 14px
                     "
                        ng-click="showTitle('我的待办')">我的待办
@@ -170,7 +170,7 @@
                     <div style="background-color: lightgrey;height: 1px;width: 60%;margin: 0 auto">
                     </div>
                 </li>
-                <li role="presentation" ng-class="{active:isActive('subhd')}">
+                <li role="presentation" ng-class="{active:isActive('subhd')}" ng-click="setCookie('subhd')">
                     <a role="tab" aria-controls="subhd" data-toggle="tab" href="#subhd"
                        style="text-align: center;padding: 14px" ng-click="showTitle('我的已办')">我的已办</a></li>
             </ul>
