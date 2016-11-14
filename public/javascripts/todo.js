@@ -38,7 +38,16 @@ function switchTab(currentTab) {
 
     }
 }
-app.controller('matters', function ($scope, $http, $cookieStore) {
+app.controller('matters', function ($scope, $http, $cookieStore, $window) {
+    $window.addEventListener('load', function () {
+        $scope.getMatters('todohd');
+        $scope.getMatters('todounhd');
+        $scope.getMatters('subhd');
+        $scope.getMatters('subunhd');
+    });
+    //$window.addEventListener('unload',function(){
+    //    $cookieStore.remove('currentTab');
+    //});
     var currentTab = $cookieStore.get('currentTab');
     if (currentTab) {//如果currentTab不为空
         switchTab(currentTab);
@@ -131,10 +140,6 @@ app.controller('matters', function ($scope, $http, $cookieStore) {
     //            break;
     //    }
     //}
-    $scope.getMatters('todohd');
-    $scope.getMatters('todounhd');
-    $scope.getMatters('subhd');
-    $scope.getMatters('subunhd');
     $scope.goDetail = function (matter, type) {
         var uri = new URI('/form');
         uri.addQuery('taskid', matter.taskid);
