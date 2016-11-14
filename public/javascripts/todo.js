@@ -41,7 +41,23 @@ function switchTab(currentTab) {
 app.controller('matters', function ($scope, $http, $cookieStore) {
     var currentTab = $cookieStore.get('currentTab');
     if (currentTab) {//如果currentTab不为空
-        switchTab(currentTab);
+        console.log('sdfsdf');
+        switch (currentTab) {
+            case 'todounhd':
+                XuntongJSBridge.call('setWebViewTitle', '待办流程');
+                break;
+            case 'todohd':
+                console.log('sdfsfsdfsdf');
+                XuntongJSBridge.call('setWebViewTitle', '已办流程');
+                break;
+            case 'subunhd':
+                XuntongJSBridge.call('setWebViewTitle', '我的在办');
+                break;
+            case 'subhd':
+                XuntongJSBridge.call('setWebViewTitle', '我的已办');
+                break;
+
+        }
     } else {
         switchTab('todounhd');
     }
