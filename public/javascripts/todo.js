@@ -38,6 +38,22 @@ app.controller('matters', function ($scope, $http, $cookieStore) {
             }
         } else {
             if (historyTab == currentTab) {//如果页签对应上了cookie里面存储的历史页签，那么返回true
+                switch (currentTab) {
+                    case 'todounhd':
+                        XuntongJSBridge.call('setWebViewTitle', '待办流程');
+                        break;
+                    case 'todohd':
+                        XuntongJSBridge.call('setWebViewTitle', '已办流程');
+                        break;
+                    case 'subunhd':
+                        XuntongJSBridge.call('setWebViewTitle', '我的在办');
+                        break;
+                    case 'subhd':
+                        XuntongJSBridge.call('setWebViewTitle', '我的已办');
+                        break;
+
+                }
+
                 return true;
             } else {
                 return false;
