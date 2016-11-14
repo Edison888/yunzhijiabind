@@ -13,6 +13,18 @@ toastr.options = {
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
 };
+/*
+ * 延时关闭当前界面
+ * */
+function deplayCloseCurrentPage() {
+    setTimeout(function () {
+        if (history.length <= 1 || getUrlParamObj()['isFromApp'] == 'true') { //顶级页面，则关闭当前Web
+            XuntongJSBridge.call('closeWebView');
+        } else {
+            history.back();
+        }
+    }, 1500);
+}
 var yzjPerson = {};
 app.controller('form_detail', function ($scope, $http) {
     $scope.openPersonTab = function () {
@@ -117,6 +129,7 @@ app.controller('form_detail', function ($scope, $http) {
             console.log(response);
             if (response.flag) {
                 toastr.success('审批成功');
+                deplayCloseCurrentPage();
                 $scope.isApproved = true;
                 $('#footer > div:first-child').removeAttr('data-toggle');
                 $('#footer > div:nth-child(2)').removeAttr('data-toggle');

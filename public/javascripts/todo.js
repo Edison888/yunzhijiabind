@@ -142,6 +142,7 @@ app.controller('matters', function ($scope, $http, $cookieStore) {
         uri.addQuery('billtype', matter.billtype);
         uri.addQuery('ts', matter.senddate);
         uri.addQuery('billid', matter.billid);
+        uri.addQuery('isFromApp', false);//记录来自App还是轻应用
         uri.addQuery('type', type);//跳转到表单详情页面时，携带了type参数，用来告知表单详情页面过来的这个待办是哪种类型的待办。
         window.location = uri.toString();
     }
