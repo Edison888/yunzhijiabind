@@ -61,7 +61,7 @@ app.filter('selectIcon', function () {
         }
     }).success(function (response) {
         console.log(response);
-        if (response.flag) {
+        if (response.flag == 0) {
             $scope.historys = response.data.reverse();
         } else {
             toastr.error(response.desc);
