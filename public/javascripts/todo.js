@@ -32,6 +32,7 @@ app.controller('matters', function ($scope, $http, $cookieStore) {
         if (!currentTab) {//如果第一次打开
             if (historyTab == 'todounhd') {//默认显示待办流程
                 $cookieStore.put('currentTab', 'todounhd');
+                XuntongJSBridge.call('setWebViewTitle', '待办流程');
                 return true;
             } else {
                 return false;
