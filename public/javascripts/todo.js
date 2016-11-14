@@ -16,6 +16,7 @@ var app = angular.module('todo', []);
 //var userid = "22b387d3-9b1e-11e6-943d-005056b8712a";
 //var userid = "6b2da1c2-95d8-11e6-a383-005056b8712a";//杨总
 var userid = "fccda66d-9f22-11e6-943d-005056b8712a";//胡文全
+var userid = "fcc56718-9f22-11e6-943d-005056b8712a";//胡文全
 $('#myTab a').click(function (e) {
     e.preventDefault();
     $(this).tab('show')
@@ -36,7 +37,7 @@ app.controller('matters', function ($scope, $http) {
                     statuskey: statuskeyparam,
                     statuscode: statuscodeparam,
                     startline: '0',
-                    count: '10',
+                    count: '50',
                     condition: '',
                     method: 'getTaskList'
                 }
