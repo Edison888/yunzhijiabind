@@ -21,13 +21,31 @@ $('#myTab a').click(function (e) {
     e.preventDefault();
     $(this).tab('show')
 });
+function switchTab(currentTab) {
+    switch (currentTab) {
+        case 'todounhd':
+            XuntongJSBridge.call('setWebViewTitle', '待办流程');
+            break;
+        case 'todohd':
+            XuntongJSBridge.call('setWebViewTitle', '已办流程');
+            break;
+        case 'subunhd':
+            XuntongJSBridge.call('setWebViewTitle', '我的在办');
+            break;
+        case 'subhd':
+            XuntongJSBridge.call('setWebViewTitle', '我的已办');
+            break;
+
+    }
+}
 app.controller('matters', function ($scope, $http, $cookieStore) {
+    var currentTab = $cookieStore.get('currentTab');
+    switchTab(currentTab);
     document.getElementById('spinner').style.visibility = 'visible';
     $scope.setCookie = function (cookieValue) {
         $cookieStore.put('currentTab', cookieValue);
     };
     $scope.isActive = function (historyTab) {
-        var currentTab = $cookieStore.get('currentTab');
         if (!currentTab) {//如果第一次打开
             if (historyTab == 'todounhd') {//默认显示待办流程
                 $cookieStore.put('currentTab', 'todounhd');
@@ -38,22 +56,7 @@ app.controller('matters', function ($scope, $http, $cookieStore) {
             }
         } else {
             if (historyTab == currentTab) {//如果页签对应上了cookie里面存储的历史页签，那么返回true
-                switch (currentTab) {
-                    case 'todounhd':
-                        XuntongJSBridge.call('setWebViewTitle', '待办流程');
-                        break;
-                    case 'todohd':
-                        XuntongJSBridge.call('setWebViewTitle', '已办流程');
-                        break;
-                    case 'subunhd':
-                        XuntongJSBridge.call('setWebViewTitle', '我的在办');
-                        break;
-                    case 'subhd':
-                        XuntongJSBridge.call('setWebViewTitle', '我的已办');
-                        break;
-
-                }
-
+                switchTab(currentTab);
                 return true;
             } else {
                 return false;
