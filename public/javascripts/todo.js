@@ -133,15 +133,35 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
                     } else {
                         switch (type) {
                             case 'todohd'://需要我处理并且已经处理
+                                if (response.data.length == pageSize) {
+                                    document.getElementById('hdload').style.visibility = 'visible';
+                                } else {
+                                    document.getElementById('hdload').style.visibility = 'hidden';
+                                }
                                 $scope.hds = $scope.hds.concat(response.data);
                                 break;
                             case 'todounhd'://需要我处理并且未处理
+                                if (response.data.length == pageSize) {
+                                    document.getElementById('unhdload').style.visibility = 'visible';
+                                } else {
+                                    document.getElementById('unhdload').style.visibility = 'hidden';
+                                }
                                 $scope.unhds = $scope.unhds.concat(response.data);
                                 break;
                             case 'subhd'://我提交的并且已经处理
+                                if (response.data.length == pageSize) {
+                                    document.getElementById('subhdload').style.visibility = 'visible';
+                                } else {
+                                    document.getElementById('subhdload').style.visibility = 'hidden';
+                                }
                                 $scope.subhds = $scope.subhds.concat(response.data);
                                 break;
                             case 'subunhd'://我提交的并且未处理
+                                if (response.data.length == pageSize) {
+                                    document.getElementById('subunhdload').style.visibility = 'visible';
+                                } else {
+                                    document.getElementById('subunhdload').style.visibility = 'hidden';
+                                }
                                 $scope.subunhds = $scope.subunhds.concat(response.data);
                                 break;
                         }
