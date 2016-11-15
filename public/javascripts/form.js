@@ -25,17 +25,6 @@ function deplayCloseCurrentPage() {
         }
     }, 1500);
 }
-XuntongJSBridge.call('defback',
-    {},
-    function () {
-        alert('点击了返回按钮');
-        if (history.length <= 1) { //顶级页面，则关闭当前Web
-            XuntongJSBridge.call('closeWebView');
-        } else {
-            history.back();
-        }
-    }
-);
 var yzjPerson = {};
 app.controller('form_detail', function ($scope, $http) {
     $scope.openPersonTab = function () {
