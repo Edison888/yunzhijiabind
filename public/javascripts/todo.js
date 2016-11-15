@@ -41,13 +41,16 @@ function switchTab(currentTab) {
 }
 var count = 0;
 app.controller('matters', function ($scope, $http, $cookieStore, $window) {
-
-    //$window.addEventListener('load', function () {
-    //    $scope.getMatters('todohd');
-    //    $scope.getMatters('todounhd');
-    //    $scope.getMatters('subhd');
-    //    $scope.getMatters('subunhd');
-    //});
+    //$scope.getMatters('todohd');
+    //$scope.getMatters('todounhd');
+    //$scope.getMatters('subhd');
+    //$scope.getMatters('subunhd');
+    $window.addEventListener('load', function () {
+        $scope.getMatters('todohd');
+        $scope.getMatters('todounhd');
+        $scope.getMatters('subhd');
+        $scope.getMatters('subunhd');
+    });
     var currentTab = $cookieStore.get('currentTab');
     if (currentTab) {//如果currentTab不为空
         switchTab(currentTab);
@@ -153,10 +156,6 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
             });
 
     };
-    $scope.getMatters('todohd');
-    $scope.getMatters('todounhd');
-    $scope.getMatters('subhd');
-    $scope.getMatters('subunhd');
     //$scope.getMatters = function (type) {
     //    var params = {};
     //    switch (type){
