@@ -31,7 +31,6 @@ function switchTab(currentTab) {
             XuntongJSBridge.call('setWebViewTitle', '已办流程');
             break;
         case 'subunhd':
-            document.getElementById('mytabcontent').style.visibility = 'visible';
             XuntongJSBridge.call('setWebViewTitle', '我的在办');
             break;
         case 'subhd':
@@ -158,6 +157,7 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
                                 $scope.subhds = $scope.subhds.concat(response.data);
                                 break;
                             case 'subunhd'://我提交的并且未处理
+                                document.getElementById('mytabcontent').style.visibility = 'visible';
                                 if (response.data.length == pageSize) {
                                     document.getElementById('subunhdload').style.visibility = 'visible';
                                 } else {
