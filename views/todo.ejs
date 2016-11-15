@@ -39,7 +39,8 @@
 </head>
 <body>
 <div class="container" ng-controller="matters">
-    <div id="spinner" style=" margin: auto;position: absolute; top: 0; left: 0; bottom: 0; right: 0;visibility: hidden">
+    <div id="spinner"
+         style=" margin: auto;position: absolute; top: 0; left: 0; bottom: 0; right: 0;visibility: hidden;z-index:10">
         <div class="spinner-container container1">
             <div class="circle1"></div>
             <div class="circle2"></div>
@@ -60,7 +61,7 @@
         </div>
 
     </div>
-    <div class="tab-content">
+    <div class="tab-content" style="z-index: 0">
         <div role="tabpanel" ng-class="['tab-pane',{active:isActive('todounhd')}]" id="todounhd"
              style="margin-bottom: 50px">
             <ul class="list-group">
@@ -79,12 +80,13 @@
                     </div>
                 </li>
             </ul>
-            <div class="bg-info" style="height: 30px;width: 100%;">
-
-            </div>
+            <h5 style="width: 100%;background-color: lightskyblue;text-align: center;padding: 9px;margin: 0px"
+                ng-click="getMatters('todounhd')">
+                加载更多
+            </h5>
         </div>
         <div role="tabpanel" ng-class="['tab-pane',{active:isActive('todohd')}]" id="todohd"
-             style="margin-bottom: 50px">
+             style="margin-bottom: 50px;">
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="hd in hds" ng-click="goDetail(hd,'todohd')">
                     <h5 ng-bind="hd.title">
@@ -102,6 +104,10 @@
                     </div>
                 </li>
             </ul>
+            <h5 style="width: 100%;background-color: lightskyblue;text-align: center;padding: 9px;margin: 0px"
+                ng-click="getMatters('todohd')">
+                加载更多
+            </h5>
         </div>
         <div role="tabpanel" ng-class="['tab-pane',{active:isActive('subunhd')}]" id="subunhd"
              style="margin-bottom: 50px">
@@ -122,6 +128,10 @@
                     </div>
                 </li>
             </ul>
+            <h5 style="width: 100%;background-color: lightskyblue;text-align: center;padding: 9px;margin: 0px"
+                ng-click="getMatters('subunhd')">
+                加载更多
+            </h5>
         </div>
         <div role="tabpanel" ng-class="['tab-pane',{active:isActive('subhd')}]" id="subhd" style="margin-bottom: 50px">
             <ul class="list-group">
@@ -141,6 +151,10 @@
                     </div>
                 </li>
             </ul>
+            <h5 style="width: 100%;background-color: lightskyblue;text-align: center;padding: 9px;margin: 0px"
+                ng-click="getMatters('subhd')">
+                加载更多
+            </h5>
         </div>
     </div>
     <ul class="nav nav-pills" role="tablist" id="myTab" style="border-top: solid 1px lightsteelblue">

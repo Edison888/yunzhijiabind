@@ -17,6 +17,7 @@ var app = angular.module('todo', ['ngCookies']);
 //var userid = "6b2da1c2-95d8-11e6-a383-005056b8712a";//杨总
 var userid = "fccda66d-9f22-11e6-943d-005056b8712a";//胡文全
 var userid = "fcc56718-9f22-11e6-943d-005056b8712a";//胡文全
+var pageSize = 10;
 $('#myTab a').click(function (e) {
     e.preventDefault();
     $(this).tab('show')
@@ -38,6 +39,7 @@ function switchTab(currentTab) {
 
     }
 }
+var count = 0;
 app.controller('matters', function ($scope, $http, $cookieStore, $window) {
     $window.addEventListener('load', function () {
         $scope.getMatters('todohd');
@@ -76,8 +78,36 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
     $scope.showTitle = function (title) {
         XuntongJSBridge.call('setWebViewTitle', {'title': title});
     };
+    $scope.hds = [];
+    $scope.unhds = [];
+    $scope.subhds = [];
+    $scope.subunhds = [];
+    $scope.todounhdcount = 0;
+    $scope.todohdcount = 0;
+    $scope.subhdcount = 0;
+    $scope.subunhdcount = 0;
     $scope.getMatters = function (type) {
+        document.getElementById('spinner').style.visibility = 'visible';
         distinguish(type);
+        switch (type) {
+            case 'todounhd':
+                count = $scope.todounhdcount;
+                $scope.todounhdcount = $scope.todounhdcount + 1;
+                break;
+            case 'todohd':
+                count = $scope.todohdcount;
+                $scope.todohdcount = $scope.todohdcount + 1;
+                break;
+            case 'subhd':
+                count = $scope.subhdcount;
+                $scope.subhdcount = $scope.subhdcount + 1;
+                break;
+            case 'subunhd':
+                count = $scope.subunhdcount;
+                $scope.subunhdcount = $scope.subunhdcount + 1;
+                break;
+
+        }
         $http({
                 method: 'get',
                 url: requrl,
@@ -85,13 +115,15 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
                     userid: userid,
                     statuskey: statuskeyparam,
                     statuscode: statuscodeparam,
-                    startline: '0',
-                    count: '50',
+                    startline: count * pageSize,
+                    count: pageSize,
                     condition: '',
                     method: 'getTaskList'
                 }
             }
         ).success(function (response) {
+                document.getElementById('spinner').style.visibility = 'hidden';
+                console.log(type);
                 console.log(response);
                 document.getElementById('spinner').style.visibility = 'hidden';
                 if (response.flag) {
@@ -100,16 +132,16 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
                     } else {
                         switch (type) {
                             case 'todohd'://需要我处理并且已经处理
-                                $scope.hds = response.data;
+                                $scope.hds = $scope.hds.concat(response.data);
                                 break;
                             case 'todounhd'://需要我处理并且未处理
-                                $scope.unhds = response.data;
+                                $scope.unhds = $scope.unhds.concat(response.data);
                                 break;
                             case 'subhd'://我提交的并且已经处理
-                                $scope.subhds = response.data;
+                                $scope.subhds = $scope.subhds.concat(response.data);
                                 break;
                             case 'subunhd'://我提交的并且未处理
-                                $scope.subunhds = response.data;
+                                $scope.subunhds = $scope.subunhds.concat(response.data);
                                 break;
                         }
 
