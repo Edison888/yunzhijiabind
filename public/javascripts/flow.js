@@ -3,6 +3,6 @@
  */
 var app = angular.module('app', []);
 app.controller('flow', function ($scope, $http) {
-    XuntongJSBridge.call('setWebViewTitle', {'title': 'Á÷³ÌÍ¼'});
+    XuntongJSBridge.call('setWebViewTitle', {'title': 'æµç¨‹å›¾'});
     $scope.flowUrl = urlObj.imgUrl;
 });
