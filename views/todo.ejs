@@ -61,10 +61,10 @@
         </div>
 
     </div>
-    <div class="tab-content" style="visibility: hidden">
+    <div class="tab-content">
         <div style="background-color: transparent" role="tabpanel" ng-class="['tab-pane',{active:isActive('todounhd')}]"
              id="todounhd">
-            <ul class="list-group">
+            <ul class="list-group" style="background-color: transparent">
                 <li class="list-group-item" ng-repeat="unhd in unhds" ng-click="goDetail(unhd,'todounhd')">
                     <h5 ng-bind='unhd.title'></h5>
 
@@ -88,7 +88,7 @@
         </div>
         <div style="background-color: transparent" role="tabpanel" ng-class="['tab-pane',{active:isActive('todohd')}]"
              id="todohd">
-            <ul class="list-group">
+            <ul class="list-group" style="background-color: transparent">
                 <li class="list-group-item" ng-repeat="hd in hds" ng-click="goDetail(hd,'todohd')">
                     <h5 ng-bind="hd.title">
                     </h5>
@@ -113,7 +113,7 @@
         </div>
         <div style="background-color: transparent" role="tabpanel" ng-class="['tab-pane',{active:isActive('subunhd')}]"
              id="subunhd">
-            <ul class="list-group">
+            <ul class="list-group" style="background-color: transparent">
                 <li class="list-group-item" ng-repeat="subunhd in subunhds" ng-click="goDetail(subunhd,'subunhd')">
                     <h5 ng-bind="subunhd.title">
                     </h5>
@@ -138,7 +138,7 @@
         </div>
         <div style="background-color: transparent" role="tabpanel" ng-class="['tab-pane',{active:isActive('subhd')}]"
              id="subhd">
-            <ul class="list-group">
+            <ul class="list-group" style="background-color: transparent">
                 <li class="list-group-item" ng-repeat="subhd in subhds" ng-click="goDetail(subhd,'subhd')">
                     <h5 ng-bind="subhd.title">
                     </h5>
