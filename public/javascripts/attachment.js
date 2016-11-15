@@ -17,6 +17,8 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
         return bytesToSize(size);
     };
     $scope.openFile = function (index) {
+        XuntongJSBridge.call('setWebViewTitle', {'title': '附件列表'});
+
         XuntongJSBridge.call('showFile',
             {
                 fileName: $scope.attachments[index]['name'],
