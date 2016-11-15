@@ -61,9 +61,8 @@
         </div>
 
     </div>
-    <div class="tab-content" style="z-index: 0">
-        <div role="tabpanel" ng-class="['tab-pane',{active:isActive('todounhd')}]" id="todounhd"
-             style="margin-bottom: 50px">
+    <div class="tab-content">
+        <div role="tabpanel" ng-class="['tab-pane',{active:isActive('todounhd')}]" id="todounhd">
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="unhd in unhds" ng-click="goDetail(unhd,'todounhd')">
                     <h5 ng-bind='unhd.title'></h5>
@@ -86,8 +85,7 @@
                 加载更多
             </h5>
         </div>
-        <div role="tabpanel" ng-class="['tab-pane',{active:isActive('todohd')}]" id="todohd"
-             style="margin-bottom: 50px;">
+        <div role="tabpanel" ng-class="['tab-pane',{active:isActive('todohd')}]" id="todohd">
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="hd in hds" ng-click="goDetail(hd,'todohd')">
                     <h5 ng-bind="hd.title">
@@ -111,8 +109,7 @@
                 加载更多
             </h5>
         </div>
-        <div role="tabpanel" ng-class="['tab-pane',{active:isActive('subunhd')}]" id="subunhd"
-             style="margin-bottom: 50px">
+        <div role="tabpanel" ng-class="['tab-pane',{active:isActive('subunhd')}]" id="subunhd">
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="subunhd in subunhds" ng-click="goDetail(subunhd,'subunhd')">
                     <h5 ng-bind="subunhd.title">
@@ -136,7 +133,7 @@
                 加载更多
             </h5>
         </div>
-        <div role="tabpanel" ng-class="['tab-pane',{active:isActive('subhd')}]" id="subhd" style="margin-bottom: 50px">
+        <div role="tabpanel" ng-class="['tab-pane',{active:isActive('subhd')}]" id="subhd">
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="subhd in subhds" ng-click="goDetail(subhd,'subhd')">
                     <h5 ng-bind="subhd.title">
