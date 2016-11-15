@@ -27,6 +27,7 @@ function deplayCloseCurrentPage() {
 }
 var yzjPerson = {};
 app.controller('form_detail', function ($scope, $http) {
+    XuntongJSBridge.call('setWebViewTitle', {'title': '表单详情'});
     $scope.openPersonTab = function () {
         XuntongJSBridge.call('personInfo', {
             //'openId': res.data.createopenid
