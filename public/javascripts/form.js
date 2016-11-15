@@ -95,18 +95,18 @@ app.controller('form_detail', function ($scope, $http) {
             $scope.selecteds.splice(index, 1);
         };
         if (operation == 'agree') {
-            $http({
-                method: 'get',
-                url: 'json/history',
-                params: {}
-            }).success(function (response) {
-                console.log(response);
-                $scope.assigns = response.data;
-            });
+            //$http({
+            //    method: 'get',
+            //    url: 'json/history',
+            //    params: {}
+            //}).success(function (response) {
+            //    console.log(response);
+            //    $scope.assigns = response.data;
+            //});
             $scope.note = '批准';//每次点击前，需要清空note，这样，不管之前是以何种方式关闭了对话框，不管是否已经填写了建议，都先清空，重新填写。
-            $('#myModal').modal({
-                show: true
-            });
+            //$('#myModal').modal({
+            //    show: true
+            //});
         } else if (operation == 'disagree') {
             $scope.note = '不批准';
         } else if (operation == 'reject') {
