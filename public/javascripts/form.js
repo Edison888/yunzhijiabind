@@ -34,9 +34,11 @@ app.controller('form_detail', function ($scope, $http) {
         }, function (result) {
         });
     };
-
-    $scope.isHide = true;
-    $scope.isHide = urlObj.type == 'todounhd' ? false : true;
+    if (urlObj.type == 'todounhd') {
+        document.getElementById('footer').style.visibility = 'visible';
+    } else {
+        document.getElementById('footer').style.visibility = 'hidden';
+    }
     $http({
         method: 'get',
         url: requrl,
