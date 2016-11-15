@@ -31,6 +31,7 @@ function switchTab(currentTab) {
             XuntongJSBridge.call('setWebViewTitle', '已办流程');
             break;
         case 'subunhd':
+            document.getElementById('mytabcontent').style.visibility = 'visible';
             XuntongJSBridge.call('setWebViewTitle', '我的在办');
             break;
         case 'subhd':
