@@ -23,6 +23,7 @@ app.filter('selectIcon', function () {
         return out;
     }
 }).controller('opinion', function ($scope, $http) {
+    XuntongJSBridge.call('setWebViewTitle', {'title': '审批历史'});
     $scope.openPersonTab = function (openid) {
         XuntongJSBridge.call('personInfo', {
             //'openId': res.data.createopenid
