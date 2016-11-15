@@ -62,7 +62,8 @@
 
     </div>
     <div class="tab-content">
-        <div role="tabpanel" ng-class="['tab-pane',{active:isActive('todounhd')}]" id="todounhd">
+        <div style="background-color: transparent" role="tabpanel" ng-class="['tab-pane',{active:isActive('todounhd')}]"
+             id="todounhd">
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="unhd in unhds" ng-click="goDetail(unhd,'todounhd')">
                     <h5 ng-bind='unhd.title'></h5>
@@ -85,7 +86,8 @@
                 加载更多
             </h5>
         </div>
-        <div role="tabpanel" ng-class="['tab-pane',{active:isActive('todohd')}]" id="todohd">
+        <div style="background-color: transparent" role="tabpanel" ng-class="['tab-pane',{active:isActive('todohd')}]"
+             id="todohd">
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="hd in hds" ng-click="goDetail(hd,'todohd')">
                     <h5 ng-bind="hd.title">
@@ -109,7 +111,8 @@
                 加载更多
             </h5>
         </div>
-        <div role="tabpanel" ng-class="['tab-pane',{active:isActive('subunhd')}]" id="subunhd">
+        <div style="background-color: transparent" role="tabpanel" ng-class="['tab-pane',{active:isActive('subunhd')}]"
+             id="subunhd">
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="subunhd in subunhds" ng-click="goDetail(subunhd,'subunhd')">
                     <h5 ng-bind="subunhd.title">
@@ -133,7 +136,8 @@
                 加载更多
             </h5>
         </div>
-        <div role="tabpanel" ng-class="['tab-pane',{active:isActive('subhd')}]" id="subhd">
+        <div style="background-color: transparent" role="tabpanel" ng-class="['tab-pane',{active:isActive('subhd')}]"
+             id="subhd">
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="subhd in subhds" ng-click="goDetail(subhd,'subhd')">
                     <h5 ng-bind="subhd.title">
