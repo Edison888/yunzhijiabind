@@ -46,7 +46,8 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
     }).success(function (response) {
         console.log(response);
         if (response.data.length == 0) {
-            alert('暂无附件');
+            //alert('暂无附件');
+            //toastr
         } else {
             $scope.attachments = response.data;
         }
