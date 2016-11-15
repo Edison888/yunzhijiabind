@@ -43,7 +43,11 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
         }
     }).success(function (response) {
         console.log(response);
-        $scope.attachments = response.data;
+        if (response.data.length == 0) {
+            alert('暂无附件');
+        } else {
+            $scope.attachments = response.data;
+        }
 
     });
 });
