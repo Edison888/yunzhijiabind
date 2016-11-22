@@ -36,7 +36,7 @@ app.controller('form_detail', function ($scope, $http) {
         });
     };
     if (urlObj.type == 'todounhd') {
-        document.getElementById('footer').style.visibility = 'visible';
+        document.getElementById('footer').style.visibility = 'visible';//fixme 跟据吉哲提供的新接口判断单据是否存在，如果已经存在，那么分两种情况，待办还是已办，不存在，那么直接大白板提示单据已作废2016-11-22 16:26:25
     } else {
         document.getElementById('footer').style.visibility = 'hidden';
     }
@@ -218,19 +218,25 @@ app.controller('form_detail', function ($scope, $http) {
             }
         }
     ).success(function (response) {
-            $scope.task = response;
-            if (response.flag == 0) {
-                $scope.heads = response.data.taskbill.head.tabContent;
-                $scope.bodys = response.data.taskbill.body.tabContent;
-                $('#myTab a').click(function (e) {
-                    e.preventDefault();
-                    $(this).tab('show')
-                });
-                $('#myTab a:first').tab('show');
-            } else {
-                toastr.error(response.desc);
-            }
+            console.log(response);
+            //预算表单的三种类型：T1，  TBWT-01, TBWT-02
+            if (response.data.billtype == 'T1' || response.data.billtype == 'TBWT-01' || response.data.billtype == 'TBWT-02') {
+                angular.element(document).find("#table").html(response.data.taskbill);
 
+            } else {
+                $scope.task = response;
+                if (response.flag == 0) {
+                    $scope.heads = response.data.taskbill.head.tabContent;
+                    $scope.bodys = response.data.taskbill.body.tabContent;
+                    $('#myTab a').click(function (e) {
+                        e.preventDefault();
+                        $(this).tab('show')
+                    });
+                    $('#myTab a:first').tab('show');
+                } else {
+                    toastr.error(response.desc);
+                }
+            }
         });
 
 });
