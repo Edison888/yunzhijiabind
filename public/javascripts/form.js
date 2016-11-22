@@ -84,19 +84,67 @@ app.controller('form_detail', function ($scope, $http) {
         uri.addQuery('ts', $scope.task.data.ts);
         window.location = uri.toString();
     };
+    $scope.assigns = [];
+    $scope.allAssigns = [];
+    $scope.selecteds = [];
+    $scope.selectedUserIdStr = '';
+    $scope.isZhiPai = function () {
+        if ($scope.selecteds.length == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+    $scope.selectAll = function () {
+        $scope.selecteds = $scope.allAssigns;
+        $scope.assigns = [];
+    };
+    $scope.cancelAll = function () {
+        $scope.selecteds = [];
+        $scope.assigns = $scope.allAssigns;
+    };
+    $scope.zhipai = function () {
+        $scope.selectedUserIdStr = $scope.selecteds[0].id;
+        if ($scope.selecteds.length > 1) {
+            for (var i = 1; i < $scope.selecteds.length; i++) {
+                $scope.selectedUserIdStr += ',' + $scope.selecteds[i]['id'];
+            }
+            console.log($scope.selectedUserIdStr);
+        }
+        $http({
+            method: 'get',
+            url: requrl,
+            params: {
+                userid: urlObj.userid,
+                taskid: urlObj.taskid,
+                action: $scope.currentOper,
+                note: $scope.note,
+                zpuserids: $scope.selectedUserIdStr,
+                method: 'dealTask'
+            }
+        }).success(function (response) {
+            console.log(response);
+            if (response.flag == 0) {
+                toastr.success('审批成功');
+                deplayCloseCurrentPage();
+                $scope.isApproved = true;
+                $('#footer > div:first-child').removeAttr('data-toggle');
+                $('#footer > div:nth-child(2)').removeAttr('data-toggle');
+                $('#footer > div:nth-child(3)').removeAttr('data-toggle');
+            }
+        });
+    };
+    $scope.pushSelecteds = function (index) {
+        $scope.selecteds.push($scope.assigns[index]);
+        $scope.assigns.splice(index, 1);
+    };
+    $scope.pushAssigns = function (index) {
+        $scope.assigns.push($scope.selecteds[index]);
+        $scope.selecteds.splice(index, 1);
+    };
     $scope.oper = function (operation) {
         $scope.currentOper = operation;
         document.getElementById('confirm').style = 'background-color:#3cbaff';
-        $scope.assigns = [];
-        $scope.selecteds = [];
-        $scope.pushSelecteds = function (index) {
-            $scope.selecteds.push($scope.assigns[index]);
-            $scope.assigns.splice(index, 1);
-        };
-        $scope.pushAssigns = function (index) {
-            $scope.assigns.push($scope.selecteds[index]);
-            $scope.selecteds.splice(index, 1);
-        };
         if (operation == 'agree') {
             //$http({
             //    method: 'get',
@@ -131,12 +179,21 @@ app.controller('form_detail', function ($scope, $http) {
         }).success(function (response) {
             console.log(response);
             if (response.flag == 0) {
-                toastr.success('审批成功');
-                deplayCloseCurrentPage();
-                $scope.isApproved = true;
-                $('#footer > div:first-child').removeAttr('data-toggle');
-                $('#footer > div:nth-child(2)').removeAttr('data-toggle');
-                $('#footer > div:nth-child(3)').removeAttr('data-toggle');
+
+                if (response.data.isAssign == 'Y') {//有指派信息
+                    $scope.allAssigns = response.data.psnstructlist;
+                    $scope.assigns = response.data.psnstructlist;
+                    $('#myModal').modal({
+                        show: true
+                    });
+                } else {//没有指派信息直接关闭当前界面
+                    toastr.success('审批成功');
+                    deplayCloseCurrentPage();
+                    $scope.isApproved = true;
+                    $('#footer > div:first-child').removeAttr('data-toggle');
+                    $('#footer > div:nth-child(2)').removeAttr('data-toggle');
+                    $('#footer > div:nth-child(3)').removeAttr('data-toggle');
+                }
             } else {
                 toastr.error(response.desc);
             }

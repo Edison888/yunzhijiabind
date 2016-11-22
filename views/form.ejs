@@ -66,8 +66,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header  bg-info">
-                    <button type="button" class="close" data-dismiss="modal"><span
-                                aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <!--<button type="button" class="close" data-dismiss="modal"><span-->
+                    <!--aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
                     <h4 class="modal-title" id="myModalLabel">指派</h4>
                 </div>
                 <div class="modal-body container-fluid">
@@ -80,21 +80,23 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-6">
-                            <ul class="list-group">
+                        <div class="col-xs-6" style="padding: 0px 5px">
+                            <ul class="list-group"
+                                style="height: 350px;overflow-x:hidden;overflow-y:scroll;z-index: 999;">
                                 <li class="list-group-item" ng-repeat="assign in assigns"
                                     ng-click="pushSelecteds($index)">
 
-                                    <span ng-bind="assign.id+'  '+assign.checkman"></span>
+                                    <span ng-bind="assign.code+' '+assign.name"></span>
 
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-xs-6">
-                            <ul class="list-group">
+                        <div class="col-xs-6" style="padding: 0px 5px">
+                            <ul class="list-group"
+                                style="height: 350px;overflow-x:hidden;overflow-y:scroll;z-index: 999;">
                                 <li class="list-group-item" ng-repeat="selected in selecteds"
                                     ng-click="pushAssigns($index)">
-                                    <span ng-bind="selected.id+'  '+selected.checkman"></span>
+                                    <span ng-bind="selected.code+' '+selected.name"></span>
                                 </li>
                             </ul>
                         </div>
@@ -102,8 +104,14 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="cancel" type="button" class="btn" data-dismiss="modal">取消</button>
-                    <button id="confirm" type="button" style="background-color: grey" class="btn" data-dismiss="modal">
+                    <button id="cancel" type="button" class="btn glyphicon glyphicon-chevron-right"
+                            ng-click="selectAll()">选定全部
+                    </button>
+                    <button id="cancel" type="button" class="btn glyphicon glyphicon-chevron-left"
+                            ng-click="cancelAll()">取消全部
+                    </button>
+                    <button id="confirm" type="button" style="background-color: grey" class="btn" data-dismiss="modal"
+                            ng-disabled="isZhiPai()" ng-click="zhipai()">
                         确定
                     </button>
                 </div>
