@@ -14,9 +14,9 @@ toastr.options = {
 };
 var app = angular.module('todo', ['ngCookies']);
 //var userid = "22b387d3-9b1e-11e6-943d-005056b8712a";
-//var userid = "6b2da1c2-95d8-11e6-a383-005056b8712a";//杨总
-var userid = "fccda66d-9f22-11e6-943d-005056b8712a";//胡文全
-var userid = "fcc56718-9f22-11e6-943d-005056b8712a";//胡文全
+var userid = "6b2da1c2-95d8-11e6-a383-005056b8712a";//杨总
+//var userid = "fccda66d-9f22-11e6-943d-005056b8712a";//胡文全
+//var userid = "fcc56718-9f22-11e6-943d-005056b8712a";//胡文全
 var pageSize = 10;
 $('#myTab a').click(function (e) {
     e.preventDefault();
@@ -126,13 +126,13 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
                 document.getElementById('spinner').style.visibility = 'hidden';
                 console.log(type);
                 console.log(response);
-                document.getElementById('spinner').style.visibility = 'hidden';
                 if (response.flag) {
                     if (response.data.length == 0) {
                         //toastr.info('暂无待办');
                     } else {
                         switch (type) {
                             case 'todohd'://需要我处理并且已经处理
+                                document.getElementById('mytabcontent').style.visibility = 'visible';
                                 if (response.data.length == pageSize) {
                                     document.getElementById('hdload').style.visibility = 'visible';
                                 } else {
@@ -141,6 +141,7 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
                                 $scope.hds = $scope.hds.concat(response.data);
                                 break;
                             case 'todounhd'://需要我处理并且未处理
+                                document.getElementById('mytabcontent').style.visibility = 'visible';
                                 if (response.data.length == pageSize) {
                                     document.getElementById('unhdload').style.visibility = 'visible';
                                 } else {
@@ -149,6 +150,7 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
                                 $scope.unhds = $scope.unhds.concat(response.data);
                                 break;
                             case 'subhd'://我提交的并且已经处理
+                                document.getElementById('mytabcontent').style.visibility = 'visible';
                                 if (response.data.length == pageSize) {
                                     document.getElementById('subhdload').style.visibility = 'visible';
                                 } else {
