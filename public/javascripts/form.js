@@ -249,6 +249,7 @@ app.controller('form_detail', function ($scope, $http) {
             if (response.data.filecount > 0) {
                 document.getElementById('form_links_appendix').style.visibility = 'visible';
             }
+            $scope.task = response;
             //预算表单的三种类型：T1，  TBWT-01, TBWT-02
             if (response.data.billtype == 'T1' || response.data.billtype == 'TBWT-01' || response.data.billtype == 'TBWT-02') {
                 document.getElementById('form_info').style.visibility = 'hidden';
@@ -258,7 +259,6 @@ app.controller('form_detail', function ($scope, $http) {
             } else {
                 document.getElementById('form_info').style.visibility = 'visible';
                 document.getElementById('table').style.visibility = 'hidden';
-                $scope.task = response;
                 if (response.flag == 0) {
                     $scope.heads = response.data.taskbill.head.tabContent;
                     $scope.bodys = response.data.taskbill.body.tabContent;
