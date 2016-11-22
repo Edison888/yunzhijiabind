@@ -15,9 +15,7 @@ body {
 }
 
 td {
-    /*white-space: nowrap;*/
-    max-lines: 2;
-
+    white-space: nowrap;
 }
 
 table {
