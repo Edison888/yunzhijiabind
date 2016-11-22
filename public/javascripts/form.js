@@ -232,6 +232,7 @@ app.controller('form_detail', function ($scope, $http) {
         $scope.note = '';
     };
     distinguish(urlObj.type);
+    document.getElementById('spinner').style.visibility = 'visible';
     $http(
         {
             method: 'get',
@@ -245,6 +246,7 @@ app.controller('form_detail', function ($scope, $http) {
             }
         }
     ).success(function (response) {
+            document.getElementById('spinner').style.visibility = 'hidden';
             console.log(response);
             if (response.data.filecount > 0) {
                 document.getElementById('form_links_appendix').style.visibility = 'visible';
