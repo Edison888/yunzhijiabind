@@ -35,7 +35,7 @@ app.controller('form_detail', function ($scope, $http) {
         }, function (result) {
         });
     };
-    if (urlObj.isFromApp) {
+    if (urlObj.isFromApp == 'true') {
         $http({
             method: 'get',
             url: requrl,
@@ -45,7 +45,7 @@ app.controller('form_detail', function ($scope, $http) {
             }
         }).success(function (response) {
             console.log(response);
-            if (response.data.isexist) {
+            if (response.data.isexist == 'true') {
                 if (response.data.istodo == 'true') {
                     document.getElementsByClassName('container')[0].style.visibility = 'visible';
                     document.getElementById('footer').style.visibility = 'visible';
@@ -251,9 +251,13 @@ app.controller('form_detail', function ($scope, $http) {
             }
             //预算表单的三种类型：T1，  TBWT-01, TBWT-02
             if (response.data.billtype == 'T1' || response.data.billtype == 'TBWT-01' || response.data.billtype == 'TBWT-02') {
+                document.getElementById('form_info').style.visibility = 'hidden';
+                document.getElementById('table').style.visibility = 'visible';
                 angular.element(document).find("#table").html(response.data.taskbill);
                 //angular.element(document).find("#table > table").addClass('table table-bordered');
             } else {
+                document.getElementById('form_info').style.visibility = 'visible';
+                document.getElementById('table').style.visibility = 'hidden';
                 $scope.task = response;
                 if (response.flag == 0) {
                     $scope.heads = response.data.taskbill.head.tabContent;
