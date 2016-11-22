@@ -14,6 +14,11 @@ body {
     padding: 0px;
 }
 
+td {
+    white-space: nowrap;
+
+}
+
 #info {
     width: 100%;
     position: fixed;
