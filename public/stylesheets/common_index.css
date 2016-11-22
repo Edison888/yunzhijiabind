@@ -15,8 +15,13 @@ body {
 }
 
 td {
-    white-space: nowrap;
+    /*white-space: nowrap;*/
+    max-lines: 2;
 
+}
+
+table {
+    width: 100%;
 }
 
 #info {
