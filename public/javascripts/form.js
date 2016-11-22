@@ -35,10 +35,37 @@ app.controller('form_detail', function ($scope, $http) {
         }, function (result) {
         });
     };
-    if (urlObj.type == 'todounhd') {
-        document.getElementById('footer').style.visibility = 'visible';//fixme 跟据吉哲提供的新接口判断单据是否存在，如果已经存在，那么分两种情况，待办还是已办，不存在，那么直接大白板提示单据已作废2016-11-22 16:26:25
+    if (urlObj.isFromApp) {
+        $http({
+            method: 'get',
+            url: requrl,
+            params: {
+                taskid: urlObj.taskid,
+                method: 'getAPPTaskStatus'
+            }
+        }).success(function (response) {
+            console.log(response);
+            if (response.data.isexist) {
+                if (response.data.istodo == 'true') {
+                    document.getElementsByClassName('container')[0].style.visibility = 'visible';
+                    document.getElementById('footer').style.visibility = 'visible';
+
+                } else if (response.data.istodo == 'false') {
+                    document.getElementsByClassName('container')[0].style.visibility = 'visible';
+                    document.getElementById('footer').style.visibility = 'hidden';
+                }
+            } else {
+                toastr.error('该任务已被其他人处理');
+            }
+
+        });
     } else {
-        document.getElementById('footer').style.visibility = 'hidden';
+        document.getElementsByClassName('container')[0].style.visibility = 'visible';
+        if (urlObj.type == 'todounhd') {
+            document.getElementById('footer').style.visibility = 'visible';
+        } else {
+            document.getElementById('footer').style.visibility = 'hidden';
+        }
     }
     $http({
         method: 'get',
