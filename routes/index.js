@@ -65,7 +65,9 @@ router.post('/qrlogin', function (req, res, next) {
                 console.log(JSON.parse(data).access_token);
                 access_token = JSON.parse(data).access_token;
 
-            }).pipe(request({
+            }).pipe(
+            console.log('ticket---------------------->' + ticket)
+        ).pipe(console.log('access_token---------------------->' + access_token)).pipe(request({
                 //?ticket=TICKET&access_token=TOKEN
                 uri: host + '/openauth2/api/getcontext',
                 method: 'GET',
