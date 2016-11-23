@@ -69,6 +69,19 @@ router.post('/qrlogin', function (req, res, next) {
                 }, function (error, status, data) {
                     console.log('********************************************************************');
                     console.dir(data);
+                    var curUser = JSON.parse(data);
+                    request({
+                        uri: '/json/admin.json',
+                        method: 'GET'
+                    }, function (error, response, data) {
+                        var users = JSON.parse(data);
+                        for (var user in users) {
+                            if (user.openid == curUser.openid) {
+                                //res.redirect()
+                                console.log('(((((((((((((((((((((((((((((((');
+                            }
+                        }
+                    });
                 })
             });
     }
