@@ -16,7 +16,10 @@
 <script type="text/javascript">
     var qrcode = new QRCode(document.getElementById("qrcode"), {
         width: 300,
-        height: 300
+        height: 300,
+        colorDark: "#7EC0EE",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
     });
     qrcode.makeCode('http://www.baidu.com');
 </script>
