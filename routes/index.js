@@ -69,7 +69,7 @@ router.post('/qrlogin', function (req, res, next) {
                         method: 'GET'
                     }, function (error, response, data) {
                         //var users = JSON.parse(data);
-                        console.dir(data);
+                        console.log(data);
                         //for (var user in users) {
                         //    if (user.openid == curUser.openid) {
                         //        //res.redirect()
