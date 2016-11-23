@@ -39,11 +39,11 @@ router.post('/qrlogin', function (req, res, next) {
         console.log(req.body.mid);
         console.log(req.body.ticket);
 
-        var uri = new URI('http://xt.gzbfdc.com/openauth2/api/token');
+        //var uri = new URI('http://xt.gzbfdc.com/openauth2/api/token');
         //grant_type=client_credential&appid=10207&secret=bindingpage
         request(
             {
-                uri: uri,
+                uri: 'http://xt.gzbfdc.com/openauth2/api/token',
                 method: 'GET',
                 qs: {
                     grant_type: 'client_credential',
