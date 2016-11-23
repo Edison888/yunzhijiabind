@@ -49,7 +49,7 @@ router.post('/qrlogin', function (req, res, next) {
                 }
             }
             , function (error, status, data) {
-                console.log('========================================================================');
+                //console.log('========================================================================');
                 var access_token = JSON.parse(data).access_token;
                 request({
                     //?ticket=TICKET&access_token=TOKEN
@@ -68,8 +68,8 @@ router.post('/qrlogin', function (req, res, next) {
                         uri: '/json/admin.json',
                         method: 'GET'
                     }, function (error, response, data) {
-                        var users = JSON.parse(data);
-                        console.dir(users);
+                        //var users = JSON.parse(data);
+                        console.dir(data);
                         //for (var user in users) {
                         //    if (user.openid == curUser.openid) {
                         //        //res.redirect()
