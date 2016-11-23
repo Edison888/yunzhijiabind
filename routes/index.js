@@ -52,7 +52,10 @@ router.post('/qrlogin', function (req, res, next) {
                 }
             }
             , function (error, status, data) {
-                console.log(data);
+                console.log('========================================================================');
+                console.dir(error);
+                console.dir(status);
+                console.dir(data);
             });
     }
 );
