@@ -61,13 +61,13 @@ router.post('/qrlogin', function (req, res, next) {
                     }
 
                 }, function (error, status, data) {
-                    console.log('********************************************************************');
                     //console.dir(data);
                     var curUser = JSON.parse(data);
                     request({
                         uri: 'http://weibo.gzbfdc.com:3000/json/admin.json',
                         method: 'GET'
                     }, function (error, response, data) {
+                        console.log('********************************************************************');
                         //var users = JSON.parse(data);
                         console.log(data);
                         //for (var user in users) {
