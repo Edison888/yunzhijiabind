@@ -37,6 +37,8 @@ router.get('/qrlogin', function (req, res, next) {
 router.post('/qrlogin', function (req, res, next) {
       //res.body();
       console.dir(res);
+      console.log(req.body);
+      res.json(req.body);
     }
 );
 module.exports = router;
