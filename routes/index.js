@@ -59,9 +59,10 @@ router.post('/qrlogin', function (req, res, next) {
             }
             , function (error, status, data) {
                 console.log('========================================================================');
-                console.dir(error);
-                console.dir(status);
-                console.dir(data);
+                //console.dir(error);
+                //console.dir(status);
+                //console.dir(data);
+                console.dir(data.access_token);
                 access_token = data.access_token;
 
             }).pipe(request({
