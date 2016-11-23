@@ -75,12 +75,13 @@ router.post('/qrlogin', function (req, res, next) {
                         method: 'GET'
                     }, function (error, response, data) {
                         var users = JSON.parse(data);
-                        for (var user in users) {
-                            if (user.openid == curUser.openid) {
-                                //res.redirect()
-                                console.log('(((((((((((((((((((((((((((((((');
-                            }
-                        }
+                        console.dir(users);
+                        //for (var user in users) {
+                        //    if (user.openid == curUser.openid) {
+                        //        //res.redirect()
+                        //        console.log('(((((((((((((((((((((((((((((((');
+                        //    }
+                        //}
                     });
                 })
             });
