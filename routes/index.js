@@ -62,7 +62,7 @@ router.post('/qrlogin', function (req, res, next) {
                 //console.dir(error);
                 //console.dir(status);
                 console.dir(data);
-                console.log(data.access_token);
+                console.log(JSON.parse(data).access_token);
                 access_token = data.access_token;
 
             }).pipe(request({
