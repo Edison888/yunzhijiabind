@@ -20,5 +20,7 @@ router.get('/flow', function (req, res, next) {
 router.get('/attachment', function (req, res, next) {
   res.render('attachment');
 });
-
+router.get('/qrcode', function (req, res, next) {
+  res.render('QRcode');
+});
 module.exports = router;
