@@ -38,13 +38,10 @@ router.post('/qrlogin', function (req, res, next) {
         //console.dir();//输出对象，console.log只能输出字符串，跟html里面的js不一样。
         //console.log(req.body.appid);
         var host = 'http://xt.gzbfdc.com';
-        console.log(req.body.mid);
-        console.log(req.body.ticket);
         var ticket = req.body.ticket;
         var appid = req.body.appid;
         var secret = 'bindingpage';
         var grant_type = 'client_credential';
-        var access_token = '';
         //var uri = new URI('http://xt.gzbfdc.com/openauth2/api/token');
         //grant_type=client_credential&appid=10207&secret=bindingpage
         request(
@@ -59,27 +56,21 @@ router.post('/qrlogin', function (req, res, next) {
             }
             , function (error, status, data) {
                 console.log('========================================================================');
-                //console.dir(error);
-                //console.dir(status);
-                console.dir(data);
-                console.log(JSON.parse(data).access_token);
-                access_token = JSON.parse(data).access_token;
+                var access_token = JSON.parse(data).access_token;
+                request({
+                    //?ticket=TICKET&access_token=TOKEN
+                    uri: host + '/openauth2/api/getcontext',
+                    method: 'GET',
+                    qs: {
+                        ticket: ticket,
+                        access_token: access_token
+                    }
 
-            }).pipe(
-            console.log('ticket---------------------->' + access_token)
-        ).pipe(console.log('access_token---------------------->' + access_token)).pipe(request({
-                //?ticket=TICKET&access_token=TOKEN
-                uri: host + '/openauth2/api/getcontext',
-                method: 'GET',
-                qs: {
-                    ticket: ticket,
-                    access_token: access_token
-                }
-
-            }, function (error, status, data) {
-                console.log('********************************************************************');
-                console.dir(data);
-            }));
+                }, function (error, status, data) {
+                    console.log('********************************************************************');
+                    console.dir(data);
+                })
+            });
     }
 );
 module.exports = router;
