@@ -32,4 +32,11 @@ router.get('/qrlogin', function (req, res, next) {
   console.log(req.query.ticket);
 
 });
+
+
+router.post('/qrlogin', function (req, res, next) {
+      //res.body();
+      console.log(res.body());
+    }
+);
 module.exports = router;
