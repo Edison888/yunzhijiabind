@@ -63,6 +63,7 @@ router.post('/qrlogin', function (req, res, next) {
                 }, function (error, status, data) {
                     //console.dir(data);
                     var curUser = JSON.parse(data);
+                    console.log('-=-=-=-=-=-=-=-=-=-==-=-=-=-=-==-=-=-');
                     request({
                         uri: 'http://weibo.gzbfdc.com:3000/json/admin.json',
                         method: 'GET',
