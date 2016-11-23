@@ -26,8 +26,8 @@ router.get('/qrcode', function (req, res, next) {
 });
 router.get('/qrlogin', function (req, res, next) {
     //console.log(req);
-    //·¢ÆğÔÆÖ®¼ÒÇëÇó£¬ÑéÖ¤ticket£¬²¢»ñÈ¡µ½ÓÃ»§ĞÅÏ¢
-    //¸ú¾İ»ñÈ¡µ½µÄÓÃ»§ĞÅÏ¢È¥±¾µØµÄjsonÎÄ¼şÀïÃæÅĞ¶ÏÊÇ·ñÓĞµ±Ç°ÓÃ»§Èç¹ûÓĞ£¬ÄÇÃ´£¬äÖÈ¾°ó¶¨Ò³Ãæ·µ»Ø£¬Èç¹ûÃ»ÓĞ£¬äÖÈ¾±ğµÄÒ³Ãæ¡£
+    //å‘èµ·äº‘ä¹‹å®¶è¯·æ±‚ï¼ŒéªŒè¯ticketï¼Œå¹¶è·å–åˆ°ç”¨æˆ·ä¿¡æ¯
+    //è·Ÿæ®è·å–åˆ°çš„ç”¨æˆ·ä¿¡æ¯å»æœ¬åœ°çš„jsonæ–‡ä»¶é‡Œé¢åˆ¤æ–­æ˜¯å¦æœ‰å½“å‰ç”¨æˆ·å¦‚æœæœ‰ï¼Œé‚£ä¹ˆï¼Œæ¸²æŸ“ç»‘å®šé¡µé¢è¿”å›ï¼Œå¦‚æœæ²¡æœ‰ï¼Œæ¸²æŸ“åˆ«çš„é¡µé¢ã€‚
     console.log(req.query.appid);
     console.log(req.query.mid);
     console.log(req.query.ticket);
@@ -35,20 +35,26 @@ router.get('/qrlogin', function (req, res, next) {
 
 
 router.post('/qrlogin', function (req, res, next) {
+        //console.dir();//è¾“å‡ºå¯¹è±¡ï¼Œconsole.logåªèƒ½è¾“å‡ºå­—ç¬¦ä¸²ï¼Œè·Ÿhtmlé‡Œé¢çš„jsä¸ä¸€æ ·ã€‚
         //console.log(req.body.appid);
+        var host = 'http://xt.gzbfdc.com';
         console.log(req.body.mid);
         console.log(req.body.ticket);
-
+        var ticket = req.body.ticket;
+        var appid = req.body.appid;
+        var secret = 'bindingpage';
+        var grant_type = 'client_credential';
+        var access_token = '';
         //var uri = new URI('http://xt.gzbfdc.com/openauth2/api/token');
         //grant_type=client_credential&appid=10207&secret=bindingpage
         request(
             {
-                uri: 'http://xt.gzbfdc.com/openauth2/api/token',
+                uri: host + '/openauth2/api/token',
                 method: 'GET',
                 qs: {
-                    grant_type: 'client_credential',
-                    appid: req.body.appid,
-                    secret: 'bindingpage'
+                    grant_type: grant_type,
+                    appid: appid,
+                    secret: secret
                 }
             }
             , function (error, status, data) {
@@ -56,7 +62,21 @@ router.post('/qrlogin', function (req, res, next) {
                 console.dir(error);
                 console.dir(status);
                 console.dir(data);
-            });
+                access_token = data.access_token;
+
+            }).pipe(request({
+                //?ticket=TICKET&access_token=TOKEN
+                uri: host + '/openauth2/api/getcontext',
+                method: 'GET',
+                qs: {
+                    ticket: ticket,
+                    access_token: access_token
+                }
+
+            }, function (error, status, data) {
+                console.log('********************************************************************');
+                console.dir(data);
+            }));
     }
 );
 module.exports = router;
