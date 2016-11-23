@@ -25,18 +25,12 @@ router.get('/qrcode', function (req, res, next) {
     res.render('QRcode');
 });
 router.get('/qrlogin', function (req, res, next) {
-    //console.log(req);
     //发起云之家请求，验证ticket，并获取到用户信息
     //跟据获取到的用户信息去本地的json文件里面判断是否有当前用户如果有，那么，渲染绑定页面返回，如果没有，渲染别的页面。
-    console.log(req.query.appid);
-    console.log(req.query.mid);
-    console.log(req.query.ticket);
 });
 
 
 router.post('/qrlogin', function (req, res, next) {
-        //console.dir();//输出对象，console.log只能输出字符串，跟html里面的js不一样。
-        //console.log(req.body.appid);
         var host = 'http://xt.gzbfdc.com';
         var ticket = req.body.ticket;
         var appid = req.body.appid;
@@ -68,7 +62,7 @@ router.post('/qrlogin', function (req, res, next) {
 
                 }, function (error, status, data) {
                     console.log('********************************************************************');
-                    console.dir(data);
+                    //console.dir(data);
                     var curUser = JSON.parse(data);
                     request({
                         uri: '/json/admin.json',
