@@ -16,26 +16,33 @@ var app = angular.module('binding', []);
 app.controller('list_controller', function ($scope, $http) {
     $scope.searchMobile = '';
     $scope.searchMapping = function (mobile) {
-        $http({
-            method: 'get',
-            url: requrl,
-            //url: 'json/searchMappingByMobile',
-            params: {
-                //phone: mobile,//chenhao
-                mobile: mobile,//jizhe
-                method: 'getUserMappingInfo'//jizhe
-                //method: 'getAllUserMappingInfo'//chenhao
-            }
-        }).success(function (response) {
-            console.log(response);
-            if (response.flag == 0) {
-                //$scope.users = response.data;//chenhao
-                $scope.users = [];//jizhe
-                $scope.users.push(response.data[0]);//jizhe
-            } else {
-                toastr.error(response.desc);
-            }
-        });
+        if (mobile == '') {
+            $scope.getMappings();
+        } else if (!(/^1[34578]\d{9}$/.test(mobile))) {
+            toastr.error('手机号码有误，请重新输入！');
+        } else {
+            $http({
+                method: 'get',
+                url: requrl,
+                //url: 'json/searchMappingByMobile',
+                params: {
+                    //phone: mobile,//chenhao
+                    mobile: mobile,//jizhe
+                    method: 'getUserMappingInfo'//jizhe
+                    //method: 'getAllUserMappingInfo'//chenhao
+                }
+            }).success(function (response) {
+                console.log(response);
+                if (response.flag == 0) {
+                    //$scope.users = response.data;//chenhao
+                    $scope.users = [];//jizhe
+                    $scope.users.push(response.data);//jizhe
+                } else {
+                    toastr.error(response.desc);
+                }
+            });
+        }
+
     };
 
     $scope.tableSelection = {};
@@ -187,7 +194,7 @@ app.controller('list_controller', function ($scope, $http) {
                         }).success(function (response) {
                             console.log(response);
                             if (response.flag == 0) {
-                                    $scope.users.push(user);
+                                $scope.users.push(user);
                             } else {
                                 toastr.error(response.desc);
                             }
