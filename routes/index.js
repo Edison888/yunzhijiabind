@@ -39,9 +39,9 @@ router.post('/qrlogin', function (req, res, next) {
     //var uri = new URI('http://xt.gzbfdc.com/openauth2/api/token');
     //grant_type=client_credential&appid=10207&secret=bindingpage
     getToken(host, appid, secret, grant_type).then(function (token) {
-        return getUserInfo(host,ticket, token);
-    }).then(function (curUser) {
-        console.log("then log => " + curUser);
+        return getUserInfo(host, ticket, token);
+    }).then(function (curUserOpenId) {
+        return regexAdmin(curUserOpenId);
     });
 });
 
@@ -63,7 +63,7 @@ var getToken = function (host, appid, secret, grant_type) {
     });
 };
 
-var getUserInfo = function (host,ticket, access_token) {
+var getUserInfo = function (host, ticket, access_token) {
     return new Promise(function (resolve, reject) {
         request({
             //?ticket=TICKET&access_token=TOKEN
@@ -74,11 +74,20 @@ var getUserInfo = function (host,ticket, access_token) {
                 access_token: access_token
             }
         }, function (error, status, data) {
-            var curUser = JSON.parse(data);
-            console.dir(curUser);
-            resolve(curUser);
+            resolve(JSON.parse(data).openid);
         });
 
+    });
+};
+
+var regexAdmin = function (openId) {
+    return new Promise(function (resolve, reject) {
+        request({
+            uri: '/json/admin.json',
+            method: 'GET'
+        },function (error, status, data) {
+            console.log(data);
+        });
     });
 };
 
