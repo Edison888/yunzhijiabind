@@ -47,22 +47,20 @@ router.post('/qrlogin', function (req, res, next) {
 
 var getToken = function (host, appid, secret, grant_type) {
     return new Promise(function (resolve, reject) {
-        console.log(host);
-        console.log(appid);
-        // request(
-        //     {
-        //         uri: host + '/openauth2/api/token',
-        //         method: 'GET',
-        //         qs: {
-        //             grant_type: grant_type,
-        //             appid: appid,
-        //             secret: secret
-        //         }
-        //     },
-        //     function (error, status, data) {
-        //         console.log('getToken -> ' + data);
-        //         resolve(JSON.parse(data).access_token);
-        //     });
+        request(
+            {
+                uri: host + '/openauth2/api/token',
+                method: 'GET',
+                qs: {
+                    grant_type: grant_type,
+                    appid: appid,
+                    secret: secret
+                }
+            },
+            function (error, status, data) {
+                console.log('getToken -> ' + data);
+                resolve(JSON.parse(data).access_token);
+            });
     });
 };
 
