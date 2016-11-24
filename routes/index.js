@@ -31,13 +31,11 @@ router.get('/qrlogin', function (req, res, next) {
 
 
 router.post('/qrlogin', function (req, res, next) {
-
         var ticket = req.body.ticket;
         var appid = req.body.appid;
-
         //var uri = new URI('http://xt.gzbfdc.com/openauth2/api/token');
         //grant_type=client_credential&appid=10207&secret=bindingpage
-        getToken(host).then(function (token) {
+        getToken(appid).then(function (token) {
             return getUserInfo(ticket, token);
         }).then(function (curUser) {
             console.log("then log => " + curUser);
