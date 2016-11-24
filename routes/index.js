@@ -1,5 +1,6 @@
 var express = require('express');
 var request = require('request');
+var fs = require('fs');
 var router = express.Router();
 
 /* GET home page. */
@@ -31,13 +32,28 @@ router.get('/qrlogin', function (req, res, next) {
 
 
 router.post('/qrlogin', function (req, res, next) {
-        var host = 'http://xt.gzbfdc.com';
-        var ticket = req.body.ticket;
-        var appid = req.body.appid;
-        var secret = 'bindingpage';
-        var grant_type = 'client_credential';
-        //var uri = new URI('http://xt.gzbfdc.com/openauth2/api/token');
-        //grant_type=client_credential&appid=10207&secret=bindingpage
+    let host = 'http://xt.gzbfdc.com';
+    let ticket = req.body.ticket;
+    let appid = req.body.appid;
+    let secret = 'bindingpage';
+    let grant_type = 'client_credential';
+    //var uri = new URI('http://xt.gzbfdc.com/openauth2/api/token');
+    //grant_type=client_credential&appid=10207&secret=bindingpage
+    getToken(host, appid, secret, grant_type).then(function (token) {
+        return getUserInfo(host, ticket, token);
+    }).then(function (curUserOpenId) {
+        return regexAdmin(curUserOpenId);
+    }).then(function (isAdmin) {
+        if (isAdmin) {
+            res.redirect('/binding');
+        } else {
+            res.error("您没有管理权限");
+        }
+    });
+});
+
+var getToken = function (host, appid, secret, grant_type) {
+    return new Promise(function (resolve, reject) {
         request(
             {
                 uri: host + '/openauth2/api/token',
@@ -46,41 +62,43 @@ router.post('/qrlogin', function (req, res, next) {
                     grant_type: grant_type,
                     appid: appid,
                     secret: secret
-                }
-            }
-            , function (error, status, data) {
-                //console.log('========================================================================');
-                var access_token = JSON.parse(data).access_token;
-                request({
-                    //?ticket=TICKET&access_token=TOKEN
-                    uri: host + '/openauth2/api/getcontext',
-                    method: 'GET',
-                    qs: {
-                        ticket: ticket,
-                        access_token: access_token
-                    }
-
-                }, function (error, status, data) {
-                    //console.dir(data);
-                    var curUser = JSON.parse(data);
-                    console.log('-=-=-=-=-=-=-=-=-=-==-=-=-=-=-==-=-=-');
-                    request({
-                        uri: 'http://weibo.gzbfdc.com:3000/json/admin.json',
-                        method: 'GET',
-                        qs: {}
-                    }, function (error, response, data) {
-                        console.log('********************************************************************');
-                        //var users = JSON.parse(data);
-                        console.log(data);
-                        //for (var user in users) {
-                        //    if (user.openid == curUser.openid) {
-                        //        //res.redirect()
-                        //        console.log('(((((((((((((((((((((((((((((((');
-                        //    }
-                        //}
-                    });
-                })
+                },
+                json: true
+            },
+            function (error, status, data) {
+                resolve(data.access_token);
             });
-    }
-);
+    });
+};
+
+var getUserInfo = function (host, ticket, access_token) {
+    return new Promise(function (resolve, reject) {
+        request({
+            //?ticket=TICKET&access_token=TOKEN
+            uri: host + '/openauth2/api/getcontext',
+            method: 'GET',
+            qs: {
+                ticket: ticket,
+                access_token: access_token
+            },
+            json: true
+        }, function (error, status, data) {
+            resolve(data.openid);
+        });
+
+    });
+};
+
+var regexAdmin = function (openId) {
+    return new Promise(function (resolve, reject) {
+        var adminConfig = JSON.parse(fs.readFileSync('./config/admin.json'));
+        if (Array.from(adminConfig.admin).find(admin => admin == openId)) {
+            resolve(true);
+        } else {
+            resolve(false);
+        }
+    });
+};
+
+
 module.exports = router;
