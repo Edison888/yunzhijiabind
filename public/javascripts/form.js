@@ -116,7 +116,6 @@ app.filter('trustHtml', function ($sce) {
         window.location = uri.toString();
     };
     $scope.assigns = [];
-    $scope.allAssigns = [];
     $scope.selecteds = [];
     $scope.selectedUserIdStr = '';
     $scope.isZhiPai = function () {
@@ -127,12 +126,12 @@ app.filter('trustHtml', function ($sce) {
         }
     };
     $scope.selectAll = function () {
-        $scope.selecteds = $scope.allAssigns;
+        $scope.selecteds = ($scope.selecteds).concat($scope.assigns);
         $scope.assigns = [];
     };
     $scope.cancelAll = function () {
+        $scope.assigns = ($scope.selecteds).concat($scope.assigns);
         $scope.selecteds = [];
-        $scope.assigns = $scope.allAssigns;
     };
     $scope.zhipai = function () {
         $scope.selectedUserIdStr = $scope.selecteds[0].id;
@@ -210,13 +209,15 @@ app.filter('trustHtml', function ($sce) {
         }).success(function (response) {
             console.log(response);
             if (response.flag == 0) {
+                $scope.assigns = [];
+                $scope.selecteds = [];
 
                 if (response.data.isAssign == 'Y') {//有指派信息
-                    $scope.allAssigns = response.data.psnstructlist;
                     $scope.assigns = response.data.psnstructlist;
                     $('#myModal').modal({
                         show: true
                     });
+                    document.getElementById('selectDiv').focus();
                 } else {//没有指派信息直接关闭当前界面
                     toastr.success('审批成功');
                     deplayCloseCurrentPage();

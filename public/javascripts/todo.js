@@ -130,6 +130,10 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
                 if (response.flag) {
                     if (response.data.length == 0) {
                         //toastr.info('暂无待办');
+                        document.getElementById('hdload').style.visibility = 'hidden';
+                        document.getElementById('unhdload').style.visibility = 'hidden';
+                        document.getElementById('subhdload').style.visibility = 'hidden';
+                        document.getElementById('subunhdload').style.visibility = 'hidden';
                     } else {
                         switch (type) {
                             case 'todohd'://需要我处理并且已经处理
