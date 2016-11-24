@@ -99,12 +99,14 @@ app.filter('trustHtml', function ($sce) {
     $('#myModal').on('hidden.bs.modal', function (e) {
         document.getElementById('form').style.visibility = 'visible';
         document.getElementById('form_info').style.visibility = 'visible';
+        document.getElementById('info').style.visibility = 'visible';
         //console.log('隐藏了');
         //console.log(e);
     });
     $('#myModal').on('show.bs.modal', function (e) {
         //console.log('显示了');
         document.getElementById('form').style.visibility = 'hidden';
+        document.getElementById('info').style.visibility = 'hidden';
         document.getElementById('form_info').style.visibility = 'hidden';
         //console.log(e);
     });
