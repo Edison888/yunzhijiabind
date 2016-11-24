@@ -58,8 +58,11 @@ var getToken = function (host, appid, secret, grant_type) {
                 }
             },
             function (error, status, data) {
-                console.log('getToken -> ' + data);
-                resolve(JSON.parse(data).access_token);
+                if (error){
+                    reject();
+                }else{
+                    resolve(JSON.parse(data).access_token);
+                }
             });
     });
 };
