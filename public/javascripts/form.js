@@ -217,6 +217,7 @@ app.filter('trustHtml', function ($sce) {
                     $('#myModal').modal({
                         show: true
                     });
+                    document.getElementById('selectDiv').focus();
                 } else {//没有指派信息直接关闭当前界面
                     toastr.success('审批成功');
                     deplayCloseCurrentPage();
