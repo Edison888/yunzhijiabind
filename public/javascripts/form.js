@@ -210,6 +210,9 @@ app.filter('trustHtml', function ($sce) {
         }).success(function (response) {
             console.log(response);
             if (response.flag == 0) {
+                $scope.assigns = [];
+                $scope.allAssigns = [];
+                $scope.selecteds = [];
 
                 if (response.data.isAssign == 'Y') {//有指派信息
                     $scope.allAssigns = response.data.psnstructlist;
