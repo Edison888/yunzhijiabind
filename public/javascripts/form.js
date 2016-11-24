@@ -96,6 +96,16 @@ app.filter('trustHtml', function ($sce) {
             return false;
         }
     };
+    $('#myModal').on('hidden.bs.modal', function (e) {
+        document.getElementById('form').style.visibility = 'visible';
+        //console.log('隐藏了');
+        //console.log(e);
+    });
+    $('#myModal').on('show.bs.modal', function (e) {
+        //console.log('显示了');
+        document.getElementById('form').style.visibility = 'hidden';
+        //console.log(e);
+    });
     $scope.agree = 'agree';
     $scope.disagree = 'disagree';
     $scope.mreject = 'reject';
