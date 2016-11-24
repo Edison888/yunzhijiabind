@@ -83,9 +83,9 @@ var getUserInfo = function (host, ticket, access_token) {
 var regexAdmin = function (openId) {
     return new Promise(function (resolve, reject) {
         request({
-            uri: './json/admin.json',
+            uri: 'json/admin.json',
             method: 'GET'
-        },function (error, status, data) {
+        }, function (error, status, data) {
             console.log(data);
         });
     });
