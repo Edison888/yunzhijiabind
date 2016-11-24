@@ -26,7 +26,11 @@ function deplayCloseCurrentPage() {
     }, 1500);
 }
 var yzjPerson = {};
-app.controller('form_detail', function ($scope, $http) {
+app.filter('trustHtml', function ($sce) {
+    return function (input) {
+        return $sce.trustAsHtml(input);
+    }
+}).controller('form_detail', function ($scope, $http) {
     XuntongJSBridge.call('setWebViewTitle', {'title': '表单详情'});
     $scope.openPersonTab = function () {
         XuntongJSBridge.call('personInfo', {
@@ -254,13 +258,40 @@ app.controller('form_detail', function ($scope, $http) {
             $scope.task = response;
             //预算表单的三种类型：T1，  TBWT-01, TBWT-02
             if (response.data.billtype == 'T1' || response.data.billtype == 'TBWT-01' || response.data.billtype == 'TBWT-02') {
-                document.getElementById('form_info').style.visibility = 'hidden';
-                document.getElementById('table').style.visibility = 'visible';
-                angular.element(document).find("#table").html(response.data.taskbill);
-                //angular.element(document).find("#table > table").addClass('table table-bordered');
+                document.getElementById('yusuan_form').style.visibility = 'visible';
+                //angular.element(document).find("#table").html(response.data.taskbill);
+                var tablesStr = response.data.taskbill;
+                var tableStrs = tablesStr.split('<\/table>');
+                var tableStrArray = [];
+                var titleArray = [];
+                for (var i = 0; i < tableStrs.length - 1; i++) {
+
+                    var index = tableStrs[i].indexOf('<table');
+                    var tableStr = tableStrs[i].substring(index, tableStrs[i].length) + '<\/table>';
+                    var titleTr = tableStr.split('<tr>')[2];//获取第三行第一列的数据
+                    var titleTd = titleTr.split('<\/td>')[0];
+                    var title = titleTd.split('>')[1];
+                    tableStrArray.push(tableStr);
+                    if (title == "&nbsp&nbsp&nbsp&nbsp") {
+                        //var o = '';
+                        //for(var j =0;j<i;j++){
+                        //    o+='&nbsp';
+                        //}
+                        //titleArray.push(o);
+                        titleArray.push('表' + (i + 1));
+
+                    } else {
+                        titleArray.push(title);
+                    }
+
+                }
+                $scope.formcontents = tableStrArray;
+                $scope.formtitles = titleArray;
+                //console.log(titleArray);
+                //angular.element(document).find(".tab-pane > table").addClass('table table-bordered');
             } else {
                 document.getElementById('form_info').style.visibility = 'visible';
-                document.getElementById('table').style.visibility = 'hidden';
+                //document.getElementById('table').style.visibility = 'hidden';
                 if (response.flag == 0) {
                     $scope.heads = response.data.taskbill.head.tabContent;
                     $scope.bodys = response.data.taskbill.body.tabContent;
