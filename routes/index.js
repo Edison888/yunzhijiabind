@@ -85,7 +85,7 @@ var getUserInfo = function (host, ticket, access_token) {
 
 var regexAdmin = function (openId) {
     return new Promise(function (resolve, reject) {
-        var adminConfig = JSON.parse(fs.readFileSync('../config/admin.json'));
+        var adminConfig = JSON.parse(fs.readFileSync('./config/admin.json'));
         console.dir(adminConfig);
         resolve();
     });
