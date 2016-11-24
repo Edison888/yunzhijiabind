@@ -97,21 +97,10 @@ app.filter('trustHtml', function ($sce) {
         }
     };
     $('#myModal').on('hidden.bs.modal', function (e) {
-        document.getElementById('form').style.visibility = 'visible';
-        document.getElementById('form_info').style.visibility = 'visible';
-        document.getElementById('info').style.visibility = 'visible';
-        document.getElementsByTagName('html')[0].style.visibility = 'visible';
-        //document.getElementsByTagName('body').style.visibility = 'hidden';
         //console.log('隐藏了');
-        //console.log(e);
     });
     $('#myModal').on('show.bs.modal', function (e) {
         //console.log('显示了');
-        document.getElementsByTagName('html')[0].style.visibility = 'hidden';
-        document.getElementById('form').style.visibility = 'hidden';
-        document.getElementById('info').style.visibility = 'hidden';
-        document.getElementById('form_info').style.visibility = 'hidden';
-        //console.log(e);
     });
     $scope.agree = 'agree';
     $scope.disagree = 'disagree';
