@@ -48,6 +48,7 @@ router.post('/qrlogin', function (req, res, next) {
 var getToken = function (host, appid, secret, grant_type) {
     return new Promise(function (resolve, reject) {
         console.log(host);
+        console.log(appid);
         // request(
         //     {
         //         uri: host + '/openauth2/api/token',
