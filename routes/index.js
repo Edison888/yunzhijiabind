@@ -75,7 +75,7 @@ var getUserInfo = function (host,ticket, access_token) {
             }
         }, function (error, status, data) {
             var curUser = JSON.parse(data);
-            console.log('currentUser -> ' + curUser);
+            console.dir(curUser);
             resolve(curUser);
         });
 
