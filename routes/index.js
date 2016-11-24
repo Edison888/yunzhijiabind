@@ -41,6 +41,7 @@ router.post('/qrlogin', function (req, res, next) {
     getToken(host, appid, secret, grant_type).then(function (token) {
         return getUserInfo(host, ticket, token);
     }).then(function (curUserOpenId) {
+        console.log(curUserOpenId);
         return regexAdmin(curUserOpenId);
     });
 });
@@ -55,10 +56,11 @@ var getToken = function (host, appid, secret, grant_type) {
                     grant_type: grant_type,
                     appid: appid,
                     secret: secret
-                }
+                },
+                json: true
             },
             function (error, status, data) {
-                resolve(JSON.parse(data).access_token);
+                resolve(data.access_token);
             });
     });
 };
@@ -72,9 +74,10 @@ var getUserInfo = function (host, ticket, access_token) {
             qs: {
                 ticket: ticket,
                 access_token: access_token
-            }
+            },
+            json: true
         }, function (error, status, data) {
-            resolve(JSON.parse(data).openid);
+            resolve(data.openid);
         });
 
     });
