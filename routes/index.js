@@ -38,6 +38,16 @@ router.post('/qrlogin', function (req, res, next) {
         var grant_type = 'client_credential';
         //var uri = new URI('http://xt.gzbfdc.com/openauth2/api/token');
         //grant_type=client_credential&appid=10207&secret=bindingpage
+        getToken(ticket).then(function (token) {
+            return getUserInfo(ticket, token);
+        }).then(function (curUser) {
+            console.log("then log => " + curUser);
+        });
+    }
+);
+
+var getToken = function () {
+    return new Promise(function (resolve, reject) {
         request(
             {
                 uri: host + '/openauth2/api/token',
@@ -47,40 +57,32 @@ router.post('/qrlogin', function (req, res, next) {
                     appid: appid,
                     secret: secret
                 }
-            }
-            , function (error, status, data) {
-                //console.log('========================================================================');
-                var access_token = JSON.parse(data).access_token;
-                request({
-                    //?ticket=TICKET&access_token=TOKEN
-                    uri: host + '/openauth2/api/getcontext',
-                    method: 'GET',
-                    qs: {
-                        ticket: ticket,
-                        access_token: access_token
-                    }
-
-                }, function (error, status, data) {
-                    //console.dir(data);
-                    var curUser = JSON.parse(data);
-                    console.log('-=-=-=-=-=-=-=-=-=-==-=-=-=-=-==-=-=-');
-                    request({
-                        uri: 'http://weibo.gzbfdc.com:3000/json/admin.json',
-                        method: 'GET',
-                        qs: {}
-                    }, function (error, response, data) {
-                        console.log('********************************************************************');
-                        //var users = JSON.parse(data);
-                        console.log(data);
-                        //for (var user in users) {
-                        //    if (user.openid == curUser.openid) {
-                        //        //res.redirect()
-                        //        console.log('(((((((((((((((((((((((((((((((');
-                        //    }
-                        //}
-                    });
-                })
+            },
+            function (error, status, data) {
+                console.log('getToken -> ' + data);
+                resolve(JSON.parse(data).access_token);
             });
-    }
-);
+    });
+};
+
+var getUserInfo = function (ticket, access_token) {
+    return Promise(function (resolve, reject) {
+        request({
+            //?ticket=TICKET&access_token=TOKEN
+            uri: host + '/openauth2/api/getcontext',
+            method: 'GET',
+            qs: {
+                ticket: ticket,
+                access_token: access_token
+            }
+        }, function (error, status, data) {
+            var curUser = JSON.parse(data);
+            console.log('currentUser -> ' + curUser);
+            resolve(curUser);
+        });
+
+    });
+};
+
+
 module.exports = router;
