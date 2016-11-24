@@ -87,11 +87,11 @@ var regexAdmin = function (openId) {
     return new Promise(function (resolve, reject) {
         var adminConfig = JSON.parse(fs.readFileSync('./config/admin.json'));
         console.dir(adminConfig);
-        if (Array.from(adminConfig).find(admin => admin == openId)) {
-            console.log("当前用户为管理员");
-        } else {
-            console.log("当前用户不是管理员");
-        }
+        // if (Array.from(adminConfig).find(admin => admin == openId)) {
+        //     console.log("当前用户为管理员");
+        // } else {
+        //     console.log("当前用户不是管理员");
+        // }
         resolve();
     });
 };
