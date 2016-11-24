@@ -1,5 +1,6 @@
 var express = require('express');
 var request = require('request');
+var fs = require('fs');
 var router = express.Router();
 
 /* GET home page. */
@@ -41,7 +42,6 @@ router.post('/qrlogin', function (req, res, next) {
     getToken(host, appid, secret, grant_type).then(function (token) {
         return getUserInfo(host, ticket, token);
     }).then(function (curUserOpenId) {
-        console.log(curUserOpenId);
         return regexAdmin(curUserOpenId);
     });
 });
@@ -85,12 +85,9 @@ var getUserInfo = function (host, ticket, access_token) {
 
 var regexAdmin = function (openId) {
     return new Promise(function (resolve, reject) {
-        request({
-            url: 'json/admin.json',
-            method: 'GET'
-        }, function (error, status, data) {
-            console.log(data);
-        });
+        var adminConfig = JSON.parse(fs.readFileSync('../config/admin.json'));
+        console.dir(adminConfig);
+        resolve();
     });
 };
 
