@@ -1,6 +1,7 @@
 var express = require('express');
 var request = require('request');
 var fs = require('fs');
+var uuid = require('node-uuid');
 var router = express.Router();
 
 /* GET home page. */
@@ -28,8 +29,8 @@ router.get('/qrcode', function (req, res, next) {
 router.get('/qrlogin', function (req, res, next) {
     //发起云之家请求，验证ticket，并获取到用户信息
     //跟据获取到的用户信息去本地的json文件里面判断是否有当前用户如果有，那么，渲染绑定页面返回，如果没有，渲染别的页面。
-});
 
+});
 
 router.post('/qrlogin', function (req, res, next) {
     let host = 'http://xt.gzbfdc.com';
