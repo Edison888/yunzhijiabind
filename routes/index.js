@@ -31,11 +31,14 @@ router.get('/qrlogin', function (req, res, next) {
 
 
 router.post('/qrlogin', function (req, res, next) {
+        var host = 'http://xt.gzbfdc.com';
         var ticket = req.body.ticket;
         var appid = req.body.appid;
+        var secret = 'bindingpage';
+        var grant_type = 'client_credential';
         //var uri = new URI('http://xt.gzbfdc.com/openauth2/api/token');
         //grant_type=client_credential&appid=10207&secret=bindingpage
-        getToken(appid).then(function (token) {
+        getToken(host,appid,secret,grant_type).then(function (token) {
             return getUserInfo(ticket, token);
         }).then(function (curUser) {
             console.log("then log => " + curUser);
@@ -43,10 +46,7 @@ router.post('/qrlogin', function (req, res, next) {
     }
 );
 
-var getToken = function (appid) {
-    var host = 'http://xt.gzbfdc.com';
-    var secret = 'bindingpage';
-    var grant_type = 'client_credential';
+var getToken = function (host,appid,secret,grant_type) {
     return new Promise(function (resolve, reject) {
         request(
             {
