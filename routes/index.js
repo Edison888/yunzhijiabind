@@ -58,17 +58,13 @@ var getToken = function (host, appid, secret, grant_type) {
                 }
             },
             function (error, status, data) {
-                if (error){
-                    reject();
-                }else{
-                    resolve(JSON.parse(data).access_token);
-                }
+                resolve(JSON.parse(data).access_token);
             });
     });
 };
 
 var getUserInfo = function (ticket, access_token) {
-    return Promise(function (resolve, reject) {
+    return new Promise(function (resolve, reject) {
         request({
             //?ticket=TICKET&access_token=TOKEN
             uri: host + '/openauth2/api/getcontext',
