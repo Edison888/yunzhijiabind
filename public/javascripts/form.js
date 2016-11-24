@@ -272,12 +272,7 @@ app.filter('trustHtml', function ($sce) {
                     var titleTd = titleTr.split('<\/td>')[0];
                     var title = titleTd.split('>')[1];
                     tableStrArray.push(tableStr);
-                    if (title == "&nbsp&nbsp&nbsp&nbsp") {
-                        //var o = '';
-                        //for(var j =0;j<i;j++){
-                        //    o+='&nbsp';
-                        //}
-                        //titleArray.push(o);
+                    if (escape(title).indexOf("%u") < 0) {//如果不包含中文
                         titleArray.push('表' + (i + 1));
 
                     } else {
