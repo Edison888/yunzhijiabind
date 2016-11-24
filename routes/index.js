@@ -43,6 +43,12 @@ router.post('/qrlogin', function (req, res, next) {
         return getUserInfo(host, ticket, token);
     }).then(function (curUserOpenId) {
         return regexAdmin(curUserOpenId);
+    }).then(function (isAdmin) {
+        if (isAdmin) {
+            res.redirect('/binding');
+        } else {
+            res.error("您没有管理权限");
+        }
     });
 });
 
@@ -86,13 +92,11 @@ var getUserInfo = function (host, ticket, access_token) {
 var regexAdmin = function (openId) {
     return new Promise(function (resolve, reject) {
         var adminConfig = JSON.parse(fs.readFileSync('./config/admin.json'));
-        console.dir(adminConfig);
         if (Array.from(adminConfig.admin).find(admin => admin == openId)) {
-            console.log("当前用户为管理员");
+            resolve(true);
         } else {
-            console.log("当前用户不是管理员");
+            resolve(false);
         }
-        resolve();
     });
 };
 
