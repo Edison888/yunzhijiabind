@@ -41,6 +41,7 @@
                 case 201:
                     break;
                 case 200:
+                case 304:
                     var uri = new URI("/binding");
                     uri.addQuery('openId', data);
                     console.log(uri.toString());
