@@ -80,6 +80,7 @@ router.post('/qrlogin', function (req, res, next) {
     }).then(function (curUserOpenId) {
         return regexAdmin(curUserOpenId);
     }).then(function (isAdmin, curUserOpenId) {
+        console.log(curUserOpenId);
         return notify(isAdmin, curUserOpenId, req.body.sign);
     }).then(function () {
         res.status(200);
@@ -94,7 +95,7 @@ let notify = function (isAdmin, curUserOpenId, sign) {
         console.log(isAdmin);
         console.log(curUserOpenId);
         if (isAdmin && curUserOpenId) {
-            redisClient.set(sign, openId, function (error) {
+            redisClient.set(sign, curUserOpenId, function (error) {
                 if (error) {
                     console.dir(error);
                 } else {
