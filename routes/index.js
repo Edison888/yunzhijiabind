@@ -29,7 +29,7 @@ router.get('/attachment', function (req, res, next) {
 router.get('/qrcode', function (req, res, next) {
     const sign = uuid.v1();
     console.log(sign);
-    redisClient.set(sign, '');
+    redisClient.set(sign, false);
     res.render('QRcode', {sign: sign});
 });
 
