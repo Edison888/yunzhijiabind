@@ -46,7 +46,7 @@ let regexAdmin = function (openId) {
         if (Array.from(adminConfig.admin).find(admin => admin == openId)) {
             resolve(true, openId);
         } else {
-            resolve(false);
+            resolve(false, null);
         }
     });
 };
