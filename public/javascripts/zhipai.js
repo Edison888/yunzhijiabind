@@ -11,7 +11,23 @@ function deplayCloseCurrentPage() {
         }
     }, 1500);
 }
-app.controller('userlist', function ($scope, $http, $cookieStore) {
+app.filter(
+    'iszhipai', function () {
+        return function (input) {
+            var out = '';
+            switch (input) {
+                case true:
+                    out = "col-xs-4 btn zhipai-blue";
+                    break;
+                case false:
+                    out = "col-xs-4 btn zhipai-grey";
+                    break;
+            }
+            return out;
+
+        }
+    }
+).controller('userlist', function ($scope, $http, $cookieStore) {
     var list = $cookieStore.get('psnstructlist');
     $scope.isZhiPai = function () {
         if ($scope.selecteds.length == 0) {

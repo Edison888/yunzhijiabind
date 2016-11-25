@@ -8,7 +8,6 @@ span {
 }
 
 #confirm {
-    background-color: #3cbaff;
     color: white;
 }
 
@@ -16,4 +15,12 @@ span {
     border-radius: 0px;
     -webkit-box-shadow: none;
     box-shadow: none;
+}
+
+.zhipai-grey {
+    background-color: grey;
+}
+
+.zhipai-blue {
+    background-color: #3cbaff;
 }

@@ -87,13 +87,15 @@
         <!--<div class="col-xs-4" ng-click="selectAll()" style="position: relative;overflow: hidden">-->
         <!--<span class="glyphicon glyphicon-chevron-right"></span><span id="selectAll"style="float:right;white-space:nowrap;font-size: 20px;">选定全部</span>-->
         <!--</div>-->
-        <div class="col-xs-4 btn" ng-click="selectAll()" style="background-color: darkgrey;border-radius: 0px;">
+        <div class="col-xs-4 btn" ng-click="selectAll()" style="background-color: lightblue;border-radius: 0px;">
             <h4 id="selectAll" class="glyphicon glyphicon-chevron-right" style="font-size: 20px;color: white">选择全部</h4>
         </div>
-        <div class="col-xs-4 btn" ng-click="cancelAll()" style="background-color: darkgrey;border-radius: 0px;">
+        <div class="col-xs-4 btn" ng-click="cancelAll()" style="background-color: lightblue;border-radius: 0px;">
             <h4 id="cancelAll" class="glyphicon glyphicon-chevron-left" style="font-size: 20px;color: white">取消全部</h4>
         </div>
-        <div id="confirm" class="col-xs-4 btn" ng-click="zhipai()" ng-disabled="isZhiPai()" style="border-radius: 0px;">
+        <div id="confirm"
+             class="{{!isZhiPai()|iszhipai}}"
+             ng-click="zhipai()" ng-disabled="isZhiPai()" style="border-radius: 0px;">
             <h4>确定</h4>
         </div>
         <!--<button id="selectAll" type="button" class="btn " style="font-size: large"-->
