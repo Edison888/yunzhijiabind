@@ -1,4 +1,4 @@
-var app = angular.module('form', []);
+var app = angular.module('form', ['ngCookies']);
 toastr.options = {
     "closeButton": false,
     "debug": true,
@@ -30,8 +30,17 @@ app.filter('trustHtml', function ($sce) {
     return function (input) {
         return $sce.trustAsHtml(input);
     }
-}).controller('form_detail', function ($scope, $http) {
+}).controller('form_detail', function ($scope, $http, $cookieStore) {
     XuntongJSBridge.call('setWebViewTitle', {'title': '表单详情'});
+    //var iszp = $cookieStore.get('iszhipai');
+    //console.log(iszp);
+    //if(iszp){
+    //    if (history.length <= 1 || getUrlParamObj()['isFromApp'] == 'true') { //顶级页面，则关闭当前Web
+    //        XuntongJSBridge.call('closeWebView');
+    //    } else {
+    //        history.back();
+    //    }
+    //}
     $scope.openPersonTab = function () {
         XuntongJSBridge.call('personInfo', {
             //'openId': res.data.createopenid
@@ -96,6 +105,12 @@ app.filter('trustHtml', function ($sce) {
             return false;
         }
     };
+    $('#myModal').on('hidden.bs.modal', function (e) {
+        //console.log('隐藏了');
+    });
+    $('#myModal').on('show.bs.modal', function (e) {
+        //console.log('显示了');
+    });
     $scope.agree = 'agree';
     $scope.disagree = 'disagree';
     $scope.mreject = 'reject';
@@ -133,37 +148,7 @@ app.filter('trustHtml', function ($sce) {
         $scope.assigns = ($scope.selecteds).concat($scope.assigns);
         $scope.selecteds = [];
     };
-    $scope.zhipai = function () {
-        $scope.selectedUserIdStr = $scope.selecteds[0].id;
-        if ($scope.selecteds.length > 1) {
-            for (var i = 1; i < $scope.selecteds.length; i++) {
-                $scope.selectedUserIdStr += ',' + $scope.selecteds[i]['id'];
-            }
-            console.log($scope.selectedUserIdStr);
-        }
-        $http({
-            method: 'get',
-            url: requrl,
-            params: {
-                userid: urlObj.userid,
-                taskid: urlObj.taskid,
-                action: $scope.currentOper,
-                note: $scope.note,
-                zpuserids: $scope.selectedUserIdStr,
-                method: 'dealTask'
-            }
-        }).success(function (response) {
-            console.log(response);
-            if (response.flag == 0) {
-                toastr.success('审批成功');
-                deplayCloseCurrentPage();
-                $scope.isApproved = true;
-                $('#footer > div:first-child').removeAttr('data-toggle');
-                $('#footer > div:nth-child(2)').removeAttr('data-toggle');
-                $('#footer > div:nth-child(3)').removeAttr('data-toggle');
-            }
-        });
-    };
+
     $scope.pushSelecteds = function (index) {
         $scope.selecteds.push($scope.assigns[index]);
         $scope.assigns.splice(index, 1);
@@ -214,10 +199,11 @@ app.filter('trustHtml', function ($sce) {
 
                 if (response.data.isAssign == 'Y') {//有指派信息
                     $scope.assigns = response.data.psnstructlist;
-                    $('#myModal').modal({
-                        show: true
-                    });
-                    document.getElementById('selectDiv').focus();
+                    $cookieStore.put('psnstructlist', response.data.psnstructlist);
+                    window.location = new URI('/users/zhipai').toString();
+                    //$('#myModal').modal({
+                    //    show: true
+                    //});
                 } else {//没有指派信息直接关闭当前界面
                     toastr.success('审批成功');
                     deplayCloseCurrentPage();
