@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/js-cookie/latest/js.cookie.min.js"></script>
+    <script src="//cdn.bootcss.com/URI.js/1.18.1/URI.min.js"></script>
+
     <script src="javascripts/qrcode.js"></script>
     <title>扫描登录</title>
 </head>
@@ -23,7 +26,12 @@
     });
     //    qrcode.makeCode('http://weibo.gzbfdc.com:3000/qrlogin');
     //    qrcode.makeCode('http://192.168.0.14:3000/qrlogin?appid=10207&mid=102');
-    qrcode.makeCode('http://weibo.gzbfdc.com:3000/qrlogin?appid=10207&mid=102');
+    var sid = Cookies.get('connect.sid');
+    var uri = new URI('http://weibo.gzbfdc.com:3000/qrlogin');
+    uri.addQuery('appid', '10207');
+    uri.addQuery('mid', '102');
+    uri.addQuery('sign', '<%= sign %>');
+    qrcode.makeCode(uri.toString());
 </script>
 </body>
 <html>

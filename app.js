@@ -6,11 +6,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var uuid = require('node-uuid');
+var redis = require('connect-redis')(session);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+const secret = uuid.v1();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,10 +27,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-    secret: uuid.v1(),
-    cookie: {maxAge: 60000},
+    secret: secret,
+    cookie: {
+        maxAge: 60 * 1000, httpOnly: false
+    },
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: new redis(),
 }));
 
 app.use('/', routes);
