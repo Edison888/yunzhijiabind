@@ -81,6 +81,7 @@ router.post('/qrlogin', function (req, res, next) {
         return regexAdmin(curUserOpenId);
     }).then(function (isAdmin) {
         if (isAdmin) {
+            console.dir(req);
             console.log("您有管理员权限");
         } else {
             console.log("您没有管理权限");
