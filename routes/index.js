@@ -31,6 +31,7 @@ router.get('/qrcode', function (req, res, next) {
     console.log(sign);
     // redisClient.set(sign, false);
     res.render('QRcode', {sign: sign});
+    res.end();
 });
 
 router.get('/qrlogin', function (req, res, next) {
