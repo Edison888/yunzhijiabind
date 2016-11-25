@@ -42,9 +42,7 @@ router.get('/qrlogin', function (req, res, next) {
             res.end();
         } else {
             res.send(reply);
-            redisClient.del(req.query.sign, function (err) {
-                console.dir(err);
-            });
+            redisClient.del(req.query.sign);
         }
     });
 });
