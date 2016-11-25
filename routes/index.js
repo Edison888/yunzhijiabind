@@ -79,20 +79,21 @@ router.post('/qrlogin', function (req, res, next) {
         return getUserInfo(host, ticket, token);
     }).then(function (curUserOpenId) {
         return regexAdmin(curUserOpenId);
-    }).then(function (isAdmin, openId) {
-        return notify(isAdmin, openId, req.body.sign);
+    }).then(function (isAdmin, curUserOpenId) {
+        return notify(isAdmin, curUserOpenId, req.body.sign);
     }).then(function () {
         res.status(200);
+        res.end();
     });
 });
 
 
-let notify = function (isAdmin, openId, sign) {
-    console.log(openId);
+let notify = function (isAdmin, curUserOpenId, sign) {
+    console.log(curUserOpenId);
     return new Promise(function (resolve, reject) {
         console.log(isAdmin);
-        console.log(openId);
-        if (isAdmin && openId) {
+        console.log(curUserOpenId);
+        if (isAdmin && curUserOpenId) {
             redisClient.set(sign, openId, function (error) {
                 if (error) {
                     console.dir(error);
