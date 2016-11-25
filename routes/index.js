@@ -44,11 +44,8 @@ let regexAdmin = function (openId) {
     return new Promise(function (resolve, reject) {
         const adminConfig = JSON.parse(fs.readFileSync('./config/admin.json'));
         if (Array.from(adminConfig.admin).find(admin => admin == openId)) {
-            console.log('当前用户是管理员');
-            console.log(openId);
             resolve(true, openId);
         } else {
-            console.log('当前用户不是管理员');
             resolve(false, null);
         }
     });
@@ -91,6 +88,7 @@ router.post('/qrlogin', function (req, res, next) {
 
 
 let notify = function (isAdmin, openId, sign) {
+    console.log(openId);
     return new Promise(function (resolve, reject) {
         console.log(isAdmin);
         console.log(openId);
