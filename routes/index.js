@@ -80,7 +80,6 @@ router.post('/qrlogin', function (req, res, next) {
     }).then(function (curUserOpenId) {
         return regexAdmin(curUserOpenId);
     }).then(function (isAdmin, openId) {
-        console.log('开始验证' + req.body.sign);
         return notify(isAdmin, openId, req.body.sign);
     }).then(function () {
         res.status(200);
@@ -90,10 +89,12 @@ router.post('/qrlogin', function (req, res, next) {
 
 let notify = function (isAdmin, openId, sign) {
     return new Promise(function (resolve, reject) {
+        console.log(isAdmin);
+        console.log(openId);
         if (isAdmin && openId) {
             redisClient.set(sign, openId, function (error) {
                 if (error) {
-                    console.log(error);
+                    console.dir(error);
                 } else {
                     console.log('--------------------------------');
                     console.log('保存成功');
@@ -102,6 +103,8 @@ let notify = function (isAdmin, openId, sign) {
                     console.log('--------------------------------');
                 }
             });
+            resolve();
+        } else {
             resolve();
         }
     });
