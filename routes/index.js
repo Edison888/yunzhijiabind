@@ -28,8 +28,6 @@ router.get('/attachment', function (req, res, next) {
 });
 router.get('/qrcode', function (req, res, next) {
     const sign = uuid.v1();
-    console.log(sign);
-    redisClient.set(sign, '');
     res.render('QRcode', {sign: sign});
     res.end();
 });
@@ -37,7 +35,17 @@ router.get('/qrcode', function (req, res, next) {
 router.get('/qrlogin', function (req, res, next) {
     //发起云之家请求，验证ticket，并获取到用户信息
     //跟据获取到的用户信息去本地的json文件里面判断是否有当前用户如果有，那么，渲染绑定页面返回，如果没有，渲染别的页面。
-
+    redisClient.get(req.query.sign, function (err, reply) {
+        console.dir(err);
+        console.dir(reply);
+        if (err || !reply) {
+            console.log(err);
+            res.status(401);
+            res.end();
+        } else {
+            res.send(reply);
+        }
+    });
 });
 
 let regexAdmin = function (openId) {
@@ -85,7 +93,6 @@ router.post('/qrlogin', function (req, res, next) {
     }).then(function (curUserOpenId) {
         return regexAdmin(curUserOpenId);
     }).then(function (data) {
-        console.log(data);
         return notify(data, req.body.sign);
     }).then(function () {
         res.status(200);
@@ -98,16 +105,7 @@ let notify = function (data, sign) {
     console.dir(data);
     return new Promise(function (resolve, reject) {
         if (data.result) {
-            redisClient.set(sign, data.openId, function (error) {
-                if (error) {
-                    console.dir(error);
-                } else {
-                    console.log('--------------------------------');
-                    console.log('保存成功');
-                    console.dir(data);
-                    console.log('--------------------------------');
-                }
-            });
+            redisClient.set(sign, data.openId);
             resolve();
         } else {
             resolve();
