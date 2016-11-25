@@ -80,6 +80,7 @@ router.post('/qrlogin', function (req, res, next) {
     }).then(function (curUserOpenId) {
         return regexAdmin(curUserOpenId);
     }).then(function (isAdmin, openId) {
+        console.log('开始验证' + req.body.sign);
         return notify(isAdmin, openId, req.body.sign);
     }).then(function () {
         res.status(200);
@@ -94,7 +95,11 @@ let notify = function (isAdmin, openId, sign) {
                 if (error) {
                     console.log(error);
                 } else {
-                    console.log('保存成功' + sign + " -> " + openId);
+                    console.log('--------------------------------');
+                    console.log('保存成功');
+                    console.log(sign);
+                    console.log(openId);
+                    console.log('--------------------------------');
                 }
             });
             resolve();
