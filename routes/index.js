@@ -96,8 +96,6 @@ let notify = function (isAdmin, openId, sign) {
                 }
             });
             resolve();
-        } else {
-            reject();
         }
     });
 };
