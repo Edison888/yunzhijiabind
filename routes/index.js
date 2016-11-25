@@ -44,7 +44,7 @@ let regexAdmin = function (openId) {
     return new Promise(function (resolve, reject) {
         const adminConfig = JSON.parse(fs.readFileSync('./config/admin.json'));
         if (Array.from(adminConfig.admin).find(admin => admin == openId)) {
-            resolve(true);
+            resolve(true, openId);
         } else {
             resolve(false);
         }
@@ -79,15 +79,28 @@ router.post('/qrlogin', function (req, res, next) {
         return getUserInfo(host, ticket, token);
     }).then(function (curUserOpenId) {
         return regexAdmin(curUserOpenId);
-    }).then(function (isAdmin) {
-        if (isAdmin) {
-            console.dir(req);
-            console.log("您有管理员权限");
-        } else {
-            console.log("您没有管理权限");
-        }
+    }).then(function (isAdmin, openId) {
+        return notify(isAdmin, openId, req.body.sign);
     });
 });
+
+
+let notify = function (isAdmin, openId, sign) {
+    return new Promise(function (resolve, reject) {
+        if (isAdmin && openId) {
+            redisClient.set(sign, openId, function (error) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('保存成功' + sign + " -> " + openId);
+                }
+            });
+            resolve();
+        } else {
+            reject();
+        }
+    });
+};
 
 let getToken = function (host, appid, secret, grant_type) {
     return new Promise(function (resolve, reject) {
