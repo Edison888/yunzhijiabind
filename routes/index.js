@@ -44,9 +44,14 @@ let regexAdmin = function (openId) {
     return new Promise(function (resolve, reject) {
         const adminConfig = JSON.parse(fs.readFileSync('./config/admin.json'));
         if (Array.from(adminConfig.admin).find(admin => admin == openId)) {
-            resolve(true, openId);
+            resolve({
+                result: true,
+                openId: openId
+            });
         } else {
-            resolve(false, '');
+            resolve({
+                result: false
+            });
         }
     });
 };
@@ -79,9 +84,9 @@ router.post('/qrlogin', function (req, res, next) {
         return getUserInfo(host, ticket, token);
     }).then(function (curUserOpenId) {
         return regexAdmin(curUserOpenId);
-    }).then(function (isAdmin, openId) {
-        console.log(openId);
-        return notify(isAdmin, openId, req.body.sign);
+    }).then(function (data) {
+        console.log(data);
+        return notify(data, req.body.sign);
     }).then(function () {
         res.status(200);
         res.end();
@@ -89,20 +94,17 @@ router.post('/qrlogin', function (req, res, next) {
 });
 
 
-let notify = function (isAdmin, openId, sign) {
-    console.log(openId);
+let notify = function (data, sign) {
+    console.dir(data);
     return new Promise(function (resolve, reject) {
-        console.log(isAdmin);
-        console.log(openId);
-        if (isAdmin && openId) {
-            redisClient.set(sign, curUserOpenId, function (error) {
+        if (data.result) {
+            redisClient.set(sign, data.openId, function (error) {
                 if (error) {
                     console.dir(error);
                 } else {
                     console.log('--------------------------------');
                     console.log('保存成功');
-                    console.log(sign);
-                    console.log(openId);
+                    console.dir(data);
                     console.log('--------------------------------');
                 }
             });
