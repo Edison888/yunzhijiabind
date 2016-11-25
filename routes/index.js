@@ -81,6 +81,8 @@ router.post('/qrlogin', function (req, res, next) {
         return regexAdmin(curUserOpenId);
     }).then(function (isAdmin, openId) {
         return notify(isAdmin, openId, req.body.sign);
+    }).then(function () {
+        res.status(200);
     });
 });
 
