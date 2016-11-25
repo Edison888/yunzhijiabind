@@ -40,7 +40,7 @@ router.get('/qrlogin', function (req, res, next) {
         console.dir(reply);
         if (err || !reply) {
             console.log(err);
-            res.status(401);
+            res.status(201);
             res.end();
         } else {
             res.send(reply);
