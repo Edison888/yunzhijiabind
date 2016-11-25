@@ -36,22 +36,11 @@
     function fetchLogin() {
         $.get('/qrlogin', {
             sign: '<%= sign %>'
-        }).done(function (data, status) {
-            switch (status) {
-                case 201:
-                    break;
-                case 200:
-                case 304:
-                    var uri = new URI("/binding");
-                    uri.addQuery('openId', data);
-                    console.log(uri.toString());
-                    window.location = uri.toString();
-                    break;
-                default:
-                    console.log(data);
-                    console.log(status);
-                    break;
-            }
+        }).done(function (data) {
+            var uri = new URI("/binding");
+            uri.addQuery('openId', data);
+            console.log(uri.toString());
+            window.location = uri.toString();
         }).fail(function () {
 
         });
