@@ -21,8 +21,8 @@ function deplayCloseCurrentPage() {
         if (history.length <= 1 || getUrlParamObj()['isFromApp'] == 'true') { //顶级页面，则关闭当前Web
             XuntongJSBridge.call('closeWebView');
         } else {
-            //history.back();
-            location.replace(document.referrer);
+            history.back();
+            //location.replace(document.referrer);//返回上一页刷新
         }
     }, 1500);
 }
@@ -32,6 +32,7 @@ app.filter('trustHtml', function ($sce) {
         return $sce.trustAsHtml(input);
     }
 }).controller('form_detail', function ($scope, $http, $cookieStore) {
+    $cookieStore.put('isFirst', false);
     XuntongJSBridge.call('setWebViewTitle', {'title': '表单详情'});
     //var iszp = $cookieStore.get('iszhipai');
     //console.log(iszp);

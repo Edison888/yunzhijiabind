@@ -13,11 +13,11 @@ toastr.options = {
     "hideMethod": "fadeOut"
 };
 var app = angular.module('todo', ['ngCookies']);
-//var userid = "22b387d3-9b1e-11e6-943d-005056b8712a";
+//var userid = "ed3fbe63-95d8-11e6-a383-005056b8712a";
 var userid = "6b2da1c2-95d8-11e6-a383-005056b8712a";//杨总
 //var userid = "fcbe652e-9f22-11e6-943d-005056b8712a";//高梦雅预算测试2016-11-22 15:34:52
-//var userid = "fccda66d-9f22-11e6-943d-005056b8712a";//胡文全
-//var userid = "fcc56718-9f22-11e6-943d-005056b8712a";//胡文全
+//var userid = "22b89e28-9b1e-11e6-943d-005056b8712a";//冯东
+//var userid = "22c7d8c8-9b1e-11e6-943d-005056b8712a";//冯东
 var pageSize = 10;
 $('#myTab a').click(function (e) {
     e.preventDefault();
@@ -41,179 +41,186 @@ function switchTab(currentTab) {
     }
 }
 var count = 0;
+
 app.controller('matters', function ($scope, $http, $cookieStore, $window) {
-    //$cookieStore.put('iszhipai', false);
-    //$window.addEventListener('load', function () {
-    //    $scope.getMatters('todohd');
-    //    $scope.getMatters('todounhd');
-    //    $scope.getMatters('subhd');
-    //    $scope.getMatters('subunhd');
-    //});
-    var currentTab = $cookieStore.get('currentTab');
-    if (currentTab) {//如果currentTab不为空
-        switchTab(currentTab);
-    } else {
-        switchTab('todounhd');
-    }
-    document.getElementById('spinner').style.visibility = 'visible';
-    $scope.setCookie = function (cookieValue) {
-        $cookieStore.put('currentTab', cookieValue);
-    };
-    $scope.isActive = function (historyTab) {
-        if (!currentTab) {//如果第一次打开
-            if (historyTab == 'todounhd') {//默认显示待办流程
-                $cookieStore.put('currentTab', 'todounhd');
-                XuntongJSBridge.call('setWebViewTitle', '待办流程');
-                return true;
-            } else {
-                return false;
-            }
+        if (!$cookieStore.get('isFirst')) {
+            $cookieStore.put('isFirst', true);
+            location.reload(true);
         } else {
-            if (historyTab == currentTab) {//如果页签对应上了cookie里面存储的历史页签，那么返回true
+            //$window.addEventListener('load', function () {
+            //    $scope.getMatters('todohd');
+            //    $scope.getMatters('todounhd');
+            //    $scope.getMatters('subhd');
+            //    $scope.getMatters('subunhd');
+            //});
+            var currentTab = $cookieStore.get('currentTab');
+            if (currentTab) {//如果currentTab不为空
                 switchTab(currentTab);
-                return true;
             } else {
-                return false;
-            }
+                switchTab('todounhd');
         }
-    };
-    $scope.showTitle = function (title) {
-        XuntongJSBridge.call('setWebViewTitle', {'title': title});
-    };
-    $scope.hds = [];
-    $scope.unhds = [];
-    $scope.subhds = [];
-    $scope.subunhds = [];
-    $scope.todounhdcount = 0;
-    $scope.todohdcount = 0;
-    $scope.subhdcount = 0;
-    $scope.subunhdcount = 0;
-    $scope.getMatters = function (type) {
         document.getElementById('spinner').style.visibility = 'visible';
-        distinguish(type);
-        switch (type) {
-            case 'todounhd':
-                count = $scope.todounhdcount;
-                $scope.todounhdcount = $scope.todounhdcount + 1;
-                break;
-            case 'todohd':
-                count = $scope.todohdcount;
-                $scope.todohdcount = $scope.todohdcount + 1;
-                break;
-            case 'subhd':
-                count = $scope.subhdcount;
-                $scope.subhdcount = $scope.subhdcount + 1;
-                break;
-            case 'subunhd':
-                count = $scope.subunhdcount;
-                $scope.subunhdcount = $scope.subunhdcount + 1;
-                break;
-
-        }
-        $http({
-                method: 'get',
-                url: requrl,
-                params: {
-                    userid: userid,
-                    statuskey: statuskeyparam,
-                    statuscode: statuscodeparam,
-                    startline: count * pageSize,
-                    count: pageSize,
-                    condition: '',
-                    method: 'getTaskList'
-                }
-            }
-        ).success(function (response) {
-                document.getElementById('spinner').style.visibility = 'hidden';
-                console.log(type);
-                console.log(response);
-                if (response.flag) {
-                    if (response.data.length == 0) {
-                        //toastr.info('暂无待办');
-                        document.getElementById('hdload').style.visibility = 'hidden';
-                        document.getElementById('unhdload').style.visibility = 'hidden';
-                        document.getElementById('subhdload').style.visibility = 'hidden';
-                        document.getElementById('subunhdload').style.visibility = 'hidden';
+            $scope.setCookie = function (cookieValue) {
+                $cookieStore.put('currentTab', cookieValue);
+            };
+            $scope.isActive = function (historyTab) {
+                if (!currentTab) {//如果第一次打开
+                    if (historyTab == 'todounhd') {//默认显示待办流程
+                        $cookieStore.put('currentTab', 'todounhd');
+                        XuntongJSBridge.call('setWebViewTitle', '待办流程');
+                        return true;
                     } else {
-                        switch (type) {
-                            case 'todohd'://需要我处理并且已经处理
-                                document.getElementById('mytabcontent').style.visibility = 'visible';
-                                if (response.data.length == pageSize) {
-                                    document.getElementById('hdload').style.visibility = 'visible';
-                                } else {
-                                    document.getElementById('hdload').style.visibility = 'hidden';
-                                }
-                                $scope.hds = $scope.hds.concat(response.data);
-                                break;
-                            case 'todounhd'://需要我处理并且未处理
-                                document.getElementById('mytabcontent').style.visibility = 'visible';
-                                if (response.data.length == pageSize) {
-                                    document.getElementById('unhdload').style.visibility = 'visible';
-                                } else {
-                                    document.getElementById('unhdload').style.visibility = 'hidden';
-                                }
-                                $scope.unhds = $scope.unhds.concat(response.data);
-                                break;
-                            case 'subhd'://我提交的并且已经处理
-                                document.getElementById('mytabcontent').style.visibility = 'visible';
-                                if (response.data.length == pageSize) {
-                                    document.getElementById('subhdload').style.visibility = 'visible';
-                                } else {
-                                    document.getElementById('subhdload').style.visibility = 'hidden';
-                                }
-                                $scope.subhds = $scope.subhds.concat(response.data);
-                                break;
-                            case 'subunhd'://我提交的并且未处理
-                                document.getElementById('mytabcontent').style.visibility = 'visible';
-                                if (response.data.length == pageSize) {
-                                    document.getElementById('subunhdload').style.visibility = 'visible';
-                                } else {
-                                    document.getElementById('subunhdload').style.visibility = 'hidden';
-                                }
-                                $scope.subunhds = $scope.subunhds.concat(response.data);
-                                break;
-                        }
-
-                    }
-                } else {
-                    toastr.error(response.desc);
+                        return false;
                 }
-            });
+                } else {
+                    if (historyTab == currentTab) {//如果页签对应上了cookie里面存储的历史页签，那么返回true
+                        switchTab(currentTab);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            };
+            $scope.showTitle = function (title) {
+                XuntongJSBridge.call('setWebViewTitle', {'title': title});
+            };
+            $scope.hds = [];
+            $scope.unhds = [];
+            $scope.subhds = [];
+            $scope.subunhds = [];
+            $scope.todounhdcount = 0;
+            $scope.todohdcount = 0;
+            $scope.subhdcount = 0;
+            $scope.subunhdcount = 0;
+            $scope.getMatters = function (type) {
+                document.getElementById('spinner').style.visibility = 'visible';
+                distinguish(type);
+                switch (type) {
+                    case 'todounhd':
+                        count = $scope.todounhdcount;
+                        $scope.todounhdcount = $scope.todounhdcount + 1;
+                        break;
+                    case 'todohd':
+                        count = $scope.todohdcount;
+                        $scope.todohdcount = $scope.todohdcount + 1;
+                        break;
+                    case 'subhd':
+                        count = $scope.subhdcount;
+                        $scope.subhdcount = $scope.subhdcount + 1;
+                        break;
+                    case 'subunhd':
+                        count = $scope.subunhdcount;
+                        $scope.subunhdcount = $scope.subunhdcount + 1;
+                        break;
 
-    };
-    $scope.getMatters('todohd');
-    $scope.getMatters('todounhd');
-    $scope.getMatters('subhd');
-    $scope.getMatters('subunhd');
-    //$scope.getMatters = function (type) {
-    //    var params = {};
-    //    switch (type){
-    //        case 'todohd':
-    //            params = hdparams;
-    //            break;
-    //        case 'todounhd':
-    //            params = unhdparams;
-    //            break;
-    //        case 'subhd':
-    //            params = subhdparams;
-    //            break;
-    //        case 'subunhd':
-    //            params = subunhdparams;
-    //            break;
-    //    }
-    //}
-    $scope.goDetail = function (matter, type) {
-        var uri = new URI('/form');
-        uri.addQuery('taskid', matter.taskid);
-        uri.addQuery('userid', userid);
-        uri.addQuery('billtype', matter.billtype);
-        uri.addQuery('ts', matter.senddate);
-        uri.addQuery('billid', matter.billid);
-        uri.addQuery('isFromApp', false);//记录来自App还是轻应用
-        uri.addQuery('type', type);//跳转到表单详情页面时，携带了type参数，用来告知表单详情页面过来的这个待办是哪种类型的待办。
-        window.location = uri.toString();
+                }
+                $http({
+                        method: 'get',
+                        url: requrl,
+                        params: {
+                            userid: userid,
+                            statuskey: statuskeyparam,
+                            statuscode: statuscodeparam,
+                            startline: count * pageSize,
+                            count: pageSize,
+                            condition: '',
+                            method: 'getTaskList'
+                    }
+                }
+                ).success(function (response) {
+                        document.getElementById('spinner').style.visibility = 'hidden';
+                        console.log(type);
+                        console.log(response);
+                        if (response.flag) {
+                            if (response.data.length == 0) {
+                                //toastr.info('暂无待办');
+                                document.getElementById('hdload').style.visibility = 'hidden';
+                                document.getElementById('unhdload').style.visibility = 'hidden';
+                                document.getElementById('subhdload').style.visibility = 'hidden';
+                                document.getElementById('subunhdload').style.visibility = 'hidden';
+                            } else {
+                                switch (type) {
+                                    case 'todohd'://需要我处理并且已经处理
+                                        document.getElementById('mytabcontent').style.visibility = 'visible';
+                                        if (response.data.length == pageSize) {
+                                            document.getElementById('hdload').style.visibility = 'visible';
+                                        } else {
+                                            document.getElementById('hdload').style.visibility = 'hidden';
+                                        }
+                                        $scope.hds = $scope.hds.concat(response.data);
+                                        break;
+                                    case 'todounhd'://需要我处理并且未处理
+                                        document.getElementById('mytabcontent').style.visibility = 'visible';
+                                        if (response.data.length == pageSize) {
+                                            document.getElementById('unhdload').style.visibility = 'visible';
+                                        } else {
+                                            document.getElementById('unhdload').style.visibility = 'hidden';
+                                        }
+                                        $scope.unhds = $scope.unhds.concat(response.data);
+                                        break;
+                                    case 'subhd'://我提交的并且已经处理
+                                        document.getElementById('mytabcontent').style.visibility = 'visible';
+                                        if (response.data.length == pageSize) {
+                                            document.getElementById('subhdload').style.visibility = 'visible';
+                                        } else {
+                                            document.getElementById('subhdload').style.visibility = 'hidden';
+                                        }
+                                        $scope.subhds = $scope.subhds.concat(response.data);
+                                        break;
+                                    case 'subunhd'://我提交的并且未处理
+                                        document.getElementById('mytabcontent').style.visibility = 'visible';
+                                        if (response.data.length == pageSize) {
+                                            document.getElementById('subunhdload').style.visibility = 'visible';
+                                        } else {
+                                            document.getElementById('subunhdload').style.visibility = 'hidden';
+                                        }
+                                        $scope.subunhds = $scope.subunhds.concat(response.data);
+                                        break;
+                                }
+
+                            }
+                        } else {
+                            toastr.error(response.desc);
+                        }
+                    });
+
+            };
+            $scope.getMatters('todohd');
+            $scope.getMatters('todounhd');
+            $scope.getMatters('subhd');
+            $scope.getMatters('subunhd');
+            //$scope.getMatters = function (type) {
+            //    var params = {};
+            //    switch (type){
+            //        case 'todohd':
+            //            params = hdparams;
+            //            break;
+            //        case 'todounhd':
+            //            params = unhdparams;
+            //            break;
+            //        case 'subhd':
+            //            params = subhdparams;
+            //            break;
+            //        case 'subunhd':
+            //            params = subunhdparams;
+            //            break;
+            //    }
+            //}
+            $scope.goDetail = function (matter, type) {
+                var uri = new URI('/form');
+                uri.addQuery('taskid', matter.taskid);
+                uri.addQuery('userid', userid);
+                uri.addQuery('billtype', matter.billtype);
+                uri.addQuery('ts', matter.senddate);
+                uri.addQuery('billid', matter.billid);
+                uri.addQuery('isFromApp', false);//记录来自App还是轻应用
+                uri.addQuery('type', type);//跳转到表单详情页面时，携带了type参数，用来告知表单详情页面过来的这个待办是哪种类型的待办。
+                window.location = uri.toString();
+            }
     }
-});
+
+    }
+);
 //$(function () {
 //        XuntongJSBridge.call('setWebViewTitle', {'title': '业务审批'});//设置页面标题并显示
 //        $('#myTabs a').click(function (e) {
