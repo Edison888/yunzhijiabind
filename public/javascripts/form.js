@@ -21,7 +21,8 @@ function deplayCloseCurrentPage() {
         if (history.length <= 1 || getUrlParamObj()['isFromApp'] == 'true') { //顶级页面，则关闭当前Web
             XuntongJSBridge.call('closeWebView');
         } else {
-            history.back();
+            //history.back();
+            location.replace(document.referrer);
         }
     }, 1500);
 }
