@@ -207,6 +207,7 @@ app.filter('trustHtml', function ($sce) {
                     uri.addQuery('taskid', urlObj.taskid);
                     uri.addQuery('action', operation);
                     uri.addQuery('note', $scope.note);
+                    uri.addQuery('isFromApp', getUrlParamObj()['isFromApp']);
                     window.location = uri.toString();
                     //$('#myModal').modal({
                     //    show: true
