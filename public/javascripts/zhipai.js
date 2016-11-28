@@ -4,11 +4,11 @@ var app = angular.module('app', ['ngCookies']);
  * */
 function deplayCloseCurrentPage() {
     setTimeout(function () {
-        if (history.length <= 1 || getUrlParamObj()['isFromApp'] == 'true') { //顶级页面，则关闭当前Web
-            XuntongJSBridge.call('closeWebView');
-        } else {
-            history.back();
-        }
+        //if (history.length <= 1 || getUrlParamObj()['isFromApp'] == 'true') { //顶级页面，则关闭当前Web
+        //    XuntongJSBridge.call('closeWebView');
+        //} else {
+        history.go(-2);
+        //}
     }, 1500);
 }
 app.filter(
