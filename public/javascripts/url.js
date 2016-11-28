@@ -2,7 +2,7 @@
  * Created by mingxing_he@kingdee.com on 2016/10/20.
  */
 var debug = true;
-var host_produce = "";
+//var host_produce = "http://61.136.222.229";
 //var host_test = "http://192.168.1.158:8089";
 //var host_test = "http://61.136.222.246:8089";
 //var host_test = "http://61.136.222.246:8089";//吉哲原服务
