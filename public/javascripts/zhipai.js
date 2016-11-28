@@ -48,7 +48,9 @@ app.filter(
         $scope.selecteds = [];
     };
     $scope.zhipai = function () {
-        console.log($scope.selecteds);
+        if ($scope.selecteds.length == 0) {
+            return;
+        }
         $scope.selectedUserIdStr = $scope.selecteds[0].id;
         if ($scope.selecteds.length > 1) {
             for (var i = 1; i < $scope.selecteds.length; i++) {
@@ -62,8 +64,8 @@ app.filter(
             params: {
                 userid: urlObj.userid,
                 taskid: urlObj.taskid,
-                action: $scope.currentOper,
-                note: $scope.note,
+                action: urlObj.action,
+                note: urlObj.note,
                 zpuserids: $scope.selectedUserIdStr,
                 method: 'dealTask'
             }
@@ -71,8 +73,6 @@ app.filter(
             console.log(response);
             if (response.flag == 0) {
                 toastr.success('审批成功');
-                $cookieStore.put('iszhipai', true);
-                console.log($cookieStore.get('iszhipai'));
                 deplayCloseCurrentPage();
                 $scope.isApproved = true;
                 //$('#footer > div:first-child').removeAttr('data-toggle');

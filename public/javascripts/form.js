@@ -200,7 +200,12 @@ app.filter('trustHtml', function ($sce) {
                 if (response.data.isAssign == 'Y') {//有指派信息
                     $scope.assigns = response.data.psnstructlist;
                     $cookieStore.put('psnstructlist', response.data.psnstructlist);
-                    window.location = new URI('/users/zhipai').toString();
+                    var uri = new URI('/users/zhipai');
+                    uri.addQuery('userid', urlObj.userid);
+                    uri.addQuery('taskid', urlObj.taskid);
+                    uri.addQuery('action', operation);
+                    uri.addQuery('note', $scope.note);
+                    window.location = uri.toString();
                     //$('#myModal').modal({
                     //    show: true
                     //});

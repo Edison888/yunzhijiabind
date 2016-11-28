@@ -42,7 +42,7 @@ function switchTab(currentTab) {
 }
 var count = 0;
 app.controller('matters', function ($scope, $http, $cookieStore, $window) {
-    $cookieStore.put('iszhipai', false);
+    //$cookieStore.put('iszhipai', false);
     //$window.addEventListener('load', function () {
     //    $scope.getMatters('todohd');
     //    $scope.getMatters('todounhd');
