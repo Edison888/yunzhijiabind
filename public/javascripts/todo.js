@@ -42,9 +42,11 @@ function switchTab(currentTab) {
 }
 var count = 0;
 //var userid = '';
-//if (isYzjApp()) {//如果运行在云之家（Android或IOS的云之家APP客户端）里面，才能执行下面的逻辑}
-//    XuntongJSBridge.call('getPersonInfo', {}, function (result) {
-//        userid = result.data.openId;
+if (isYzjApp()) {//如果运行在云之家（Android或IOS的云之家APP客户端）里面，才能执行下面的逻辑}
+    XuntongJSBridge.call('getPersonInfo', {}, function (result) {
+        userid = result.data.openId;
+        alert(result);
+        alert(userid);
         app.controller('matters', function ($scope, $http, $cookieStore, $window) {
                 if (!$cookieStore.get('isFirst')) {
                     $cookieStore.put('isFirst', true);
@@ -224,8 +226,8 @@ var count = 0;
 
             }
         );
-//    });
-//}
+    });
+}
 ////            XuntongJSBridge.call('getPersonInfo', {}, function (result) {
 
 
