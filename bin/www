@@ -93,6 +93,5 @@ function onListening() {
 }
 
 exports.emit = function (sign, openid) {
-    console.log(sign);
-    console.log(openid);
+    io.emit(sign, openid);
 };
