@@ -7,7 +7,7 @@ const app = require('../app');
 const debug = require('debug')('gzbfdc:server');
 const http = require('http');
 const socketio = require('socket.io');
-
+const redis = require('socket.io-redis');
 
 /**
  * Get port from environment and store in Express.
@@ -21,6 +21,7 @@ app.set('port', port);
 const server = http.createServer(app);
 
 const io = socketio(server);
+io.adapter(redis({host: 'localhost', port: 6379}));
 /**
  * Listen on provided port, on all network interfaces.
  */
