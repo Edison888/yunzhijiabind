@@ -12,7 +12,9 @@ toastr.options = {
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
 };
-var app = angular.module('binding', []);
+var app = angular.module('binding', []).config(function ($locationProvider) {
+    $locationProvider.html5Mode(true);
+});
 app.controller('list_controller', function ($scope, $http, $document, $location, $log, $window) {
     console.log('hello');
     angular.element($document).ready(function () {
