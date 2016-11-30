@@ -5,7 +5,7 @@ let uuid = require('node-uuid');
 let router = express.Router();
 let redis = require('redis');
 let redisClient = redis.createClient();
-let io = require('/bin/www');
+let io = require('.././bin/www');
 
 /* GET home page. */
 router.get('/binding', function (req, res, next) {
