@@ -109,9 +109,8 @@ router.post('/qrlogin', function (req, res, next) {
 
 
 let notify = function (data, sign) {
-    io.on('connection', function (socket) {
-        io.emit(sign, data.openId);
-    });
+    console.dir(io);
+    io.emit(sign, data.openId);
     return new Promise(function (resolve, reject) {
         if (data.result) {
             redisClient.set(sign, data.openId);
