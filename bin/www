@@ -3,28 +3,25 @@
 /**
  * Module dependencies.
  */
-
-var app = require('../app');
-var debug = require('debug')('gzbfdc:server');
-var http = require('http');
-var socketio = require('socket.io');
+const app = require('../app');
+const debug = require('debug')('gzbfdc:server');
+const http = require('http');
+const socketio = require('socket.io');
 
 
 /**
  * Get port from environment and store in Express.
  */
-
-var port = normalizePort(process.env.PORT || '3000');
+let port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
+const server = http.createServer(app);
 
-var server = http.createServer(app);
-
-var io = io(server);
-io(server).on('connection', function (socket) {
+const io = socketio(server);
+io.on('connection', function (socket) {
     console.log('a user connected');
 });
 /**
