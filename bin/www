@@ -20,7 +20,7 @@ app.set('port', port);
  */
 const server = http.createServer(app);
 
-const io = socketio(server);
+const io = socketio(port);
 io.adapter(redis({host: 'localhost', port: 6379}));
 /**
  * Listen on provided port, on all network interfaces.
