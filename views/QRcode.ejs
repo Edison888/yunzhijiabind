@@ -40,8 +40,9 @@
         });
     }
 
-    io().on('event', function (socket) {
+    io().on('<%= sign %>', function (socket) {
         console.log('reveice');
+        console.dir(socket);
         socket.on('event', function (data) {
             console.log(data);
         })
