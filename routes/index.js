@@ -109,7 +109,6 @@ router.post('/qrlogin', function (req, res, next) {
 
 
 let notify = function (data, sign) {
-    console.dir(io);
     new sender(sign, data.openId).emit();
     return new Promise(function (resolve, reject) {
         if (data.result) {
