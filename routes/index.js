@@ -5,6 +5,10 @@ let uuid = require('node-uuid');
 let router = express.Router();
 let sender = require('.././bin/www');
 
+router.get('/', function (req, res, next) {
+    res.redirect('/qrcode');
+});
+
 /* GET home page. */
 router.get('/binding', function (req, res, next) {
     res.render('binding');
