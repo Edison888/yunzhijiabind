@@ -31,7 +31,6 @@ router.get('/qrcode', function (req, res, next) {
 });
 
 router.post('/permission', function (req, res, next) {
-    console.dir(req.body);
     regexAdmin(req.body.openid).then(function (result) {
         res.send(result);
     });
