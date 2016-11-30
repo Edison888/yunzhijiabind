@@ -42,6 +42,7 @@
 
     io().on('<%= sign %>', function (socket) {
         if (socket) {
+            console.log(socket);
             var uri = new URI("/binding#");
             uri.addQuery('openid', socket);
             window.location = uri.toString();
