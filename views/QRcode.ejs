@@ -40,13 +40,14 @@
         });
     }
 
-    io().on('connection', function (socket) {
+    io().on('event', function (socket) {
+        console.log('reveice');
         socket.on('event', function (data) {
             console.log(data);
         })
     })
 
-//    window.setInterval(fetchLogin, 3 * 1000);
+    //    window.setInterval(fetchLogin, 3 * 1000);
 </script>
 </body>
 <html>
