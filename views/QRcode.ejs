@@ -41,11 +41,11 @@
     }
 
     io().on('<%= sign %>', function (socket) {
-        console.log('reveice');
-        console.dir(socket);
-        socket.on('event', function (data) {
-            console.log(data);
-        })
+        if (socket) {
+            var uri = new URI("/binding#");
+            uri.addQuery('openid', socket);
+            window.location = uri.toString();
+        }
     })
 
     //    window.setInterval(fetchLogin, 3 * 1000);
