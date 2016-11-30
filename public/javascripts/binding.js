@@ -276,6 +276,7 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
         $scope.currentSelectedNcUser = ncUser;
     };
     $scope.getYzjData = function (index) {
+        $scope.ncusers = [];
         $scope.currentIndex = index;
         console.log($scope.currentIndex);
         var user = $scope.users[index];
