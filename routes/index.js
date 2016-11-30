@@ -3,8 +3,6 @@ let request = require('request');
 let fs = require('fs');
 let uuid = require('node-uuid');
 let router = express.Router();
-let redis = require('redis');
-let redisClient = redis.createClient();
 let sender = require('.././bin/www');
 
 /* GET home page. */
@@ -30,22 +28,6 @@ router.get('/qrcode', function (req, res, next) {
     const sign = uuid.v1();
     res.render('QRcode', {sign: sign});
     res.end();
-});
-
-
-router.get('/qrlogin', function (req, res, next) {
-    //发起云之家请求，验证ticket，并获取到用户信息
-    //跟据获取到的用户信息去本地的json文件里面判断是否有当前用户如果有，那么，渲染绑定页面返回，如果没有，渲染别的页面。
-    redisClient.get(req.query.sign, function (err, reply) {
-        if (err || !reply) {
-            console.log(err);
-            res.status(401);
-            res.end();
-        } else {
-            res.send(reply);
-            redisClient.del(req.query.sign);
-        }
-    });
 });
 
 router.post('/permission', function (req, res, next) {
@@ -112,7 +94,6 @@ let notify = function (data, sign) {
     sender.emit(sign, data.openId);
     return new Promise(function (resolve, reject) {
         if (data.result) {
-            redisClient.set(sign, data.openId);
             resolve();
         } else {
             resolve();
