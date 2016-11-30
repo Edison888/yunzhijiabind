@@ -93,8 +93,5 @@ function onListening() {
 }
 
 exports.emit = function (sign, openid) {
-    io.sockets.emit(JSON.stringify({
-        sign: sign,
-        openid: openid
-    }));
+    io.sockets.emit('event');
 };
