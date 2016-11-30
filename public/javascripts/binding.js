@@ -13,7 +13,27 @@ toastr.options = {
     "hideMethod": "fadeOut"
 };
 var app = angular.module('binding', []);
-app.controller('list_controller', function ($scope, $http) {
+app.controller('list_controller', function ($scope, $http, $document, $location, $log, $window) {
+    angular.element($document).ready(function () {
+        if ($location.search().openid) {
+            $http.post('/permission', {
+                openid: $location.search().openid
+            }).success(function (data) {
+                if (!data.result) {
+                    returnQrcode();
+                }
+            }).error(function () {
+                returnQrcode();
+            });
+        } else {
+            returnQrcode();
+        }
+    });
+
+    function returnQrcode() {
+        $window.location = '/qrcode';
+    }
+
     $scope.searchMobile = '';
     $scope.searchMapping = function (mobile) {
         if (mobile == '') {
@@ -80,27 +100,27 @@ app.controller('list_controller', function ($scope, $http) {
 
             }
         ).success(function (response) {//todo 请求删除行数据
-                console.log(response);
-                if (response.flag == 0) {
-                    toastr.success("已删除");
-                } else {
-                    toastr.error(response.desc);
+            console.log(response);
+            if (response.flag == 0) {
+                toastr.success("已删除");
+            } else {
+                toastr.error(response.desc);
 
-                }
+            }
 
-                $scope.selectedRows.reverse();
-                console.log($scope.selectedRows);
-                for (var i = 0; i < $scope.selectedRows.length; i++) {
-                    var selectIndex = $scope.selectedRows[i];
-                    //delete row from data
-                    $scope.users.splice(selectIndex, 1);
-                    console.log(selectIndex);
-                    //delete rowSelection property
-                    delete $scope.tableSelection[selectIndex];
-                    console.log($scope.tableSelection)
-                }
-                console.log($scope.tableSelection);
-            });
+            $scope.selectedRows.reverse();
+            console.log($scope.selectedRows);
+            for (var i = 0; i < $scope.selectedRows.length; i++) {
+                var selectIndex = $scope.selectedRows[i];
+                //delete row from data
+                $scope.users.splice(selectIndex, 1);
+                console.log(selectIndex);
+                //delete rowSelection property
+                delete $scope.tableSelection[selectIndex];
+                console.log($scope.tableSelection)
+            }
+            console.log($scope.tableSelection);
+        });
     };
     $scope.getSelectedRows = function () {
         //start from last index because starting from first index cause shifting
@@ -229,19 +249,19 @@ app.controller('list_controller', function ($scope, $http) {
                 }
             }
         ).success(function (response) {
-                document.getElementById('spinner').style.visibility = 'hidden';
-                $scope.disableBind();
-                if (response.flag == 0) {
-                    console.log(currentIndex);
-                    $scope.users[currentIndex]['ncuser_code'] = currentSelectedNcUser.ncuser_code;
-                    $scope.users[currentIndex]['ncuser_name'] = currentSelectedNcUser.ncuser_name;
-                    $scope.users[currentIndex]['ncmobile'] = currentSelectedNcUser.ncmobile;
-                    toastr.success("绑定成功");
-                } else {
-                    toastr.error(response.desc);
-                }
+            document.getElementById('spinner').style.visibility = 'hidden';
+            $scope.disableBind();
+            if (response.flag == 0) {
+                console.log(currentIndex);
+                $scope.users[currentIndex]['ncuser_code'] = currentSelectedNcUser.ncuser_code;
+                $scope.users[currentIndex]['ncuser_name'] = currentSelectedNcUser.ncuser_name;
+                $scope.users[currentIndex]['ncmobile'] = currentSelectedNcUser.ncmobile;
+                toastr.success("绑定成功");
+            } else {
+                toastr.error(response.desc);
+            }
 
-            });
+        });
 
     };
     $scope.disableBind = function () {
