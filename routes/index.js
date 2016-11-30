@@ -5,7 +5,7 @@ let uuid = require('node-uuid');
 let router = express.Router();
 let redis = require('redis');
 let redisClient = redis.createClient();
-let io = require('.././bin/www').io;
+let sender = require('.././bin/www');
 
 /* GET home page. */
 router.get('/binding', function (req, res, next) {
@@ -110,7 +110,7 @@ router.post('/qrlogin', function (req, res, next) {
 
 let notify = function (data, sign) {
     console.dir(io);
-    io.emit(sign, data.openId);
+    new sender(sign, data.openId).emit();
     return new Promise(function (resolve, reject) {
         if (data.result) {
             redisClient.set(sign, data.openId);
