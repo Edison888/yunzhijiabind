@@ -41,8 +41,8 @@
     }
 
     io().on('connection', function (socket) {
-        socket.on('<%= sign %>', function (msg) {
-            console.log(msg);
+        socket.on('event', function (data) {
+            console.log(data);
         })
     })
 
