@@ -92,8 +92,7 @@ function onListening() {
     debug('Listening on ' + bind);
 }
 
-module.exports = function (sign, openid) {
-    this.emit = function () {
-        io.emit(sign, openid);
-    }
+exports.emit = function (sign, openid) {
+    console.log(sign);
+    console.log(openid);
 };
