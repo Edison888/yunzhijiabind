@@ -28,28 +28,13 @@
         text: uri.toString()
     });
 
-    function fetchLogin() {
-        $.get('/qrlogin', {
-            sign: '<%= sign %>'
-        }).done(function (data) {
-            var uri = new URI("/binding#");
-            uri.addQuery('openid', data);
-            window.location = uri.toString();
-        }).fail(function () {
-
-        });
-    }
-
     io().on('<%= sign %>', function (socket) {
         if (socket) {
-            console.log(socket);
             var uri = new URI("/binding#");
             uri.addQuery('openid', socket);
             window.location = uri.toString();
         }
     })
-
-    //    window.setInterval(fetchLogin, 3 * 1000);
 </script>
 </body>
 <html>
