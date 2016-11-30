@@ -93,5 +93,8 @@ function onListening() {
 }
 
 exports.emit = function (sign, openid) {
-    io.emit(sign, openid);
+    io.emit(JSON.stringify({
+        sign: sign,
+        openid: openid
+    }), {for: 'everyone'});
 };
