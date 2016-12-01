@@ -41,7 +41,7 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
             $cookieStore.put('isFirst', true);
             location.reload(true);
         } else {
-            if (isYzjApp()) {//如果运行在云之家（Android或IOS的云之家APP客户端）里面，才能执行下面的逻辑}
+            //if (isYzjApp()) {//如果运行在云之家（Android或IOS的云之家APP客户端）里面，才能执行下面的逻辑}
                 XuntongJSBridge.call('getPersonInfo', {}, function (result) {
                         userid = result.data.openId;
                         //userid ='6b2da1c2-95d8-11e6-a383-005056b8712a';//杨总
@@ -194,7 +194,7 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
                     }
                     }//func
                 );//xuntong
-            }//if
+            //}//if
         }
 
     }
