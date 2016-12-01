@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const uuid = require('node-uuid');
-const redis = require('connect-redis')(session);
 
 const routes = require('./routes/index');
 const users = require('./routes/users');
@@ -29,11 +28,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: secret,
     cookie: {
-        maxAge: 60 * 1000, httpOnly: false
+        maxAge: 60 * 1000, httpOnly: true
     },
     resave: false,
     saveUninitialized: true,
-    store: new redis(),
 }));
 
 app.use('/', routes);
