@@ -41,8 +41,16 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
             $cookieStore.put('isFirst', true);
             location.reload(true);
         } else {
-            //if (isYzjApp()) {//如果运行在云之家（Android或IOS的云之家APP客户端）里面，才能执行下面的逻辑}
+            if (isYzjApp() || getCloudHub().isCloudHub) {//如果运行在云之家（Android或IOS的云之家APP客户端）里面，才能执行下面的逻辑}
                 XuntongJSBridge.call('getPersonInfo', {}, function (result) {
+                        /* ****  注意 start **** */
+                        /* ****  由于在桌面端，实现JS-API方式不同，这里的回调返回值result是一个string **** */
+                        /* ****  为确保result正常使用，建议在回调中添加如下代码 **** */
+                        if (typeof result == 'string') {
+                            result = JSON.parse(result);
+                        }
+                        /* ****  注意 end **** */
+
                         userid = result.data.openId;
                         //userid ='6b2da1c2-95d8-11e6-a383-005056b8712a';//杨总
                     var currentTab = $cookieStore.get('currentTab');
@@ -194,7 +202,7 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
                     }
                     }//func
                 );//xuntong
-            //}//if
+            }//if
         }
 
     }
@@ -203,4 +211,32 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
 //判断是否运行于云之家App中
 function isYzjApp() {
     return !!navigator.userAgent.match(/Qing\/.*;(iPhone|Android).*/);
+}
+
+/* 判断是否运行于云之家桌面端
+ * @return {object} cloudhub 返回是否桌面端、当前桌面端userAgent版本及是否支持JS-API
+ * cloudhub = {isCloudHub: true | false, hasJS-APIt: true | false, version: '0.0.1'}
+ */
+function getCloudHub() {
+    var ua = window.navigator.userAgent;
+    var reg = /cloudhub 10204\/([^;]+)/;
+    var cloudhub = {
+        isCloudHub: false,
+        hasJS_APIt: false,
+        version: ''
+    };
+
+    var match = reg.exec(ua), version;
+
+    if (match) {
+        version = match[1];
+        cloudhub.isCloudHub = true,
+            cloudhub.version = version;
+
+        if (version.replace(/\./g, '') > 1) {
+            cloudhub.hasJS_APIt = true;
+        }
+    }
+
+    return cloudhub;
 }
