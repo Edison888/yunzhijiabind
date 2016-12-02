@@ -12,29 +12,29 @@ toastr.options = {
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
 };
-var app = angular.module('binding', []).config(function ($locationProvider) {
+var app = angular.module('binding', ["ngTable"]).config(function ($locationProvider) {
     $locationProvider.html5Mode(true);
 });
-app.controller('list_controller', function ($scope, $http, $document, $location, $log, $window) {
-    angular.element($document).ready(function () {
-        if ($location.search().openid) {
-            $http.post('/permission', {
-                openid: $location.search().openid
-            }).success(function (data) {
-                if (!data.result) {
-                    returnQrcode();
-                }
-            }).error(function () {
-                returnQrcode();
-            });
-        } else {
-            returnQrcode();
-        }
-    });
-
-    function returnQrcode() {
-        $window.location = '/qrcode';
-    }
+app.controller('list_controller', function ($scope, $http, $document, $location, $log, $window, NgTableParams) {
+    //angular.element($document).ready(function () {
+    //    if ($location.search().openid) {
+    //        $http.post('/permission', {
+    //            openid: $location.search().openid
+    //        }).success(function (data) {
+    //            if (!data.result) {
+    //                returnQrcode();
+    //            }
+    //        }).error(function () {
+    //            returnQrcode();
+    //        });
+    //    } else {
+    //        returnQrcode();
+    //    }
+    //});
+    //
+    //function returnQrcode() {
+    //    $window.location = '/qrcode';
+    //}
 
     $scope.searchMobile = '';
     $scope.searchMapping = function (mobile) {
@@ -148,7 +148,10 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
         }).success(function (response) {
             document.getElementById('spinner').style.visibility = 'hidden';
             console.log(response);
-            $scope.users = response.data;
+            $scope.tableParams = new NgTableParams({}, {
+                paginationMaxBlocks: 6,
+                paginationMinBlocks: 2, dataset: response.data
+            });
         });
     };
     //分页相关↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
