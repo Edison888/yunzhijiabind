@@ -16,25 +16,25 @@ var app = angular.module('binding', ["ngTable"]).config(function ($locationProvi
     $locationProvider.html5Mode(true);
 });
 app.controller('list_controller', function ($scope, $http, $document, $location, $log, $window, NgTableParams) {
-    //angular.element($document).ready(function () {
-    //    if ($location.search().openid) {
-    //        $http.post('/permission', {
-    //            openid: $location.search().openid
-    //        }).success(function (data) {
-    //            if (!data.result) {
-    //                returnQrcode();
-    //            }
-    //        }).error(function () {
-    //            returnQrcode();
-    //        });
-    //    } else {
-    //        returnQrcode();
-    //    }
-    //});
-    //
-    //function returnQrcode() {
-    //    $window.location = '/qrcode';
-    //}
+    angular.element($document).ready(function () {
+        if ($location.search().openid) {
+            $http.post('/permission', {
+                openid: $location.search().openid
+            }).success(function (data) {
+                if (!data.result) {
+                    returnQrcode();
+                }
+            }).error(function () {
+                returnQrcode();
+            });
+        } else {
+            returnQrcode();
+        }
+    });
+
+    function returnQrcode() {
+        $window.location = '/qrcode';
+    }
 
     $scope.searchMobile = '';
     $scope.searchMapping = function (mobile) {
