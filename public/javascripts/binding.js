@@ -154,26 +154,7 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
             });
         });
     };
-    //分页相关↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-    var pageSize = 2;
-//        var totalPages = Math.ceil(getUrlParamObj()['pagecount'] / pageSize);
-    var totalPages = Math.ceil(5);
-    //    document.getElementById('spinner').style.visibility = 'visible';
-    /*
-     * 分页控件（https://github.com/lyonlai/bootstrap-paginator）
-     * */
-    var element = $('#paginator');
-    var options = {
-        bootstrapMajorVersion: 3,//必须指定bootstrap的版本
-        currentPage: 1,//默认显示第一页
-        numberOfPages: 3,//这里固定为4
-        totalPages: totalPages,
-        onPageChanged: function (e, oldPage, newPage) {
-            $scope.getMappings(newPage, pageSize);
-        }
-    };
-    element.bootstrapPaginator(options);
-    $scope.getMappings(1, pageSize);
+    $scope.getMappings();
     //分页相关↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
     $scope.addYzj = function () {
         var phoneValue = document.getElementById('yzj_phone').value;
