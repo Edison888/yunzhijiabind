@@ -57,8 +57,8 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
                 console.log(response);
                 if (response.flag == 0) {
                     //$scope.users = response.data;//chenhao
-                    //$scope.users = [];//jizhe old fixed
-                    //$scope.users.push(response.data);//jizhe old fixed
+                    $scope.users = [];//jizhe old fixed
+                    $scope.users.push(response.data);//jizhe old fixed
                     var a = [];
                     a.push(response.data);
                     $scope.tableParams = new NgTableParams({}, {
@@ -124,12 +124,13 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
                 //delete row from data
                 $scope.users.splice(selectIndex, 1);
                 console.log(selectIndex);
-                //delete rowSelection property
-                delete $scope.tableSelection[selectIndex];
-                console.log($scope.tableSelection)
             }
-            console.log($scope.tableSelection);
+                $scope.tableParams = new NgTableParams({}, {
+                    counts: [],
+                    paginationMaxBlocks: 6,
+                    paginationMinBlocks: 2, dataset: $scope.users
         });
+            });
     };
     $scope.getSelectedRows = function () {
         //start from last index because starting from first index cause shifting
@@ -138,11 +139,10 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
         $scope.selectedOpenIds = [];
         $scope.selectedOpenIdsStr = '';
         for (var i = 0; i < $scope.users.length; i++) {// todo 125
-            if ($scope.tableSelection[i]) {
+            if ($scope.users[i]['checked']) {
                 $scope.selectedRows.push(i);
             }
         }
-        console.log($scope.selectedRows);
     };
     $scope.getMappings = function () {
         document.getElementById('spinner').style.visibility = 'visible';
@@ -155,6 +155,8 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
         }).success(function (response) {
             document.getElementById('spinner').style.visibility = 'hidden';
             console.log(response);
+            $scope.users = [];//jizhe old fixed
+            $scope.users = response.data;//jizhe old fixed
             $scope.tableParams = new NgTableParams({}, {
                 paginationMaxBlocks: 6,
                 paginationMinBlocks: 2, dataset: response.data
@@ -266,7 +268,7 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
         document.getElementById("binding").style.backgroundColor = "#3cbaff";
         $scope.currentSelectedNcUser = ncUser;
     };
-    $scope.getYzjData = function (user) {//todo 125
+    $scope.getYzjData = function (user) {
         console.log(user);
         $scope.ncusers = [];
         $scope.currentUser = {

@@ -227,8 +227,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="user in $data" ng-class="{'success' : tableSelection[$index]}">
-                <td><input type="checkbox" ng-model="tableSelection[$index]"></td>
+            <tr ng-repeat="user in $data" ng-class="{'success' : user.checked}">
+                <td><input type="checkbox" ng-model="user.checked"></td>
                 <td>{{user.yzjid}}</td>
                 <td>{{user.yzjname}}</td>
                 <td>{{user.yzjmobile}}</td>
