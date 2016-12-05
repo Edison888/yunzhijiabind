@@ -16,25 +16,25 @@ var app = angular.module('binding', ["ngTable"]).config(function ($locationProvi
     $locationProvider.html5Mode(true);
 });
 app.controller('list_controller', function ($scope, $http, $document, $location, $log, $window, NgTableParams) {
-    angular.element($document).ready(function () {
-        if ($location.search().openid) {
-            $http.post('/permission', {
-                openid: $location.search().openid
-            }).success(function (data) {
-                if (!data.result) {
-                    returnQrcode();
-                }
-            }).error(function () {
-                returnQrcode();
-            });
-        } else {
-            returnQrcode();
-        }
-    });
-
-    function returnQrcode() {
-        $window.location = '/qrcode';
-    }
+    //angular.element($document).ready(function () {
+    //    if ($location.search().openid) {
+    //        $http.post('/permission', {
+    //            openid: $location.search().openid
+    //        }).success(function (data) {
+    //            if (!data.result) {
+    //                returnQrcode();
+    //            }
+    //        }).error(function () {
+    //            returnQrcode();
+    //        });
+    //    } else {
+    //        returnQrcode();
+    //    }
+    //});
+    //
+    //function returnQrcode() {
+    //    $window.location = '/qrcode';
+    //}
 
     $scope.searchMobile = '';
     $scope.searchMapping = function (mobile) {
@@ -57,8 +57,15 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
                 console.log(response);
                 if (response.flag == 0) {
                     //$scope.users = response.data;//chenhao
-                    $scope.users = [];//jizhe
-                    $scope.users.push(response.data);//jizhe
+                    //$scope.users = [];//jizhe old fixed
+                    //$scope.users.push(response.data);//jizhe old fixed
+                    var a = [];
+                    a.push(response.data);
+                    $scope.tableParams = new NgTableParams({}, {
+                        counts: [],
+                        paginationMaxBlocks: 6,
+                        paginationMinBlocks: 2, dataset: a
+                    });
                 } else {
                     toastr.error(response.desc);
                 }
