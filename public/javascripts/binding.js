@@ -137,7 +137,7 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
         $scope.selectedRows = [];
         $scope.selectedOpenIds = [];
         $scope.selectedOpenIdsStr = '';
-        for (var i = 0; i < $scope.users.length; i++) {
+        for (var i = 0; i < $scope.users.length; i++) {// todo 125
             if ($scope.tableSelection[i]) {
                 $scope.selectedRows.push(i);
             }
@@ -207,7 +207,7 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
                         }).success(function (response) {
                             console.log(response);
                             if (response.flag == 0) {
-                                $scope.users.push(user);
+                                $scope.users.push(user);// todo 125
                             } else {
                                 toastr.error(response.desc);
                             }
@@ -244,7 +244,7 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
         ).success(function (response) {
             document.getElementById('spinner').style.visibility = 'hidden';
             $scope.disableBind();
-            if (response.flag == 0) {
+                if (response.flag == 0) {// todo 125
                 console.log(currentIndex);
                 $scope.users[currentIndex]['ncuser_code'] = currentSelectedNcUser.ncuser_code;
                 $scope.users[currentIndex]['ncuser_name'] = currentSelectedNcUser.ncuser_name;
@@ -266,11 +266,9 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
         document.getElementById("binding").style.backgroundColor = "#3cbaff";
         $scope.currentSelectedNcUser = ncUser;
     };
-    $scope.getYzjData = function (index) {
+    $scope.getYzjData = function (user) {//todo 125
+        console.log(user);
         $scope.ncusers = [];
-        $scope.currentIndex = index;
-        console.log($scope.currentIndex);
-        var user = $scope.users[index];
         $scope.currentUser = {
             yzjid: user.yzjid,
             yzjmobile: user.yzjmobile,
