@@ -109,27 +109,27 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
 
             }
         ).success(function (response) {//todo 请求删除行数据
-            console.log(response);
-            if (response.flag == 0) {
-                toastr.success("已删除");
-            } else {
-                toastr.error(response.desc);
+                console.log(response);
+                if (response.flag == 0) {
+                    toastr.success("已删除");
+                } else {
+                    toastr.error(response.desc);
 
-            }
+                }
 
-            $scope.selectedRows.reverse();
-            console.log($scope.selectedRows);
-            for (var i = 0; i < $scope.selectedRows.length; i++) {
-                var selectIndex = $scope.selectedRows[i];
-                //delete row from data
-                $scope.users.splice(selectIndex, 1);
-                console.log(selectIndex);
-            }
+                $scope.selectedRows.reverse();
+                console.log($scope.selectedRows);
+                for (var i = 0; i < $scope.selectedRows.length; i++) {
+                    var selectIndex = $scope.selectedRows[i];
+                    //delete row from data
+                    $scope.users.splice(selectIndex, 1);
+                    console.log(selectIndex);
+                }
                 $scope.tableParams = new NgTableParams({}, {
                     counts: [],
                     paginationMaxBlocks: 6,
                     paginationMinBlocks: 2, dataset: $scope.users
-        });
+                });
             });
     };
     $scope.getSelectedRows = function () {
@@ -223,9 +223,8 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
             ;
         }
     };
-    $scope.bindNC = function (currentSelectedNcUser, currentIndex) {
-        //todo
-        console.log(currentSelectedNcUser);
+    $scope.bindNC = function () {
+        console.log($scope.currentSelectedNcUser);
         document.getElementById('spinner').style.visibility = 'visible';
         $http(
             {
@@ -263,7 +262,7 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
         $('#binding').attr("disabled", true);
         document.getElementById("binding").style.backgroundColor = "grey";
     };
-    $scope.selectNcUser = function (ncUser, index) {
+    $scope.selectNcUser = function (ncUser) {
         $("#binding").removeAttr("disabled", false);
         document.getElementById("binding").style.backgroundColor = "#3cbaff";
         $scope.currentSelectedNcUser = ncUser;
