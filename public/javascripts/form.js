@@ -236,7 +236,6 @@ app.filter('trustHtml', function ($sce) {
         {
             method: 'get',
             url: requrl,
-            //url: 'json/form',
             params: {
                 statuskey: statuskeyparam,
                 statuscode: statuscodeparam,
@@ -251,8 +250,8 @@ app.filter('trustHtml', function ($sce) {
                 document.getElementById('form_links_appendix').style.visibility = 'visible';
             }
             $scope.task = response;
-            //预算表单的三种类型：T1，  TBWT-01, TBWT-02
-            if (response.data.billtype == 'T1' || response.data.billtype == 'TBWT-01' || response.data.billtype == 'TBWT-02') {
+            //预算表单的三种类型：T1
+            if (response.data.billtype == 'T1') {
                 document.getElementById('yusuan_form').style.visibility = 'visible';
                 //angular.element(document).find("#table").html(response.data.taskbill);
                 var tablesStr = response.data.taskbill;
@@ -277,13 +276,30 @@ app.filter('trustHtml', function ($sce) {
                 }
                 $scope.formcontents = tableStrArray;
                 $scope.formtitles = titleArray;
-                //console.log(titleArray);
-                //angular.element(document).find(".tab-pane > table").addClass('table table-bordered');
             } else {
                 document.getElementById('form_info').style.visibility = 'visible';
                 //document.getElementById('table').style.visibility = 'hidden';
                 if (response.flag == 0) {
                     $scope.heads = response.data.taskbill.head.tabContent;
+
+                    var bodys = response.data.taskbill.body.tabContent;
+                    for (var i = 0; i < bodys.length; i++) {
+                        for (var j = 0; j < bodys[i]['tabdata'].length; j++) {
+                            for (var k = 0; k < bodys[i]['tabdata'][j].length; k++) {
+                                var newstring = null;
+                                var oldstring = bodys[i].tabdata[j][k]['colvalue'];
+                                for (var m = 0; m < oldstring.length; m++) {
+                                    if (m % 10 == 0) {
+                                        var temp = oldstring.substr(m, 10) + "<br>";
+                                        m == 0 ? newstring = temp : newstring += temp;
+                                    }
+                                }
+
+                                console.log(newstring);
+                                bodys[i].tabdata[j][k]['colvalue'] = newstring;
+                            }
+                        }
+                    }
                     $scope.bodys = response.data.taskbill.body.tabContent;
                     $('#myTab a').click(function (e) {
                         e.preventDefault();

@@ -225,7 +225,8 @@
                             </thead>
                             <tbody>
                             <tr ng-repeat="line in body.tabdata">
-                                <td ng-repeat="item in line" style="text-align: center" ng-bind="item.colvalue">
+                                <td ng-repeat="item in line" style="text-align: center"
+                                    ng-bind-html="item.colvalue | trustHtml">
                                 </td>
                             </tr>
                             </tbody>
