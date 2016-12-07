@@ -16,25 +16,25 @@ var app = angular.module('binding', ["ngTable"]).config(function ($locationProvi
     $locationProvider.html5Mode(true);
 });
 app.controller('list_controller', function ($scope, $http, $document, $location, $log, $window, NgTableParams) {
-    angular.element($document).ready(function () {
-        if ($location.search().openid) {
-            $http.post('/permission', {
-                openid: $location.search().openid
-            }).success(function (data) {
-                if (!data.result) {
-                    returnQrcode();
-                }
-            }).error(function () {
-                returnQrcode();
-            });
-        } else {
-            returnQrcode();
-        }
-    });
-
-    function returnQrcode() {
-        $window.location = '/qrcode';
-    }
+    //angular.element($document).ready(function () {
+    //    if ($location.search().openid) {
+    //        $http.post('/permission', {
+    //            openid: $location.search().openid
+    //        }).success(function (data) {
+    //            if (!data.result) {
+    //                returnQrcode();
+    //            }
+    //        }).error(function () {
+    //            returnQrcode();
+    //        });
+    //    } else {
+    //        returnQrcode();
+    //    }
+    //});
+    //
+    //function returnQrcode() {
+    //    $window.location = '/qrcode';
+    //}
 
     $scope.searchMobile = '';
     $scope.searchMapping = function (mobile) {
@@ -231,31 +231,36 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
                 method: 'get',
                 url: requrl,
                 params: {
-                    ncjob: currentSelectedNcUser.ncjob,
-                    ncmobile: currentSelectedNcUser.ncmobile,
-                    ncunit: currentSelectedNcUser.ncunit,
-                    ncdept: currentSelectedNcUser.ncdept,
-                    ncusercode: currentSelectedNcUser.ncuser_code,
-                    ncusername: currentSelectedNcUser.ncuser_name,
-                    ncuserid: currentSelectedNcUser.ncuserid,
+                    ncjob: $scope.currentSelectedNcUser.ncjob,
+                    ncmobile: $scope.currentSelectedNcUser.ncmobile,
+                    ncunit: $scope.currentSelectedNcUser.ncunit,
+                    ncdept: $scope.currentSelectedNcUser.ncdept,
+                    ncusercode: $scope.currentSelectedNcUser.ncuser_code,
+                    ncusername: $scope.currentSelectedNcUser.ncuser_name,
+                    ncuserid: $scope.currentSelectedNcUser.ncuserid,
                     method: 'bindNCUser',
                     yzjid: $scope.currentUser.yzjid
                 }
             }
         ).success(function (response) {
-            document.getElementById('spinner').style.visibility = 'hidden';
-            $scope.disableBind();
+                document.getElementById('spinner').style.visibility = 'hidden';
+                $scope.disableBind();
                 if (response.flag == 0) {// todo 125
-                console.log(currentIndex);
-                $scope.users[currentIndex]['ncuser_code'] = currentSelectedNcUser.ncuser_code;
-                $scope.users[currentIndex]['ncuser_name'] = currentSelectedNcUser.ncuser_name;
-                $scope.users[currentIndex]['ncmobile'] = currentSelectedNcUser.ncmobile;
-                toastr.success("绑定成功");
-            } else {
-                toastr.error(response.desc);
-            }
+                    var currentIndex = '';
+                    for (var i = 0; i < $scope.users.length; i++) {// todo 125
+                        if ($scope.users[i]['yzjid'] == $scope.currentUser.yzjid) {
+                            currentIndex = i;
+                            $scope.users[currentIndex]['ncuser_code'] = $scope.currentSelectedNcUser.ncuser_code;
+                            $scope.users[currentIndex]['ncuser_name'] = $scope.currentSelectedNcUser.ncuser_name;
+                            $scope.users[currentIndex]['ncmobile'] = $scope.currentSelectedNcUser.ncmobile;
+                            toastr.success("绑定成功");
+                        }
+                    }
+                } else {
+                    toastr.error(response.desc);
+                }
 
-        });
+            });
 
     };
     $scope.disableBind = function () {
