@@ -123,7 +123,6 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
                     var selectIndex = $scope.selectedRows[i];
                     //delete row from data
                     $scope.users.splice(selectIndex, 1);
-                    console.log(selectIndex);
                 }
                 $scope.tableParams = new NgTableParams({}, {
                     counts: [],
@@ -166,6 +165,8 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
     $scope.getMappings();
     //分页相关↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
     $scope.addYzj = function () {
+        var temArray = [];
+        temArray = $scope.users;
         var phoneValue = document.getElementById('yzj_phone').value;
         if (phoneValue == null || phoneValue == '' || phoneValue == undefined) {
             toastr.error('手机号不能为空');
@@ -181,8 +182,6 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
                     mobile: phoneValue
                 }
             }).success(function (response) {
-                    console.log("sdfsdf");
-                    console.log(response);
                     document.getElementById('spinner').style.visibility = 'hidden';
                     if (response.flag == 0) {
                         var yzjUserObj = response.data;
@@ -209,7 +208,14 @@ app.controller('list_controller', function ($scope, $http, $document, $location,
                         }).success(function (response) {
                             console.log(response);
                             if (response.flag == 0) {
-                                $scope.users.push(user);// todo 125
+                                temArray.unshift(user);// todo 125
+                                $scope.users = [];
+                                $scope.users = temArray;
+                                $scope.tableParams = new NgTableParams({}, {
+                                    counts: [],
+                                    paginationMaxBlocks: 6,
+                                    paginationMinBlocks: 2, dataset: $scope.users
+                                });
                             } else {
                                 toastr.error(response.desc);
                             }
