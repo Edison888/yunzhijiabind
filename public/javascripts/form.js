@@ -1,4 +1,4 @@
-var app = angular.module('form', ['ngCookies']);
+var app = angular.module('form', ['ngCookies', 'panzoom', 'panzoomwidget']);
 toastr.options = {
     "closeButton": false,
     "debug": true,
@@ -31,7 +31,60 @@ app.filter('trustHtml', function ($sce) {
     return function (input) {
         return $sce.trustAsHtml(input);
     }
-}).controller('form_detail', function ($scope, $http, $cookieStore) {
+}).controller('form_detail', function ($scope, $http, $cookieStore, PanZoomService) {
+    var shark = {
+        x: 391,
+        y: 371,
+        width: 206,
+        height: 136
+    };
+    var chopper = {
+        x: 88,
+        y: 213,
+        width: 660,
+        height: 144
+    };
+    var ladder = {
+        x: 333,
+        y: 325,
+        width: 75,
+        height: 200
+    };
+
+    $scope.rects = [chopper, shark, ladder];
+
+    // Instantiate models which will be passed to <panzoom> and <panzoomwidget>
+
+    // The panzoom config model can be used to override default configuration values
+    $scope.panzoomConfig = {
+        zoomLevels: 12,
+        neutralZoomLevel: 5,
+        scalePerZoomLevel: 1.5,
+        initialZoomToFit: shark
+    };
+
+    // The panzoom model should initialle be empty; it is initialized by the <panzoom>
+    // directive. It can be used to read the current state of pan and zoom. Also, it will
+    // contain methods for manipulating this state.
+    $scope.panzoomModel = {};
+
+    $scope.zoomToShark = function () {
+        PanZoomService.getAPI('PanZoom').then(function (api) {
+            api.zoomToFit(shark);
+        });
+    };
+
+    $scope.zoomToChopper = function () {
+        PanZoomService.getAPI('PanZoom').then(function (api) {
+            api.zoomToFit(chopper);
+        });
+    };
+
+    $scope.zoomToLadder = function () {
+        PanZoomService.getAPI('PanZoom').then(function (api) {
+            api.zoomToFit(ladder);
+        });
+    };
     $cookieStore.put('isFirst', false);
     XuntongJSBridge.call('setWebViewTitle', {'title': '表单详情'});
     //var iszp = $cookieStore.get('iszhipai');
@@ -276,6 +329,7 @@ app.filter('trustHtml', function ($sce) {
                 }
                 $scope.formcontents = tableStrArray;
                 $scope.formtitles = titleArray;
+
             } else {
                 document.getElementById('form_info').style.visibility = 'visible';
                 //document.getElementById('table').style.visibility = 'hidden';
