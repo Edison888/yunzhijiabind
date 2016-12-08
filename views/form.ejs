@@ -33,9 +33,9 @@
     <script src="//cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     <!-- ↑↑↑↑↑↑something about bootstrap && jquery↑↑↑↑↑↑-->
     <script src="//cdn.bootcss.com/blueimp-md5/2.3.0/js/md5.min.js"></script>
-    <link rel="stylesheet" href="stylesheets/panzoomwidget.css">
-    <!--自定义css文件-->
     <link rel="stylesheet" href="stylesheets/common_index.css">
+    <!--自定义css文件-->
+    <link rel="stylesheet" href="stylesheets/panzoomwidget.css">
     <!--加载动画-->
     <link rel="stylesheet" href="stylesheets/loading.css">
     <title>表单详情</title>
@@ -174,23 +174,14 @@
             </ul>
 
             <!-- Tab panes -->
+            <panzoom id="PanZoom" config="panzoomConfig" model="panzoomModel" style="width:800px; height: 600px">
             <div class="tab-content">
-                <div style="position:relative">
-                    <panzoomwidget panzoom-id="PanZoom"
-                                   style="position:absolute;top:10px;left:10px;z-index:1"></panzoomwidget>
-                    <panzoom id="PanZoom" config="panzoomConfig" model="panzoomModel"
-                             style="width:800px; height: 600px">
-                        <div role="tabpanel" ng-repeat="formcontent in formcontents" class="tab-pane table-responsive"
-                             ng-class="{'active':$index==0}"
-                             id="form{{$index}}" ng-bind-html="formcontent | trustHtml">
-                        </div>
-                    </panzoom>
+                <div role="tabpanel" ng-repeat="formcontent in formcontents" class="tab-pane table-responsive"
+                     ng-class="{'active':$index==0}"
+                     id="form{{$index}}" ng-bind-html="formcontent | trustHtml">
                 </div>
-                <!--<div role="tabpanel" ng-repeat="formcontent in formcontents" class="tab-pane table-responsive"-->
-                <!--ng-class="{'active':$index==0}"-->
-                <!--id="form{{$index}}" ng-bind-html="formcontent | trustHtml">-->
-                <!--</div>-->
             </div>
+            </panzoom>
         </div>
         <div id="form_info" style="visibility: hidden">
 

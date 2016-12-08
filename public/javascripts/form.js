@@ -32,26 +32,6 @@ app.filter('trustHtml', function ($sce) {
         return $sce.trustAsHtml(input);
     }
 }).controller('form_detail', function ($scope, $http, $cookieStore, PanZoomService) {
-    var shark = {
-        x: 391,
-        y: 371,
-        width: 206,
-        height: 136
-    };
-    var chopper = {
-        x: 88,
-        y: 213,
-        width: 660,
-        height: 144
-    };
-    var ladder = {
-        x: 333,
-        y: 325,
-        width: 75,
-        height: 200
-    };
-
-    $scope.rects = [chopper, shark, ladder];
 
     // Instantiate models which will be passed to <panzoom> and <panzoomwidget>
 
@@ -60,7 +40,7 @@ app.filter('trustHtml', function ($sce) {
         zoomLevels: 12,
         neutralZoomLevel: 5,
         scalePerZoomLevel: 1.5,
-        initialZoomToFit: shark
+        //initialZoomToFit: shark
     };
 
     // The panzoom model should initialle be empty; it is initialized by the <panzoom>
@@ -68,23 +48,6 @@ app.filter('trustHtml', function ($sce) {
     // contain methods for manipulating this state.
     $scope.panzoomModel = {};
 
-    $scope.zoomToShark = function () {
-        PanZoomService.getAPI('PanZoom').then(function (api) {
-            api.zoomToFit(shark);
-        });
-    };
-
-    $scope.zoomToChopper = function () {
-        PanZoomService.getAPI('PanZoom').then(function (api) {
-            api.zoomToFit(chopper);
-        });
-    };
-
-    $scope.zoomToLadder = function () {
-        PanZoomService.getAPI('PanZoom').then(function (api) {
-            api.zoomToFit(ladder);
-        });
-    };
     $cookieStore.put('isFirst', false);
     XuntongJSBridge.call('setWebViewTitle', {'title': '表单详情'});
     //var iszp = $cookieStore.get('iszhipai');
