@@ -33,6 +33,16 @@ app.filter('trustHtml', function ($sce) {
     }
 }).controller('form_detail', function ($scope, $http, $cookieStore, PanZoomService) {
 
+
+    $scope.getPanzoomStype = function () {
+        var width = $(window).width();   // returns width of browser viewport
+        //$(document).width();
+        return {
+            "width": width,
+            "height": width / 16 * 9
+        }
+    }
+
     // Instantiate models which will be passed to <panzoom> and <panzoomwidget>
 
     // The panzoom config model can be used to override default configuration values
@@ -40,7 +50,13 @@ app.filter('trustHtml', function ($sce) {
         zoomLevels: 12,
         neutralZoomLevel: 5,
         scalePerZoomLevel: 1.5,
-        //initialZoomToFit: shark
+        useHardwareAcceleration: true
+        //initialZoomToFit: {
+        //    x: 0,
+        //    y: 0,
+        //    width: 0,
+        //    height: 0
+        //}
     };
 
     // The panzoom model should initialle be empty; it is initialized by the <panzoom>

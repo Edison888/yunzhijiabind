@@ -174,9 +174,10 @@
             </ul>
 
             <!-- Tab panes -->
-            <panzoom id="PanZoom" config="panzoomConfig" model="panzoomModel" style="width:800px; height: 600px">
+            <!--<panzoomwidget panzoom-id="PanZoom" style="position:absolute;top:10px;left:10px;z-index:1"></panzoomwidget>-->
+            <panzoom id="PanZoom" config="panzoomConfig" model="panzoomModel" ng-style="getPanzoomStype()">
             <div class="tab-content">
-                <div role="tabpanel" ng-repeat="formcontent in formcontents" class="tab-pane table-responsive"
+                <div role="tabpanel" ng-repeat="formcontent in formcontents" class="tab-pane"
                      ng-class="{'active':$index==0}"
                      id="form{{$index}}" ng-bind-html="formcontent | trustHtml">
                 </div>
