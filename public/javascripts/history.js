@@ -18,6 +18,11 @@ app.filter('selectIcon', function () {
             case '驳回':
                 out = 'glyphicon glyphicon-repeat item-icon item-icon-purple';
                 break;
+            case  '作废':
+                out = 'glyphicon glyphicon-trash item-icon item-icon-gray';
+                break;
+            case '':
+                out = 'glyphicon glyphicon-time item-icon item-icon-yellow';
         }
 
         return out;
