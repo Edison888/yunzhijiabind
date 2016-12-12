@@ -33,7 +33,7 @@ app.filter('trustHtml', function ($sce) {
     }
 }).controller('form_detail', function ($scope, $http, $cookieStore, PanZoomService) {
 
-
+    $scope.isShowZoom = false;
     $scope.getPanzoomStype = function () {
         var width = $(window).width();   // returns width of browser viewport
         //$(document).width();
@@ -41,7 +41,7 @@ app.filter('trustHtml', function ($sce) {
             "width": width,
             "height": width / 16 * 9
         }
-    }
+    };
 
     // Instantiate models which will be passed to <panzoom> and <panzoomwidget>
 
@@ -284,7 +284,8 @@ app.filter('trustHtml', function ($sce) {
             $scope.task = response;
             //预算表单的三种类型：T1
             if (response.data.billtype == 'T1') {
-                document.getElementById('yusuan_form').style.visibility = 'visible';
+                $scope.isShowZoom = true;
+                //document.getElementById('yusuan_form').style.visibility = 'visible';
                 //angular.element(document).find("#table").html(response.data.taskbill);
                 var tablesStr = response.data.taskbill;
                 var tableStrs = tablesStr.split('<\/table>');
@@ -310,6 +311,7 @@ app.filter('trustHtml', function ($sce) {
                 $scope.formtitles = titleArray;
 
             } else {
+                $scope.isShowZoom = false;
                 document.getElementById('form_info').style.visibility = 'visible';
                 //document.getElementById('table').style.visibility = 'hidden';
                 if (response.flag == 0) {
