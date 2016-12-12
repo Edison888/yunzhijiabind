@@ -41,18 +41,19 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
             $cookieStore.put('isFirst', true);
             location.reload(true);
         } else {
-            //if (isYzjApp() || getCloudHub().isCloudHub) {//如果运行在云之家（Android或IOS的云之家APP客户端）里面，才能执行下面的逻辑}
-            //    XuntongJSBridge.call('getPersonInfo', {}, function (result) {
-            //            /* ****  注意 start **** */
-            //            /* ****  由于在桌面端，实现JS-API方式不同，这里的回调返回值result是一个string **** */
-            //            /* ****  为确保result正常使用，建议在回调中添加如下代码 **** */
-            //            if (typeof result == 'string') {
-            //                result = JSON.parse(result);
-            //            }
-            //            /* ****  注意 end **** */
+            if (isYzjApp() || getCloudHub().isCloudHub) {//如果运行在云之家（Android或IOS的云之家APP客户端）里面，才能执行下面的逻辑}
+                XuntongJSBridge.call('getPersonInfo', {}, function (result) {
+                        /* ****  注意 start **** */
+                        /* ****  由于在桌面端，实现JS-API方式不同，这里的回调返回值result是一个string **** */
+                        /* ****  为确保result正常使用，建议在回调中添加如下代码 **** */
+                        if (typeof result == 'string') {
+                            result = JSON.parse(result);
+                        }
+                        /* ****  注意 end **** */
 
-            //userid = result.data.openId;
-            userid = 'fcbe652e-9f22-11e6-943d-005056b8712a';//高梦雅
+                        userid = result.data.openId;
+                        //userid = 'fcbe652e-9f22-11e6-943d-005056b8712a';//高梦雅
+                        //userid = 'ed3fbe63-95d8-11e6-a383-005056b8712a';//陈急着
                         //userid ='6b2da1c2-95d8-11e6-a383-005056b8712a';//杨总
                     var currentTab = $cookieStore.get('currentTab');
                     if (currentTab) {//如果currentTab不为空
@@ -201,9 +202,9 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
                         uri.addQuery('type', type);//跳转到表单详情页面时，携带了type参数，用来告知表单详情页面过来的这个待办是哪种类型的待办。
                         window.location = uri.toString();
                     };
-            //        }//func
-            //    );//xuntong
-            //}//if
+                    }//func
+                );//xuntong
+            }//if
         }
 
     }
