@@ -30,7 +30,7 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
                 fileDownloadUrl: $scope.attachments[index]['url']
             },
             function (result) {
-                alert(result);
+                alert(JSON.stringify(result));
                 if (!(result.success)) {
                 }
             }
