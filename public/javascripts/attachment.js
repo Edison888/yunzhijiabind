@@ -18,7 +18,7 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
     };
     $scope.openFile = function (index) {
         XuntongJSBridge.call('setWebViewTitle', {'title': '附件列表'});
-
+        alert($scope.attachments[index]['name']);
         XuntongJSBridge.call('showFile',
             {
                 fileName: $scope.attachments[index]['name'],
