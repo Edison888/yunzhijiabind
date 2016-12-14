@@ -21,7 +21,7 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
 
         XuntongJSBridge.call('showFile',
             {
-                fileName: $scope.attachments[index]['name'],
+                fileName: $scope.attachments[index]['name'].split('.')[0],
                 fileExt: $scope.attachments[index]['ext'],
                 fileTime: $scope.attachments[index]['ts'],
                 //fileTime: '2015-06-02 15:40',
