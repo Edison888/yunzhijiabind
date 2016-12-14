@@ -18,7 +18,7 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
     };
     $scope.openFile = function (index) {
         XuntongJSBridge.call('setWebViewTitle', {'title': '附件列表'});
-        alert($scope.attachments[index]['name']);
+        alert($scope.attachments[index]['name'].split('.')[0]);
         XuntongJSBridge.call('showFile',
             {
                 fileName: $scope.attachments[index]['name'],
@@ -30,7 +30,6 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
                 fileDownloadUrl: $scope.attachments[index]['url']
             },
             function (result) {
-                alert(JSON.stringify(result));
                 if (!(result.success)) {
                 }
             }
