@@ -37,6 +37,13 @@ function switchTab(currentTab) {
 }
 var count = 0;
 app.controller('matters', function ($scope, $http, $cookieStore, $window) {
+        XuntongJSBridge.call('defback',
+            {},
+            function () {
+                $cookieStore.remove('currentTab');
+                XuntongJSBridge.call('closeWebView');
+            }
+        );
         if (!$cookieStore.get('isFirst')) {
             $cookieStore.put('isFirst', true);
             location.reload(true);
