@@ -17,23 +17,28 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
         return bytesToSize(size);
     };
     $scope.openFile = function (index) {
-        XuntongJSBridge.call('setWebViewTitle', {'title': '附件列表'});
-        //alert($scope.attachments[index]['name'].split('.')[0]);
-        XuntongJSBridge.call('showFile',
-            {
-                fileName: $scope.attachments[index]['name'],
-                fileExt: $scope.attachments[index]['ext'],
-                fileTime: $scope.attachments[index]['ts'],
-                //fileTime: '2015-06-02 15:40',
-                fileSize: $scope.attachments[index]['size'],
-                //fileDownloadUrl: fileDownloadUrl + '&fileSize=' + fileSize
-                fileDownloadUrl: $scope.attachments[index]['url']
-            },
-            function (result) {
-                if (!(result.success)) {
+        if (isYzjApp()) {
+            XuntongJSBridge.call('setWebViewTitle', {'title': '附件列表'});
+            //alert($scope.attachments[index]['name'].split('.')[0]);
+            XuntongJSBridge.call('showFile',
+                {
+                    fileName: $scope.attachments[index]['name'],
+                    fileExt: $scope.attachments[index]['ext'],
+                    fileTime: $scope.attachments[index]['ts'],
+                    //fileTime: '2015-06-02 15:40',
+                    fileSize: $scope.attachments[index]['size'],
+                    //fileDownloadUrl: fileDownloadUrl + '&fileSize=' + fileSize
+                    fileDownloadUrl: $scope.attachments[index]['url']
+                },
+                function (result) {
+                    if (!(result.success)) {
+                    }
                 }
-            }
-        );
+            );
+        } else if (getCloudHub().isCloudHub) {
+            window.location = $scope.attachments[index]['url'];
+        }
+
     };
     $http({
         method: 'get',
@@ -54,3 +59,36 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
 
     });
 });
+
+//判断是否运行于云之家App中
+function isYzjApp() {
+    return !!navigator.userAgent.match(/Qing\/.*;(iPhone|Android).*/);
+}
+
+/* 判断是否运行于云之家桌面端
+ * @return {object} cloudhub 返回是否桌面端、当前桌面端userAgent版本及是否支持JS-API
+ * cloudhub = {isCloudHub: true | false, hasJS-APIt: true | false, version: '0.0.1'}
+ */
+function getCloudHub() {
+    var ua = window.navigator.userAgent;
+    var reg = /cloudhub 10204\/([^;]+)/;
+    var cloudhub = {
+        isCloudHub: false,
+        hasJS_APIt: false,
+        version: ''
+    };
+
+    var match = reg.exec(ua), version;
+
+    if (match) {
+        version = match[1];
+        cloudhub.isCloudHub = true,
+            cloudhub.version = version;
+
+        if (version.replace(/\./g, '') > 1) {
+            cloudhub.hasJS_APIt = true;
+        }
+    }
+
+    return cloudhub;
+}
