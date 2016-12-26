@@ -167,22 +167,35 @@
         <!--</div>-->
         <!--<div id="line_top"></div>-->
         <div id="yusuan_form" style="margin-top:80px">
-            <ul id="myTab" class="nav nav-pills" role="tablist">
-                <li role="presentation" ng-repeat="formtitle in formtitles" ng-class="{'active':$index==0}"><a
-                            href="#form{{$index}}" role="tab"
-                            data-toggle="tab" ng-bind="formtitle"></a></li>
-            </ul>
+            <!--<ul id="myTab" class="nav nav-pills" role="tablist">-->
+            <!--<li role="presentation" ng-repeat="formtitle in formtitles" ng-class="{'active':$index==0}"><a-->
+            <!--href="#form{{$index}}" role="tab"-->
+            <!--data-toggle="tab" ng-bind="formtitle"></a></li>-->
+            <!--</ul>-->
+
+            <!--&lt;!&ndash; Tab panes &ndash;&gt;-->
+            <!--&lt;!&ndash;<panzoomwidget panzoom-id="PanZoom" style="position:absolute;top:10px;left:10px;z-index:1"></panzoomwidget>&ndash;&gt;-->
+            <!--<panzoom id="PanZoom" config="panzoomConfig" model="panzoomModel" ng-style="getPanzoomStype()"-->
+            <!--ng-show="isShowZoom">-->
+            <!--<div class="tab-content">-->
+            <!--<div role="tabpanel" ng-repeat="formcontent in formcontents" class="tab-pane"-->
+            <!--ng-class="{'active':$index==0}"-->
+            <!--id="form{{$index}}" ng-bind-html="formcontent | trustHtml">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</panzoom>-->
+            <!--<ul id="myTab" class="nav nav-pills" role="tablist">-->
+            <!--<li role="presentation" ng-repeat="formtitle in formtitles" ng-class="{'active':$index==0}"><a-->
+            <!--href="#form{{$index}}" role="tab"-->
+            <!--data-toggle="tab" ng-bind="formtitle"></a></li>-->
+            <!--</ul>-->
 
             <!-- Tab panes -->
             <!--<panzoomwidget panzoom-id="PanZoom" style="position:absolute;top:10px;left:10px;z-index:1"></panzoomwidget>-->
             <panzoom id="PanZoom" config="panzoomConfig" model="panzoomModel" ng-style="getPanzoomStype()"
                      ng-show="isShowZoom">
-            <div class="tab-content">
-                <div role="tabpanel" ng-repeat="formcontent in formcontents" class="tab-pane"
-                     ng-class="{'active':$index==0}"
-                     id="form{{$index}}" ng-bind-html="formcontent | trustHtml">
+                <div ng-bind-html="formcontent | trustHtml">
                 </div>
-            </div>
             </panzoom>
         </div>
         <div id="form_info" style="visibility: hidden">
