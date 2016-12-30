@@ -44,6 +44,11 @@ router.post('/permission', function (req, res, next) {
     });
 });
 
+router.post('/logs', function (req, res, next) {
+    console.log(JSON.stringify(req.body));
+    res.end();
+});
+
 let regexAdmin = function (openId) {
     return new Promise(function (resolve, reject) {
         const adminConfig = JSON.parse(fs.readFileSync('./config/admin.json'));
