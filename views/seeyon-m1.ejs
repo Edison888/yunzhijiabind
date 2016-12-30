@@ -15,7 +15,6 @@
 <script type="text/javascript">
     Logger.useDefaults();
     Logger.setHandler(function (messages, context) {
-        console.log("test");
         $.post('/logs', {message: messages[0], level: context.level});
     });
     var uri = new URI();
