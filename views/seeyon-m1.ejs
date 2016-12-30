@@ -42,6 +42,7 @@
             uri.hostname('example.com');
         }
         uri.query(URI.buildQuery(data, true, false));
+        alert(URI.decode(uri.toString()));
         XuntongJSBridge.call(
             'gotoApp',
             {"data": URI.decode(uri.toString())},
