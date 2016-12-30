@@ -1,4 +1,4 @@
-var app = angular.module('form', ['ngCookies']);
+var app = angular.module('form', ['ngCookies', 'panzoom', 'panzoomwidget']);
 toastr.options = {
     "closeButton": false,
     "debug": true,
@@ -31,7 +31,40 @@ app.filter('trustHtml', function ($sce) {
     return function (input) {
         return $sce.trustAsHtml(input);
     }
-}).controller('form_detail', function ($scope, $http, $cookieStore) {
+}).controller('form_detail', function ($scope, $http, $cookieStore, PanZoomService) {
+
+    $scope.isShowZoom = false;
+    $scope.getPanzoomStype = function () {
+        var width = $(window).width();   // returns width of browser viewport
+        var height = $(window).height();   // returns width of browser viewport
+        //$(document).width();
+        return {
+            "width": width,
+            "height": height
+        }
+    };
+
+    // Instantiate models which will be passed to <panzoom> and <panzoomwidget>
+
+    // The panzoom config model can be used to override default configuration values
+    $scope.panzoomConfig = {
+        zoomLevels: 12,
+        neutralZoomLevel: 5,
+        scalePerZoomLevel: 1.5,
+        useHardwareAcceleration: true
+        //initialZoomToFit: {
+        //    x: 0,
+        //    y: 0,
+        //    width: 0,
+        //    height: 0
+        //}
+    };
+
+    // The panzoom model should initialle be empty; it is initialized by the <panzoom>
+    // directive. It can be used to read the current state of pan and zoom. Also, it will
+    // contain methods for manipulating this state.
+    $scope.panzoomModel = {};
+
     $cookieStore.put('isFirst', false);
     XuntongJSBridge.call('setWebViewTitle', {'title': '表单详情'});
     //var iszp = $cookieStore.get('iszhipai');
@@ -252,31 +285,35 @@ app.filter('trustHtml', function ($sce) {
             $scope.task = response;
             //预算表单的三种类型：T1
             if (response.data.billtype == 'T1') {
-                document.getElementById('yusuan_form').style.visibility = 'visible';
+                $scope.isShowZoom = true;
+                //document.getElementById('yusuan_form').style.visibility = 'visible';
                 //angular.element(document).find("#table").html(response.data.taskbill);
-                var tablesStr = response.data.taskbill;
-                var tableStrs = tablesStr.split('<\/table>');
-                var tableStrArray = [];
-                var titleArray = [];
-                for (var i = 0; i < tableStrs.length - 1; i++) {
+                $scope.formcontent = response.data.taskbill;
+                //var tablesStr = response.data.taskbill;
+                //var tableStrs = tablesStr.split('<\/table>');
+                //var tableStrArray = [];
+                //var titleArray = [];
+                //for (var i = 0; i < tableStrs.length - 1; i++) {
+                //
+                //    var index = tableStrs[i].indexOf('<table');
+                //    var tableStr = tableStrs[i].substring(index, tableStrs[i].length) + '<\/table>';
+                //    var titleTr = tableStr.split('<tr>')[2];//获取第三行第一列的数据
+                //    var titleTd = titleTr.split('<\/td>')[0];
+                //    var title = titleTd.split('>')[1];
+                //    tableStrArray.push(tableStr);
+                //    if (escape(title).indexOf("%u") < 0) {//如果不包含中文
+                //        titleArray.push('表' + (i + 1));
+                //
+                //    } else {
+                //        titleArray.push(title);
+                //    }
+                //
+                //}
+                //$scope.formcontents = tableStrArray;
+                //$scope.formtitles = titleArray;
 
-                    var index = tableStrs[i].indexOf('<table');
-                    var tableStr = tableStrs[i].substring(index, tableStrs[i].length) + '<\/table>';
-                    var titleTr = tableStr.split('<tr>')[2];//获取第三行第一列的数据
-                    var titleTd = titleTr.split('<\/td>')[0];
-                    var title = titleTd.split('>')[1];
-                    tableStrArray.push(tableStr);
-                    if (escape(title).indexOf("%u") < 0) {//如果不包含中文
-                        titleArray.push('表' + (i + 1));
-
-                    } else {
-                        titleArray.push(title);
-                    }
-
-                }
-                $scope.formcontents = tableStrArray;
-                $scope.formtitles = titleArray;
             } else {
+                $scope.isShowZoom = false;
                 document.getElementById('form_info').style.visibility = 'visible';
                 //document.getElementById('table').style.visibility = 'hidden';
                 if (response.flag == 0) {
