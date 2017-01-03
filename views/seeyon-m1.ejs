@@ -13,6 +13,22 @@
 <script src="//do.yunzhijia.com/pub/js/qingjs.js"></script>
 <script src="//cdn.bootcss.com/URI.js/1.18.1/URI.min.js"></script>
 <script type="text/javascript">
+    console.log("device.portrait() === %s", device.portrait());
+    console.log("device.landscape() === %s", device.landscape());
+    console.log("device.mobile() === %s", device.mobile());
+    console.log("device.tablet() === %s", device.tablet());
+    console.log("device.ipad() === %s", device.ipad());
+    console.log("device.ipod() === %s", device.ipod());
+    console.log("device.iphone() === %s", device.iphone());
+    console.log("device.android() === %s", device.android());
+    console.log("device.androidTablet() === %s", device.androidTablet());
+    console.log("device.blackberryTablet() === %s", device.blackberryTablet());
+    console.log("device.fxos() === %s", device.fxos());
+    console.log("device.fxosPhone() === %s", device.fxosPhone());
+    console.log("device.fxosTablet() === %s", device.fxosTablet());
+    console.log("device.meego() === %s", device.meego());
+    console.log("device.television() === %s", device.television());
+
     Logger.useDefaults();
     Logger.setHandler(function (messages, context) {
         $.post('/logs', {message: messages[0], level: context.level});
@@ -28,16 +44,16 @@
         uri.path('login' + 'p');
         data.url = 'http://m1.seeyon.com/';
         Logger.info('platform => android');
-    } else if (device.iphone()) {
-        uri.protocol('sycmpiphone');
-        uri.path('p');
-        data.url = 'itms-apps://itunes.apple.com/cn/app/yi-dong-xie-tong/id437448699?mt=8';
-        Logger.info('iphone');
     } else if (device.ipad()) {
         uri.protocol('sycmpipad');
         uri.path('p');
         data.url = 'itms-apps://itunes.apple.com/cn/app/yi-dong-xie-tong-hd/id437471524?mt=8';
         Logger.info('ipad');
+    } else if (device.iphone()) {
+        uri.protocol('sycmpiphone');
+        uri.path('p');
+        data.url = 'itms-apps://itunes.apple.com/cn/app/yi-dong-xie-tong/id437448699?mt=8';
+        Logger.info('iphone');
     } else {
         uri.protocol('https');
         uri.hostname('example.com');
