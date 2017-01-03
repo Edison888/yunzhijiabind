@@ -21,6 +21,7 @@
     uri.hostname('');
     uri.search(window.location.search);
     Logger.info('open-seeyon-app');
+    Logger.info(window.navigator.userAgent);
     var data = uri.query(true);
     if (device.android()) {
         uri.protocol('sycmpandroidphone');
