@@ -17,7 +17,11 @@
         $.post('/logs', {message: messages[0], level: context.level});
     });
     XuntongJSBridge.call('getPersonInfo', {}, function (result) {
-        Logger.info('用户数据：' + JSON.stringify(result));
+        Logger.info(JSON.stringify(result));
+        if (result.success) {
+            var email = result.data.email;
+            Logger.info(email);
+        }
     });
 </script>
 页面已装载
