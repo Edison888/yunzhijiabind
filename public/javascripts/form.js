@@ -1,4 +1,4 @@
-var app = angular.module('form', ['ngCookies']);
+var app = angular.module('form', ['ngCookies', 'panzoom', 'panzoomwidget']);
 toastr.options = {
     "closeButton": false,
     "debug": true,
@@ -31,7 +31,40 @@ app.filter('trustHtml', function ($sce) {
     return function (input) {
         return $sce.trustAsHtml(input);
     }
-}).controller('form_detail', function ($scope, $http, $cookieStore) {
+}).controller('form_detail', function ($scope, $http, $cookieStore, PanZoomService) {
+
+    $scope.isShowZoom = false;
+    $scope.getPanzoomStype = function () {
+        var width = $(window).width();   // returns width of browser viewport
+        var height = $(window).height();   // returns width of browser viewport
+        //$(document).width();
+        return {
+            "width": width,
+            "height": height
+        }
+    };
+
+    // Instantiate models which will be passed to <panzoom> and <panzoomwidget>
+
+    // The panzoom config model can be used to override default configuration values
+    $scope.panzoomConfig = {
+        zoomLevels: 12,
+        neutralZoomLevel: 5,
+        scalePerZoomLevel: 1.5,
+        useHardwareAcceleration: true
+        //initialZoomToFit: {
+        //    x: 0,
+        //    y: 0,
+        //    width: 0,
+        //    height: 0
+        //}
+    };
+
+    // The panzoom model should initialle be empty; it is initialized by the <panzoom>
+    // directive. It can be used to read the current state of pan and zoom. Also, it will
+    // contain methods for manipulating this state.
+    $scope.panzoomModel = {};
+
     $cookieStore.put('isFirst', false);
     XuntongJSBridge.call('setWebViewTitle', {'title': '表单详情'});
     //var iszp = $cookieStore.get('iszhipai');

@@ -34,10 +34,19 @@ router.get('/qrcode', function (req, res, next) {
     res.end();
 });
 
+router.get('/seeyon', function (req, res, next) {
+    res.render('seeyon-m1');
+});
+
 router.post('/permission', function (req, res, next) {
     regexAdmin(req.body.openid).then(function (result) {
         res.send(result);
     });
+});
+
+router.post('/logs', function (req, res, next) {
+    console.log(JSON.stringify(req.body));
+    res.end();
 });
 
 let regexAdmin = function (openId) {

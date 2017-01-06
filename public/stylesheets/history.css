@@ -67,6 +67,13 @@
     color: dodgerblue;
 }
 
+.item-icon-yellow {
+    color: yellowgreen;
+}
+
+.item-icon-gray {
+    color: gray;
+}
 .item-person {
     width: 67%;
     float: right;
