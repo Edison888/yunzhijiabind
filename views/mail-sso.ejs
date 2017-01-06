@@ -22,23 +22,22 @@
         if (result.success) {
             var email = result.data.email;
             Logger.info('current user email => ' + email);
-            $.soap({
-                url: 'http://mail.gzbfdc.com/apiws/services/API?wsdl',
-                method: 'userExist',
+            $.get({
+                url: 'http://mail.gzbfdc.com/apiws/services/API/userExist',
 
                 data: {
                     user_at_domain: 'chenjizhe@gzbfdc.com'
                 },
 
-                success: function (soapResponse) {
-                    Logger.info('success => ' + JSON.stringify(soapResponse));
+                success: function (result) {
+                    Logger.info('success => ' + JSON.stringify(result));
                     // do stuff with soapResponse
                     // if you want to have the response as JSON use soapResponse.toJSON();
                     // or soapResponse.toString() to get XML string
                     // or soapResponse.toXML() to get XML DOM
                 },
-                error: function (soapResponse) {
-                    Logger.info('failure => ' + JSON.stringify(soapResponse));
+                error: function (result) {
+                    Logger.info('failure => ' + JSON.stringify(result));
                     // show error
                 }
             });
