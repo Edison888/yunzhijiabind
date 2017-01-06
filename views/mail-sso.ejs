@@ -11,6 +11,7 @@
 <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script src="//do.yunzhijia.com/pub/js/qingjs.js"></script>
 <script src="//cdn.bootcss.com/URI.js/1.18.1/URI.min.js"></script>
+<script src="//cdn.rawgit.com/doedje/jquery.soap/master/jquery.soap.js"></script>
 <script type="text/javascript">
     Logger.useDefaults();
     Logger.setHandler(function (messages, context) {
@@ -20,7 +21,27 @@
         Logger.info(JSON.stringify(result));
         if (result.success) {
             var email = result.data.email;
-            Logger.info(email);
+            Logger.info('current user email => ' + email);
+            $.soap({
+                url: 'http://mail.gzbfdc.com/apiws/services/API',
+                method: 'userExist',
+
+                data: {
+                    user_at_domain: 'chenjizhe@gzbfdc.com'
+                },
+
+                success: function (soapResponse) {
+                    Logger.info(JSON.stringify(soapResponse));
+                    // do stuff with soapResponse
+                    // if you want to have the response as JSON use soapResponse.toJSON();
+                    // or soapResponse.toString() to get XML string
+                    // or soapResponse.toXML() to get XML DOM
+                },
+                error: function (soapResponse) {
+                    Logger.info(JSON.stringify(soapResponse));
+                    // show error
+                }
+            });
         }
     });
 </script>
