@@ -23,11 +23,11 @@
             var email = result.data.email;
             Logger.info('current user email => ' + email);
             $.soap({
-                url: 'http://mail.gzbfdc.com/apiws/services/API',
-                method: 'userExist',
+                url: 'http://mail.gzbfdc.com/apiws/services',
+                method: 'API',
 
                 data: {
-                    user_at_domain: 'chenjizhe@gzbfdc.com'
+//                    user_at_domain: 'chenjizhe@gzbfdc.com'
                 },
 
                 success: function (soapResponse) {
