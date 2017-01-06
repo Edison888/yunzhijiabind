@@ -38,7 +38,7 @@ router.get('/seeyon', function (req, res, next) {
     res.render('seeyon-m1');
 });
 
-router.get('/mail/sso', function (req, res, next) {
+router.get('/coremail/sso', function (req, res, next) {
     res.render('mail-sso');
 });
 
