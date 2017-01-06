@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>App跳转</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+</head>
+<body>
+<script src="//cdn.rawgit.com/jonnyreeves/js-logger/master/src/logger.min.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="//do.yunzhijia.com/pub/js/qingjs.js"></script>
+<script src="//cdn.bootcss.com/URI.js/1.18.1/URI.min.js"></script>
+<script type="text/javascript">
+    Logger.useDefaults();
+    Logger.setHandler(function (messages, context) {
+        $.post('/logs', {message: messages[0], level: context.level});
+    });
+    XuntongJSBridge.call('getPersonInfo', {}, function (result) {
+        Logger.info('用户数据：' + JSON.stringify(result));
+    });
+</script>
+页面已装载
+</body>
+</html>
