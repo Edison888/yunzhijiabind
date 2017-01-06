@@ -251,32 +251,32 @@ app.filter('trustHtml', function ($sce) {
             }
             $scope.task = response;
             //预算表单的三种类型：T1
-            if (response.data.billtype == 'T1') {
-                document.getElementById('yusuan_form').style.visibility = 'visible';
-                //angular.element(document).find("#table").html(response.data.taskbill);
-                var tablesStr = response.data.taskbill;
-                var tableStrs = tablesStr.split('<\/table>');
-                var tableStrArray = [];
-                var titleArray = [];
-                for (var i = 0; i < tableStrs.length - 1; i++) {
-
-                    var index = tableStrs[i].indexOf('<table');
-                    var tableStr = tableStrs[i].substring(index, tableStrs[i].length) + '<\/table>';
-                    var titleTr = tableStr.split('<tr>')[2];//获取第三行第一列的数据
-                    var titleTd = titleTr.split('<\/td>')[0];
-                    var title = titleTd.split('>')[1];
-                    tableStrArray.push(tableStr);
-                    if (escape(title).indexOf("%u") < 0) {//如果不包含中文
-                        titleArray.push('表' + (i + 1));
-
-                    } else {
-                        titleArray.push(title);
-                    }
-
-                }
-                $scope.formcontents = tableStrArray;
-                $scope.formtitles = titleArray;
-            } else {
+            //if (response.data.billtype == 'T1') {
+            //    document.getElementById('yusuan_form').style.visibility = 'visible';
+            //    //angular.element(document).find("#table").html(response.data.taskbill);
+            //    var tablesStr = response.data.taskbill;
+            //    var tableStrs = tablesStr.split('<\/table>');
+            //    var tableStrArray = [];
+            //    var titleArray = [];
+            //    for (var i = 0; i < tableStrs.length - 1; i++) {
+            //
+            //        var index = tableStrs[i].indexOf('<table');
+            //        var tableStr = tableStrs[i].substring(index, tableStrs[i].length) + '<\/table>';
+            //        var titleTr = tableStr.split('<tr>')[2];//获取第三行第一列的数据
+            //        var titleTd = titleTr.split('<\/td>')[0];
+            //        var title = titleTd.split('>')[1];
+            //        tableStrArray.push(tableStr);
+            //        if (escape(title).indexOf("%u") < 0) {//如果不包含中文
+            //            titleArray.push('表' + (i + 1));
+            //
+            //        } else {
+            //            titleArray.push(title);
+            //        }
+            //
+            //    }
+            //    $scope.formcontents = tableStrArray;
+            //    $scope.formtitles = titleArray;
+            //} else {
                 document.getElementById('form_info').style.visibility = 'visible';
                 //document.getElementById('table').style.visibility = 'hidden';
                 if (response.flag == 0) {
@@ -309,7 +309,7 @@ app.filter('trustHtml', function ($sce) {
                 } else {
                     toastr.error(response.desc);
                 }
-            }
+            //}
         });
 
 });
