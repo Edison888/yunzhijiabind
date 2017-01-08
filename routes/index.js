@@ -60,8 +60,8 @@ router.post('/mail/verify', function (req, res, next) {
             user_at_domain: 'chenjizhe@gzbfdc.com'
         }
     }, function (error, status, data) {
-        xmlParser(data, {trim: true}, function (err, result)  {
-            console.dir(result.get('soap:Envelope'));
+        xmlParser(data, {trim: true}, function (err, result) {
+            console.dir(result);
         });
     });
 });
