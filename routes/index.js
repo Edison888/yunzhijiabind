@@ -82,24 +82,8 @@ router.post('/mail/authenticate', function (req, res, next) {
     });
 });
 
-router.get('/mail/test', function (req, res, next) {
-    var data = encryption({
-        eid: '101'
-    }, fs.readFileSync('./config/key/101.key'));
-    console.log('encrypt => ' + data);
-    request({
-        uri: 'http://xt.gzbfdc.com/openaccess/input/person/getall',
-        method: 'POST',
-        formData: {
-            eid: '101',
-            nonce: uuid.v1(),
-            data: data
-        }
-    }, function (error, status, data) {
-        console.log(error);
-        console.log(status);
-        console.log(data);
-    });
+router.get('/mail/binding', function (req, res, next) {
+
 });
 
 router.post('/logs', function (req, res, next) {
@@ -189,19 +173,5 @@ let getToken = function (host, appid, secret, grant_type) {
             });
     });
 };
-
-function encryption(data, key) {
-    var iv = "";
-    var clearEncoding = 'utf8';
-    var cipherEncoding = 'base64';
-    var cipherChunks = [];
-    var cipher = crypto.createCipheriv('aes-128-ecb', key, iv);
-    cipher.setAutoPadding(true);
-
-    cipherChunks.push(cipher.update(JSON.stringify(data), clearEncoding, cipherEncoding));
-    cipherChunks.push(cipher.final(cipherEncoding));
-    return cipherChunks.join('');
-}
-
 
 module.exports = router;

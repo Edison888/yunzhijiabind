@@ -19,16 +19,6 @@
         $.post('/logs', {message: messages[0], level: context.level});
     });
 
-    $.get({
-        url: '/mail/test',
-        success: function (result) {
-
-        },
-        error: function (result) {
-
-        }
-    });
-
     function doLogin(username, password, success, error) {
         $.post({
             url: '/mail/authenticate',
@@ -40,6 +30,7 @@
 
     function doSSO() {
         XuntongJSBridge.call('getPersonInfo', {}, function (result) {
+            Logger.info(JSON.stringify(result));
             if (result.success) {
                 var email = result.data.email;
 //                Logger.info('do sso');
