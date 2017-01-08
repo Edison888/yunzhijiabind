@@ -61,7 +61,7 @@ router.post('/mail/verify', function (req, res, next) {
         }
     }, function (error, status, data) {
         xml2js.parseString(S(data).replaceAll('<return>', '<response>').replaceAll('</return>', '</response>').s, {trim: true}, function (err, result) {
-            console.dir(result['soap:Envelope']['soap:Body']);
+            console.dir(result['soap:Envelope']['soap:Body']['ns1:userExistResponse']);
         });
     });
 });
