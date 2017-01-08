@@ -226,7 +226,7 @@
             if (result.success) {
                 $.post({
                     url: '/mail/login',
-                    data: {user_at_domain: result.data.email, openid: result.data.openId},
+                    data: {openid: result.data.openId},
                     success: function (result) {
                         Logger.info(JSON.stringify(result));
                     },
