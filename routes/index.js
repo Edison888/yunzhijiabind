@@ -61,7 +61,7 @@ router.post('/mail/verify', function (req, res, next) {
         }
     }, function (error, status, data) {
         xmlParser(data, {trim: true}, function (err, result) {
-            console.dir(result);
+            console.dir(result['soap:Envelope']);
         });
     });
 });
