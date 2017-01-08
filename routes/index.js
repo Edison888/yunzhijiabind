@@ -117,9 +117,10 @@ router.post('/mail/login', function (req, res, next) {
                 type: 1,
                 array: [req.body.openid]
             })
-        }
+        },
+        json: true
     }, function (error, status, data) {
-        console.log(data);
+        console.dir(data);
     });
 
 
