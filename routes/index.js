@@ -48,6 +48,22 @@ router.post('/permission', function (req, res, next) {
     });
 });
 
+router.post('/mail/verify', function (req, res, next) {
+    console.log(JSON.stringify(req.body));
+    request({
+        uri: 'http://mail.gzbfdc.com/apiws/services/API/userExist',
+        method: 'GET',
+        qs: {
+            user_at_domain: 'chenjizhe@gzbfdc.com'
+        }, function (error, status, data) {
+            console.dir(data);
+        }
+    });
+    res.status(200);
+    res.end();
+});
+
+
 router.post('/logs', function (req, res, next) {
     console.log(JSON.stringify(req.body));
     res.end();
