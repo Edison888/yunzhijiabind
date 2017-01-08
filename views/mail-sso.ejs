@@ -19,7 +19,7 @@
         $.post('/logs', {message: messages[0], level: context.level});
     });
 
-    $.post({
+    $.get({
         url: '/mail/test',
         success: function (result) {
 

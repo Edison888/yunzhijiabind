@@ -83,16 +83,15 @@ router.post('/mail/authenticate', function (req, res, next) {
 });
 
 router.get('/mail/test', function (req, res, next) {
-    var data = encryption({
-        eid: '101'
-    }, fs.readFileSync('./config/key/101.key'));
     request({
         uri: 'http://xt.gzbfdc.com/openaccess/input/person/getall',
         method: 'POST',
         formData: {
             eid: '101',
             nonce: uuid.v1(),
-            data: data
+            data: encryption({
+                eid: '101'
+            }, fs.readFileSync('./config/key/101.key'))
         }
     }, function (error, status, data) {
         console.log(error);
