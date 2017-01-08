@@ -52,16 +52,18 @@ router.post('/mail/verify', function (req, res, next) {
     console.log('verify start');
     console.log(JSON.stringify(req.body));
     request({
-        uri: 'http://mail.gzbfdc.com/apiws/services/API/userExist?user_at_domain=chenjizhe@gzbfdc.com',
-        method: 'GET'
-        , function (error, status, data) {
-            console.log(error);
-            console.log(status);
-            console.log(data);
-            console.log('request finish');
-            // res.body(data);
-            // res.end();
+        uri: 'http://mail.gzbfdc.com/apiws/services/API/userExist',
+        method: 'GET',
+        qs: {
+            user_at_domain: 'chenjizhe@gzbfdc.com'
         }
+    }, function (error, status, data) {
+        console.log(error);
+        console.log(status);
+        console.log(data);
+        console.log('request finish');
+        // res.body(data);
+        // res.end();
     });
 });
 
