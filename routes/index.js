@@ -60,7 +60,7 @@ router.post('/mail/verify', function (req, res, next) {
             user_at_domain: 'chenjizhe@gzbfdc.com'
         }
     }, function (error, status, data) {
-        var val = S(data).between('<ns1:userExistResponse>', '</ns1:userExistResponse>').s;
+        var val = S(data).between('<soap:Body>', '</soap:Body>').s;
         console.log(val);
         xml2js.parseString(val, {trim: true}, function (err, result) {
             console.dir(result);
