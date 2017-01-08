@@ -83,8 +83,16 @@ router.post('/mail/authenticate', function (req, res, next) {
 
 router.post('/mail/binding', function (req, res, next) {
     request({
-        uri: 'http://localhost:8080',
-        method: 'GET'
+        uri: 'http://localhost:8080/proxy/sync',
+        method: 'POST',
+        formData: {
+            key: fs.createReadStream('./config/key/101.key'),
+            url: 'http://xt.gzbfdc.com/openaccess/input/person/getall',
+            eid: '101',
+            data: JSON.stringify({
+                eid: '101'
+            })
+        }
     }, function (error, status, data) {
         console.log(data);
     });
