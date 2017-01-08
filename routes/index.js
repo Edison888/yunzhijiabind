@@ -60,8 +60,7 @@ router.post('/mail/verify', function (req, res, next) {
     }, function (error, status, data) {
         xml2js.parseString(S(data).between('<soap:Body>', '</soap:Body>').s, {trim: true}, function (err, result) {
             var resp = result['ns1:userExistResponse']['return'];
-            res.body({'result': resp.code == 0});
-            res.end();
+            res.send({'result': resp.code == 0});
         });
     });
 });
