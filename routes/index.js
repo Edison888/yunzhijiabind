@@ -59,7 +59,7 @@ router.post('/mail/verify', function (req, res, next) {
             user_at_domain: 'chenjizhe@gzbfdc.com'
         }
     }, function (error, status, data) {
-        console.dir(jQuery.parseXML(data));
+        console.dir($.parseXML(data));
     });
 });
 
