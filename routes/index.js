@@ -103,6 +103,7 @@ router.post('/mail/binding', function (req, res, next) {
 });
 
 router.post('/mail/login', function (req, res, next) {
+    console.log(req.body.user_at_domain);
     request({
         uri: 'http://mail.gzbfdc.com/apiws/services/API/userLogin',
         method: 'GET',
