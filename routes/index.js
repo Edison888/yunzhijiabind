@@ -102,7 +102,7 @@ router.post('/mail/binding', function (req, res, next) {
     });
 });
 
-router.post('/mail/login',function (req, res, next) {
+router.post('/mail/login', function (req, res, next) {
     request({
         uri: 'http://mail.gzbfdc.com/apiws/services/API/userLogin',
         method: 'GET',
@@ -110,6 +110,7 @@ router.post('/mail/login',function (req, res, next) {
             user_at_domain: req.body.user_at_domain
         }
     }, function (error, status, data) {
+        console.log(data);
         xml2js.parseString(S(data).between('<soap:Body>', '</soap:Body>').s, {trim: true}, function (err, result) {
             var resp = result['ns1:userExistResponse']['return'];
             res.send({'result': resp[0].code[0] == '0'});
