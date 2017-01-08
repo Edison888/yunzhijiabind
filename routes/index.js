@@ -4,6 +4,7 @@ let fs = require('fs');
 let uuid = require('node-uuid');
 let router = express.Router();
 let sender = require('.././bin/www');
+let xmlDoc = require('xmldoc');
 let xmlParser = require('xml2js').parseString;
 
 router.get('/', function (req, res, next) {
@@ -59,9 +60,7 @@ router.post('/mail/verify', function (req, res, next) {
             user_at_domain: 'chenjizhe@gzbfdc.com'
         }
     }, function (error, status, data) {
-        xmlParser(data, {trim: true}, function (err, result) {
-            console.dir(result);
-        });
+        console.log(new xmlDoc.XmlDocument(data).childNamed('return'));
     });
 });
 
