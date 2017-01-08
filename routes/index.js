@@ -81,7 +81,7 @@ router.post('/mail/authenticate', function (req, res, next) {
     });
 });
 
-router.get('/mail/binding', function (req, res, next) {
+router.post('/mail/binding', function (req, res, next) {
     request({
         uri: 'http://localhost:8080',
         method: 'GET'
