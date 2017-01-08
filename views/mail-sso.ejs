@@ -25,6 +25,7 @@
             data: {user_at_domain: username, password: password},
             success: function (result) {
                 Logger.info(JSON.stringify(result));
+                Logger.info('start sso');
                 success();
             },
             error: function (result) {
