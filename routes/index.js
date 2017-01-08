@@ -83,15 +83,17 @@ router.post('/mail/authenticate', function (req, res, next) {
 });
 
 router.get('/mail/test', function (req, res, next) {
+    var data = encryption({
+        eid: '101'
+    }, fs.readFileSync('./config/key/101.key'));
+    console.log('encrypt => ' + data);
     request({
         uri: 'http://xt.gzbfdc.com/openaccess/input/person/getall',
         method: 'POST',
         formData: {
             eid: '101',
             nonce: uuid.v1(),
-            data: encryption({
-                eid: '101'
-            }, fs.readFileSync('./config/key/101.key'))
+            data: data
         }
     }, function (error, status, data) {
         console.log(error);
@@ -198,9 +200,6 @@ function encryption(data, key) {
 
     cipherChunks.push(cipher.update(JSON.stringify(data), clearEncoding, cipherEncoding));
     cipherChunks.push(cipher.final(cipherEncoding));
-    var res = cipherChunks.join('');
-    console.log(JSON.stringify(data));
-    console.log(res);
     return cipherChunks.join('');
 }
 
