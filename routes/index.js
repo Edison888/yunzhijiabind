@@ -58,8 +58,7 @@ router.post('/mail/verify', function (req, res, next) {
             user_at_domain: req.body.user_at_domain
         }
     }, function (error, status, data) {
-        console.log(S(data).between('<soap:Body>', '</soap:Body>').s);
-        xml2js.parseString(val, {trim: true}, function (err, result) {
+        xml2js.parseString(S(data).between('<soap:Body>', '</soap:Body>').s, {trim: true}, function (err, result) {
             var resp = result['ns1:userExistResponse']['return'];
             res.body({'result': resp.code == 0});
             res.end();
