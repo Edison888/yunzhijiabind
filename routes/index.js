@@ -61,6 +61,7 @@ router.post('/mail/verify', function (req, res, next) {
         }
     }, function (error, status, data) {
         var val = S(data).between('<return>', '</return>').s;
+        console.log(val);
         xml2js.parseString(val, {trim: true}, function (err, result) {
             console.dir(result);
         });
