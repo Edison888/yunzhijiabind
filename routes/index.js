@@ -49,6 +49,7 @@ router.post('/permission', function (req, res, next) {
 });
 
 router.post('/mail/verify', function (req, res, next) {
+    console.log('verify start');
     console.log(JSON.stringify(req.body));
     request({
         uri: 'http://mail.gzbfdc.com/apiws/services/API/userExist',
