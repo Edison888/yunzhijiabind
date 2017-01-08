@@ -228,7 +228,11 @@
                     url: '/mail/login',
                     data: {openid: result.data.openId},
                     success: function (result) {
-                        Logger.info(JSON.stringify(result));
+                        if (result.result) {
+                            var mailUri = new URI('https://mail.gzbfdc.com/coremail/XT5/index.jsp');
+                            mailUri.addQuery('sid', result.sid);
+                            $(location).href = mailUri.toString();
+                        }
                     },
                     error: function (result) {
 
