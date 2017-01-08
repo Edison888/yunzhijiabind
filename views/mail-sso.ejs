@@ -36,9 +36,11 @@
     }
 
     function doSSO() {
-        Logger.info('start sso');
+        Logger.info('start sso1');
         XuntongJSBridge.call('getPersonInfo', {}, function (result) {
+            Logger.info('start sso2');
             if (result.success) {
+                Logger.info('start sso3');
                 var email = result.data.email;
                 Logger.info(email);
             }
