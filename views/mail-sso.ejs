@@ -175,11 +175,11 @@
 </head>
 <body>
 <div class="login">
-    <h1>Login</h1>
-    <form method="post">
-        <input type="text" name="u" placeholder="Username" required="required"/>
-        <input type="password" name="p" placeholder="Password" required="required"/>
-        <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
+    <h1>CoreMail Login</h1>
+    <form>
+        <input id="username" type="text" name="u" placeholder="email" required="required"/>
+        <input id="password" type="password" name="p" placeholder="password" required="required"/>
+        <button id="submit" type="button" class="btn btn-primary btn-block btn-large">Let me in.</button>
     </form>
 </div>
 
@@ -241,6 +241,11 @@
 
     });
 
+    $('#submit').onclick(function () {
+        var email = $('#username').val();
+        var password = $('#password').val();
+        Logger.info(email + ':' + password);
+    });
 
 </script>
 </body>
