@@ -4,6 +4,7 @@ let fs = require('fs');
 let uuid = require('node-uuid');
 let router = express.Router();
 let sender = require('.././bin/www');
+let xmlParser = require('xml2js').parseString;
 
 router.get('/', function (req, res, next) {
     res.redirect('/qrcode');
@@ -58,12 +59,9 @@ router.post('/mail/verify', function (req, res, next) {
             user_at_domain: 'chenjizhe@gzbfdc.com'
         }
     }, function (error, status, data) {
-        console.log(error);
-        console.log(status);
-        console.log(data);
-        console.log('request finish');
-        // res.body(data);
-        // res.end();
+        xmlParser(data, {trim: true}, function (err, result) {
+            console.dir(result);
+        });
     });
 });
 
