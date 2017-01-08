@@ -130,8 +130,8 @@ router.post('/mail/login', function (req, res, next) {
             }, function (error, status, data) {
                 console.log(data);
                 xml2js.parseString(S(data).between('<soap:Body>', '</soap:Body>').s, {trim: true}, function (err, result) {
-                    var resp = result['ns1:userExistResponse']['return'];
-                    res.send({'result': resp[0].code[0] == '0'});
+                    var resp = result['ns1:userLoginResponse']['return'];
+                    res.send({'result': resp[0].code[0] == '0', 'sid': resp[0].result[0]});
                 });
             });
         }
