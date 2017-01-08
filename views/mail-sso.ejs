@@ -23,32 +23,25 @@
         $.post({
             url: '/mail/authenticate',
             data: {user_at_domain: username, password: password},
-            success: function (result) {
-                Logger.info(JSON.stringify(result));
-                Logger.info('start sso');
-                success();
-            },
-            error: function (result) {
-                Logger.info(result);
-                error();
-            }
+            success: success,
+            error: error
         });
     }
 
     function doSSO() {
-        Logger.info('start sso1');
         XuntongJSBridge.call('getPersonInfo', {}, function (result) {
-            Logger.info('start sso2');
             if (result.success) {
-                Logger.info('start sso3');
                 var email = result.data.email;
+                Logger.info('do sso');
                 Logger.info(email);
             }
         });
     }
 
-    doLogin('chenjizhe@gzbfdc.com', '19860222', function () {
-        doSSO();
+    doLogin('chenjizhe@gzbfdc.com', '19860222', function (result) {
+        if (result.result) {
+            doSSO();
+        }
     }, function () {
 
     });
