@@ -222,6 +222,7 @@
 
     function doSSO() {
         XuntongJSBridge.call('getPersonInfo', {}, function (result) {
+            Logger.info(JSON.stringify(result));
             if (result.success) {
                 var email = result.data.email;
                 $.post({
