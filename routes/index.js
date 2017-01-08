@@ -198,7 +198,9 @@ function encryption(data, key) {
 
     cipherChunks.push(cipher.update(JSON.stringify(data), clearEncoding, cipherEncoding));
     cipherChunks.push(cipher.final(cipherEncoding));
-
+    var res = cipherChunks.join('');
+    console.log(JSON.stringify(data));
+    console.log(res);
     return cipherChunks.join('');
 }
 
