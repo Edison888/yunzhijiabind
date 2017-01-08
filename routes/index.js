@@ -60,9 +60,14 @@ router.post('/mail/verify', function (req, res, next) {
             user_at_domain: 'chenjizhe@gzbfdc.com'
         }
     }, function (error, status, data) {
-        var val = S(data).between('<return>', '</return>').s;
-        console.log(val);
-        xml2js.parseString(val, {trim: true}, function (err, result) {
+        var code = S(data).between('<code>', '</code>').s;
+        var result = S(data).between('<result>', '</result>').s;
+        console.log(code);
+        console.log(result);
+        xml2js.parseString(code, {trim: true}, function (err, result) {
+            console.dir(result);
+        });
+        xml2js.parseString(result, {trim: true}, function (err, result) {
             console.dir(result);
         });
         // var result=cheerio.load(data);
