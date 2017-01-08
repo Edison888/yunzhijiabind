@@ -6,7 +6,6 @@ let router = express.Router();
 let sender = require('.././bin/www');
 let S = require('string');
 let xml2js = require('xml2js');
-let crypto = require('crypto');
 
 router.get('/', function (req, res, next) {
     res.redirect('/qrcode');
@@ -83,7 +82,12 @@ router.post('/mail/authenticate', function (req, res, next) {
 });
 
 router.get('/mail/binding', function (req, res, next) {
-
+    request({
+        uri: 'http://localhost:8080',
+        method: 'GET'
+    }, function (error, status, data) {
+        console.log(data);
+    });
 });
 
 router.post('/logs', function (req, res, next) {

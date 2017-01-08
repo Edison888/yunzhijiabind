@@ -28,6 +28,24 @@
         });
     }
 
+    function binding(email) {
+        XuntongJSBridge.call('getPersonInfo', {}, function (result) {
+            if (result.success) {
+                $.post({
+                    url: '/mail/binding',
+                    data: {openid: result.data.openId, email: email},
+                    success: function (result) {
+
+                    },
+                    error: function (result) {
+
+                    }
+                });
+            }
+        });
+
+    }
+
     function doSSO() {
         XuntongJSBridge.call('getPersonInfo', {}, function (result) {
             Logger.info(JSON.stringify(result));
@@ -46,6 +64,7 @@
     }, function () {
 
     });
+
 
 </script>
 页面已装载
