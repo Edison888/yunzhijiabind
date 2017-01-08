@@ -204,15 +204,13 @@
         });
     }
 
-    function binding(email) {
+    function binding(email, success) {
         XuntongJSBridge.call('getPersonInfo', {}, function (result) {
             if (result.success) {
                 $.post({
                     url: '/mail/binding',
                     data: {openid: result.data.openId, email: email},
-                    success: function (result) {
-
-                    },
+                    success: success,
                     error: function (result) {
 
                     }
@@ -227,27 +225,36 @@
             Logger.info(JSON.stringify(result));
             if (result.success) {
                 var email = result.data.email;
-//                Logger.info('do sso');
-//                Logger.info(email);
+                $.post({
+                    url: '/mail/userLogin',
+                    data: {user_at_domain: email},
+                    success: function (result) {
+                        Logger.info(JSON.stringify(result));
+                    },
+                    error: function (result) {
+
+                    }
+                });
             }
         });
     }
 
-    doLogin('chenjizhe@gzbfdc.com', '19860222', function (result) {
-        if (result.result) {
-            binding('chenjizhe@gzbfdc.com');
-        }
-    }, function () {
-
-    });
 
     $('#submit').click(function () {
-        Logger.info('submit click');
         var email = $('#username').val();
         var password = $('#password').val();
-        Logger.info(email + ':' + password);
+        doLogin(email, password, function (result) {
+            if (result.result) {
+                binding(email, function () {
+                    doSSO();
+                });
+            }
+        }, function () {
+
+        });
     });
 
+    doSSO();
 </script>
 </body>
 </html>

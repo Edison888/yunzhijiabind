@@ -102,6 +102,21 @@ router.post('/mail/binding', function (req, res, next) {
     });
 });
 
+router.post('/mail/login',function (req, res, next) {
+    request({
+        uri: 'http://mail.gzbfdc.com/apiws/services/API/userLogin',
+        method: 'GET',
+        qs: {
+            user_at_domain: req.body.user_at_domain
+        }
+    }, function (error, status, data) {
+        xml2js.parseString(S(data).between('<soap:Body>', '</soap:Body>').s, {trim: true}, function (err, result) {
+            var resp = result['ns1:userExistResponse']['return'];
+            res.send({'result': resp[0].code[0] == '0'});
+        });
+    });
+});
+
 router.post('/logs', function (req, res, next) {
     console.log(JSON.stringify(req.body));
     res.end();
