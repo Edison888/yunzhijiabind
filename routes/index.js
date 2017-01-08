@@ -60,7 +60,9 @@ router.post('/mail/verify', function (req, res, next) {
             user_at_domain: 'chenjizhe@gzbfdc.com'
         }
     }, function (error, status, data) {
-        console.dir(new xmlDoc.XmlDocument(data));
+        xmlParser(data, {trim: true}, function (err, result) {
+            console.dir(result);
+        });
     });
 });
 
