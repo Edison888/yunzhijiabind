@@ -51,19 +51,18 @@ router.post('/permission', function (req, res, next) {
 });
 
 router.post('/mail/verify', function (req, res, next) {
-    console.log('verify start');
-    console.log(JSON.stringify(req.body));
     request({
         uri: 'http://mail.gzbfdc.com/apiws/services/API/userExist',
         method: 'GET',
         qs: {
-            user_at_domain: 'chenjizhe@gzbfdc.com'
+            user_at_domain: req.body.user_at_domain
         }
     }, function (error, status, data) {
-        var val = S(data).between('<soap:Body>', '</soap:Body>').s;
-        console.log(val);
+        console.log(S(data).between('<soap:Body>', '</soap:Body>').s);
         xml2js.parseString(val, {trim: true}, function (err, result) {
-            console.dir(result['ns1:userExistResponse']['return']);
+            var resp = result['ns1:userExistResponse']['return'];
+            res.body({'result': resp.code == 0});
+            res.end();
         });
     });
 });
