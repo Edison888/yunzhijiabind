@@ -4,7 +4,8 @@ let fs = require('fs');
 let uuid = require('node-uuid');
 let router = express.Router();
 let sender = require('.././bin/www');
-let cheerio = require('cheerio');
+let S = require('string');
+let xml2js = require('xml2js');
 
 router.get('/', function (req, res, next) {
     res.redirect('/qrcode');
@@ -59,7 +60,7 @@ router.post('/mail/verify', function (req, res, next) {
             user_at_domain: 'chenjizhe@gzbfdc.com'
         }
     }, function (error, status, data) {
-        console.log(data);
+        console.log(S(data).between('<return>', '</return>'));
         // var result=cheerio.load(data);
         // console.dir(result('soap:Envelope.soap:Body.ns1:userExistResponse.return').text());
     });

@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "body-parser": "~1.15.1",
-    "cheerio": "^0.22.0",
     "connect-redis": "^3.1.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
@@ -21,6 +20,7 @@
     "request": "^2.79.0",
     "serve-favicon": "~2.3.0",
     "socket.io": "^1.7.1",
-    "xmldom": "^0.1.27"
+    "string": "^3.3.3",
+    "xml2js": "^0.4.17"
   }
 }
