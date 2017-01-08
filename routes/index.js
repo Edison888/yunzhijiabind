@@ -60,9 +60,10 @@ router.post('/mail/verify', function (req, res, next) {
             user_at_domain: 'chenjizhe@gzbfdc.com'
         }
     }, function (error, status, data) {
-        xml2js.parseString(S(data).between('<return>', '</return>')).s, {trim: true}, function (err, result) {
+        var val = S(data).between('<return>', '</return>').s;
+        xml2js.parseString(val, {trim: true}, function (err, result) {
             console.dir(result);
-        };
+        });
         // var result=cheerio.load(data);
         // console.dir(result('soap:Envelope.soap:Body.ns1:userExistResponse.return').text());
     });
