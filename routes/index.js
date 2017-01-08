@@ -104,19 +104,38 @@ router.post('/mail/binding', function (req, res, next) {
 
 router.post('/mail/login', function (req, res, next) {
     console.dir(req.body);
+
     request({
-        uri: 'http://mail.gzbfdc.com/apiws/services/API/userLogin',
-        method: 'GET',
-        qs: {
-            user_at_domain: req.body.user_at_domain
+        uri: 'http://localhost:8080/proxy/sync',
+        method: 'POST',
+        formData: {
+            key: fs.createReadStream('./config/key/101.key'),
+            url: 'http://xt.gzbfdc.com/openaccess/input/person/get',
+            eid: '101',
+            data: JSON.stringify({
+                eid: '101',
+                type: 1,
+                array: [req.body.openid]
+            })
         }
     }, function (error, status, data) {
         console.log(data);
-        xml2js.parseString(S(data).between('<soap:Body>', '</soap:Body>').s, {trim: true}, function (err, result) {
-            var resp = result['ns1:userExistResponse']['return'];
-            res.send({'result': resp[0].code[0] == '0'});
-        });
     });
+
+
+    // request({
+    //     uri: 'http://mail.gzbfdc.com/apiws/services/API/userLogin',
+    //     method: 'GET',
+    //     qs: {
+    //         user_at_domain: req.body.user_at_domain
+    //     }
+    // }, function (error, status, data) {
+    //     console.log(data);
+    //     xml2js.parseString(S(data).between('<soap:Body>', '</soap:Body>').s, {trim: true}, function (err, result) {
+    //         var resp = result['ns1:userExistResponse']['return'];
+    //         res.send({'result': resp[0].code[0] == '0'});
+    //     });
+    // });
 });
 
 router.post('/logs', function (req, res, next) {
