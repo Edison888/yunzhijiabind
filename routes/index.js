@@ -4,7 +4,7 @@ let fs = require('fs');
 let uuid = require('node-uuid');
 let router = express.Router();
 let sender = require('.././bin/www');
-let $ = require('jquery');
+let DOMParser = require('xmldom').DOMParser;
 
 router.get('/', function (req, res, next) {
     res.redirect('/qrcode');
@@ -59,7 +59,7 @@ router.post('/mail/verify', function (req, res, next) {
             user_at_domain: 'chenjizhe@gzbfdc.com'
         }
     }, function (error, status, data) {
-        console.dir($.parseXML(data));
+        console.dir(new DOMParser().parseFromString(data, 'text/xml'));
     });
 });
 
