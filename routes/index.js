@@ -50,7 +50,7 @@ router.post('/permission', function (req, res, next) {
     });
 });
 
-router.post('/mail/verify/exist', function (req, res, next) {
+router.post('/mail/verify', function (req, res, next) {
     request({
         uri: 'http://mail.gzbfdc.com/apiws/services/API/userExist',
         method: 'GET',
@@ -58,6 +58,23 @@ router.post('/mail/verify/exist', function (req, res, next) {
             user_at_domain: req.body.user_at_domain
         }
     }, function (error, status, data) {
+        xml2js.parseString(S(data).between('<soap:Body>', '</soap:Body>').s, {trim: true}, function (err, result) {
+            var resp = result['ns1:userExistResponse']['return'];
+            res.send({'result': resp[0].code[0] == '0'});
+        });
+    });
+});
+
+router.post('/mail/authenticate', function (req, res, next) {
+    request({
+        uri: 'http://mail.gzbfdc.com/apiws/services/API/authenticate',
+        method: 'GET',
+        qs: {
+            user_at_domain: req.body.user_at_domain,
+            password: req.body.password
+        }
+    }, function (error, status, data) {
+        console.log(data);
         xml2js.parseString(S(data).between('<soap:Body>', '</soap:Body>').s, {trim: true}, function (err, result) {
             var resp = result['ns1:userExistResponse']['return'];
             res.send({'result': resp[0].code[0] == '0'});

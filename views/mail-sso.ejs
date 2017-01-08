@@ -23,13 +23,19 @@
             var email = result.data.email;
             Logger.info('current user email => ' + email);
             $.post({
-                url: '/mail/verify/exist',
+                url: '/mail/verify',
                 data: {
                     user_at_domain: 'chenjizhe@gzbfdc.com'
                 },
                 success: function (result) {
                     if (result.result) {
-                        Logger.info('exist => ' + true);
+                        $.post({
+                            url: '/mail/authenticate',
+                            data: {user_at_domain: 'chenjizhe@gzbfdc.com', password: '19860222'},
+                            success: function (result) {
+                                Logger.info(JSON.stringify(result));
+                            }
+                        });
                     }
                 },
                 error: function (result) {
