@@ -6,6 +6,7 @@ let router = express.Router();
 let sender = require('.././bin/www');
 let S = require('string');
 let xml2js = require('xml2js');
+let crypto = require('crypto');
 
 router.get('/', function (req, res, next) {
     res.redirect('/qrcode');
@@ -82,8 +83,21 @@ router.post('/mail/authenticate', function (req, res, next) {
     });
 });
 
-router.post('/mail/verify')
-
+router.get('/mail/test', function (req, res, next) {
+    request({
+        uri: 'http://xt.gzbfdc.com/openaccess/input/person/getall',
+        method: 'POST',
+        formData: {
+            eid: '101',
+            nonce: uuid.v1(),
+            data: encryption({
+                eid: '101'
+            }, fs.readFileSync('./config/key/101.key'))
+        }
+    }, function (error, status, data) {
+        console.log(data);
+    });
+});
 
 router.post('/logs', function (req, res, next) {
     console.log(JSON.stringify(req.body));
@@ -172,6 +186,20 @@ let getToken = function (host, appid, secret, grant_type) {
             });
     });
 };
+
+function encryption(data, key) {
+    var iv = "";
+    var clearEncoding = 'utf8';
+    var cipherEncoding = 'base64';
+    var cipherChunks = [];
+    var cipher = crypto.createCipheriv('aes-128-ecb', key, iv);
+    cipher.setAutoPadding(true);
+
+    cipherChunks.push(cipher.update(JSON.stringify(data), clearEncoding, cipherEncoding));
+    cipherChunks.push(cipher.final(cipherEncoding));
+
+    return cipherChunks.join('');
+}
 
 
 module.exports = router;
