@@ -28,8 +28,7 @@
                     user_at_domain: 'chenjizhe@gzbfdc.com'
                 },
                 success: function (result) {
-                    if (result.result) {
-                        Logger.info(result.result);
+                    if (JSON.parse(result).result) {
                         Logger.info('exist => ' + true);
                     }
                 },
