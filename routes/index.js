@@ -61,7 +61,7 @@ router.post('/mail/verify/exist', function (req, res, next) {
         xml2js.parseString(S(data).between('<soap:Body>', '</soap:Body>').s, {trim: true}, function (err, result) {
             var resp = result['ns1:userExistResponse']['return'];
             console.dir(resp);
-            res.send({'result': resp.code == 0});
+            res.send({'result': resp.code == '0'});
         });
     });
 });
