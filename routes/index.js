@@ -63,7 +63,7 @@ router.post('/mail/verify', function (req, res, next) {
         var val = S(data).between('<soap:Body>', '</soap:Body>').s;
         console.log(val);
         xml2js.parseString(val, {trim: true}, function (err, result) {
-            console.dir(result['ns1:userExistResponse']);
+            console.dir(result['ns1:userExistResponse']['return']);
         });
     });
 });
