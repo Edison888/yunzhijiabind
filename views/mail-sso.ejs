@@ -13,37 +13,37 @@
 <script src="//cdn.bootcss.com/URI.js/1.18.1/URI.min.js"></script>
 <script src="//cdn.rawgit.com/doedje/jquery.soap/master/jquery.soap.js"></script>
 <script type="text/javascript">
+
     Logger.useDefaults();
     Logger.setHandler(function (messages, context) {
         $.post('/logs', {message: messages[0], level: context.level});
     });
-    XuntongJSBridge.call('getPersonInfo', {}, function (result) {
-        Logger.info(JSON.stringify(result));
-        if (result.success) {
-            var email = result.data.email;
-            Logger.info('current user email => ' + email);
-            $.post({
-                url: '/mail/verify',
-                data: {
-                    user_at_domain: 'chenjizhe@gzbfdc.com'
-                },
-                success: function (result) {
-                    if (result.result) {
-                        $.post({
-                            url: '/mail/authenticate',
-                            data: {user_at_domain: 'chenjizhe@gzbfdc.com', password: '19860222'},
-                            success: function (result) {
-                                Logger.info(JSON.stringify(result));
-                            }
-                        });
-                    }
-                },
-                error: function (result) {
-                    Logger.info(result);
-                }
-            });
-        }
-    });
+
+    function doLogin(username, password, success, error) {
+        $.post({
+            url: '/mail/authenticate',
+            data: {user_at_domain: username, password: password},
+            success: function (result) {
+                Logger.info(JSON.stringify(result));
+                success();
+            },
+            error: function (result) {
+                Logger.info(result);
+            }
+        });
+    }
+
+    function doSSO() {
+        XuntongJSBridge.call('getPersonInfo', {}, function (result) {
+            if (result.success) {
+                var email = result.data.email;
+                Logger.info(email);
+            }
+        });
+    }
+
+    doLogin('chenjizhe@gzbfdc.com', '19860222', doSSO());
+
 </script>
 页面已装载
 </body>
