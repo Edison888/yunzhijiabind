@@ -29,6 +29,7 @@
             },
             error: function (result) {
                 Logger.info(result);
+                error();
             }
         });
     }
@@ -42,7 +43,9 @@
         });
     }
 
-    doLogin('chenjizhe@gzbfdc.com', '19860222', doSSO());
+    doLogin('chenjizhe@gzbfdc.com', '19860222', doSSO(), function () {
+
+    });
 
 </script>
 页面已装载
