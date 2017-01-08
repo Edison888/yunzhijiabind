@@ -56,6 +56,7 @@ router.post('/mail/verify', function (req, res, next) {
         qs: {
             user_at_domain: 'chenjizhe@gzbfdc.com'
         }, function (error, status, data) {
+            console.log('request finish');
             res.body(data);
             res.status(200);
             res.end();
