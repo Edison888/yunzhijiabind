@@ -50,7 +50,7 @@ router.post('/permission', function (req, res, next) {
     });
 });
 
-router.post('/mail/verify', function (req, res, next) {
+router.post('/mail/verify/exist', function (req, res, next) {
     request({
         uri: 'http://mail.gzbfdc.com/apiws/services/API/userExist',
         method: 'GET',
@@ -64,6 +64,8 @@ router.post('/mail/verify', function (req, res, next) {
         });
     });
 });
+
+router.post('/mail/verify')
 
 
 router.post('/logs', function (req, res, next) {

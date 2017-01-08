@@ -23,12 +23,14 @@
             var email = result.data.email;
             Logger.info('current user email => ' + email);
             $.post({
-                url: '/mail/verify',
+                url: '/mail/verify/exist',
                 data: {
                     user_at_domain: 'chenjizhe@gzbfdc.com'
                 },
                 success: function (result) {
-                    Logger.info(result);
+                    if (result) {
+                        Logger.info('exist => ' + true);
+                    }
                 },
                 error: function (result) {
                     Logger.info(result);
