@@ -59,6 +59,7 @@ router.post('/mail/verify', function (req, res, next) {
         }, function (error, status, data) {
             console.log(error);
             console.log(status);
+            console.log(data);
             console.log('request finish');
             // res.body(data);
             // res.end();
