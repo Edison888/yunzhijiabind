@@ -95,6 +95,7 @@ router.get('/mail/test', function (req, res, next) {
             }, fs.readFileSync('./config/key/101.key'))
         }
     }, function (error, status, data) {
+        console.log(error);
         console.log(data);
     });
 });
