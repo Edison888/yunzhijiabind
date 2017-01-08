@@ -232,7 +232,7 @@
                             var mailUri = new URI('https://mail.gzbfdc.com/coremail/XT5/index.jsp');
                             mailUri.addQuery('sid', result.sid);
                             Logger.info(mailUri.toString());
-                            $(location).href = mailUri.toString();
+                            window.location = mailUri.toString();
                         }
                     },
                     error: function (result) {
