@@ -225,7 +225,7 @@
             if (result.success) {
                 var email = result.data.email;
                 $.post({
-                    url: '/mail/userLogin',
+                    url: '/mail/login',
                     data: {user_at_domain: email},
                     success: function (result) {
                         Logger.info(JSON.stringify(result));
