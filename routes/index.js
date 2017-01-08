@@ -87,10 +87,14 @@ router.post('/mail/binding', function (req, res, next) {
         method: 'POST',
         formData: {
             key: fs.createReadStream('./config/key/101.key'),
-            url: 'http://xt.gzbfdc.com/openaccess/input/person/getall',
+            url: 'http://xt.gzbfdc.com/openaccess/input/person/updateInfo',
             eid: '101',
             data: JSON.stringify({
-                eid: '101'
+                eid: '101',
+                persons: [{
+                    openId: req.body.openid,
+                    email: req.body.email
+                }]
             })
         }
     }, function (error, status, data) {
