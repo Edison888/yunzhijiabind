@@ -122,6 +122,8 @@ router.post('/mail/login', function (req, res, next) {
         },
         json: true
     }, function (error, status, data) {
+        console.log('resp from proxy');
+        console.log(data);
         if (data.success) {
             request({
                 uri: 'http://mail.gzbfdc.com/apiws/services/API/userLogin',
