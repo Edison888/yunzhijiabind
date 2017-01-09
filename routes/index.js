@@ -66,6 +66,7 @@ router.post('/mail/verify', function (req, res, next) {
 });
 
 router.post('/mail/authenticate', function (req, res, next) {
+    console.dir(req.body);
     request({
         uri: 'http://mail.gzbfdc.com/apiws/services/API/authenticate',
         method: 'GET',
@@ -74,6 +75,7 @@ router.post('/mail/authenticate', function (req, res, next) {
             password: req.body.password
         }
     }, function (error, status, data) {
+        console.log(data);
         xml2js.parseString(S(data).between('<soap:Body>', '</soap:Body>').s, {trim: true}, function (err, result) {
             var resp = result['ns1:authenticateResponse']['return'];
             res.send({'result': resp[0].code[0] == '0'});
