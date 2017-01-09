@@ -125,19 +125,25 @@ router.post('/mail/login', function (req, res, next) {
         console.log('resp from proxy');
         console.log(data);
         if (data.success) {
-            request({
-                uri: 'http://mail.gzbfdc.com/apiws/services/API/userLogin',
-                method: 'GET',
-                qs: {
-                    user_at_domain: data.data[0].email
-                }
-            }, function (error, status, data) {
-                console.log(data);
-                xml2js.parseString(S(data).between('<soap:Body>', '</soap:Body>').s, {trim: true}, function (err, result) {
-                    var resp = result['ns1:userLoginResponse']['return'];
-                    res.send({'result': resp[0].code[0] == '0', 'sid': resp[0].result[0]});
+            if (data.data.length > 0 && data.data[0].email) {
+                request({
+                    uri: 'http://mail.gzbfdc.com/apiws/services/API/userLogin',
+                    method: 'GET',
+                    qs: {
+                        user_at_domain: data.data[0].email
+                    }
+                }, function (error, status, data) {
+                    console.log(data);
+                    xml2js.parseString(S(data).between('<soap:Body>', '</soap:Body>').s, {trim: true}, function (err, result) {
+                        var resp = result['ns1:userLoginResponse']['return'];
+                        res.send({'result': resp[0].code[0] == '0', 'sid': resp[0].result[0]});
+                    });
                 });
-            });
+            } else {
+                res.send({'result': false});
+            }
+        } else {
+            res.send({'result': false});
         }
     });
 });
