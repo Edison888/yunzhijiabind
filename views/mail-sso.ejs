@@ -221,20 +221,13 @@
     }
 
     function doSSO() {
-        Logger.info('start do sso');
         XuntongJSBridge.call('getPersonInfo', {}, function (result) {
-            Logger.info('start do sso2');
-            Logger.info(JSON.stringify(result));
             if (result.success) {
-                Logger.info('start do sso3');
                 $.post({
                     url: '/mail/login',
                     data: {openid: result.data.openId},
                     success: function (result) {
-                        Logger.info('start do sso4');
-                        Logger.info(JSON.stringify(result));
                         if (result.result) {
-                            Logger.info('start do sso5');
                             var mailUri = new URI('https://mail.gzbfdc.com/coremail/xphone/main.jsp');
                             mailUri.addQuery('sid', result.sid);
                             Logger.info(mailUri.toString());
@@ -246,7 +239,7 @@
                             );
                             window.location = mailUri.toString();
                         } else {
-                            Logger.info('start do sso6');
+                           alert('您的账户无法自动登录，请手动确认邮箱账户');
                         }
                     },
                     error: function (result) {
