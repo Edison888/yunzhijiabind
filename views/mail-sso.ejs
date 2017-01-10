@@ -237,13 +237,7 @@
                                     XuntongJSBridge.call('closeWebView');
                                 }
                             );
-
-                            XuntongJSBridge.call('openInBrowser',
-                                {'url': mailUri.toString()}, //自定义链接
-                                function (result) {
-                                    Logger.info(JSON.stringify(result));
-                                }
-                            );
+                            window.open(mailUri.toString());
                         } else {
                             alert('您的账户无法自动登录，请手动确认邮箱账户');
                         }
