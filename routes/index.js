@@ -100,6 +100,9 @@ router.post('/mail/binding', function (req, res, next) {
             })
         }
     }, function (error, status, data) {
+        console.log(data);
+        res.status(status);
+        res.error(error);
         res.send(data);
     });
 });
