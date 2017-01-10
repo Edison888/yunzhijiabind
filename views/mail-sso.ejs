@@ -175,11 +175,11 @@
 </head>
 <body>
 <div class="login">
-    <h1>CoreMail Login</h1>
+    <h1>企业邮箱</h1>
     <form>
         <input id="username" type="text" name="u" placeholder="email" required="required"/>
         <input id="password" type="password" name="p" placeholder="password" required="required"/>
-        <button id="submit" type="button" class="btn btn-primary btn-block btn-large">Let me in.</button>
+        <button id="submit" type="button" class="btn btn-primary btn-block btn-large">登录</button>
     </form>
 </div>
 
@@ -238,7 +238,6 @@
                                 }
                             );
                             document.location.href = mailUri.toString();
-//                            document.location.href = 'https://example.com';
                         } else {
                             alert('您的账户无法自动登录，请手动确认邮箱账户');
                         }
