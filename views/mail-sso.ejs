@@ -264,8 +264,10 @@
         if (email && password) {
             doLogin(email, password, function (result) {
                 if (result.result) {
-                    binding(email, function () {
-                        doSSO();
+                    binding(email, function (result) {
+                        if (result.success) {
+                            doSSO();
+                        }
                     });
                 }
             }, function () {
