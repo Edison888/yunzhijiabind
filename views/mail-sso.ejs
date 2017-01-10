@@ -265,8 +265,7 @@
             doLogin(email, password, function (result) {
                 if (result.result) {
                     binding(email, function (result) {
-                        Logger.info(JSON.stringify(result));
-                        if (result.success) {
+                        if (JSON.parse(result).success) {
                             Logger.info(JSON.stringify(result));
                             doSSO();
                         }
