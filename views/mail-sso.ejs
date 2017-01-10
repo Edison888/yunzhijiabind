@@ -263,7 +263,6 @@
         var password = $('#password').val();
         if (email && password) {
             doLogin(email, password, function (result) {
-                Logger.info(JSON.stringify(result));
                 if (result.result) {
                     binding(email, function () {
                         doSSO();
