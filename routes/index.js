@@ -123,7 +123,6 @@ router.post('/mail/login', function (req, res, next) {
         },
         json: true
     }, function (error, status, data) {
-        console.log('resp from proxy');
         console.log(data);
         if (data.success) {
             if (data.data.length > 0 && data.data[0].email) {
