@@ -228,7 +228,7 @@
                     data: {openid: result.data.openId},
                     success: function (result) {
                         if (result.result) {
-                            var mailUri = new URI('https://mail.gzbfdc.com/coremail/xphone/main.jsp');
+                            var mailUri = new URI('http://mail.gzbfdc.com/coremail/xphone/main.jsp');
                             mailUri.addQuery('sid', result.sid);
                             Logger.info(mailUri.toString());
                             XuntongJSBridge.call('defback',
