@@ -237,7 +237,7 @@
                                     XuntongJSBridge.call('closeWebView');
                                 }
                             );
-                            window.open(mailUri.toString());
+                            location.replace(mailUri.toString());
                         } else {
                             alert('您的账户无法自动登录，请手动确认邮箱账户');
                         }
