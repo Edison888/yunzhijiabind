@@ -88,11 +88,11 @@ router.post('/mail/binding', function (req, res, next) {
         uri: 'http://localhost:8080/proxy/sync',
         method: 'POST',
         formData: {
-            key: fs.createReadStream('./config/key/101.key'),
+            key: fs.createReadStream('./config/key/102.key'),
             url: 'http://xt.gzbfdc.com/openaccess/input/person/updateInfo',
-            eid: '101',
+            eid: '102',
             data: JSON.stringify({
-                eid: '101',
+                eid: '102',
                 persons: [{
                     openId: req.body.openid,
                     email: req.body.email
@@ -112,11 +112,11 @@ router.post('/mail/login', function (req, res, next) {
         uri: 'http://localhost:8080/proxy/sync',
         method: 'POST',
         formData: {
-            key: fs.createReadStream('./config/key/101.key'),
+            key: fs.createReadStream('./config/key/102.key'),
             url: 'http://xt.gzbfdc.com/openaccess/input/person/get',
-            eid: '101',
+            eid: '102',
             data: JSON.stringify({
-                eid: '101',
+                eid: '102',
                 type: 1,
                 array: [req.body.openid]
             })
