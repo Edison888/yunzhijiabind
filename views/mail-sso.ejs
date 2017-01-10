@@ -235,7 +235,7 @@
                         Logger.info(JSON.stringify(result));
                         if (result.result) {
                             Logger.info('start do sso5');
-                            var mailUri = new URI('https://mail.gzbfdc.com/coremail/xphone/index.jsp');
+                            var mailUri = new URI('https://mail.gzbfdc.com/coremail/xphone/main.jsp');
                             mailUri.addQuery('sid', result.sid);
                             Logger.info(mailUri.toString());
                             XuntongJSBridge.call('defback',
