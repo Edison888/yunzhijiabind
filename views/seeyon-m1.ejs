@@ -62,14 +62,13 @@
     uri.query(URI.buildQuery(data, true, false));
     Logger.info(URI.decode(uri.toString()));
     XuntongJSBridge.call(
-            'gotoApp',
-            {"data": URI.decode(uri.toString())},
-            function (result) {
-                if (!result.success) {
-                    Logger.info(JSON.stringify(result.error));
-                }
-            });
+        'gotoApp',
+        {"data": URI.decode(uri.toString())},
+        function (result) {
+            if (!result.success) {
+                Logger.info(JSON.stringify(result.error));
+            }
+        });
 </script>
-页面已装载
 </body>
 </html>
