@@ -1,6 +1,10 @@
 /**
  * Created by 1 on 2016/11/8.
  */
+Logger.useDefaults();
+Logger.setHandler(function (messages, context) {
+    $.post('/logs', {message: messages[0], level: context.level});
+});
 function bytesToSize(bytes) {
     if (bytes === 0) return '0 B';
 
@@ -18,6 +22,7 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
     };
     $scope.openFile = function (index) {
         if (isYzjApp()) {
+            Logger.info("attachment.js run in app");
             XuntongJSBridge.call('setWebViewTitle', {'title': '附件列表'});
             //alert($scope.attachments[index]['name'].split('.')[0]);
             XuntongJSBridge.call('showFile',
@@ -36,7 +41,10 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
                 }
             );
         } else if (getCloudHub().isCloudHub) {
+            Logger.info("attachment.js run in cloudhub => "+ $scope.attachments[index]['url']);
             window.location.href = $scope.attachments[index]['url'];
+        }else{
+            Logger.info("attachment.js run in other");
         }
 
     };
