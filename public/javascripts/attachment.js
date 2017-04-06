@@ -36,7 +36,7 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
                 }
             );
         } else if (getCloudHub().isCloudHub) {
-            window.location = $scope.attachments[index]['url'];
+            window.location.href = $scope.attachments[index]['url'];
         }
 
     };
