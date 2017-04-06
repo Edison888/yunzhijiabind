@@ -46,6 +46,7 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
             // window.location.href = $scope.attachments[index]['url'];
             try{
                 download($scope.attachments[index]['url']);
+                Logger.info("download js is called");
             }catch (e){
                 Logger.error(JSON.stringify(e));
             }
