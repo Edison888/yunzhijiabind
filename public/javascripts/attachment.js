@@ -43,7 +43,11 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
         } else if (getCloudHub().isCloudHub) {
             Logger.info("attachment.js run in cloudhub => "+ $scope.attachments[index]['url']);
             // window.location.href = $scope.attachments[index]['url'];
-            download($scope.attachments[index]['url']);
+            try{
+                download($scope.attachments[index]['url']);
+            }catch (e){
+                Logger.error(JSON.stringify(e));
+            }
         }else{
             Logger.info("attachment.js run in other");
         }
