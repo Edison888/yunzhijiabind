@@ -41,26 +41,26 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
                 }
             );
         } else if (getCloudHub().isCloudHub) {
-            XuntongJSBridge.call('downloadFile',
-                {
-                    fileExt: $scope.attachments[index]['ext'],
-                    fileTime: $scope.attachments[index]['ts'],
-                    'fileName': $scope.attachments[index]['name'],
-                    'fileSize': $scope.attachments[index]['size'],
-                    'fileDownloadUrl': $scope.attachments[index]['url']
-                }, function (result) {
-
-                }
-            );
-            //Logger.info("attachment.js run in cloudhub => "+ $scope.attachments[index]['url']);
-            //Logger.info("UA => "+ window.navigator.userAgent);
-            //// window.location.href = $scope.attachments[index]['url'];
-            //try{
-            //    download($scope.attachments[index]['url']);
-            //    Logger.info("download js is called");
-            //}catch (e){
-            //    Logger.error(JSON.stringify(e));
-            //}
+            //XuntongJSBridge.call('downloadFile',
+            //    {
+            //        fileExt: $scope.attachments[index]['ext'],
+            //        fileTime: $scope.attachments[index]['ts'],
+            //        'fileName': $scope.attachments[index]['name'],
+            //        'fileSize': $scope.attachments[index]['size'],
+            //        'fileDownloadUrl': $scope.attachments[index]['url']
+            //    }, function (result) {
+            //
+            //    }
+            //);
+            Logger.info("attachment.js run in cloudhub => " + $scope.attachments[index]['url']);
+            Logger.info("UA => " + window.navigator.userAgent);
+            // window.location.href = $scope.attachments[index]['url'];
+            try {
+                download($scope.attachments[index]['url']);
+                Logger.info("download js is called");
+            } catch (e) {
+                Logger.error(JSON.stringify(e));
+            }
         } else {
             Logger.info("attachment.js run in other");
         }
