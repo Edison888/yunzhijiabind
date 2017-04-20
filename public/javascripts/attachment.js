@@ -43,10 +43,13 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
         } else if (getCloudHub().isCloudHub) {
             XuntongJSBridge.call('downloadFile',
                 {
+                    fileExt: $scope.attachments[index]['ext'],
+                    fileTime: $scope.attachments[index]['ts'],
                     'fileName': $scope.attachments[index]['name'],
                     'fileSize': $scope.attachments[index]['size'],
                     'fileDownloadUrl': $scope.attachments[index]['url']
                 }, function (result) {
+
                 }
             );
             //Logger.info("attachment.js run in cloudhub => "+ $scope.attachments[index]['url']);
