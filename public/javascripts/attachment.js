@@ -52,15 +52,21 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
             //
             //    }
             //);
-            Logger.info("attachment.js run in cloudhub => " + $scope.attachments[index]['url']);
-            Logger.info("UA => " + window.navigator.userAgent);
-            // window.location.href = $scope.attachments[index]['url'];
-            try {
-                download($scope.attachments[index]['url']);
-                Logger.info("download js is called");
-            } catch (e) {
-                Logger.error(JSON.stringify(e));
-            }
+
+            XuntongJSBridge.call('openInBrowser',
+                {'url': $scope.attachments[index]['url']}, //自定义链接
+                function (result) {
+                }
+            );
+            //Logger.info("attachment.js run in cloudhub => " + $scope.attachments[index]['url']);
+            //Logger.info("UA => " + window.navigator.userAgent);
+            //// window.location.href = $scope.attachments[index]['url'];
+            //try {
+            //    download($scope.attachments[index]['url']);
+            //    Logger.info("download js is called");
+            //} catch (e) {
+            //    Logger.error(JSON.stringify(e));
+            //}
         } else {
             Logger.info("attachment.js run in other");
         }
