@@ -237,7 +237,7 @@
                                 function () {
                                     XuntongJSBridge.call('closeWebView');
                                 }
-                            );
+                            );                                             
                             document.location.href = mailUri.toString();
                         } else {
                             alert('您的账户无法自动登录，请手动确认邮箱账户');
@@ -257,16 +257,18 @@
         var password = $('#password').val();
         if (email && password) {
             doLogin(email, password, function (result) {
+alert($("#submit").html());
                 if (result.result) {
+
                     binding(email, function (result) {
                         if (JSON.parse(result).success) {
-                            Logger.info(JSON.stringify(result));
+                             Logger.info(JSON.stringify(result));
                             doSSO();
                         }
                     });
                 }
             }, function () {
-
+              
             });
         }
     });
