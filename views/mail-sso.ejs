@@ -255,22 +255,18 @@
     $('#submit').click(function () {
         var email = $('#username').val();
         var password = $('#password').val();
-alert(1)
         if (email && password) {
             doLogin(email, password, function (result) {
-alert(2);
                 if (result.result) {
-alert(3)
                     binding(email, function (result) {
                         if (JSON.parse(result).success) {
-alert(4)
                              Logger.info(JSON.stringify(result));
                             doSSO();
                         }
                     });
                 }
             }, function () {
-              alert(5);
+              //alert("获取用户失败");
             });
         }
     });
