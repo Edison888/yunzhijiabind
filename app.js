@@ -9,6 +9,7 @@ const uuid = require('node-uuid');
 
 const routes = require('./routes/index');
 const users = require('./routes/users');
+const helmet = require('helmet');
 
 const app = express();
 const secret = uuid.v1();
@@ -24,6 +25,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(helmet());
+app.disable('x-powered-by');
 
 app.use(session({
     secret: secret,
