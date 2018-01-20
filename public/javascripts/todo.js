@@ -49,6 +49,7 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
             location.reload(true);
         } else {
             if (isYzjApp() || getCloudHub().isCloudHub) {//如果运行在云之家（Android或IOS的云之家APP客户端）里面，才能执行下面的逻辑}
+                console.log('prepare to start');
                 XuntongJSBridge.call('getPersonInfo', {}, function (result) {
                         /* ****  注意 start **** */
                         /* ****  由于在桌面端，实现JS-API方式不同，这里的回调返回值result是一个string **** */
@@ -62,7 +63,6 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
                         //userid = 'fcbe652e-9f22-11e6-943d-005056b8712a';//高梦雅
                         //userid = 'ed3fbe63-95d8-11e6-a383-005056b8712a';//陈急着
                         userid = '6b2da1c2-95d8-11e6-a383-005056b8712a';//杨总
-                        console.log(userid);
                         var currentTab = $cookieStore.get('currentTab');
                         if (currentTab) {//如果currentTab不为空
                             switchTab(currentTab);
