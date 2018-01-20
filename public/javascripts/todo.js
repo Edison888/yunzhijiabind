@@ -59,6 +59,7 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
                         /* ****  注意 end **** */
 
                         userid = result.data.openId;
+                        console.log(userid);
                         //userid = 'fcbe652e-9f22-11e6-943d-005056b8712a';//高梦雅
                         //userid = 'ed3fbe63-95d8-11e6-a383-005056b8712a';//陈急着
                         //userid ='6b2da1c2-95d8-11e6-a383-005056b8712a';//杨总
