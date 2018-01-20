@@ -205,6 +205,26 @@ router.post('/qrlogin', function (req, res, next) {
     });
 });
 
+router.get('/qrlogin', function (req, res, next) {
+    let host = 'http://xt.gzbfdc.com';
+    let ticket = req.body.ticket;
+    let appid = req.body.appid;
+    let secret = 'bindingpage';
+    let grant_type = 'client_credential';
+    //var uri = new URI('http://xt.gzbfdc.com/openauth2/api/token');
+    //grant_type=client_credential&appid=10207&secret=bindingpage
+    getToken(host, appid, secret, grant_type).then(function (token) {
+        return getUserInfo(host, ticket, token);
+    }).then(function (curUserOpenId) {
+        return regexAdmin(curUserOpenId);
+    }).then(function (data) {
+        return notify(data, req.body.sign);
+    }).then(function () {
+        res.status(200);
+        res.end();
+    });
+});
+
 
 let notify = function (data, sign) {
     sender.emit(sign, data.openId);
