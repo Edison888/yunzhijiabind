@@ -209,7 +209,7 @@ router.get('/qrlogin', function (req, res, next) {
     let host = 'http://xt.gzbfdc.com';
     let ticket = req.query.ticket;
     let appid = req.query.appid;
-    let secret = 'bindingpage';
+    let secret = 'NC审批';
     let grant_type = 'client_credential';
     //var uri = new URI('http://xt.gzbfdc.com/openauth2/api/token');
     //grant_type=client_credential&appid=10207&secret=bindingpage
