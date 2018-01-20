@@ -36,7 +36,9 @@ app.use(helmet.contentSecurityPolicy({
 ));
 
 app.use(helmet.hsts({
-    includeSubDomains: true
+    includeSubDomains: true,
+    preload: true,
+    always: true
 }));
 
 app.use(session({
