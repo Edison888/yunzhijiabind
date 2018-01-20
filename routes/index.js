@@ -218,7 +218,7 @@ router.get('/qrlogin', function (req, res, next) {
     }).then(function (curUserOpenId) {
         return regexAdmin(curUserOpenId);
     }).then(function (data) {
-        return notify(data, req.body.sign);
+        return notify(data, req.query.sign);
     }).then(function () {
         res.status(200);
         res.end();
