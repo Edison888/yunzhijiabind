@@ -28,6 +28,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
 app.disable('x-powered-by');
 
+app.use(helmet.contentSecurityPolicy({
+        directive: {
+            defaultSrc: ["'self", 'cdn.bootcss.com', 'yunzhijia.com'],
+        }
+    }
+));
+
+app.use(helmet.hsts({
+    includeSubDomains: true
+}));
+
 app.use(session({
     secret: secret,
     cookie: {
