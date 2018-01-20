@@ -29,7 +29,7 @@ app.use(helmet());
 app.use(helmet.hidePoweredBy());
 app.use(helmet.contentSecurityPolicy({
         directives: {
-            defaultSrc: ["'self'", 'cdn.bootcss.com', 'yunzhijia.com'],
+            defaultSrc: ["'self'", "'unsafe-inline'"],
         }
     }
 ));
