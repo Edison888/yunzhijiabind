@@ -211,7 +211,9 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
                     };
                     }//func
                 );//xuntong
-            }//if
+            }else{
+                console.log("there is not cloudhub");
+            }
         }
 
     }
