@@ -156,12 +156,16 @@ router.post('/logs', function (req, res, next) {
 let regexAdmin = function (openId) {
     return new Promise(function (resolve, reject) {
         const adminConfig = JSON.parse(fs.readFileSync('./config/admin.json'));
+        console.log("start regex");
+        console.dir(adminConfig);
         if (Array.from(adminConfig.admin).find(admin => admin == openId)) {
+            console.log("success");
             resolve({
                 result: true,
                 openId: openId
             });
         } else {
+            console.log("failure");
             resolve({
                 result: false
             });
