@@ -27,12 +27,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'), {
     maxage: '1d'
 }));
-app.use(helmet());
-app.use(helmet.hidePoweredBy());
-app.use(helmet.frameguard({
-    action: 'allow-from',
-    domain: 'http://weibo.gzbfdc.com'
+app.use(helmet({
+    frameguard: false
 }));
+app.use(helmet.hidePoweredBy());
 
 app.use(session({
     secret: secret,
