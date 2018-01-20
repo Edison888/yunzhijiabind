@@ -207,8 +207,8 @@ router.post('/qrlogin', function (req, res, next) {
 
 router.get('/qrlogin', function (req, res, next) {
     let host = 'http://xt.gzbfdc.com';
-    let ticket = req.body.ticket;
-    let appid = req.body.appid;
+    let ticket = req.query.ticket;
+    let appid = req.query.appid;
     let secret = 'bindingpage';
     let grant_type = 'client_credential';
     //var uri = new URI('http://xt.gzbfdc.com/openauth2/api/token');
