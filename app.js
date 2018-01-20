@@ -27,16 +27,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
 app.use(helmet.hidePoweredBy());
-app.use(helmet.contentSecurityPolicy({
-        directives: {
-            defaultSrc: ["'self'", "'unsafe-inline'"],
-        }
-    }
-));
-app.use(helmet.hsts({
-    includeSubDomains: true,
-    preload: true
-}));
 
 app.use(session({
     secret: secret,
