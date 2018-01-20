@@ -49,9 +49,7 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
             location.reload(true);
         } else {
             if (isYzjApp() || getCloudHub().isCloudHub) {//如果运行在云之家（Android或IOS的云之家APP客户端）里面，才能执行下面的逻辑}
-                console.log('prepare to start');
                 XuntongJSBridge.call('getPersonInfo', {}, function (result) {
-                    console.log('get resp');
                         /* ****  注意 start **** */
                         /* ****  由于在桌面端，实现JS-API方式不同，这里的回调返回值result是一个string **** */
                         /* ****  为确保result正常使用，建议在回调中添加如下代码 **** */
