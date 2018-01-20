@@ -63,7 +63,7 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
                         userid = result.data.openId;
                         //userid = 'fcbe652e-9f22-11e6-943d-005056b8712a';//高梦雅
                         //userid = 'ed3fbe63-95d8-11e6-a383-005056b8712a';//陈急着
-                        userid = '6b2da1c2-95d8-11e6-a383-005056b8712a';//杨总
+                        // userid = '6b2da1c2-95d8-11e6-a383-005056b8712a';//杨总
                         var currentTab = $cookieStore.get('currentTab');
                         if (currentTab) {//如果currentTab不为空
                             switchTab(currentTab);
