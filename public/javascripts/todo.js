@@ -221,7 +221,8 @@ app.controller('matters', function ($scope, $http, $cookieStore, $window) {
 
 //判断是否运行于云之家App中
 function isYzjApp() {
-    return !!navigator.userAgent.match(/Qing\/.*;(iPhone|Android).*/);
+    // return !!navigator.userAgent.match(/Qing\/.*;(iPhone|Android).*/);
+    return true;
 }
 
 /* 判断是否运行于云之家桌面端
