@@ -156,9 +156,6 @@ router.post('/logs', function (req, res, next) {
 let regexAdmin = function (openId) {
     return new Promise(function (resolve, reject) {
         const adminConfig = JSON.parse(fs.readFileSync('./config/admin.json'));
-        console.log("start regex");
-        console.log(openId);
-        console.dir(adminConfig.admin);
         if (adminConfig.admin.includes(openId)) {
             console.log("success");
             resolve({
@@ -185,6 +182,7 @@ let getUserInfo = function (host, ticket, access_token) {
             },
             json: true
         }, function (error, status, data) {
+            console.dir(data);
             resolve(data.openid);
         });
 
