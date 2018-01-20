@@ -27,9 +27,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'), {
     maxage: '1d'
 }));
-// app.use(helmet());
+app.use(helmet());
 app.use(helmet.hidePoweredBy());
-// app.use(helmet.frameguard({}));
 
 app.use(session({
     secret: secret,
