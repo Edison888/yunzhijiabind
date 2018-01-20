@@ -185,9 +185,9 @@
 </div>
 
 <script src="/javascripts/logger.min.js"></script>
-<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-<script src="//do.yunzhijia.com/pub/js/qingjs.js"></script>
-<script src="//cdn.bootcss.com/URI.js/1.18.1/URI.min.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="//yunzhijia.com/pub/js/qingjs.js"></script>
+<script src="//cdn.bootcss.com/URI.js/1.19.0/URI.min.js"></script>
 <script src="/javascripts/jquery.soap.js"></script>
 <script type="text/javascript">
 
@@ -237,7 +237,7 @@
                                 function () {
                                     XuntongJSBridge.call('closeWebView');
                                 }
-                            );                                             
+                            );
                             document.location.href = mailUri.toString();
                         } else {
                             alert('您的账户无法自动登录，请手动确认邮箱账户');
@@ -260,13 +260,13 @@
                 if (result.result) {
                     binding(email, function (result) {
                         if (JSON.parse(result).success) {
-                             Logger.info(JSON.stringify(result));
+                            Logger.info(JSON.stringify(result));
                             doSSO();
                         }
                     });
                 }
             }, function () {
-              //alert("获取用户失败");
+                //alert("获取用户失败");
             });
         }
     });
