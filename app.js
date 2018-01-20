@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
 app.use(helmet.hidePoweredBy());
 app.use(helmet.contentSecurityPolicy({
-        directive: {
+        directives: {
             defaultSrc: ["'self", 'cdn.bootcss.com', 'yunzhijia.com'],
         }
     }
