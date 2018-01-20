@@ -158,7 +158,7 @@ let regexAdmin = function (openId) {
         const adminConfig = JSON.parse(fs.readFileSync('./config/admin.json'));
         console.log("start regex");
         console.dir(adminConfig);
-        if (Array.from(adminConfig.admin).find(admin => admin == openId)) {
+        if (Array.from(adminConfig.admin).includes(openId)) {
             console.log("success");
             resolve({
                 result: true,
