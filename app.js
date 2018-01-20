@@ -29,6 +29,11 @@ app.use(express.static(path.join(__dirname, 'public'), {
 }));
 app.use(helmet());
 app.use(helmet.hidePoweredBy());
+app.use(helmet.frameguard({ action: 'sameorigin' }))
+app.use(helmet.frameguard({
+    action: 'allow-from',
+    domain: 'http://weibo.gzbfdc.com'
+}));
 
 app.use(session({
     secret: secret,
