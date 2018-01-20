@@ -84,7 +84,7 @@ app.filter('trustHtml', function ($sce) {
         });
     };
     if (urlObj.isFromApp == 'true') {
-        console.log(urlObj)
+        console.log(urlObj);
         $http({
             method: 'get',
             url: requrl,
@@ -252,9 +252,9 @@ app.filter('trustHtml', function ($sce) {
                     toastr.success('审批成功');
                     deplayCloseCurrentPage();
                     $scope.isApproved = true;
-                    $('#footer > div:first-child').removeAttr('data-toggle');
-                    $('#footer > div:nth-child(2)').removeAttr('data-toggle');
-                    $('#footer > div:nth-child(3)').removeAttr('data-toggle');
+                    $('#footer').find('> div:first-child').removeAttr('data-toggle');
+                    $('#footer').find('> div:nth-child(2)').removeAttr('data-toggle');
+                    $('#footer').find('> div:nth-child(3)').removeAttr('data-toggle');
                 }
             } else {
                 toastr.error(response.desc);
@@ -339,11 +339,11 @@ app.filter('trustHtml', function ($sce) {
                     }
                     $scope.bodys = response.data.taskbill.body.tabContent;
                     console.log($scope.bodys[0]['tabdata'][0])
-                    $('#myTab a').click(function (e) {
+                    $('#myTab').find('a').click(function (e) {
                         e.preventDefault();
                         $(this).tab('show')
                     });
-                    $('#myTab a:first').tab('show');
+                    $('#myTab').find('a:first').tab('show');
                 } else {
                     toastr.error(response.desc);
                 }
@@ -366,12 +366,12 @@ app.filter('trustHtml', function ($sce) {
             //if (response.data.billtype == 'T1') {
             //    document.getElementById('yusu
             $scope.historys = response.data;
-            console.log($scope.historys)
-            $('#myTab a').click(function (e) {
+            console.log($scope.historys);
+            $('#myTab').find('a').click(function (e) {
                         e.preventDefault();
                         $(this).tab('show')
                     });
-            $('#myTab a:first').tab('show');
+            $('#myTab').find('a:first').tab('show');
             
         } else {
             toastr.error(response.desc);
