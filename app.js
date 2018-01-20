@@ -26,15 +26,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
-app.disable('x-powered-by');
-
+app.use(helmet.hidePoweredBy());
 app.use(helmet.contentSecurityPolicy({
         directive: {
             defaultSrc: ["'self", 'cdn.bootcss.com', 'yunzhijia.com'],
         }
     }
 ));
-
 app.use(helmet.hsts({
     includeSubDomains: true,
     preload: true
