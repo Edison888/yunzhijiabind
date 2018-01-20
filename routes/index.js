@@ -213,11 +213,15 @@ router.get('/qrlogin', function (req, res, next) {
     let grant_type = 'client_credential';
     //var uri = new URI('http://xt.gzbfdc.com/openauth2/api/token');
     //grant_type=client_credential&appid=10207&secret=bindingpage
+    console.log('start');
     getToken(host, appid, secret, grant_type).then(function (token) {
+        console.log('get user info');
         return getUserInfo(host, ticket, token);
     }).then(function (curUserOpenId) {
+        console.log('regex admin');
         return regexAdmin(curUserOpenId);
     }).then(function (data) {
+        console.log('notify io');
         return notify(data, req.query.sign);
     }).then(function () {
         res.status(200);
