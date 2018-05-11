@@ -16,7 +16,7 @@ function bytesToSize(bytes) {
     // i = Math.floor(Math.log(bytes) / Math.log(k));
     //
     // return (bytes / Math.pow(k, i)).toFixed(2) + ' ' + sizes[i];
-   return filesize(bytes);
+    return filesize(bytes);
 }
 
 angular.module('app', []).controller('attachment', function ($scope, $http) {
@@ -24,7 +24,13 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
         return bytesToSize(size);
     };
     $scope.openFile = function (index) {
-        if (device.android()||device.ios()) {
+        if (getCloudHub().isCloudHub) {
+            XuntongJSBridge.call('openInBrowser',
+                {'url': $scope.attachments[index]['url']}, //自定义链接
+                function (result) {
+                }
+            );
+        } else /*if (device.android()||device.ios()) */{
             Logger.info("attachment.js run in app");
             XuntongJSBridge.call('setWebViewTitle', {'title': '附件列表'});
             //alert($scope.attachments[index]['name'].split('.')[0]);
@@ -43,15 +49,10 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
                     }
                 }
             );
-        } else if (getCloudHub().isCloudHub) {
-            XuntongJSBridge.call('openInBrowser',
-                {'url': $scope.attachments[index]['url']}, //自定义链接
-                function (result) {
-                }
-            );
-        } else {
-            Logger.info("attachment.js run in other");
         }
+        // }  else {
+        //     Logger.info("attachment.js run in other");
+        // }
 
     };
     $http({
