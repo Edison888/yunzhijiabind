@@ -24,7 +24,6 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
         return bytesToSize(size);
     };
     $scope.openFile = function (index) {
-        Logger.info(navigator.userAgent);
         if (isYzjApp()) {
             Logger.info("attachment.js run in app");
             XuntongJSBridge.call('setWebViewTitle', {'title': '附件列表'});
@@ -72,6 +71,8 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
             //    Logger.error(JSON.stringify(e));
             //}
         } else {
+            Logger.info("this is a problem!");
+            Logger.info(navigator.userAgent);
             Logger.info("attachment.js run in other");
         }
 
