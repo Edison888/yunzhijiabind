@@ -24,10 +24,7 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
         return bytesToSize(size);
     };
     $scope.openFile = function (index) {
-        Logger.info("isYzjApp => "+isYzjApp());
-        Logger.info("isCloudHub => "+getCloudHub().isCloudHub);
-        Logger.info(navigator.userAgent);
-        if (isYzjApp()) {
+        if (device.android()||device.ios()) {
             Logger.info("attachment.js run in app");
             XuntongJSBridge.call('setWebViewTitle', {'title': '附件列表'});
             //alert($scope.attachments[index]['name'].split('.')[0]);
