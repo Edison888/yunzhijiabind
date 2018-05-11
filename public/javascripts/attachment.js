@@ -5,22 +5,26 @@ Logger.useDefaults();
 Logger.setHandler(function (messages, context) {
     $.post('/logs', {message: messages[0], level: context.level});
 });
+
 function bytesToSize(bytes) {
-    if (bytes === 0) return '0 B';
-
-    var k = 1024;
-
-    sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-
-    i = Math.floor(Math.log(bytes) / Math.log(k));
-
-    return (bytes / Math.pow(k, i)).toFixed(2) + ' ' + sizes[i];
+    // if (bytes === 0) return '0 B';
+    //
+    // var k = 1024;
+    //
+    // sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    //
+    // i = Math.floor(Math.log(bytes) / Math.log(k));
+    //
+    // return (bytes / Math.pow(k, i)).toFixed(2) + ' ' + sizes[i];
+   return filesize(bytes);
 }
+
 angular.module('app', []).controller('attachment', function ($scope, $http) {
     $scope.showSize = function (size) {
         return bytesToSize(size);
     };
     $scope.openFile = function (index) {
+        Logger.info(navigator.userAgent);
         if (isYzjApp()) {
             Logger.info("attachment.js run in app");
             XuntongJSBridge.call('setWebViewTitle', {'title': '附件列表'});
@@ -82,7 +86,7 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
         }
     }).success(function (response) {
         console.log(response);
-        if (response.data.length == 0) {
+        if (response.data.length === 0) {
             //alert('暂无附件');
             //toastr
         } else {
@@ -114,8 +118,8 @@ function getCloudHub() {
 
     if (match) {
         version = match[1];
-        cloudhub.isCloudHub = true,
-            cloudhub.version = version;
+        cloudhub.isCloudHub = true;
+        cloudhub.version = version;
 
         if (version.replace(/\./g, '') > 1) {
             cloudhub.hasJS_APIt = true;
