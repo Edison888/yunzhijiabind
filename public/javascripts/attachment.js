@@ -24,6 +24,9 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
         return bytesToSize(size);
     };
     $scope.openFile = function (index) {
+        Logger.info("isYzjApp => "+isYzjApp());
+        Logger.info("isCloudHub => "+getCloudHub().isCloudHub);
+        Logger.info(navigator.userAgent);
         if (isYzjApp()) {
             Logger.info("attachment.js run in app");
             XuntongJSBridge.call('setWebViewTitle', {'title': '附件列表'});
@@ -44,35 +47,12 @@ angular.module('app', []).controller('attachment', function ($scope, $http) {
                 }
             );
         } else if (getCloudHub().isCloudHub) {
-            //XuntongJSBridge.call('downloadFile',
-            //    {
-            //        fileExt: $scope.attachments[index]['ext'],
-            //        fileTime: $scope.attachments[index]['ts'],
-            //        'fileName': $scope.attachments[index]['name'],
-            //        'fileSize': $scope.attachments[index]['size'],
-            //        'fileDownloadUrl': $scope.attachments[index]['url']
-            //    }, function (result) {
-            //
-            //    }
-            //);
-
             XuntongJSBridge.call('openInBrowser',
                 {'url': $scope.attachments[index]['url']}, //自定义链接
                 function (result) {
                 }
             );
-            //Logger.info("attachment.js run in cloudhub => " + $scope.attachments[index]['url']);
-            //Logger.info("UA => " + window.navigator.userAgent);
-            //// window.location.href = $scope.attachments[index]['url'];
-            //try {
-            //    download($scope.attachments[index]['url']);
-            //    Logger.info("download js is called");
-            //} catch (e) {
-            //    Logger.error(JSON.stringify(e));
-            //}
         } else {
-            Logger.info("this is a problem!");
-            Logger.info(navigator.userAgent);
             Logger.info("attachment.js run in other");
         }
 
